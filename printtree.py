@@ -1,4 +1,6 @@
 
+import readline
+
 languageName = "calamity"
 
 Lexer = getattr(__import__(languageName + "Lexer"), languageName + "Lexer")

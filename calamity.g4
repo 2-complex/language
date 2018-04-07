@@ -109,7 +109,7 @@ expression
    ;
 
 call
-   : evaluable expression
+   : evaluable expression+
    ;
 
 pair
