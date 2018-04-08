@@ -18,16 +18,20 @@ TRIER_GENERATED_CODE = \
 CPP_GENERATED_CODE = \
 	CalamityBaseListener.cpp \
 	CalamityBaseListener.h \
+	CalamityBaseVisitor.cpp \
+	CalamityBaseVisitor.h \
 	CalamityLexer.cpp \
 	CalamityLexer.h \
 	CalamityListener.cpp \
 	CalamityListener.h \
+	CalamityVisitor.cpp \
+	CalamityVisitor.h \
 	CalamityParser.cpp \
 	CalamityParser.h
 
 
 run: calam
-	./calam
+	./calam programs/function.cal
 
 
 test: printtree.py $(GENERATED_CODE)
@@ -50,28 +54,41 @@ CalamityListener.py: Calamity.g4
 
 
 CalamityBaseListener.cpp: Calamity.g4
-	$(ANTLR) -Dlanguage=Cpp Calamity.g4
+	$(ANTLR) -Dlanguage=Cpp -visitor Calamity.g4
 
 CalamityBaseListener.h: Calamity.g4
-	$(ANTLR) -Dlanguage=Cpp Calamity.g4
+	$(ANTLR) -Dlanguage=Cpp -visitor Calamity.g4
+
+CalamityBaseVisitor.cpp: Calamity.g4
+	$(ANTLR) -Dlanguage=Cpp -visitor Calamity.g4
+
+CalamityBaseVisitor.h: Calamity.g4
+	$(ANTLR) -Dlanguage=Cpp -visitor Calamity.g4
 
 CalamityLexer.cpp: Calamity.g4
-	$(ANTLR) -Dlanguage=Cpp Calamity.g4
+	$(ANTLR) -Dlanguage=Cpp -visitor Calamity.g4
 
 CalamityLexer.h: Calamity.g4
-	$(ANTLR) -Dlanguage=Cpp Calamity.g4
+	$(ANTLR) -Dlanguage=Cpp -visitor Calamity.g4
 
 CalamityListener.cpp: Calamity.g4
-	$(ANTLR) -Dlanguage=Cpp Calamity.g4
+	$(ANTLR) -Dlanguage=Cpp -visitor Calamity.g4
 
 CalamityListener.h: Calamity.g4
-	$(ANTLR) -Dlanguage=Cpp Calamity.g4
+	$(ANTLR) -Dlanguage=Cpp -visitor Calamity.g4
+
+CalamityVisitor.cpp: Calamity.g4
+	$(ANTLR) -Dlanguage=Cpp -visitor Calamity.g4
+
+CalamityVisitor.h: Calamity.g4
+	$(ANTLR) -Dlanguage=Cpp -visitor Calamity.g4
 
 CalamityParser.cpp: Calamity.g4
-	$(ANTLR) -Dlanguage=Cpp Calamity.g4
+	$(ANTLR) -Dlanguage=Cpp -visitor Calamity.g4
 
 CalamityParser.h: Calamity.g4
-	$(ANTLR) -Dlanguage=Cpp Calamity.g4
+	$(ANTLR) -Dlanguage=Cpp -visitor Calamity.g4
+
 
 CPP = c++ -std=gnu++11
 
@@ -84,11 +101,17 @@ ANTLR_LIBRARY = \
 CalamityBaseListener.o: CalamityBaseListener.h CalamityBaseListener.cpp
 	$(CPP) -c $(INCLUDES) CalamityBaseListener.cpp
 
+CalamityBaseVisitor.o: CalamityBaseVisitor.h CalamityBaseVisitor.cpp
+	$(CPP) -c $(INCLUDES) CalamityBaseVisitor.cpp
+
 CalamityLexer.o: CalamityLexer.h CalamityLexer.cpp
 	$(CPP) -c $(INCLUDES) CalamityLexer.cpp
 
 CalamityListener.o: CalamityListener.h CalamityListener.cpp
 	$(CPP) -c $(INCLUDES) CalamityListener.cpp
+
+CalamityVisitor.o: CalamityVisitor.h CalamityVisitor.cpp
+	$(CPP) -c $(INCLUDES) CalamityVisitor.cpp
 
 CalamityParser.o: CalamityParser.h CalamityParser.cpp
 	$(CPP) -c $(INCLUDES) CalamityParser.cpp
@@ -98,6 +121,7 @@ CALAMITY_OBJETS = \
 	CalamityBaseListener.o \
 	CalamityLexer.o \
 	CalamityListener.o \
+	CalamityVisitor.o \
 	CalamityParser.o
 
 
@@ -132,4 +156,11 @@ clean:
 	rm -f $(CPP_GENERATED_CODE)
 	rm -f Calamity.interp
 	rm -f Calamity.tokens
+	rm -f *.pyc
+	rm -f *.o
+	rm -f calam
+	rm -f *.interp
+	rm -f *.tokens
+
+
 
