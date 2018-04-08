@@ -2,6 +2,11 @@
 *Parser*
 *Listener*
 *.tokens
-calamity.interp
-trier.interp
+*.interp
+*.o
+CalamityBaseVisitor.cpp
+CalamityBaseVisitor.h
+CalamityVisitor.cpp
+CalamityVisitor.h
+test
 calam
