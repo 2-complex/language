@@ -31,7 +31,7 @@ CPP_GENERATED_CODE = \
 
 
 run: calam
-	./calam programs/function.cal
+	./calam programs/object.cal
 
 
 test: printtree.py $(GENERATED_CODE)
@@ -116,13 +116,17 @@ CalamityVisitor.o: CalamityVisitor.h CalamityVisitor.cpp
 CalamityParser.o: CalamityParser.h CalamityParser.cpp
 	$(CPP) -c $(INCLUDES) CalamityParser.cpp
 
+TreeShapeListener.o: TreeShapeListener.h TreeShapeListener.cpp
+	$(CPP) -c $(INCLUDES) TreeShapeListener.cpp
+
 
 CALAMITY_OBJETS = \
 	CalamityBaseListener.o \
 	CalamityLexer.o \
 	CalamityListener.o \
 	CalamityVisitor.o \
-	CalamityParser.o
+	CalamityParser.o \
+	TreeShapeListener.o
 
 
 calam: main.cpp $(CALAMITY_OBJETS)
