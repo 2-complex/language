@@ -1,4 +1,4 @@
-grammar calamity;
+grammar Calamity;
 
 program
    : (line ((';'|',') line)* (';'|',')?)?
@@ -118,6 +118,7 @@ pair
 
 reference
    : word
+   | call
    ;
 
 assignment

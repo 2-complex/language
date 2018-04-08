@@ -1,7 +1,7 @@
 
 import readline
 
-languageName = "calamity"
+languageName = "Calamity"
 
 Lexer = getattr(__import__(languageName + "Lexer"), languageName + "Lexer")
 Parser = getattr(__import__(languageName + "Parser"), languageName + "Parser")
