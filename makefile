@@ -31,7 +31,7 @@ CPP_GENERATED_CODE = \
 
 
 run: calam
-	./calam programs/object.cal
+	./calam programs/comparison.cal
 
 
 test: printtree.py $(GENERATED_CODE)
@@ -136,8 +136,6 @@ calam: main.cpp $(CALAMITY_OBJETS)
 	$(ANTLR_LIBRARY)
 
 
-
-
 try: printtree.py $(TRIER_GENERATED_CODE)
 	python printtree.py
 
@@ -165,6 +163,4 @@ clean:
 	rm -f calam
 	rm -f *.interp
 	rm -f *.tokens
-
-
 

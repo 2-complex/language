@@ -10,18 +10,6 @@ line
    | expression
    ;
 
-function
-   : '{' program '}'
-   ;
-
-group
-   : '(' program ')'
-   ;
-
-comparison
-   : comparable ('<' | '>' | '<=' | '>=' | '==' | '!=') comparable
-   ;
-
 comparable
    : string
    | word
@@ -43,26 +31,6 @@ logicable
    | call
    | 'true'
    | 'false'
-   ;
-
-negation
-   : 'not' logicable
-   ;
-
-conjunction
-   : logicable (('and' | 'or') logicable)+
-   ;
-
-negative
-   : '-' addable
-   ;
-
-addedList
-   : addable (('+' | '-') addable)+
-   ;
-
-product
-   : mutliplyable (('*' | '/') mutliplyable)+
    ;
 
 addable
@@ -106,6 +74,38 @@ expression
    | logicable
    | conjunction
    | negation
+   ;
+
+function
+   : '{' program '}'
+   ;
+
+group
+   : '(' program ')'
+   ;
+
+comparison
+   : comparable ('<' | '>' | '<=' | '>=' | '==' | '!=') comparable
+   ;
+
+negation
+   : 'not' logicable
+   ;
+
+conjunction
+   : logicable (('and' | 'or') logicable)+
+   ;
+
+negative
+   : '-' addable
+   ;
+
+addedList
+   : addable (('+' | '-') addable)+
+   ;
+
+product
+   : mutliplyable (('*' | '/' | '%') mutliplyable)+
    ;
 
 call

@@ -116,6 +116,70 @@ public:
     }
 };
 
+class Comparable : public Thing
+{
+public:
+    Comparable()
+    {
+    }
+};
+
+class Logicable : public Thing
+{
+public:
+    Logicable()
+    {
+    }
+};
+
+class Addable : public Thing
+{
+public:
+    Addable()
+    {
+    }
+};
+
+class Mutliplyable : public Thing
+{
+public:
+    Mutliplyable()
+    {
+    }
+};
+
+class Evaluable : public Thing
+{
+public:
+    Evaluable()
+    {
+    }
+};
+
+class Comparison : public Logicable
+{
+private:
+    Comparable* left;
+    std::string op;
+    Comparable* right;
+
+public:
+    Comparison(
+        Comparable* left,
+        std::string op,
+        Comparable* right)
+        : left(left)
+        , op(op)
+        , right(right)
+    {
+    }
+
+    virtual std::string toString() const
+    {
+        return left->toString() + op + right->toString();
+    }
+};
+
 class Function : public Expression
 {
 private:
@@ -149,6 +213,31 @@ public:
         return std::string("(") + program->toString() + std::string(")");
     }
 };
+
+class Number : public Expression
+{
+private:
+    double value;
+public:
+
+    Number()
+        : value(0.0)
+    {
+    }
+
+    Number(const std::string& text)
+    {
+        value = atof(text.c_str());
+    }
+
+    virtual std::string toString() const override
+    {
+        char buffer[1000];
+        sprintf(buffer, "%f", value);
+        return std::string(buffer);
+    }
+};
+
 
 class MainVisitor : public CalamityBaseVisitor
 {
@@ -203,6 +292,28 @@ class MainVisitor : public CalamityBaseVisitor
         HType programH = visit(ctx->children[1]);
         return HType(new Group(static_cast<Program*>(programH.thing)));
     }
+
+    virtual Any visitComparable(CalamityParser::ComparableContext* ctx) override
+    {
+        return visit(ctx->children[0]);
+    }
+
+    virtual Any visitComparison(CalamityParser::ComparisonContext* ctx) override
+    {
+        HType leftH = visit(ctx->children[0]);
+        HType rightH = visit(ctx->children[2]);
+
+        Comparable* left = static_cast<Comparable*>(leftH.thing);
+        Comparable* right = static_cast<Comparable*>(rightH.thing);
+
+        return HType(new Comparison(left, ctx->children[1]->getText(), right));
+    }
+
+    virtual Any visitNumber(CalamityParser::NumberContext* ctx) override
+    {
+        return HType(new Number(ctx->getText()));
+    }
+
 };
 
 
