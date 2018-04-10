@@ -156,6 +156,30 @@ public:
     }
 };
 
+class AddedList : public Thing
+{
+public:
+    AddedList()
+    {
+    }
+
+    std::vector<Addable*> summands;
+    std::vector<std::string> ops;
+
+    virtual std::string toString() const override
+    {
+        std::string accum;
+        size_t n = summands.size();
+
+        for( size_t i = 0; i < n-1; i++ )
+            accum += (summands[i])->toString() + ops[i];
+
+        accum += summands[n-1]->toString();
+
+        return accum;
+    }
+};
+
 class Comparison : public Logicable
 {
 private:
@@ -238,6 +262,27 @@ public:
     }
 };
 
+class String : public Expression
+{
+private:
+    std::string value;
+public:
+
+    String()
+    {
+    }
+
+    String(const std::string& text)
+    {
+        value = text.substr(1, text.size()-2);
+    }
+
+    virtual std::string toString() const override
+    {
+        return std::string("\"") + value + std::string("\"");
+    }
+};
+
 
 class MainVisitor : public CalamityBaseVisitor
 {
@@ -309,11 +354,43 @@ class MainVisitor : public CalamityBaseVisitor
         return HType(new Comparison(left, ctx->children[1]->getText(), right));
     }
 
+    virtual Any visitAddable(CalamityParser::AddableContext* ctx) override
+    {
+        return visit(ctx->children[0]);
+    }
+
     virtual Any visitNumber(CalamityParser::NumberContext* ctx) override
     {
         return HType(new Number(ctx->getText()));
     }
 
+    virtual Any visitString(CalamityParser::StringContext* ctx) override
+    {
+        return HType(new String(ctx->getText()));
+    }
+
+    virtual Any visitAddedList(CalamityParser::AddedListContext* ctx) override
+    {
+        AddedList* addedList = new AddedList;
+
+        size_t n = ctx->children.size();
+
+
+        for (size_t i = 0; i < n; i++)
+        {
+            if( i%2 )
+            {
+                addedList->ops.push_back( ctx->children[i]->getText() );
+            }
+            else
+            {
+                HType h = visit(ctx->children[i]);
+                addedList->summands.push_back(static_cast<Addable*>(h.thing));
+            }
+        }
+
+        return HType(addedList);
+    }
 };
 
 

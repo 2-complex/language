@@ -31,7 +31,7 @@ CPP_GENERATED_CODE = \
 
 
 run: calam
-	./calam programs/comparison.cal
+	./calam programs/string-arithmetic.cal
 
 
 test: printtree.py $(GENERATED_CODE)

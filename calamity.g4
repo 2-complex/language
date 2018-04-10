@@ -61,15 +61,15 @@ evaluable
 expression
    : string
    | word
-   | array
    | group
+   | array
    | call
    | number
    | member
    | product
    | addedList
-   | negative
    | function
+   | negative
    | comparison
    | logicable
    | conjunction
