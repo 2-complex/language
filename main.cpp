@@ -36,26 +36,6 @@ class Line : public Thing
 {
 };
 
-class Pair : public Line
-{
-public:
-    Pair(
-        const std::string& left,
-        const std::string& right)
-        : left(left)
-        , right(right)
-    {
-    }
-
-    std::string left;
-    std::string right;
-
-    virtual std::string toString() const override
-    {
-        return left + ":" + right;
-    }
-};
-
 class Expression : public Line
 {
 public:
@@ -74,6 +54,22 @@ public:
     virtual std::string toString() const override
     {
         return expression;
+    }
+};
+
+class Pair : public Line
+{
+public:
+    Pair()
+    {
+    }
+
+    Expression* left;
+    Expression* right;
+
+    virtual std::string toString() const override
+    {
+        return left->toString() + ":" + right->toString();
     }
 };
 
@@ -425,9 +421,15 @@ class MainVisitor : public CalamityBaseVisitor
 
     virtual Any visitPair(CalamityParser::PairContext* ctx) override
     {
-        return HType(new Pair(
-            ctx->children[0]->getText(),
-            ctx->children[2]->getText()));
+        Pair* pair = new Pair;
+
+        HType hLeft = visit(ctx->children[0]);
+        HType hRight = visit(ctx->children[2]);
+
+        pair->left = static_cast<Expression*>(hLeft.thing);
+        pair->right = static_cast<Expression*>(hRight.thing);
+
+        return HType(pair);
     }
 
     virtual Any visitExpression(CalamityParser::ExpressionContext* ctx) override
