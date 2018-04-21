@@ -140,10 +140,10 @@ public:
     }
 };
 
-class Mutliplyable : public Thing
+class Multiplyable : public Thing
 {
 public:
-    Mutliplyable()
+    Multiplyable()
     {
     }
 };
@@ -163,22 +163,47 @@ public:
     {
     }
 
-    std::vector<Addable*> summands;
+    std::vector<Addable*> operands;
     std::vector<std::string> ops;
 
     virtual std::string toString() const override
     {
         std::string accum;
-        size_t n = summands.size();
+        size_t n = operands.size();
 
         for( size_t i = 0; i < n-1; i++ )
-            accum += (summands[i])->toString() + ops[i];
+            accum += (operands[i])->toString() + ops[i];
 
-        accum += summands[n-1]->toString();
+        accum += operands[n-1]->toString();
 
         return accum;
     }
 };
+
+class Product : public Thing
+{
+public:
+    Product()
+    {
+    }
+
+    std::vector<Multiplyable*> operands;
+    std::vector<std::string> ops;
+
+    virtual std::string toString() const override
+    {
+        std::string accum;
+        size_t n = operands.size();
+
+        for( size_t i = 0; i < n-1; i++ )
+            accum += (operands[i])->toString() + ops[i];
+
+        accum += operands[n-1]->toString();
+
+        return accum;
+    }
+};
+
 
 class Comparison : public Logicable
 {
@@ -262,6 +287,27 @@ public:
     }
 };
 
+class Word : public Expression
+{
+private:
+    std::string name;
+public:
+
+    Word()
+    {
+    }
+
+    Word(const std::string& text)
+        : name(text.c_str())
+    {
+    }
+
+    virtual std::string toString() const override
+    {
+        return name;
+    }
+};
+
 class String : public Expression
 {
 private:
@@ -288,6 +334,7 @@ class MainVisitor : public CalamityBaseVisitor
 {
     virtual Any visitProgram(CalamityParser::ProgramContext* ctx) override
     {
+        printf( "visiting program\n" );
         Program* program = new Program;
 
         size_t n = ctx->children.size();
@@ -301,6 +348,7 @@ class MainVisitor : public CalamityBaseVisitor
 
     virtual Any visitLine(CalamityParser::LineContext* ctx) override
     {
+        printf( "visiting line\n" );
         HType lineH = visit(ctx->children[0]);
         Line* lineptr = static_cast<Line*>(lineH.thing);
         return lineptr;
@@ -323,6 +371,7 @@ class MainVisitor : public CalamityBaseVisitor
 
     virtual Any visitExpression(CalamityParser::ExpressionContext* ctx) override
     {
+        printf( "visiting expression %s\n", ctx->children[0]->getText().c_str() );
         return visit(ctx->children[0]);
     }
 
@@ -334,6 +383,7 @@ class MainVisitor : public CalamityBaseVisitor
 
     virtual Any visitGroup(CalamityParser::GroupContext* ctx) override
     {
+        printf( "visiting group\n" );
         HType programH = visit(ctx->children[1]);
         return HType(new Group(static_cast<Program*>(programH.thing)));
     }
@@ -356,12 +406,20 @@ class MainVisitor : public CalamityBaseVisitor
 
     virtual Any visitAddable(CalamityParser::AddableContext* ctx) override
     {
+        printf("visiting addable\n");
         return visit(ctx->children[0]);
     }
 
     virtual Any visitNumber(CalamityParser::NumberContext* ctx) override
     {
+        printf("visiting number\n");
         return HType(new Number(ctx->getText()));
+    }
+
+    virtual Any visitWord(CalamityParser::WordContext* ctx) override
+    {
+        printf("visiting word\n");
+        return HType(new Word(ctx->getText()));
     }
 
     virtual Any visitString(CalamityParser::StringContext* ctx) override
@@ -375,8 +433,9 @@ class MainVisitor : public CalamityBaseVisitor
 
         size_t n = ctx->children.size();
 
+        printf("visiting added list\n");
 
-        for (size_t i = 0; i < n; i++)
+        for( size_t i = 0; i < n; i++ )
         {
             if( i%2 )
             {
@@ -385,11 +444,39 @@ class MainVisitor : public CalamityBaseVisitor
             else
             {
                 HType h = visit(ctx->children[i]);
-                addedList->summands.push_back(static_cast<Addable*>(h.thing));
+                addedList->operands.push_back(static_cast<Addable*>(h.thing));
             }
         }
 
         return HType(addedList);
+    }
+
+    virtual Any visitProduct(CalamityParser::ProductContext* ctx) override
+    {
+        Product* product = new Product;
+
+        size_t n = ctx->children.size();
+
+        printf("visiting product\n");
+
+        for( size_t i = 0; i < n; i++ )
+        {
+            printf( "%zu\n", i );
+            if( i%2 )
+            {
+                printf( "%s\n", ctx->children[i]->getText().c_str() );
+                product->ops.push_back( ctx->children[i]->getText() );
+            }
+            else
+            {
+                printf( "about to visit %s\n", ctx->children[i]->getText().c_str() );
+                HType h = visit(ctx->children[i]);
+                printf( "done visiting %s\n", ctx->children[i]->getText().c_str() );
+                product->operands.push_back(static_cast<Multiplyable*>(h.thing));
+            }
+        }
+
+        return HType(product);
     }
 };
 

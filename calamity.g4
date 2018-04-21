@@ -34,11 +34,11 @@ logicable
    ;
 
 addable
-   : product
-   | group
+   : group
    | call
    | number
    | word
+   | product
    | string
    | negative
    ;
@@ -114,6 +114,7 @@ call
 
 pair
    : expression ':' expression
+   | '*' ':' expression
    ;
 
 reference
