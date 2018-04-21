@@ -156,6 +156,24 @@ public:
     }
 };
 
+class Call : public Thing
+{
+public:
+    Evaluable* evaluable;
+    std::vector<Expression*> expressions;
+
+    virtual std::string toString() const override
+    {
+        std::string accum = evaluable->toString() + " ";
+        for( std::vector<Expression*>::const_iterator itr = expressions.begin();
+            itr != expressions.end(); itr++ )
+        {
+            accum += (*itr)->toString() + " ";
+        }
+        return accum;
+    }
+};
+
 class AddedList : public Thing
 {
 public:
@@ -298,7 +316,7 @@ public:
     }
 
     Word(const std::string& text)
-        : name(text.c_str())
+        : name(text)
     {
     }
 
@@ -307,6 +325,28 @@ public:
         return name;
     }
 };
+
+class Member : public Expression
+{
+private:
+    std::string name;
+public:
+
+    Member()
+    {
+    }
+
+    Member(const std::string& text)
+        : name(text.substr(1, text.size()-1))
+    {
+    }
+
+    virtual std::string toString() const override
+    {
+        return std::string(".") + name;
+    }
+};
+
 
 class String : public Expression
 {
@@ -422,6 +462,12 @@ class MainVisitor : public CalamityBaseVisitor
         return HType(new Word(ctx->getText()));
     }
 
+    virtual Any visitMember(CalamityParser::MemberContext* ctx) override
+    {
+        printf("visiting member\n");
+        return HType(new Member(ctx->getText()));
+    }
+
     virtual Any visitString(CalamityParser::StringContext* ctx) override
     {
         return HType(new String(ctx->getText()));
@@ -477,6 +523,25 @@ class MainVisitor : public CalamityBaseVisitor
         }
 
         return HType(product);
+    }
+
+    virtual Any visitCall(CalamityParser::CallContext* ctx) override
+    {
+        printf("visiting call\n");
+        Call* call = new Call;
+
+        size_t n = ctx->children.size();
+
+        HType h = visit(ctx->children[0]);
+        call->evaluable = static_cast<Evaluable*>(h.thing);
+
+        for (size_t i = 1; i < n; i++)
+        {
+            HType h = visit(ctx->children[i]);
+            call->expressions.push_back(static_cast<Expression*>(h.thing));
+        }
+
+        return HType(call);
     }
 };
 
