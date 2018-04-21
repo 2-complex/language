@@ -8,6 +8,7 @@ line
    : assignment
    | pair
    | expression
+   | defaultPair
    ;
 
 comparable
@@ -114,7 +115,10 @@ product
 
 pair
    : expression ':' expression
-   | '*' ':' expression
+   ;
+
+defaultPair
+   : '*' ':' expression
    ;
 
 reference
