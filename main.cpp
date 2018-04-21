@@ -198,6 +198,21 @@ public:
     }
 };
 
+class Negative : public Thing
+{
+public:
+    Negative()
+    {
+    }
+
+    Addable* operand;
+
+    virtual std::string toString() const override
+    {
+        return std::string("-") + operand->toString();
+    }
+};
+
 class Product : public Thing
 {
 public:
@@ -542,6 +557,14 @@ class MainVisitor : public CalamityBaseVisitor
         }
 
         return HType(call);
+    }
+
+    virtual Any visitNegative(CalamityParser::NegativeContext* ctx) override
+    {
+        Negative* negative = new Negative;
+        HType h = visit(ctx->children[1]);
+        negative->operand = static_cast<Addable*>(h.thing);
+        return HType(negative);
     }
 };
 

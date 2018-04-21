@@ -59,21 +59,21 @@ evaluable
    ;
 
 expression
-   : string
+   : group
    | word
-   | group
-   | array
-   | call
-   | number
+   | string
    | member
-   | product
-   | addedList
+   | number
+   | array
    | function
+   | product
    | negative
+   | addedList
    | comparison
    | logicable
    | conjunction
    | negation
+   | call
    ;
 
 function
@@ -104,12 +104,12 @@ addedList
    : addable (('+' | '-') addable)+
    ;
 
-product
-   : mutliplyable (('*' | '/' | '%') mutliplyable)+
-   ;
-
 call
    : evaluable expression+
+   ;
+
+product
+   : mutliplyable (('*' | '/' | '%') mutliplyable)+
    ;
 
 pair
