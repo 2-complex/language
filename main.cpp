@@ -36,29 +36,6 @@ class Line : public Thing
 {
 };
 
-class Assignment : public Line
-{
-public:
-    Assignment(
-        const std::string& reference,
-        const std::string& operation,
-        const std::string& expression)
-        : reference(reference)
-        , operation(operation)
-        , expression(expression)
-    {
-    }
-
-    std::string reference;
-    std::string operation;
-    std::string expression;
-
-    virtual std::string toString() const override
-    {
-        return reference + operation + expression;
-    }
-};
-
 class Pair : public Line
 {
 public:
@@ -99,6 +76,29 @@ public:
         return expression;
     }
 };
+
+class Reference : public Thing
+{
+};
+
+
+class Assignment : public Line
+{
+public:
+    Assignment()
+    {
+    }
+
+    Reference* reference;
+    std::string operation;
+    Expression* expression;
+
+    virtual std::string toString() const override
+    {
+        return reference->toString() + operation + expression->toString();
+    }
+};
+
 
 class Program : public Thing
 {
@@ -411,10 +411,16 @@ class MainVisitor : public CalamityBaseVisitor
 
     virtual Any visitAssignment(CalamityParser::AssignmentContext* ctx) override
     {
-        return HType(new Assignment(
-            ctx->children[0]->getText(),
-            ctx->children[1]->getText(),
-            ctx->children[2]->getText()));
+        Assignment* assignment = new Assignment;
+
+        HType hRef = visit(ctx->children[0]);
+        assignment->reference = static_cast<Reference*>(hRef.thing);
+        assignment->operation = ctx->children[1]->getText();
+
+        HType hExp = visit(ctx->children[2]);
+        assignment->expression = static_cast<Expression*>(hExp.thing);
+
+        return HType(assignment);
     }
 
     virtual Any visitPair(CalamityParser::PairContext* ctx) override
