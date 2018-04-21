@@ -62,6 +62,8 @@ public:
     virtual void exitString(CalamityParser::StringContext * /*ctx*/) override;
     virtual void enterNumber(CalamityParser::NumberContext* ctx) override;
     virtual void exitNumber(CalamityParser::NumberContext * /*ctx*/) override;
+    virtual void enterBoolean(CalamityParser::BooleanContext* ctx) override;
+    virtual void exitBoolean(CalamityParser::BooleanContext * /*ctx*/) override;
 
 private:
     int indentAmt;

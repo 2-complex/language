@@ -233,6 +233,44 @@ public:
     }
 };
 
+class Conjunction : public Thing
+{
+public:
+    Conjunction()
+    {
+    }
+
+    std::vector<Logicable*> operands;
+    std::vector<std::string> ops;
+
+    virtual std::string toString() const override
+    {
+        std::string accum;
+        size_t n = operands.size();
+
+        for( size_t i = 0; i < n-1; i++ )
+            accum += (operands[i])->toString() + " " + ops[i] + " ";
+
+        accum += operands[n-1]->toString();
+
+        return accum;
+    }
+};
+
+class Negation : public Thing
+{
+public:
+    Negation()
+    {
+    }
+
+    Logicable* operand;
+
+    virtual std::string toString() const override
+    {
+        return std::string("not ") + operand->toString();
+    }
+};
 
 class Comparison : public Logicable
 {
@@ -313,6 +351,28 @@ public:
         char buffer[1000];
         sprintf(buffer, "%f", value);
         return std::string(buffer);
+    }
+};
+
+class Boolean : public Expression
+{
+private:
+    bool value;
+public:
+
+    Boolean()
+        : value(false)
+    {
+    }
+
+    Boolean(const std::string& text)
+    {
+        value = (text == "true");
+    }
+
+    virtual std::string toString() const override
+    {
+        return std::string(value ? "true" : "false");
     }
 };
 
@@ -530,17 +590,13 @@ class MainVisitor : public CalamityBaseVisitor
 
         for( size_t i = 0; i < n; i++ )
         {
-            printf( "%zu\n", i );
             if( i%2 )
             {
-                printf( "%s\n", ctx->children[i]->getText().c_str() );
                 product->ops.push_back( ctx->children[i]->getText() );
             }
             else
             {
-                printf( "about to visit %s\n", ctx->children[i]->getText().c_str() );
                 HType h = visit(ctx->children[i]);
-                printf( "done visiting %s\n", ctx->children[i]->getText().c_str() );
                 product->operands.push_back(static_cast<Multiplyable*>(h.thing));
             }
         }
@@ -573,6 +629,44 @@ class MainVisitor : public CalamityBaseVisitor
         HType h = visit(ctx->children[1]);
         negative->operand = static_cast<Addable*>(h.thing);
         return HType(negative);
+    }
+
+    virtual Any visitConjunction(CalamityParser::ConjunctionContext* ctx) override
+    {
+        Conjunction* conjunction = new Conjunction;
+
+        size_t n = ctx->children.size();
+
+        printf("visiting conjunction\n");
+
+        for( size_t i = 0; i < n; i++ )
+        {
+            if( i%2 )
+            {
+                conjunction->ops.push_back( ctx->children[i]->getText() );
+            }
+            else
+            {
+                HType h = visit(ctx->children[i]);
+                conjunction->operands.push_back(static_cast<Logicable*>(h.thing));
+            }
+        }
+
+        return HType(conjunction);
+    }
+
+    virtual Any visitNegation(CalamityParser::NegationContext* ctx) override
+    {
+        Negation* negation = new Negation;
+        HType h = visit(ctx->children[1]);
+        negation->operand = static_cast<Logicable*>(h.thing);
+        return HType(negation);
+    }
+
+    virtual Any visitBoolean(CalamityParser::BooleanContext* ctx) override
+    {
+        Boolean* boolean = new Boolean(ctx->getText());
+        return HType(boolean);
     }
 };
 
