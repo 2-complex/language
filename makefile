@@ -33,6 +33,11 @@ CPP_GENERATED_CODE = \
 run: calam
 	./calam programs/program.cal
 
+Code.o: Code.h Code.cpp
+	$(CPP) -c Code.cpp
+
+codetest: codetest.cpp Code.o
+	$(CPP) codetest.cpp Code.o -o codetest
 
 test: printtree.py $(GENERATED_CODE)
 	python printtree.py
