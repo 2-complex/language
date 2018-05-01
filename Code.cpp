@@ -2,6 +2,63 @@
 
 #include <stdlib.h>
 
+namespace object
+{
+    Addable* Addable::operator + (const Addable* other) const
+    {
+        printf( "Oops, not supposed to get here" );
+        return NULL;
+    }
+
+    Addable* Addable::operator - (const Addable* other) const
+    {
+        printf( "Oops, not supposed to get here" );
+        return NULL;
+    }
+
+    std::string Number::toString() const
+    {
+        char buffer[1000];
+        sprintf(buffer, "%f", value);
+        return std::string(buffer);
+    }
+
+    Addable* Number::operator + (const Addable* other) const
+    {
+        if( other->isNumber() )
+        {
+            return new Number( value + other->asNumber()->value );
+        }
+        else
+        {
+            assert(false);
+            return NULL;
+        }
+
+        assert(false);
+        return NULL;
+    }
+
+    Addable* Number::operator - (const Addable* other) const
+    {
+        if( other->isNumber() )
+        {
+            return new Number( value - other->asNumber()->value );
+        }
+        else
+        {
+            assert(false);
+            return NULL;
+        }
+
+        assert(false);
+        return NULL;
+    }
+}
+
+namespace code
+{
+
 std::string Code::toString() const
 {
     return std::string("********");
@@ -49,6 +106,39 @@ std::string Call::toString() const
 AddedList::AddedList(Addable* first)
 {
     operands.push_back(first);
+}
+
+object::Addable* AddedList::evaluate() const
+{
+    object::Addable* accum = operands[0]->evaluate();
+
+    size_t n = ops.size();
+
+    for( size_t i = 0; i < n; i++ )
+    {
+        if( ops[i] == "+" )
+        {
+            object::Addable* next = operands[i+1]->evaluate();
+            object::Addable* newAddable = (*accum) + next;
+
+            delete accum;
+            delete next;
+
+            accum = newAddable;
+        }
+        else if( ops[i] == "-" )
+        {
+            object::Addable* next = operands[i+1]->evaluate();
+            object::Addable* newAddable = (*accum) - next;
+
+            delete accum;
+            delete next;
+
+            accum = newAddable;
+        }
+    }
+
+    return accum;
 }
 
 void AddedList::add(const std::string& op, Addable* operand)
@@ -165,6 +255,11 @@ std::string Number::toString() const
     return std::string(buffer);
 }
 
+object::Addable* Number::evaluate() const
+{
+    return new object::Number(value);
+}
+
 Word::Word()
 {
 }
@@ -205,4 +300,6 @@ String::String(const std::string& text)
 std::string String::toString() const
 {
     return std::string("\"") + value + std::string("\"");
+}
+
 }

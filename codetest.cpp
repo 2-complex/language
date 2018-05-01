@@ -3,12 +3,20 @@
 
 int main(int argc, char** args)
 {
-    Number a("3");
-    Number b("4");
+    code::Number a("3");
+    code::Number b("4");
 
-    AddedList l(&a);
-    l.add("+", &b);
+    code::AddedList sum(&a);
+    sum.add("+", &b);
 
-    printf( "%s\n", l.toString().c_str() );
+    printf( "%s\n", sum.toString().c_str() );
+    printf( "%s\n", sum.evaluate()->toString().c_str() );
+
+    code::AddedList difference(&a);
+    difference.add("-", &b);
+
+    printf( "%s\n", difference.toString().c_str() );
+    printf( "%s\n", difference.evaluate()->toString().c_str() );
+
     return 0;
 }
