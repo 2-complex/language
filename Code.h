@@ -144,7 +144,7 @@ public:
     std::vector<Addable*> operands;
     std::vector<std::string> ops;
 
-    void add(const std::string& op, Addable* operand);
+    void append(const std::string& op, Addable* operand);
 
     virtual std::string toString() const override;
 

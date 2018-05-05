@@ -141,7 +141,7 @@ object::Addable* AddedList::evaluate() const
     return accum;
 }
 
-void AddedList::add(const std::string& op, Addable* operand)
+void AddedList::append(const std::string& op, Addable* operand)
 {
     ops.push_back(op);
     operands.push_back(operand);

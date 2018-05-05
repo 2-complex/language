@@ -7,13 +7,13 @@ int main(int argc, char** args)
     code::Number b("4");
 
     code::AddedList sum(&a);
-    sum.add("+", &b);
+    sum.append("+", &b);
 
     printf( "%s\n", sum.toString().c_str() );
     printf( "%s\n", sum.evaluate()->toString().c_str() );
 
     code::AddedList difference(&a);
-    difference.add("-", &b);
+    difference.append("-", &b);
 
     printf( "%s\n", difference.toString().c_str() );
     printf( "%s\n", difference.evaluate()->toString().c_str() );
