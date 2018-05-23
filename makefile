@@ -31,7 +31,7 @@ CPP_GENERATED_CODE = \
 
 
 run: calam
-	./calam programs/program.cal
+	./calam programs/boolean-logic.cal
 
 Code.o: Code.h Code.cpp
 	$(CPP) -c Code.cpp
@@ -129,6 +129,8 @@ TreeShapeListener.o: TreeShapeListener.h TreeShapeListener.cpp
 
 
 CALAMITY_OBJETS = \
+	Code.o \
+	objects.o \
 	CalamityBaseListener.o \
 	CalamityLexer.o \
 	CalamityListener.o \

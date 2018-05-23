@@ -12,21 +12,18 @@
 
 using namespace antlrcpp;
 using namespace antlr4;
-
-
+using namespace code;
 
 class HType
 {
 public:
-    HType(Code* Code)
-        : Code(Code)
+    HType(Code* code)
+        : code(code)
     {
     }
 
-    Code* Code;
+    Code* code;
 };
-
-
 
 class MainVisitor : public CalamityBaseVisitor
 {
@@ -46,7 +43,7 @@ class MainVisitor : public CalamityBaseVisitor
     virtual Any visitLine(CalamityParser::LineContext* ctx) override
     {
         HType lineH = visit(ctx->children[0]);
-        Line* lineptr = static_cast<Line*>(lineH.Code);
+        Line* lineptr = static_cast<Line*>(lineH.code);
         return lineptr;
     }
 
@@ -55,11 +52,11 @@ class MainVisitor : public CalamityBaseVisitor
         Assignment* assignment = new Assignment;
 
         HType hRef = visit(ctx->children[0]);
-        assignment->reference = static_cast<Reference*>(hRef.Code);
+        assignment->reference = static_cast<Reference*>(hRef.code);
         assignment->operation = ctx->children[1]->getText();
 
         HType hExp = visit(ctx->children[2]);
-        assignment->expression = static_cast<Expression*>(hExp.Code);
+        assignment->expression = static_cast<Expression*>(hExp.code);
 
         return HType(assignment);
     }
@@ -71,8 +68,8 @@ class MainVisitor : public CalamityBaseVisitor
         HType hLeft = visit(ctx->children[0]);
         HType hRight = visit(ctx->children[2]);
 
-        pair->left = static_cast<Expression*>(hLeft.Code);
-        pair->right = static_cast<Expression*>(hRight.Code);
+        pair->left = static_cast<Expression*>(hLeft.code);
+        pair->right = static_cast<Expression*>(hRight.code);
 
         return HType(pair);
     }
@@ -85,13 +82,13 @@ class MainVisitor : public CalamityBaseVisitor
     virtual Any visitFunction(CalamityParser::FunctionContext* ctx) override
     {
         HType programH = visit(ctx->children[1]);
-        return HType(new Function(static_cast<Program*>(programH.Code)));
+        return HType(new Function(static_cast<Program*>(programH.code)));
     }
 
     virtual Any visitGroup(CalamityParser::GroupContext* ctx) override
     {
         HType programH = visit(ctx->children[1]);
-        return HType(new Group(static_cast<Program*>(programH.Code)));
+        return HType(new Group(static_cast<Program*>(programH.code)));
     }
 
     virtual Any visitComparable(CalamityParser::ComparableContext* ctx) override
@@ -104,8 +101,8 @@ class MainVisitor : public CalamityBaseVisitor
         HType leftH = visit(ctx->children[0]);
         HType rightH = visit(ctx->children[2]);
 
-        Comparable* left = static_cast<Comparable*>(leftH.Code);
-        Comparable* right = static_cast<Comparable*>(rightH.Code);
+        Comparable* left = static_cast<Comparable*>(leftH.code);
+        Comparable* right = static_cast<Comparable*>(rightH.code);
 
         return HType(new Comparison(left, ctx->children[1]->getText(), right));
     }
@@ -137,21 +134,15 @@ class MainVisitor : public CalamityBaseVisitor
 
     virtual Any visitAddedList(CalamityParser::AddedListContext* ctx) override
     {
-        AddedList* addedList = new AddedList;
+        HType firstH = visit(ctx->children[0]);
+        AddedList* addedList = new AddedList(static_cast<Addable*>(firstH.code));
 
         size_t n = ctx->children.size();
-
-        for( size_t i = 0; i < n; i++ )
+        for( size_t i = 1; i < n; i+=2 )
         {
-            if( i%2 )
-            {
-                addedList->ops.push_back( ctx->children[i]->getText() );
-            }
-            else
-            {
-                HType h = visit(ctx->children[i]);
-                addedList->operands.push_back(static_cast<Addable*>(h.Code));
-            }
+            HType h = visit(ctx->children[i+1]);
+            addedList->append( ctx->children[i]->getText(),
+                 static_cast<Addable*>(h.code));
         }
 
         return HType(addedList);
@@ -159,21 +150,16 @@ class MainVisitor : public CalamityBaseVisitor
 
     virtual Any visitProduct(CalamityParser::ProductContext* ctx) override
     {
-        Product* product = new Product;
+        HType firstH = visit(ctx->children[0]);
+        Product* product = new Product(static_cast<Multiplyable*>(firstH.code));
 
         size_t n = ctx->children.size();
 
-        for( size_t i = 0; i < n; i++ )
+        for( size_t i = 1; i < n; i+=2 )
         {
-            if( i%2 )
-            {
-                product->ops.push_back( ctx->children[i]->getText() );
-            }
-            else
-            {
-                HType h = visit(ctx->children[i]);
-                product->operands.push_back(static_cast<Multiplyable*>(h.Code));
-            }
+            HType h = visit(ctx->children[i+1]);
+            product->append( ctx->children[i]->getText(),
+                static_cast<Multiplyable*>(static_cast<Multiplyable*>(h.code)));
         }
 
         return HType(product);
@@ -186,12 +172,12 @@ class MainVisitor : public CalamityBaseVisitor
         size_t n = ctx->children.size();
 
         HType h = visit(ctx->children[0]);
-        call->evaluable = static_cast<Evaluable*>(h.Code);
+        call->evaluable = static_cast<Evaluable*>(h.code);
 
-        for( size_t i = 1; i < n; i++ )
+        for (size_t i = 1; i < n; i++)
         {
             HType h = visit(ctx->children[i]);
-            call->expressions.push_back(static_cast<Expression*>(h.Code));
+            call->expressions.push_back(static_cast<Expression*>(h.code));
         }
 
         return HType(call);
@@ -201,18 +187,49 @@ class MainVisitor : public CalamityBaseVisitor
     {
         Negative* negative = new Negative;
         HType h = visit(ctx->children[1]);
-        negative->operand = static_cast<Addable*>(h.Code);
+        negative->operand = static_cast<Addable*>(h.code);
         return HType(negative);
+    }
+
+    virtual Any visitConjunction(CalamityParser::ConjunctionContext* ctx) override
+    {
+        HType firstH = visit(ctx->children[0]);
+        Conjunction* conjunction = new Conjunction(static_cast<Logicable*>(firstH.code));
+
+        size_t n = ctx->children.size();
+        for( size_t i = 1; i < n; i+=2 )
+        {
+            HType h = visit(ctx->children[i+1]);
+            conjunction->append( ctx->children[i]->getText(),
+                static_cast<Logicable*>(h.code));
+        }
+
+        return HType(conjunction);
+    }
+
+    virtual Any visitNegation(CalamityParser::NegationContext* ctx) override
+    {
+        Negation* negation = new Negation;
+        HType h = visit(ctx->children[1]);
+        negation->operand = static_cast<Logicable*>(h.code);
+        return HType(negation);
+    }
+
+    virtual Any visitBoolean(CalamityParser::BooleanContext* ctx) override
+    {
+        Boolean* boolean = new Boolean(ctx->getText());
+        return HType(boolean);
     }
 
     virtual Any visitArray(CalamityParser::ArrayContext* ctx) override
     {
         Array* array = new Array;
 
+        size_t n = ctx->children.size();
         for( size_t i = 1; i < n-1; i+=2 )
         {
             HType h = visit(ctx->children[i]);
-            array->elements.push_back(static_cast<Expression*>(h.Code));
+            array->elements.push_back(static_cast<Expression*>(h.code));
         }
 
         return HType(array);
@@ -243,7 +260,7 @@ int main(int argc, const char* argv[])
     MainVisitor vistor;
     HType a = vistor.visit(tree);
 
-    printf( "%s\n", a.Code->toString().c_str() );
+    printf( "%s\n", a.code->toString().c_str() );
 
     return 0;
 }

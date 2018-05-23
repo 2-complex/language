@@ -118,10 +118,35 @@ public:
 class Product : public Code
 {
 public:
-    Product();
+    Product(Multiplyable* first);
 
     std::vector<Multiplyable*> operands;
     std::vector<std::string> ops;
+
+    void append(const std::string& op, Multiplyable* operand);
+
+    virtual std::string toString() const override;
+};
+
+class Conjunction : public Code
+{
+public:
+    Conjunction(Logicable* first);
+
+    std::vector<Logicable*> operands;
+    std::vector<std::string> ops;
+
+    void append(const std::string& op, Logicable* operand);
+
+    virtual std::string toString() const override;
+};
+
+class Negation : public Code
+{
+public:
+    Negation();
+
+    Logicable* operand;
 
     virtual std::string toString() const override;
 };
@@ -182,6 +207,18 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate() const override;
+};
+
+class Boolean : public Expression
+{
+private:
+    bool value;
+public:
+
+    Boolean();
+    Boolean(const std::string& text);
+
+    virtual std::string toString() const override;
 };
 
 class Word : public Expression

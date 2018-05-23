@@ -116,8 +116,15 @@ std::string Negative::toString() const
     return std::string("-") + operand->toString();
 }
 
-Product::Product()
+Product::Product(Multiplyable* first)
 {
+    operands.push_back(first);
+}
+
+void Product::append(const std::string& op, Multiplyable* operand)
+{
+    ops.push_back(op);
+    operands.push_back(operand);
 }
 
 std::string Product::toString() const
@@ -131,6 +138,39 @@ std::string Product::toString() const
     accum += operands[n-1]->toString();
 
     return accum;
+}
+
+Conjunction::Conjunction(Logicable* first)
+{
+    operands.push_back(first);
+}
+
+void Conjunction::append(const std::string& op, Logicable* operand)
+{
+    ops.push_back(op);
+    operands.push_back(operand);
+}
+
+std::string Conjunction::toString() const
+{
+    std::string accum;
+    size_t n = operands.size();
+
+    for( size_t i = 0; i < n-1; i++ )
+        accum += (operands[i])->toString() + " " + ops[i] + " ";
+
+    accum += operands[n-1]->toString();
+
+    return accum;
+}
+
+Negation::Negation()
+{
+}
+
+std::string Negation::toString() const
+{
+    return std::string("not ") + operand->toString();
 }
 
 Comparison::Comparison(
@@ -185,6 +225,21 @@ std::string Array::toString() const
     return result;
 }
 
+Boolean::Boolean()
+    : value(false)
+{
+}
+
+Boolean::Boolean(const std::string& text)
+{
+    value = (text == "true");
+}
+
+std::string Boolean::toString() const
+{
+    return std::string(value ? "true" : "false");
+}
+
 Number::Number()
     : text("0")
 {
@@ -219,6 +274,20 @@ object::Node* Number::evaluate() const
     }
 }
 
+String::String()
+{
+}
+
+String::String(const std::string& text)
+{
+    value = text.substr(1, text.size()-2);
+}
+
+std::string String::toString() const
+{
+    return std::string("\"") + value + std::string("\"");
+}
+
 Word::Word()
 {
 }
@@ -245,20 +314,6 @@ Member::Member(const std::string& text)
 std::string Member::toString() const
 {
     return std::string(".") + name;
-}
-
-String::String()
-{
-}
-
-String::String(const std::string& text)
-{
-    value = text.substr(1, text.size()-2);
-}
-
-std::string String::toString() const
-{
-    return std::string("\"") + value + std::string("\"");
 }
 
 }

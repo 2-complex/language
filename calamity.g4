@@ -30,7 +30,11 @@ logicable
    | word
    | group
    | call
-   | 'true'
+   | boolean
+   ;
+
+boolean
+   : 'true'
    | 'false'
    ;
 
