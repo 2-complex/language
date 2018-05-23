@@ -261,6 +261,11 @@ std::string Group::toString() const
     return std::string("(") + program->toString() + std::string(")");
 }
 
+object::Node* Group::evaluate() const
+{
+    return program->evaluate();
+}
+
 Array::Array()
 {
 }
