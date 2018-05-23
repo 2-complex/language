@@ -128,6 +128,7 @@ public:
     void append(const std::string& op, Multiplyable* operand);
 
     virtual std::string toString() const override;
+    virtual object::Node* evaluate() const override;
 };
 
 class Conjunction : public Code

@@ -150,6 +150,49 @@ std::string Product::toString() const
     return accum;
 }
 
+object::Node* Product::evaluate() const
+{
+    object::Node* accum = operands[0]->evaluate();
+
+    size_t n = ops.size();
+
+    for( size_t i = 0; i < n; i++ )
+    {
+        if( ops[i] == "*" )
+        {
+            object::Node* next = operands[i+1]->evaluate();
+            object::Node* newNode = accum->Times(next);
+
+            delete accum;
+            delete next;
+
+            accum = newNode;
+        }
+        else if( ops[i] == "/" )
+        {
+            object::Node* next = operands[i+1]->evaluate();
+            object::Node* newNode = accum->DividedBy(next);
+
+            delete accum;
+            delete next;
+
+            accum = newNode;
+        }
+        else if( ops[i] == "%" )
+        {
+            object::Node* next = operands[i+1]->evaluate();
+            object::Node* newNode = accum->Mod(next);
+
+            delete accum;
+            delete next;
+
+            accum = newNode;
+        }
+    }
+
+    return accum;
+}
+
 Conjunction::Conjunction(Logicable* first)
 {
     operands.push_back(first);

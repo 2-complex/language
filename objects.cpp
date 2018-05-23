@@ -12,7 +12,7 @@ std::string Node::toString() const
 
 Node* Error::And(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Error::And(Bool* _)
@@ -52,7 +52,7 @@ Node* Error::And(Function* _)
 
 Node* Bool::And(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Bool::And(Bool* _)
@@ -107,7 +107,7 @@ std::string Integer::toString() const
 
 Node* Integer::And(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Integer::And(Bool* _)
@@ -157,7 +157,7 @@ std::string Double::toString() const
 
 Node* Double::And(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Double::And(Bool* _)
@@ -197,7 +197,7 @@ Node* Double::And(Function* _)
 
 Node* String::And(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* String::And(Bool* _)
@@ -237,7 +237,7 @@ Node* String::And(Function* _)
 
 Node* List::And(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* List::And(Bool* _)
@@ -277,7 +277,7 @@ Node* List::And(Function* _)
 
 Node* Object::And(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Object::And(Bool* _)
@@ -317,7 +317,7 @@ Node* Object::And(Function* _)
 
 Node* Function::And(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Function::And(Bool* _)
@@ -357,7 +357,7 @@ Node* Function::And(Function* _)
 
 Node* Error::Or(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Error::Or(Bool* _)
@@ -397,7 +397,7 @@ Node* Error::Or(Function* _)
 
 Node* Bool::Or(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Bool::Or(Bool* _)
@@ -437,7 +437,7 @@ Node* Bool::Or(Function* _)
 
 Node* Integer::Or(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Integer::Or(Bool* _)
@@ -477,7 +477,7 @@ Node* Integer::Or(Function* _)
 
 Node* Double::Or(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Double::Or(Bool* _)
@@ -517,7 +517,7 @@ Node* Double::Or(Function* _)
 
 Node* String::Or(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* String::Or(Bool* _)
@@ -557,7 +557,7 @@ Node* String::Or(Function* _)
 
 Node* List::Or(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* List::Or(Bool* _)
@@ -597,7 +597,7 @@ Node* List::Or(Function* _)
 
 Node* Object::Or(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Object::Or(Bool* _)
@@ -637,7 +637,7 @@ Node* Object::Or(Function* _)
 
 Node* Function::Or(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Function::Or(Bool* _)
@@ -677,7 +677,7 @@ Node* Function::Or(Function* _)
 
 Node* Error::Plus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Error::Plus(Bool* _)
@@ -717,7 +717,7 @@ Node* Error::Plus(Function* _)
 
 Node* Bool::Plus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Bool::Plus(Bool* _)
@@ -757,7 +757,7 @@ Node* Bool::Plus(Function* _)
 
 Node* Integer::Plus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Integer::Plus(Bool* _)
@@ -797,7 +797,7 @@ Node* Integer::Plus(Function* _)
 
 Node* Double::Plus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Double::Plus(Bool* _)
@@ -837,7 +837,7 @@ Node* Double::Plus(Function* _)
 
 Node* String::Plus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* String::Plus(Bool* _)
@@ -877,7 +877,7 @@ Node* String::Plus(Function* _)
 
 Node* List::Plus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* List::Plus(Bool* _)
@@ -917,7 +917,7 @@ Node* List::Plus(Function* _)
 
 Node* Object::Plus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Object::Plus(Bool* _)
@@ -957,7 +957,7 @@ Node* Object::Plus(Function* _)
 
 Node* Function::Plus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Function::Plus(Bool* _)
@@ -997,7 +997,7 @@ Node* Function::Plus(Function* _)
 
 Node* Error::Minus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Error::Minus(Bool* _)
@@ -1037,7 +1037,7 @@ Node* Error::Minus(Function* _)
 
 Node* Bool::Minus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Bool::Minus(Bool* _)
@@ -1117,7 +1117,7 @@ Node* Integer::Minus(Function* _)
 
 Node* Double::Minus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Double::Minus(Bool* _)
@@ -1157,7 +1157,7 @@ Node* Double::Minus(Function* _)
 
 Node* String::Minus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* String::Minus(Bool* _)
@@ -1197,7 +1197,7 @@ Node* String::Minus(Function* _)
 
 Node* List::Minus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* List::Minus(Bool* _)
@@ -1237,7 +1237,7 @@ Node* List::Minus(Function* _)
 
 Node* Object::Minus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Object::Minus(Bool* _)
@@ -1277,7 +1277,7 @@ Node* Object::Minus(Function* _)
 
 Node* Function::Minus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Function::Minus(Bool* _)
@@ -1317,47 +1317,47 @@ Node* Function::Minus(Function* _)
 
 Node* Error::Times(Error* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Times(Bool* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Times(Integer* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Times(Double* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Times(String* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Times(List* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Times(Object* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Times(Function* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Bool::Times(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Bool::Times(Bool* _)
@@ -1397,7 +1397,7 @@ Node* Bool::Times(Function* _)
 
 Node* Integer::Times(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Integer::Times(Bool* _)
@@ -1407,7 +1407,7 @@ Node* Integer::Times(Bool* _)
 
 Node* Integer::Times(Integer* _)
 {
-    return new Error;
+    return new Integer(value * _->value);
 }
 
 Node* Integer::Times(Double* _)
@@ -1437,7 +1437,7 @@ Node* Integer::Times(Function* _)
 
 Node* Double::Times(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Double::Times(Bool* _)
@@ -1477,7 +1477,7 @@ Node* Double::Times(Function* _)
 
 Node* String::Times(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* String::Times(Bool* _)
@@ -1517,7 +1517,7 @@ Node* String::Times(Function* _)
 
 Node* List::Times(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* List::Times(Bool* _)
@@ -1557,7 +1557,7 @@ Node* List::Times(Function* _)
 
 Node* Object::Times(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Object::Times(Bool* _)
@@ -1597,7 +1597,7 @@ Node* Object::Times(Function* _)
 
 Node* Function::Times(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Function::Times(Bool* _)
@@ -1637,7 +1637,7 @@ Node* Function::Times(Function* _)
 
 Node* Error::DividedBy(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Error::DividedBy(Bool* _)
@@ -1677,7 +1677,7 @@ Node* Error::DividedBy(Function* _)
 
 Node* Bool::DividedBy(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Bool::DividedBy(Bool* _)
@@ -1717,7 +1717,7 @@ Node* Bool::DividedBy(Function* _)
 
 Node* Integer::DividedBy(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Integer::DividedBy(Bool* _)
@@ -1727,7 +1727,7 @@ Node* Integer::DividedBy(Bool* _)
 
 Node* Integer::DividedBy(Integer* _)
 {
-    return new Error;
+    return new Integer(value / _->value);
 }
 
 Node* Integer::DividedBy(Double* _)
@@ -1757,7 +1757,7 @@ Node* Integer::DividedBy(Function* _)
 
 Node* Double::DividedBy(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Double::DividedBy(Bool* _)
@@ -1797,7 +1797,7 @@ Node* Double::DividedBy(Function* _)
 
 Node* String::DividedBy(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* String::DividedBy(Bool* _)
@@ -1837,7 +1837,7 @@ Node* String::DividedBy(Function* _)
 
 Node* List::DividedBy(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* List::DividedBy(Bool* _)
@@ -1877,7 +1877,7 @@ Node* List::DividedBy(Function* _)
 
 Node* Object::DividedBy(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Object::DividedBy(Bool* _)
@@ -1917,7 +1917,7 @@ Node* Object::DividedBy(Function* _)
 
 Node* Function::DividedBy(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Function::DividedBy(Bool* _)
@@ -1957,7 +1957,7 @@ Node* Function::DividedBy(Function* _)
 
 Node* Error::Mod(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Error::Mod(Bool* _)
@@ -1997,7 +1997,7 @@ Node* Error::Mod(Function* _)
 
 Node* Bool::Mod(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Bool::Mod(Bool* _)
@@ -2037,7 +2037,7 @@ Node* Bool::Mod(Function* _)
 
 Node* Integer::Mod(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Integer::Mod(Bool* _)
@@ -2047,7 +2047,7 @@ Node* Integer::Mod(Bool* _)
 
 Node* Integer::Mod(Integer* _)
 {
-    return new Error;
+    return new Integer(value % _->value);
 }
 
 Node* Integer::Mod(Double* _)
@@ -2077,7 +2077,7 @@ Node* Integer::Mod(Function* _)
 
 Node* Double::Mod(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Double::Mod(Bool* _)
@@ -2117,7 +2117,7 @@ Node* Double::Mod(Function* _)
 
 Node* String::Mod(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* String::Mod(Bool* _)
@@ -2157,7 +2157,7 @@ Node* String::Mod(Function* _)
 
 Node* List::Mod(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* List::Mod(Bool* _)
@@ -2197,7 +2197,7 @@ Node* List::Mod(Function* _)
 
 Node* Object::Mod(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Object::Mod(Bool* _)
@@ -2237,7 +2237,7 @@ Node* Object::Mod(Function* _)
 
 Node* Function::Mod(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Function::Mod(Bool* _)
@@ -2277,7 +2277,7 @@ Node* Function::Mod(Function* _)
 
 Node* Error::Call(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Error::Call(Bool* _)
@@ -2317,7 +2317,7 @@ Node* Error::Call(Function* _)
 
 Node* Bool::Call(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Bool::Call(Bool* _)
@@ -2357,7 +2357,7 @@ Node* Bool::Call(Function* _)
 
 Node* Integer::Call(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Integer::Call(Bool* _)
@@ -2397,7 +2397,7 @@ Node* Integer::Call(Function* _)
 
 Node* Double::Call(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Double::Call(Bool* _)
@@ -2437,7 +2437,7 @@ Node* Double::Call(Function* _)
 
 Node* String::Call(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* String::Call(Bool* _)
@@ -2477,7 +2477,7 @@ Node* String::Call(Function* _)
 
 Node* List::Call(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* List::Call(Bool* _)
@@ -2517,7 +2517,7 @@ Node* List::Call(Function* _)
 
 Node* Object::Call(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Object::Call(Bool* _)
@@ -2557,7 +2557,7 @@ Node* Object::Call(Function* _)
 
 Node* Function::Call(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Function::Call(Bool* _)
