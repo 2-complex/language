@@ -15,6 +15,7 @@ class Code
 {
 public:
     virtual std::string toString() const;
+    virtual object::Node* evaluate() const;
 };
 
 class Line : public Code
@@ -57,6 +58,7 @@ public:
     std::vector<Line*> lines;
 
     virtual std::string toString() const override;
+    virtual object::Node* evaluate() const override;
 };
 
 class Comparable : public Code

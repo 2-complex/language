@@ -5,7 +5,7 @@ Node::~Node()
 {
 }
 
-std::string Node::toString()
+std::string Node::toString() const
 {
     return "STANDIN STRING";
 }
@@ -90,9 +90,19 @@ Node* Bool::And(Function* _)
     return new Error;
 }
 
+Integer::Integer(int value)
+    : value(value)
+{
+}
+
 Integer::Integer(const std::string& text)
 {
     value = atoi(text.c_str());
+}
+
+std::string Integer::toString() const
+{
+    return std::to_string(value);
 }
 
 Node* Integer::And(Error* _)
@@ -138,6 +148,11 @@ Node* Integer::And(Function* _)
 Double::Double(const std::string& text)
 {
     value = atof(text.c_str());
+}
+
+std::string Double::toString() const
+{
+    return std::to_string(value);
 }
 
 Node* Double::And(Error* _)
@@ -752,7 +767,7 @@ Node* Integer::Plus(Bool* _)
 
 Node* Integer::Plus(Integer* _)
 {
-    return new Error;
+    return new Integer(value + _->value);
 }
 
 Node* Integer::Plus(Double* _)
@@ -1062,7 +1077,7 @@ Node* Bool::Minus(Function* _)
 
 Node* Integer::Minus(Error* _)
 {
-    return new Error;
+    return _;
 }
 
 Node* Integer::Minus(Bool* _)
@@ -1072,7 +1087,7 @@ Node* Integer::Minus(Bool* _)
 
 Node* Integer::Minus(Integer* _)
 {
-    return new Error;
+    return new Integer(value - _->value);
 }
 
 Node* Integer::Minus(Double* _)

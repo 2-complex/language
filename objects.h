@@ -159,7 +159,7 @@ class Node
 {
 public:
     virtual ~Node();
-    virtual std::string toString();
+    virtual std::string toString() const;
 
     virtual Node* And(Node*) = 0;
     virtual Node* back_And(Error*) = 0;
@@ -251,7 +251,10 @@ class Integer : public Node
 {
     int value;
 public:
+    Integer(int value);
     Integer(const std::string& text);
+
+    virtual std::string toString() const override;
 DEFINITIONS
 };
 
@@ -260,6 +263,8 @@ class Double : public Node
     double value;
 public:
     Double(const std::string& text);
+
+    virtual std::string toString() const override;
 DEFINITIONS
 };
 

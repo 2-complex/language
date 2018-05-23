@@ -11,6 +11,11 @@ std::string Code::toString() const
     return std::string("********");
 }
 
+object::Node* Code::evaluate() const
+{
+    return new object::Error;
+}
+
 Pair::Pair()
 {
 }
@@ -37,6 +42,11 @@ std::string Program::toString() const
         accum += (*itr)->toString() + ",";
     }
     return accum;
+}
+
+object::Node* Program::evaluate() const
+{
+    return (*(lines.rbegin()))->evaluate();
 }
 
 std::string Call::toString() const

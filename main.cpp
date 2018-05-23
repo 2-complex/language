@@ -244,24 +244,59 @@ void displayTreeShape(tree::ParseTree *tree)
 }
 
 
+#include <iostream>
+#include <string>
+#include <sstream>
+
 int main(int argc, const char* argv[])
 {
     std::ifstream stream;
-    stream.open(argv[1]);
 
-    ANTLRInputStream input(stream);
-    CalamityLexer lexer(&input);
-    CommonTokenStream tokens(&lexer);
-    CalamityParser parser(&tokens);
+    if(argc == 2)
+    {
+        stream.open(argv[1]);
 
-    tree::ParseTree *tree = parser.program();
-    displayTreeShape(tree);
+        ANTLRInputStream input(stream);
+        CalamityLexer lexer(&input);
+        CommonTokenStream tokens(&lexer);
+        CalamityParser parser(&tokens);
 
-    MainVisitor vistor;
-    HType a = vistor.visit(tree);
+        tree::ParseTree *tree = parser.program();
+        displayTreeShape(tree);
 
-    printf( "%s\n", a.code->toString().c_str() );
+        MainVisitor vistor;
+        HType a = vistor.visit(tree);
 
-    return 0;
+        printf( "%s\n", a.code->toString().c_str() );
+
+        return 0;
+    }
+    else if(argc == 1)
+    {
+        for(;;)
+        {
+            printf("> ");
+            std::string mystr;
+            getline(std::cin, mystr);
+
+            std::stringstream ss(mystr);
+
+            ANTLRInputStream input(ss);
+            CalamityLexer lexer(&input);
+            CommonTokenStream tokens(&lexer);
+            CalamityParser parser(&tokens);
+
+            tree::ParseTree *tree = parser.program();
+
+            MainVisitor vistor;
+            HType a = vistor.visit(tree);
+
+            object::Node* answer = a.code->evaluate();
+
+            printf( "%s\n", answer->toString().c_str() );
+
+            delete answer;
+        }
+    }
 }
 
