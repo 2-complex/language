@@ -1,60 +1,7 @@
 #include "Code.h"
+#include "objects.h"
 
 #include <stdlib.h>
-
-namespace object
-{
-    Addable* Addable::operator + (const Addable* other) const
-    {
-        printf( "Oops, not supposed to get here" );
-        return NULL;
-    }
-
-    Addable* Addable::operator - (const Addable* other) const
-    {
-        printf( "Oops, not supposed to get here" );
-        return NULL;
-    }
-
-    std::string Number::toString() const
-    {
-        char buffer[1000];
-        sprintf(buffer, "%f", value);
-        return std::string(buffer);
-    }
-
-    Addable* Number::operator + (const Addable* other) const
-    {
-        if( other->isNumber() )
-        {
-            return new Number( value + other->asNumber()->value );
-        }
-        else
-        {
-            assert(false);
-            return NULL;
-        }
-
-        assert(false);
-        return NULL;
-    }
-
-    Addable* Number::operator - (const Addable* other) const
-    {
-        if( other->isNumber() )
-        {
-            return new Number( value - other->asNumber()->value );
-        }
-        else
-        {
-            assert(false);
-            return NULL;
-        }
-
-        assert(false);
-        return NULL;
-    }
-}
 
 namespace code
 {
@@ -108,9 +55,9 @@ AddedList::AddedList(Addable* first)
     operands.push_back(first);
 }
 
-object::Addable* AddedList::evaluate() const
+object::Node* AddedList::evaluate() const
 {
-    object::Addable* accum = operands[0]->evaluate();
+    object::Node* accum = operands[0]->evaluate();
 
     size_t n = ops.size();
 
@@ -118,23 +65,23 @@ object::Addable* AddedList::evaluate() const
     {
         if( ops[i] == "+" )
         {
-            object::Addable* next = operands[i+1]->evaluate();
-            object::Addable* newAddable = (*accum) + next;
+            object::Node* next = operands[i+1]->evaluate();
+            object::Node* newNode = accum->Plus(next);
 
             delete accum;
             delete next;
 
-            accum = newAddable;
+            accum = newNode;
         }
         else if( ops[i] == "-" )
         {
-            object::Addable* next = operands[i+1]->evaluate();
-            object::Addable* newAddable = (*accum) - next;
+            object::Node* next = operands[i+1]->evaluate();
+            object::Node* newNode = accum->Minus(next);
 
             delete accum;
             delete next;
 
-            accum = newAddable;
+            accum = newNode;
         }
     }
 
@@ -239,25 +186,37 @@ std::string Array::toString() const
 }
 
 Number::Number()
-    : value(0.0)
+    : text("0")
 {
 }
 
 Number::Number(const std::string& text)
+    : text(text)
 {
-    value = atof(text.c_str());
 }
 
 std::string Number::toString() const
 {
-    char buffer[1000];
-    sprintf(buffer, "%f", value);
-    return std::string(buffer);
+    return text;
 }
 
-object::Addable* Number::evaluate() const
+object::Node* Number::evaluate() const
 {
-    return new object::Number(value);
+    bool isFloat = false;
+    for( size_t i = 0; i < text.size(); ++i)
+    {
+        if( text[i] == '.' )
+            isFloat = true;
+    }
+
+    if( isFloat )
+    {
+        return new object::Double(text);
+    }
+    else
+    {
+        return new object::Integer(text);
+    }
 }
 
 Word::Word()

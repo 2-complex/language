@@ -6,53 +6,7 @@
 
 #include <assert.h>
 
-
-namespace object
-{
-
-class Object;
-class Number;
-
-class Object
-{
-public:
-    virtual ~Object() {}
-
-    virtual std::string toString() const = 0;
-    virtual bool isNumber() const = 0;
-    virtual const Number* asNumber() const = 0;
-};
-
-class Addable : public Object
-{
-public:
-    virtual ~Addable() {}
-
-    virtual object::Addable* operator + (const object::Addable* other) const;
-    virtual object::Addable* operator - (const object::Addable* other) const;
-
-    virtual bool isNumber() const {assert(false); return false;}
-};
-
-class Number : public Addable
-{
-    double value;
-
-public:
-    Number(double value) : value(value) {}
-    virtual ~Number() {}
-
-    virtual std::string toString() const;
-
-    virtual const Number* asNumber() const override {return this;}
-    virtual bool isNumber() const override {return true;}
-
-    virtual object::Addable* operator + (const object::Addable* other) const override;
-    virtual object::Addable* operator - (const object::Addable* other) const override;
-};
-
-}
-
+#include "objects.h"
 
 namespace code
 {
@@ -116,7 +70,7 @@ class Logicable : public Code
 class Addable : public Expression
 {
 public:
-    virtual object::Addable* evaluate() const = 0;
+    virtual object::Node* evaluate() const = 0;
 };
 
 class Multiplyable : public Code
@@ -148,7 +102,7 @@ public:
 
     virtual std::string toString() const override;
 
-    object::Addable* evaluate() const;
+    object::Node* evaluate() const;
 };
 
 class Negative : public Code
@@ -220,14 +174,14 @@ public:
 class Number : public Addable
 {
 private:
-    double value;
+    std::string text;
 public:
 
     Number();
     Number(const std::string& text);
 
     virtual std::string toString() const override;
-    virtual object::Addable* evaluate() const override;
+    virtual object::Node* evaluate() const override;
 };
 
 class Word : public Expression

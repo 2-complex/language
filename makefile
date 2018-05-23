@@ -36,8 +36,11 @@ run: calam
 Code.o: Code.h Code.cpp
 	$(CPP) -c Code.cpp
 
-codetest: codetest.cpp Code.o
-	$(CPP) codetest.cpp Code.o -o codetest
+objects.o: objects.cpp objects.h
+	$(CPP) -c objects.cpp
+
+codetest: codetest.cpp objects.o Code.o
+	$(CPP) codetest.cpp objects.o Code.o -o codetest
 
 test: printtree.py $(GENERATED_CODE)
 	python printtree.py
