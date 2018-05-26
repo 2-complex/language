@@ -395,6 +395,7 @@ class Integer : public Node
 public:
     Integer(int value);
     Integer(const std::string& text);
+    int getValue();
 
     virtual std::string toString() const override;
 DEFINITIONS
@@ -404,7 +405,9 @@ class Double : public Node
 {
     double value;
 public:
+    Double(double value);
     Double(const std::string& text);
+    double getValue() const;
 
     virtual std::string toString() const override;
 DEFINITIONS

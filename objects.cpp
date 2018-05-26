@@ -125,6 +125,11 @@ Integer::Integer(const std::string& text)
     value = atoi(text.c_str());
 }
 
+int Integer::getValue()
+{
+    return value;
+}
+
 std::string Integer::toString() const
 {
     return std::to_string(value);
@@ -170,9 +175,19 @@ Node* Integer::And(Function* _)
     return new Error("Attempted booean and with integer and function.");
 }
 
+Double::Double(double value)
+    : value(value)
+{
+}
+
 Double::Double(const std::string& text)
 {
     value = atof(text.c_str());
+}
+
+double Double::getValue() const
+{
+    return value;
 }
 
 std::string Double::toString() const
@@ -298,37 +313,37 @@ Node* Array::And(Error* _)
 
 Node* Array::And(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with array and boolean.");
 }
 
 Node* Array::And(Integer* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with array and integer.");
 }
 
 Node* Array::And(Double* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with array and double.");
 }
 
 Node* Array::And(String* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with array and string.");
 }
 
 Node* Array::And(Array* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with arrays.");
 }
 
 Node* Array::And(Object* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with array and object.");
 }
 
 Node* Array::And(Function* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with array and function.");
 }
 
 Key::Key(int typeComparor, Node* node)
@@ -351,37 +366,37 @@ Node* Object::And(Error* _)
 
 Node* Object::And(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with object and boolean.");
 }
 
 Node* Object::And(Integer* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with object and integer.");
 }
 
 Node* Object::And(Double* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with object and double.");
 }
 
 Node* Object::And(String* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with object and string.");
 }
 
 Node* Object::And(Array* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with object and array.");
 }
 
 Node* Object::And(Object* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with object and array.");
 }
 
 Node* Object::And(Function* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with object and function.");
 }
 
 Node* Function::And(Error* _)
@@ -841,7 +856,7 @@ Node* Integer::Plus(Integer* _)
 
 Node* Integer::Plus(Double* _)
 {
-    return new Error;
+    return new Double(value + _->getValue());
 }
 
 Node* Integer::Plus(String* _)
@@ -851,17 +866,17 @@ Node* Integer::Plus(String* _)
 
 Node* Integer::Plus(Array* _)
 {
-    return new Error;
+    return new Error("Attempt to add integer and array.");
 }
 
 Node* Integer::Plus(Object* _)
 {
-    return new Error;
+    return new Error("Attempt to add integer and object.");
 }
 
 Node* Integer::Plus(Function* _)
 {
-    return new Error;
+    return new Error("Attempt to add integer and function.");
 }
 
 Node* Double::Plus(Error* _)
@@ -871,17 +886,17 @@ Node* Double::Plus(Error* _)
 
 Node* Double::Plus(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempt to add double and boolean.");
 }
 
 Node* Double::Plus(Integer* _)
 {
-    return new Error;
+    return new Double(value + _->getValue());
 }
 
 Node* Double::Plus(Double* _)
 {
-    return new Error;
+    return new Double(value + _->value);
 }
 
 Node* Double::Plus(String* _)
@@ -891,17 +906,17 @@ Node* Double::Plus(String* _)
 
 Node* Double::Plus(Array* _)
 {
-    return new Error;
+    return new Error("Attempt to add double and array.");
 }
 
 Node* Double::Plus(Object* _)
 {
-    return new Error;
+    return new Error("Attempt to add double and object.");
 }
 
 Node* Double::Plus(Function* _)
 {
-    return new Error;
+    return new Error("Attempt to add double and function.");
 }
 
 Node* String::Plus(Error* _)
@@ -951,17 +966,17 @@ Node* Array::Plus(Error* _)
 
 Node* Array::Plus(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempt to add array and boolean.");
 }
 
 Node* Array::Plus(Integer* _)
 {
-    return new Error;
+    return new Error("Attempt to add array and integer.");
 }
 
 Node* Array::Plus(Double* _)
 {
-    return new Error;
+    return new Error("Attempt to add array and double.");
 }
 
 Node* Array::Plus(String* _)
@@ -974,26 +989,22 @@ Node* Array::Plus(Array* _)
     Array* array = new Array;
 
     for (Node* node : elements)
-    {
         array->append(node);
-    }
 
     for (Node* node : _->elements)
-    {
         array->append(node);
-    }
 
     return array;
 }
 
 Node* Array::Plus(Object* _)
 {
-    return new Error;
+    return new Error("Attempt to add array and object.");
 }
 
 Node* Array::Plus(Function* _)
 {
-    return new Error;
+    return new Error("Attempt to add array and function.");
 }
 
 Node* Object::Plus(Error* _)
@@ -1003,17 +1014,17 @@ Node* Object::Plus(Error* _)
 
 Node* Object::Plus(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempt to add object and boolean.");
 }
 
 Node* Object::Plus(Integer* _)
 {
-    return new Error;
+    return new Error("Attempt to add object and integer.");
 }
 
 Node* Object::Plus(Double* _)
 {
-    return new Error;
+    return new Error("Attempt to add object and double.");
 }
 
 Node* Object::Plus(String* _)
@@ -1023,17 +1034,17 @@ Node* Object::Plus(String* _)
 
 Node* Object::Plus(Array* _)
 {
-    return new Error;
+    return new Error("Attempt to add object and array.");
 }
 
 Node* Object::Plus(Object* _)
 {
-    return new Error;
+    return new Error("Attempt to add objects.");
 }
 
 Node* Object::Plus(Function* _)
 {
-    return new Error;
+    return new Error("Attempt to add object and function.");
 }
 
 Node* Function::Plus(Error* _)
@@ -1043,17 +1054,17 @@ Node* Function::Plus(Error* _)
 
 Node* Function::Plus(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempt to add function and boolean.");
 }
 
 Node* Function::Plus(Integer* _)
 {
-    return new Error;
+    return new Error("Attempt to add function and integer.");
 }
 
 Node* Function::Plus(Double* _)
 {
-    return new Error;
+    return new Error("Attempt to add function and double.");
 }
 
 Node* Function::Plus(String* _)
@@ -1063,17 +1074,17 @@ Node* Function::Plus(String* _)
 
 Node* Function::Plus(Array* _)
 {
-    return new Error;
+    return new Error("Attempt to add function and array.");
 }
 
 Node* Function::Plus(Object* _)
 {
-    return new Error;
+    return new Error("Attempt to add function and object.");
 }
 
 Node* Function::Plus(Function* _)
 {
-    return new Error;
+    return new Error("Attempt to add functions.");
 }
 
 Node* Error::Minus(Error* _)
