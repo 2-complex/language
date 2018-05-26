@@ -65,11 +65,13 @@ class Comparable : public Code
 {
 };
 
-class Logicable : public Code
+class Addable : public Expression
 {
+public:
+    virtual object::Node* evaluate() const = 0;
 };
 
-class Addable : public Expression
+class Logicable : public Expression
 {
 public:
     virtual object::Node* evaluate() const = 0;
@@ -103,8 +105,7 @@ public:
     void append(const std::string& op, Addable* operand);
 
     virtual std::string toString() const override;
-
-    object::Node* evaluate() const;
+    virtual object::Node* evaluate() const override;
 };
 
 class Negative : public Code
@@ -142,6 +143,7 @@ public:
     void append(const std::string& op, Logicable* operand);
 
     virtual std::string toString() const override;
+    virtual object::Node* evaluate() const override;
 };
 
 class Negation : public Code
@@ -192,12 +194,13 @@ public:
     virtual object::Node* evaluate() const override;
 };
 
-class Array : public Expression
+class Array : public Addable
 {
 public:
     Array();
     std::vector<Expression*> elements;
     virtual std::string toString() const override;
+    virtual object::Node* evaluate() const override;
 };
 
 class Number : public Addable
@@ -213,7 +216,7 @@ public:
     virtual object::Node* evaluate() const override;
 };
 
-class Boolean : public Expression
+class Boolean : public Logicable
 {
 private:
     bool value;
@@ -223,6 +226,7 @@ public:
     Boolean(const std::string& text);
 
     virtual std::string toString() const override;
+    virtual object::Node* evaluate() const override;
 };
 
 class Word : public Expression
@@ -248,7 +252,7 @@ public:
     virtual std::string toString() const override;
 };
 
-class String : public Expression
+class String : public Addable
 {
 private:
     std::string value;
@@ -257,6 +261,7 @@ public:
     String();
     String(const std::string& text);
     virtual std::string toString() const override;
+    virtual object::Node* evaluate() const override;
 };
 
 }

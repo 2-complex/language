@@ -217,6 +217,39 @@ std::string Conjunction::toString() const
     return accum;
 }
 
+object::Node* Conjunction::evaluate() const
+{
+    object::Node* accum = operands[0]->evaluate();
+
+    size_t n = ops.size();
+
+    for( size_t i = 0; i < n; i++ )
+    {
+        if( ops[i] == "and" )
+        {
+            object::Node* next = operands[i+1]->evaluate();
+            object::Node* newNode = accum->And(next);
+
+            delete accum;
+            delete next;
+
+            accum = newNode;
+        }
+        else if( ops[i] == "or" )
+        {
+            object::Node* next = operands[i+1]->evaluate();
+            object::Node* newNode = accum->Or(next);
+
+            delete accum;
+            delete next;
+
+            accum = newNode;
+        }
+    }
+
+    return accum;
+}
+
 Negation::Negation()
 {
 }
@@ -283,6 +316,20 @@ std::string Array::toString() const
     return result;
 }
 
+object::Node* Array::evaluate() const
+{
+    object::Array* array = new object::Array;
+
+    for(std::vector<Expression*>::const_iterator itr = elements.begin();
+        itr != elements.end();
+        itr++)
+    {
+        array->append((*itr)->evaluate());
+    }
+
+    return array;
+}
+
 Boolean::Boolean()
     : value(false)
 {
@@ -296,6 +343,11 @@ Boolean::Boolean(const std::string& text)
 std::string Boolean::toString() const
 {
     return std::string(value ? "true" : "false");
+}
+
+object::Node* Boolean::evaluate() const
+{
+    return new object::Boolean(value);
 }
 
 Number::Number()
@@ -344,6 +396,11 @@ String::String(const std::string& text)
 std::string String::toString() const
 {
     return std::string("\"") + value + std::string("\"");
+}
+
+object::Node* String::evaluate() const
+{
+    return new object::String(value);
 }
 
 Word::Word()
