@@ -8,14 +8,20 @@
 
 #include "objects.h"
 
+class Environment
+{
+public:
+    object::Node* get(const std::string& name);
+};
+
+
 namespace code
 {
-
 class Code
 {
 public:
     virtual std::string toString() const;
-    virtual object::Node* evaluate() const;
+    virtual object::Node* evaluate(Environment& env) const;
 };
 
 class Line : public Code
@@ -58,7 +64,7 @@ public:
     std::vector<Line*> lines;
 
     virtual std::string toString() const override;
-    virtual object::Node* evaluate() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Comparable : public Code
@@ -68,13 +74,13 @@ class Comparable : public Code
 class Addable : public Expression
 {
 public:
-    virtual object::Node* evaluate() const = 0;
+    virtual object::Node* evaluate(Environment& env) const = 0;
 };
 
 class Logicable : public Expression
 {
 public:
-    virtual object::Node* evaluate() const = 0;
+    virtual object::Node* evaluate(Environment& env) const = 0;
 };
 
 class Multiplyable : public Code
@@ -105,7 +111,7 @@ public:
     void append(const std::string& op, Addable* operand);
 
     virtual std::string toString() const override;
-    virtual object::Node* evaluate() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Negative : public Code
@@ -129,7 +135,7 @@ public:
     void append(const std::string& op, Multiplyable* operand);
 
     virtual std::string toString() const override;
-    virtual object::Node* evaluate() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Conjunction : public Code
@@ -143,7 +149,7 @@ public:
     void append(const std::string& op, Logicable* operand);
 
     virtual std::string toString() const override;
-    virtual object::Node* evaluate() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Negation : public Code
@@ -191,7 +197,7 @@ public:
     Group(Program* program);
 
     virtual std::string toString() const override;
-    virtual object::Node* evaluate() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Array : public Addable
@@ -200,7 +206,7 @@ public:
     Array();
     std::vector<Expression*> elements;
     virtual std::string toString() const override;
-    virtual object::Node* evaluate() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Number : public Addable
@@ -213,7 +219,7 @@ public:
     Number(const std::string& text);
 
     virtual std::string toString() const override;
-    virtual object::Node* evaluate() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Boolean : public Logicable
@@ -226,7 +232,7 @@ public:
     Boolean(const std::string& text);
 
     virtual std::string toString() const override;
-    virtual object::Node* evaluate() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Word : public Expression
@@ -261,7 +267,7 @@ public:
     String();
     String(const std::string& text);
     virtual std::string toString() const override;
-    virtual object::Node* evaluate() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 }

@@ -406,37 +406,37 @@ Node* Function::And(Error* _)
 
 Node* Function::And(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with function and boolean.");
 }
 
 Node* Function::And(Integer* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with function and integer.");
 }
 
 Node* Function::And(Double* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with function and double.");
 }
 
 Node* Function::And(String* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with function and string.");
 }
 
 Node* Function::And(Array* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with function and array.");
 }
 
 Node* Function::And(Object* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with function and object.");
 }
 
 Node* Function::And(Function* _)
 {
-    return new Error;
+    return new Error("Attempted boolean and with function and function.");
 }
 
 Node* Error::Or(Error* _)
@@ -446,37 +446,37 @@ Node* Error::Or(Error* _)
 
 Node* Error::Or(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and boolean.");
 }
 
 Node* Error::Or(Integer* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and integer.");
 }
 
 Node* Error::Or(Double* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and boolean.");
 }
 
 Node* Error::Or(String* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and string.");
 }
 
 Node* Error::Or(Array* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and array.");
 }
 
 Node* Error::Or(Object* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and object.");
 }
 
 Node* Error::Or(Function* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and function.");
 }
 
 Node* Boolean::Or(Error* _)
@@ -526,37 +526,37 @@ Node* Integer::Or(Error* _)
 
 Node* Integer::Or(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and boolean.");
 }
 
 Node* Integer::Or(Integer* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and integer.");
 }
 
 Node* Integer::Or(Double* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and double.");
 }
 
 Node* Integer::Or(String* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and string.");
 }
 
 Node* Integer::Or(Array* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and array.");
 }
 
 Node* Integer::Or(Object* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and object.");
 }
 
 Node* Integer::Or(Function* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and function.");
 }
 
 Node* Double::Or(Error* _)
@@ -566,37 +566,37 @@ Node* Double::Or(Error* _)
 
 Node* Double::Or(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and boolean.");
 }
 
 Node* Double::Or(Integer* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and integer.");
 }
 
 Node* Double::Or(Double* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and double.");
 }
 
 Node* Double::Or(String* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and string.");
 }
 
 Node* Double::Or(Array* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and array.");
 }
 
 Node* Double::Or(Object* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and object.");
 }
 
 Node* Double::Or(Function* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with integer and function.");
 }
 
 Node* String::Or(Error* _)
@@ -606,37 +606,37 @@ Node* String::Or(Error* _)
 
 Node* String::Or(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with string and boolean.");
 }
 
 Node* String::Or(Integer* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with string and integer.");
 }
 
 Node* String::Or(Double* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with string and double.");
 }
 
 Node* String::Or(String* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with string and string.");
 }
 
 Node* String::Or(Array* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with string and array.");
 }
 
 Node* String::Or(Object* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with string and object.");
 }
 
 Node* String::Or(Function* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with string and function.");
 }
 
 Node* Array::Or(Error* _)
@@ -646,37 +646,37 @@ Node* Array::Or(Error* _)
 
 Node* Array::Or(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with array and boolean.");
 }
 
 Node* Array::Or(Integer* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with array and integer.");
 }
 
 Node* Array::Or(Double* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with array and double.");
 }
 
 Node* Array::Or(String* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with array and string.");
 }
 
 Node* Array::Or(Array* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with array and array.");
 }
 
 Node* Array::Or(Object* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with array and object.");
 }
 
 Node* Array::Or(Function* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with array and function.");
 }
 
 Node* Object::Or(Error* _)
@@ -686,37 +686,37 @@ Node* Object::Or(Error* _)
 
 Node* Object::Or(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with object and boolean.");
 }
 
 Node* Object::Or(Integer* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with object and integer.");
 }
 
 Node* Object::Or(Double* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with object and double.");
 }
 
 Node* Object::Or(String* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with object and string.");
 }
 
 Node* Object::Or(Array* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with object and array.");
 }
 
 Node* Object::Or(Object* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with object and object.");
 }
 
 Node* Object::Or(Function* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with object and function.");
 }
 
 Node* Function::Or(Error* _)
@@ -726,37 +726,37 @@ Node* Function::Or(Error* _)
 
 Node* Function::Or(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and boolean.");
 }
 
 Node* Function::Or(Integer* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and integer.");
 }
 
 Node* Function::Or(Double* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and double.");
 }
 
 Node* Function::Or(String* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and string.");
 }
 
 Node* Function::Or(Array* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and array.");
 }
 
 Node* Function::Or(Object* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and object.");
 }
 
 Node* Function::Or(Function* _)
 {
-    return new Error;
+    return new Error("Attempted boolean or with function and function.");
 }
 
 Node* Error::Plus(Error* _)
@@ -766,37 +766,37 @@ Node* Error::Plus(Error* _)
 
 Node* Error::Plus(Boolean* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Plus(Integer* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Plus(Double* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Plus(String* _)
 {
-    return new String(toString() + _->getValue());
+    return this;
 }
 
 Node* Error::Plus(Array* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Plus(Object* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Plus(Function* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Boolean::Plus(Error* _)
@@ -1084,7 +1084,7 @@ Node* Function::Plus(Object* _)
 
 Node* Function::Plus(Function* _)
 {
-    return new Error("Attempt to add functions.");
+    return new Error("Attempt to add function and function.");
 }
 
 Node* Error::Minus(Error* _)
@@ -1094,37 +1094,37 @@ Node* Error::Minus(Error* _)
 
 Node* Error::Minus(Boolean* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Minus(Integer* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Minus(Double* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Minus(String* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Minus(Array* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Minus(Object* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::Minus(Function* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Boolean::Minus(Error* _)
@@ -1734,37 +1734,37 @@ Node* Error::DividedBy(Error* _)
 
 Node* Error::DividedBy(Boolean* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::DividedBy(Integer* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::DividedBy(Double* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::DividedBy(String* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::DividedBy(Array* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::DividedBy(Object* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Error::DividedBy(Function* _)
 {
-    return new Error;
+    return this;
 }
 
 Node* Boolean::DividedBy(Error* _)

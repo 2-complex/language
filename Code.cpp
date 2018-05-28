@@ -11,7 +11,7 @@ std::string Code::toString() const
     return std::string("********");
 }
 
-object::Node* Code::evaluate() const
+object::Node* Code::evaluate(Environment& env) const
 {
     return new object::Error;
 }
@@ -44,9 +44,9 @@ std::string Program::toString() const
     return accum;
 }
 
-object::Node* Program::evaluate() const
+object::Node* Program::evaluate(Environment& env) const
 {
-    return (*(lines.rbegin()))->evaluate();
+    return (*(lines.rbegin()))->evaluate(env);
 }
 
 std::string Call::toString() const
@@ -65,9 +65,9 @@ AddedList::AddedList(Addable* first)
     operands.push_back(first);
 }
 
-object::Node* AddedList::evaluate() const
+object::Node* AddedList::evaluate(Environment& env) const
 {
-    object::Node* accum = operands[0]->evaluate();
+    object::Node* accum = operands[0]->evaluate(env);
 
     size_t n = ops.size();
 
@@ -75,7 +75,7 @@ object::Node* AddedList::evaluate() const
     {
         if( ops[i] == "+" )
         {
-            object::Node* next = operands[i+1]->evaluate();
+            object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->Plus(next);
 
             delete accum;
@@ -85,7 +85,7 @@ object::Node* AddedList::evaluate() const
         }
         else if( ops[i] == "-" )
         {
-            object::Node* next = operands[i+1]->evaluate();
+            object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->Minus(next);
 
             delete accum;
@@ -150,9 +150,9 @@ std::string Product::toString() const
     return accum;
 }
 
-object::Node* Product::evaluate() const
+object::Node* Product::evaluate(Environment& env) const
 {
-    object::Node* accum = operands[0]->evaluate();
+    object::Node* accum = operands[0]->evaluate(env);
 
     size_t n = ops.size();
 
@@ -160,7 +160,7 @@ object::Node* Product::evaluate() const
     {
         if( ops[i] == "*" )
         {
-            object::Node* next = operands[i+1]->evaluate();
+            object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->Times(next);
 
             delete accum;
@@ -170,7 +170,7 @@ object::Node* Product::evaluate() const
         }
         else if( ops[i] == "/" )
         {
-            object::Node* next = operands[i+1]->evaluate();
+            object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->DividedBy(next);
 
             delete accum;
@@ -180,7 +180,7 @@ object::Node* Product::evaluate() const
         }
         else if( ops[i] == "%" )
         {
-            object::Node* next = operands[i+1]->evaluate();
+            object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->Mod(next);
 
             delete accum;
@@ -217,9 +217,9 @@ std::string Conjunction::toString() const
     return accum;
 }
 
-object::Node* Conjunction::evaluate() const
+object::Node* Conjunction::evaluate(Environment& env) const
 {
-    object::Node* accum = operands[0]->evaluate();
+    object::Node* accum = operands[0]->evaluate(env);
 
     size_t n = ops.size();
 
@@ -227,7 +227,7 @@ object::Node* Conjunction::evaluate() const
     {
         if( ops[i] == "and" )
         {
-            object::Node* next = operands[i+1]->evaluate();
+            object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->And(next);
 
             delete accum;
@@ -237,7 +237,7 @@ object::Node* Conjunction::evaluate() const
         }
         else if( ops[i] == "or" )
         {
-            object::Node* next = operands[i+1]->evaluate();
+            object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->Or(next);
 
             delete accum;
@@ -294,9 +294,9 @@ std::string Group::toString() const
     return std::string("(") + program->toString() + std::string(")");
 }
 
-object::Node* Group::evaluate() const
+object::Node* Group::evaluate(Environment& env) const
 {
-    return program->evaluate();
+    return program->evaluate(env);
 }
 
 Array::Array()
@@ -316,7 +316,7 @@ std::string Array::toString() const
     return result;
 }
 
-object::Node* Array::evaluate() const
+object::Node* Array::evaluate(Environment& env) const
 {
     object::Array* array = new object::Array;
 
@@ -324,7 +324,7 @@ object::Node* Array::evaluate() const
         itr != elements.end();
         itr++)
     {
-        array->append((*itr)->evaluate());
+        array->append((*itr)->evaluate(env));
     }
 
     return array;
@@ -345,7 +345,7 @@ std::string Boolean::toString() const
     return std::string(value ? "true" : "false");
 }
 
-object::Node* Boolean::evaluate() const
+object::Node* Boolean::evaluate(Environment& env) const
 {
     return new object::Boolean(value);
 }
@@ -365,7 +365,7 @@ std::string Number::toString() const
     return text;
 }
 
-object::Node* Number::evaluate() const
+object::Node* Number::evaluate(Environment& env) const
 {
     bool isFloat = false;
     for( size_t i = 0; i < text.size(); ++i)
@@ -398,7 +398,7 @@ std::string String::toString() const
     return std::string("\"") + value + std::string("\"");
 }
 
-object::Node* String::evaluate() const
+object::Node* String::evaluate(Environment& env) const
 {
     return new object::String(value);
 }

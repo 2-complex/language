@@ -3,6 +3,8 @@
 
 void testAddSubtract()
 {
+    Environment env;
+
     code::Number a("3");
     code::Number b("4");
 
@@ -10,17 +12,19 @@ void testAddSubtract()
     sum.append("+", &b);
 
     printf( "%s = \n", sum.toString().c_str() );
-    printf( "%s\n", sum.evaluate()->toString().c_str() );
+    printf( "%s\n", sum.evaluate(env)->toString().c_str() );
 
     code::AddedList difference(&a);
     difference.append("-", &b);
 
     printf( "%s = \n", difference.toString().c_str() );
-    printf( "%s\n", difference.evaluate()->toString().c_str() );
+    printf( "%s\n", difference.evaluate(env)->toString().c_str() );
 }
 
 void testBooeanOps()
 {
+    Environment env;
+
     code::Boolean codeTrue("true");
     code::Boolean codeFalse("false");
 
@@ -28,18 +32,20 @@ void testBooeanOps()
     conjAnd.append("and", &codeFalse);
 
     printf( "%s = \n", conjAnd.toString().c_str() );
-    printf( "%s\n", conjAnd.evaluate()->toString().c_str() );
+    printf( "%s\n", conjAnd.evaluate(env)->toString().c_str() );
 
 
     code::Conjunction conjOr(&codeTrue);
     conjOr.append("or", &codeFalse);
 
     printf( "%s = \n", conjOr.toString().c_str() );
-    printf( "%s\n", conjOr.evaluate()->toString().c_str() );
+    printf( "%s\n", conjOr.evaluate(env)->toString().c_str() );
 }
 
 void testStringConcat()
 {
+    Environment env;
+
     code::String codeA("\"apples\"");
     code::String codeB("\"bananas\"");
 
@@ -47,11 +53,13 @@ void testStringConcat()
     sum.append("+", &codeB);
 
     printf( "%s = \n", sum.toString().c_str() );
-    printf( "%s\n", sum.evaluate()->toString().c_str() );
+    printf( "%s\n", sum.evaluate(env)->toString().c_str() );
 }
 
 void testArrayConcat()
 {
+    Environment env;
+
     code::Array A;
     code::Array B;
 
@@ -71,7 +79,13 @@ void testArrayConcat()
     sum.append("+", &B);
 
     printf( "%s = \n", sum.toString().c_str() );
-    printf( "%s\n", sum.evaluate()->toString().c_str() );
+    printf( "%s\n", sum.evaluate(env)->toString().c_str() );
+}
+
+void testAssignments()
+{
+    Environment env;
+    code::Assignment codeA;
 }
 
 int main(int argc, char** args)
@@ -79,8 +93,10 @@ int main(int argc, char** args)
     // testAddSubtract();
     // testBooeanOps();
     // testStringConcat();
+    // testArrayConcat();
 
-    testArrayConcat();
+    testAssignments();
+
     return 0;
 }
 
