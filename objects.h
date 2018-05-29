@@ -250,6 +250,8 @@ public:
     virtual ~Node();
     virtual std::string toString() const;
     virtual bool isTrue() const;
+    virtual void setMember(const std::string& name, object::Node* value);
+    virtual object::Node* getMember(const std::string& name);
 
     virtual Node* And(Node*) = 0;
     virtual Node* back_And(Error*) = 0;
@@ -376,6 +378,8 @@ class Error : public Node
 public:
     Error();
     Error(const std::string& message);
+
+    virtual std::string toString() const override;
 DEFINITIONS
 };
 
@@ -449,6 +453,9 @@ class Object : public Node
     std::map<Key, Node*> keyValues;
     std::unordered_map<std::string, Node*> members;
 public:
+
+    virtual void setMember(const std::string& name, object::Node* value) override;
+    virtual object::Node* getMember(const std::string& name) override;
 DEFINITIONS
 };
 
@@ -457,7 +464,6 @@ class Function : public Node
 public:
 DEFINITIONS
 };
-
 
 }
 

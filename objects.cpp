@@ -15,6 +15,20 @@ bool Node::isTrue() const
     return false;
 }
 
+void Node::setMember(const std::string& name, object::Node* value)
+{
+}
+
+object::Node* Node::getMember(const std::string& name)
+{
+    return new Error("Attempt to get member value on non-object");
+}
+
+std::string Error::toString() const
+{
+    return "ERROR: " + message;
+}
+
 Error::Error()
     : message("SOME ERROR.  PLEASE REPLACE WITH MEANINGFUL MESSAGE.")
 {
@@ -357,6 +371,21 @@ bool Key::operator < (const class Key& other) const
     return typeComparor < other.typeComparor ||
         (typeComparor == other.typeComparor &&
             node->LessThan(other.node)->isTrue());
+}
+
+void Object::setMember(const std::string& name, object::Node* value)
+{
+    members[name] = value;
+}
+
+object::Node* Object::getMember(const std::string& name)
+{
+    auto itr = members.find(name);
+    if( itr == members.end() )
+    {
+        return new Error("Member not found: " + name);
+    }
+    return itr->second;
 }
 
 Node* Object::And(Error* _)

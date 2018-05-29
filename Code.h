@@ -10,8 +10,11 @@
 
 class Environment
 {
+    object::Object obj;
+
 public:
-    object::Node* get(const std::string& name);
+    void setMember(const std::string& name, object::Node* value);
+    object::Node* getMember(const std::string& name);
 };
 
 
@@ -45,6 +48,8 @@ public:
 
 class Reference : public Code
 {
+public:
+    virtual void setMember(Environment& env, object::Node* value) const = 0;
 };
 
 class Assignment : public Line
@@ -55,7 +60,13 @@ public:
     Expression* expression;
 
     Assignment();
+    Assignment(
+        Reference* reference,
+        const std::string& operation,
+        Expression* expression);
+
     virtual std::string toString() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Program : public Code
@@ -235,7 +246,9 @@ public:
     virtual object::Node* evaluate(Environment& env) const override;
 };
 
-class Word : public Expression
+class Word
+    : public Expression
+    , public Reference
 {
 private:
     std::string name;
@@ -244,7 +257,9 @@ public:
     Word();
     Word(const std::string& text);
 
-    virtual std::string toString() const;
+    virtual std::string toString() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
+    virtual void setMember(Environment& env, object::Node* value) const;
 };
 
 class Member : public Expression

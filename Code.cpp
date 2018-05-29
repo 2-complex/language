@@ -3,6 +3,16 @@
 
 #include <stdlib.h>
 
+void Environment::setMember(const std::string& name, object::Node* value)
+{
+    return obj.setMember(name, value);
+}
+
+object::Node* Environment::getMember(const std::string& name)
+{
+    return obj.getMember(name);
+}
+
 namespace code
 {
 
@@ -29,9 +39,25 @@ Assignment::Assignment()
 {
 }
 
+Assignment::Assignment(
+    Reference* reference,
+    const std::string& operation,
+    Expression* expression)
+    : reference(reference)
+    , operation(operation)
+    , expression(expression)
+{
+}
+
 std::string Assignment::toString() const
 {
     return reference->toString() + operation + expression->toString();
+}
+
+object::Node* Assignment::evaluate(Environment& env) const
+{
+    reference->setMember(env, expression->evaluate(env));
+    return NULL;
 }
 
 std::string Program::toString() const
@@ -415,6 +441,16 @@ Word::Word(const std::string& text)
 std::string Word::toString() const
 {
     return name;
+}
+
+object::Node* Word::evaluate(Environment& env) const
+{
+    return env.getMember(name);
+}
+
+void Word::setMember(Environment& env, object::Node* value) const
+{
+    env.setMember(name, value);
 }
 
 Member::Member()

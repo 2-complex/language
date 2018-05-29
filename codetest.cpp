@@ -85,7 +85,15 @@ void testArrayConcat()
 void testAssignments()
 {
     Environment env;
-    code::Assignment codeA;
+
+    code::Word x("x");
+    code::Number three("3");
+    code::Assignment codeA(&x, "=", &three);
+
+    codeA.evaluate(env);
+
+    printf( "%s = \n", x.toString().c_str() );
+    printf( "%s\n", x.evaluate(env)->toString().c_str() );
 }
 
 int main(int argc, char** args)
