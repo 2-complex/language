@@ -166,11 +166,12 @@ public:
 class Negation : public Code
 {
 public:
-    Negation();
+    Negation(Logicable* operand);
 
     Logicable* operand;
 
     virtual std::string toString() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Comparison : public Logicable

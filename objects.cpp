@@ -1,4 +1,5 @@
 #include "objects.h"
+
 namespace object
 {
 Node::~Node()
@@ -37,6 +38,11 @@ Error::Error()
 Error::Error(const std::string& message)
     : message(message)
 {
+}
+
+Node* Error::Negation()
+{
+    return this;
 }
 
 Node* Error::And(Error* _)
@@ -87,6 +93,11 @@ std::string Boolean::toString() const
 Boolean::Boolean(bool value)
     : value(value)
 {
+}
+
+Node* Boolean::Negation()
+{
+    return new Boolean(!value);
 }
 
 Node* Boolean::And(Error* _)
@@ -149,6 +160,11 @@ std::string Integer::toString() const
     return std::to_string(value);
 }
 
+Node* Integer::Negation()
+{
+    return new Error("Attempt to negate integer with 'not'.");
+}
+
 Node* Integer::And(Error* _)
 {
     return _;
@@ -209,6 +225,11 @@ std::string Double::toString() const
     return std::to_string(value);
 }
 
+Node* Double::Negation()
+{
+    return new Error("Attempt to negate double with 'not'.");
+}
+
 Node* Double::And(Error* _)
 {
     return _;
@@ -262,6 +283,11 @@ std::string String::toString() const
 const std::string& String::getValue() const
 {
     return value;
+}
+
+Node* String::Negation()
+{
+    return new Error("Attempt to negate string with 'not'.");
 }
 
 Node* String::And(Error* _)
@@ -318,6 +344,11 @@ std::string Array::toString() const
 void Array::append(Node* node)
 {
     elements.push_back(node);
+}
+
+Node* Array::Negation()
+{
+    return new Error("Attempt to negate array with 'not'.");
 }
 
 Node* Array::And(Error* _)
@@ -388,6 +419,11 @@ object::Node* Object::getMember(const std::string& name)
     return itr->second;
 }
 
+Node* Object::Negation()
+{
+    return new Error("Attempt to negate object with 'not'.");
+}
+
 Node* Object::And(Error* _)
 {
     return _;
@@ -426,6 +462,11 @@ Node* Object::And(Object* _)
 Node* Object::And(Function* _)
 {
     return new Error("Attempted boolean and with object and function.");
+}
+
+Node* Function::Negation()
+{
+    return new Error("Attempt to negate function with 'not'.");
 }
 
 Node* Function::And(Error* _)
@@ -860,12 +901,12 @@ Node* Boolean::Plus(Array* _)
 
 Node* Boolean::Plus(Object* _)
 {
-    return new Error;
+    return new Error("Attempt to add boolean and object.");
 }
 
 Node* Boolean::Plus(Function* _)
 {
-    return new Error;
+    return new Error("Attempt to add boolean and function.");
 }
 
 Node* Integer::Plus(Error* _)
@@ -875,7 +916,7 @@ Node* Integer::Plus(Error* _)
 
 Node* Integer::Plus(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempt to add integer and boolean.");
 }
 
 Node* Integer::Plus(Integer* _)

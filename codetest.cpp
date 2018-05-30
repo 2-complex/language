@@ -40,6 +40,12 @@ void testBooeanOps()
 
     printf( "%s = \n", conjOr.toString().c_str() );
     printf( "%s\n", conjOr.evaluate(env)->toString().c_str() );
+
+
+    code::Negation notTrue(&codeTrue);
+
+    printf( "%s = \n", notTrue.toString().c_str() );
+    printf( "%s\n", notTrue.evaluate(env)->toString().c_str() );
 }
 
 void testStringConcat()
@@ -99,11 +105,11 @@ void testAssignments()
 int main(int argc, char** args)
 {
     // testAddSubtract();
-    // testBooeanOps();
+    testBooeanOps();
     // testStringConcat();
     // testArrayConcat();
 
-    testAssignments();
+    // testAssignments();
 
     return 0;
 }

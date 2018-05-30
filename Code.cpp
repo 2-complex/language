@@ -276,13 +276,19 @@ object::Node* Conjunction::evaluate(Environment& env) const
     return accum;
 }
 
-Negation::Negation()
+Negation::Negation(Logicable* operand)
+    : operand(operand)
 {
 }
 
 std::string Negation::toString() const
 {
     return std::string("not ") + operand->toString();
+}
+
+object::Node* Negation::evaluate(Environment& env) const
+{
+    return operand->evaluate(env)->Negation();
 }
 
 Comparison::Comparison(

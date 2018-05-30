@@ -21,6 +21,7 @@ class Object;
 class Function;
 
 #define DEFINITIONS \
+    virtual Node* Negation();\
     virtual Node* And(Node*);\
     virtual Node* back_And(Error*);\
     virtual Node* back_And(Boolean*);\
@@ -252,6 +253,8 @@ public:
     virtual bool isTrue() const;
     virtual void setMember(const std::string& name, object::Node* value);
     virtual object::Node* getMember(const std::string& name);
+
+    virtual Node* Negation() = 0;
 
     virtual Node* And(Node*) = 0;
     virtual Node* back_And(Error*) = 0;
