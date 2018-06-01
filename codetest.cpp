@@ -19,6 +19,11 @@ void testAddSubtract()
 
     printf( "%s = \n", difference.toString().c_str() );
     printf( "%s\n", difference.evaluate(env)->toString().c_str() );
+
+    code::Negative n(&a);
+
+    printf( "%s = \n", n.toString().c_str() );
+    printf( "%s\n", n.evaluate(env)->toString().c_str() );
 }
 
 void testBooeanOps()
@@ -104,11 +109,10 @@ void testAssignments()
 
 int main(int argc, char** args)
 {
-    // testAddSubtract();
-    testBooeanOps();
+    testAddSubtract();
+    // testBooeanOps();
     // testStringConcat();
     // testArrayConcat();
-
     // testAssignments();
 
     return 0;

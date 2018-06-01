@@ -15,6 +15,9 @@ class Environment
 public:
     void setMember(const std::string& name, object::Node* value);
     object::Node* getMember(const std::string& name);
+
+    void setMapping(object::Node* key, object::Node* value);
+    object::Node* getMapping(object::Node* key);
 };
 
 
@@ -44,6 +47,7 @@ public:
     Expression* right;
 
     virtual std::string toString() const override;
+    virtual object::Node* evaluate(Environment& env) const;
 };
 
 class Reference : public Code
@@ -129,10 +133,12 @@ class Negative : public Code
 {
 public:
     Negative();
+    Negative(Addable* operand);
 
     Addable* operand;
 
     virtual std::string toString() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Product : public Code

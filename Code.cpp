@@ -13,6 +13,16 @@ object::Node* Environment::getMember(const std::string& name)
     return obj.getMember(name);
 }
 
+void Environment::setMapping(object::Node* key, object::Node* value)
+{
+    return obj.setMapping(key, value);
+}
+
+object::Node* Environment::getMapping(object::Node* key)
+{
+    return obj.getMapping(key);
+}
+
 namespace code
 {
 
@@ -33,6 +43,12 @@ Pair::Pair()
 std::string Pair::toString() const
 {
     return left->toString() + ":" + right->toString();
+}
+
+object::Node* Pair::evaluate(Environment& env) const
+{
+    env.setMapping(left->evaluate(env), right->evaluate(env));
+    return NULL;
 }
 
 Assignment::Assignment()
@@ -147,9 +163,19 @@ Negative::Negative()
 {
 }
 
+Negative::Negative(Addable* operand)
+    : operand(operand)
+{
+}
+
 std::string Negative::toString() const
 {
     return std::string("-") + operand->toString();
+}
+
+object::Node* Negative::evaluate(Environment& env) const
+{
+    return operand->evaluate(env)->Negative();
 }
 
 Product::Product(Multiplyable* first)

@@ -21,7 +21,9 @@ class Object;
 class Function;
 
 #define DEFINITIONS \
+    virtual int typeComparor() const;\
     virtual Node* Negation();\
+    virtual Node* Negative();\
     virtual Node* And(Node*);\
     virtual Node* back_And(Error*);\
     virtual Node* back_And(Boolean*);\
@@ -251,10 +253,14 @@ public:
     virtual ~Node();
     virtual std::string toString() const;
     virtual bool isTrue() const;
+    virtual int typeComparor() const = 0;
     virtual void setMember(const std::string& name, object::Node* value);
     virtual object::Node* getMember(const std::string& name);
+    virtual void setMapping(object::Node* key, object::Node* value);
+    virtual object::Node* getMapping(object::Node* key);
 
     virtual Node* Negation() = 0;
+    virtual Node* Negative() = 0;
 
     virtual Node* And(Node*) = 0;
     virtual Node* back_And(Error*) = 0;
@@ -446,19 +452,22 @@ class Key
     int typeComparor;
     Node* node;
 public:
-    Key(int typeComparor, Node* node);
+    Key(Node* node);
 
     bool operator < (const class Key& other) const;
 };
 
 class Object : public Node
 {
-    std::map<Key, Node*> keyValues;
+    std::map<Key, Node*> mappings;
     std::unordered_map<std::string, Node*> members;
 public:
 
     virtual void setMember(const std::string& name, object::Node* value) override;
     virtual object::Node* getMember(const std::string& name) override;
+
+    virtual void setMapping(object::Node* key, object::Node* value);
+    virtual object::Node* getMapping(object::Node* key);
 DEFINITIONS
 };
 

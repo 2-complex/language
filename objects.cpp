@@ -22,7 +22,16 @@ void Node::setMember(const std::string& name, object::Node* value)
 
 object::Node* Node::getMember(const std::string& name)
 {
-    return new Error("Attempt to get member value on non-object");
+    return new Error("Attempt to get member value on non-object.");
+}
+
+void Node::setMapping(object::Node* key, object::Node* value)
+{
+}
+
+object::Node* Node::getMapping(object::Node* key)
+{
+    return new Error("Attempt to get mapped value on non-object.");
 }
 
 std::string Error::toString() const
@@ -40,7 +49,17 @@ Error::Error(const std::string& message)
 {
 }
 
+int Error::typeComparor() const
+{
+    return -1;
+}
+
 Node* Error::Negation()
+{
+    return this;
+}
+
+Node* Error::Negative()
 {
     return this;
 }
@@ -95,9 +114,19 @@ Boolean::Boolean(bool value)
 {
 }
 
+int Boolean::typeComparor() const
+{
+    return 0;
+}
+
 Node* Boolean::Negation()
 {
     return new Boolean(!value);
+}
+
+Node* Boolean::Negative()
+{
+    return new Error("Attempt to arithmetic negate a boolean.");
 }
 
 Node* Boolean::And(Error* _)
@@ -160,9 +189,19 @@ std::string Integer::toString() const
     return std::to_string(value);
 }
 
+int Integer::typeComparor() const
+{
+    return 1;
+}
+
 Node* Integer::Negation()
 {
     return new Error("Attempt to negate integer with 'not'.");
+}
+
+Node* Integer::Negative()
+{
+    return new Integer(-value);
 }
 
 Node* Integer::And(Error* _)
@@ -225,9 +264,19 @@ std::string Double::toString() const
     return std::to_string(value);
 }
 
+int Double::typeComparor() const
+{
+    return 1;
+}
+
 Node* Double::Negation()
 {
     return new Error("Attempt to negate double with 'not'.");
+}
+
+Node* Double::Negative()
+{
+    return new Double(-value);
 }
 
 Node* Double::And(Error* _)
@@ -285,9 +334,19 @@ const std::string& String::getValue() const
     return value;
 }
 
+int String::typeComparor() const
+{
+    return 2;
+}
+
 Node* String::Negation()
 {
     return new Error("Attempt to negate string with 'not'.");
+}
+
+Node* String::Negative()
+{
+    return new Error("Attempt to arithmetic negate a string.");
 }
 
 Node* String::And(Error* _)
@@ -346,9 +405,19 @@ void Array::append(Node* node)
     elements.push_back(node);
 }
 
+int Array::typeComparor() const
+{
+    return 3;
+}
+
 Node* Array::Negation()
 {
     return new Error("Attempt to negate array with 'not'.");
+}
+
+Node* Array::Negative()
+{
+    return new Error("Attempt to arithmetic negate a array.");
 }
 
 Node* Array::And(Error* _)
@@ -391,10 +460,10 @@ Node* Array::And(Function* _)
     return new Error("Attempted boolean and with array and function.");
 }
 
-Key::Key(int typeComparor, Node* node)
-    : typeComparor(typeComparor)
-    , node(node)
+Key::Key(Node* node)
+    : node(node)
 {
+    typeComparor = node->typeComparor();
 }
 
 bool Key::operator < (const class Key& other) const
@@ -419,9 +488,36 @@ object::Node* Object::getMember(const std::string& name)
     return itr->second;
 }
 
+void Object::setMapping(Node* key, Node* value)
+{
+    mappings[Key(key)] = value;
+}
+
+Node* Object::getMapping(Node* key)
+{
+    auto itr = mappings.find(key);
+
+    if( itr == mappings.end() )
+    {
+        return new Object;
+    }
+
+    return itr->second;
+}
+
+int Object::typeComparor() const
+{
+    return 4;
+}
+
 Node* Object::Negation()
 {
     return new Error("Attempt to negate object with 'not'.");
+}
+
+Node* Object::Negative()
+{
+    return new Error("Attempt to arithmetic negate an object.");
 }
 
 Node* Object::And(Error* _)
@@ -464,9 +560,19 @@ Node* Object::And(Function* _)
     return new Error("Attempted boolean and with object and function.");
 }
 
+int Function::typeComparor() const
+{
+    return 5;
+}
+
 Node* Function::Negation()
 {
     return new Error("Attempt to negate function with 'not'.");
+}
+
+Node* Function::Negative()
+{
+    return new Error("Attempt to arithmetic negate a function.");
 }
 
 Node* Function::And(Error* _)
