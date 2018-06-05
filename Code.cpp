@@ -40,7 +40,7 @@ Assignment::Assignment()
 }
 
 Assignment::Assignment(
-    Reference* reference,
+    Expression* reference,
     const std::string& operation,
     Expression* expression)
     : reference(reference)
@@ -298,6 +298,34 @@ Comparison::Comparison(
 std::string Comparison::toString() const
 {
     return left->toString() + op + right->toString();
+}
+
+object::Node* Comparison::evaluate(Environment& env) const
+{
+    if( op == "==" )
+    {
+        return left->evaluate(env)->Equals( right->evaluate(env) );
+    }
+    else if( op == "!=" )
+    {
+        return left->evaluate(env)->NotEquals( right->evaluate(env) );
+    }
+    else if( op == "<=" )
+    {
+        return left->evaluate(env)->LessThanOrEqualTo( right->evaluate(env) );
+    }
+    else if( op == ">=" )
+    {
+        return left->evaluate(env)->GreaterThanOrEqualTo( right->evaluate(env) );
+    }
+    else if( op == "<" )
+    {
+        return left->evaluate(env)->LessThan( right->evaluate(env) );
+    }
+    else //( op == ">" )
+    {
+        return left->evaluate(env)->GreaterThan( right->evaluate(env) );
+    }
 }
 
 Function::Function(Program* program)

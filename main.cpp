@@ -52,7 +52,7 @@ class MainVisitor : public CalamityBaseVisitor
         Assignment* assignment = new Assignment;
 
         HType hRef = visit(ctx->children[0]);
-        assignment->reference = static_cast<Reference*>(hRef.code);
+        assignment->reference = static_cast<Expression*>(hRef.code);
         assignment->operation = ctx->children[1]->getText();
 
         HType hExp = visit(ctx->children[2]);
@@ -291,7 +291,8 @@ int main(int argc, const char* argv[])
             MainVisitor vistor;
             HType a = vistor.visit(tree);
 
-            object::Node* answer = a.code->evaluate();
+            Environment env;
+            object::Node* answer = a.code->evaluate(env);
 
             printf( "%s\n", answer->toString().c_str() );
 

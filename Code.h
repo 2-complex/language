@@ -33,6 +33,8 @@ class Line : public Code
 
 class Expression : public Line
 {
+public:
+    virtual void setMember(Environment& env, object::Node* value) const {}
 };
 
 class Pair : public Line
@@ -46,22 +48,16 @@ public:
     virtual std::string toString() const override;
 };
 
-class Reference : public Code
-{
-public:
-    virtual void setMember(Environment& env, object::Node* value) const = 0;
-};
-
 class Assignment : public Line
 {
 public:
-    Reference* reference;
+    Expression* reference;
     std::string operation;
     Expression* expression;
 
     Assignment();
     Assignment(
-        Reference* reference,
+        Expression* reference,
         const std::string& operation,
         Expression* expression);
 
@@ -187,6 +183,7 @@ public:
         Comparable* right);
 
     virtual std::string toString() const override;
+    virtual object::Node* evaluate(Environment& env) const;
 };
 
 class Function : public Expression
@@ -248,7 +245,6 @@ public:
 
 class Word
     : public Expression
-    , public Reference
 {
 private:
     std::string name;
