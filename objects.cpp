@@ -3183,6 +3183,326 @@ Node* Function::Equals(Function* _)
     return new Error;
 }
 
+Node* Error::NotEquals(Error* _)
+{
+    return new Error;
+}
+
+Node* Error::NotEquals(Boolean* _)
+{
+    return new Error;
+}
+
+Node* Error::NotEquals(Integer* _)
+{
+    return new Error;
+}
+
+Node* Error::NotEquals(Double* _)
+{
+    return new Error;
+}
+
+Node* Error::NotEquals(String* _)
+{
+    return new Error;
+}
+
+Node* Error::NotEquals(Array* _)
+{
+    return new Error;
+}
+
+Node* Error::NotEquals(Object* _)
+{
+    return new Error;
+}
+
+Node* Error::NotEquals(Function* _)
+{
+    return new Error;
+}
+
+Node* Boolean::NotEquals(Error* _)
+{
+    return new Error;
+}
+
+Node* Boolean::NotEquals(Boolean* _)
+{
+    return new Error;
+}
+
+Node* Boolean::NotEquals(Integer* _)
+{
+    return new Error;
+}
+
+Node* Boolean::NotEquals(Double* _)
+{
+    return new Error;
+}
+
+Node* Boolean::NotEquals(String* _)
+{
+    return new Error;
+}
+
+Node* Boolean::NotEquals(Array* _)
+{
+    return new Error;
+}
+
+Node* Boolean::NotEquals(Object* _)
+{
+    return new Error;
+}
+
+Node* Boolean::NotEquals(Function* _)
+{
+    return new Error;
+}
+
+Node* Integer::NotEquals(Error* _)
+{
+    return new Error;
+}
+
+Node* Integer::NotEquals(Boolean* _)
+{
+    return new Error;
+}
+
+Node* Integer::NotEquals(Integer* _)
+{
+    return new Error;
+}
+
+Node* Integer::NotEquals(Double* _)
+{
+    return new Error;
+}
+
+Node* Integer::NotEquals(String* _)
+{
+    return new Error;
+}
+
+Node* Integer::NotEquals(Array* _)
+{
+    return new Error;
+}
+
+Node* Integer::NotEquals(Object* _)
+{
+    return new Error;
+}
+
+Node* Integer::NotEquals(Function* _)
+{
+    return new Error;
+}
+
+Node* Double::NotEquals(Error* _)
+{
+    return new Error;
+}
+
+Node* Double::NotEquals(Boolean* _)
+{
+    return new Error;
+}
+
+Node* Double::NotEquals(Integer* _)
+{
+    return new Error;
+}
+
+Node* Double::NotEquals(Double* _)
+{
+    return new Error;
+}
+
+Node* Double::NotEquals(String* _)
+{
+    return new Error;
+}
+
+Node* Double::NotEquals(Array* _)
+{
+    return new Error;
+}
+
+Node* Double::NotEquals(Object* _)
+{
+    return new Error;
+}
+
+Node* Double::NotEquals(Function* _)
+{
+    return new Error;
+}
+
+Node* String::NotEquals(Error* _)
+{
+    return new Error;
+}
+
+Node* String::NotEquals(Boolean* _)
+{
+    return new Error;
+}
+
+Node* String::NotEquals(Integer* _)
+{
+    return new Error;
+}
+
+Node* String::NotEquals(Double* _)
+{
+    return new Error;
+}
+
+Node* String::NotEquals(String* _)
+{
+    return new Error;
+}
+
+Node* String::NotEquals(Array* _)
+{
+    return new Error;
+}
+
+Node* String::NotEquals(Object* _)
+{
+    return new Error;
+}
+
+Node* String::NotEquals(Function* _)
+{
+    return new Error;
+}
+
+Node* Array::NotEquals(Error* _)
+{
+    return new Error;
+}
+
+Node* Array::NotEquals(Boolean* _)
+{
+    return new Error;
+}
+
+Node* Array::NotEquals(Integer* _)
+{
+    return new Error;
+}
+
+Node* Array::NotEquals(Double* _)
+{
+    return new Error;
+}
+
+Node* Array::NotEquals(String* _)
+{
+    return new Error;
+}
+
+Node* Array::NotEquals(Array* _)
+{
+    return new Error;
+}
+
+Node* Array::NotEquals(Object* _)
+{
+    return new Error;
+}
+
+Node* Array::NotEquals(Function* _)
+{
+    return new Error;
+}
+
+Node* Object::NotEquals(Error* _)
+{
+    return new Error;
+}
+
+Node* Object::NotEquals(Boolean* _)
+{
+    return new Error;
+}
+
+Node* Object::NotEquals(Integer* _)
+{
+    return new Error;
+}
+
+Node* Object::NotEquals(Double* _)
+{
+    return new Error;
+}
+
+Node* Object::NotEquals(String* _)
+{
+    return new Error;
+}
+
+Node* Object::NotEquals(Array* _)
+{
+    return new Error;
+}
+
+Node* Object::NotEquals(Object* _)
+{
+    return new Error;
+}
+
+Node* Object::NotEquals(Function* _)
+{
+    return new Error;
+}
+
+Node* Function::NotEquals(Error* _)
+{
+    return new Error;
+}
+
+Node* Function::NotEquals(Boolean* _)
+{
+    return new Error;
+}
+
+Node* Function::NotEquals(Integer* _)
+{
+    return new Error;
+}
+
+Node* Function::NotEquals(Double* _)
+{
+    return new Error;
+}
+
+Node* Function::NotEquals(String* _)
+{
+    return new Error;
+}
+
+Node* Function::NotEquals(Array* _)
+{
+    return new Error;
+}
+
+Node* Function::NotEquals(Object* _)
+{
+    return new Error;
+}
+
+Node* Function::NotEquals(Function* _)
+{
+    return new Error;
+}
+
 Node* Error::LessThan(Error* _)
 {
     return new Error;
@@ -5111,6 +5431,78 @@ Node* Function::back_Equals(String* _) { return _->Equals(this); }
 Node* Function::back_Equals(Array* _) { return _->Equals(this); }
 Node* Function::back_Equals(Object* _) { return _->Equals(this); }
 Node* Function::back_Equals(Function* _) { return _->Equals(this); }
+Node* Error::NotEquals(Node* _) { return _->back_NotEquals(this); }
+Node* Error::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Error::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
+Node* Error::back_NotEquals(Integer* _) { return _->NotEquals(this); }
+Node* Error::back_NotEquals(Double* _) { return _->NotEquals(this); }
+Node* Error::back_NotEquals(String* _) { return _->NotEquals(this); }
+Node* Error::back_NotEquals(Array* _) { return _->NotEquals(this); }
+Node* Error::back_NotEquals(Object* _) { return _->NotEquals(this); }
+Node* Error::back_NotEquals(Function* _) { return _->NotEquals(this); }
+Node* Boolean::NotEquals(Node* _) { return _->back_NotEquals(this); }
+Node* Boolean::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Boolean::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
+Node* Boolean::back_NotEquals(Integer* _) { return _->NotEquals(this); }
+Node* Boolean::back_NotEquals(Double* _) { return _->NotEquals(this); }
+Node* Boolean::back_NotEquals(String* _) { return _->NotEquals(this); }
+Node* Boolean::back_NotEquals(Array* _) { return _->NotEquals(this); }
+Node* Boolean::back_NotEquals(Object* _) { return _->NotEquals(this); }
+Node* Boolean::back_NotEquals(Function* _) { return _->NotEquals(this); }
+Node* Integer::NotEquals(Node* _) { return _->back_NotEquals(this); }
+Node* Integer::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Integer::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
+Node* Integer::back_NotEquals(Integer* _) { return _->NotEquals(this); }
+Node* Integer::back_NotEquals(Double* _) { return _->NotEquals(this); }
+Node* Integer::back_NotEquals(String* _) { return _->NotEquals(this); }
+Node* Integer::back_NotEquals(Array* _) { return _->NotEquals(this); }
+Node* Integer::back_NotEquals(Object* _) { return _->NotEquals(this); }
+Node* Integer::back_NotEquals(Function* _) { return _->NotEquals(this); }
+Node* Double::NotEquals(Node* _) { return _->back_NotEquals(this); }
+Node* Double::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Double::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
+Node* Double::back_NotEquals(Integer* _) { return _->NotEquals(this); }
+Node* Double::back_NotEquals(Double* _) { return _->NotEquals(this); }
+Node* Double::back_NotEquals(String* _) { return _->NotEquals(this); }
+Node* Double::back_NotEquals(Array* _) { return _->NotEquals(this); }
+Node* Double::back_NotEquals(Object* _) { return _->NotEquals(this); }
+Node* Double::back_NotEquals(Function* _) { return _->NotEquals(this); }
+Node* String::NotEquals(Node* _) { return _->back_NotEquals(this); }
+Node* String::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* String::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
+Node* String::back_NotEquals(Integer* _) { return _->NotEquals(this); }
+Node* String::back_NotEquals(Double* _) { return _->NotEquals(this); }
+Node* String::back_NotEquals(String* _) { return _->NotEquals(this); }
+Node* String::back_NotEquals(Array* _) { return _->NotEquals(this); }
+Node* String::back_NotEquals(Object* _) { return _->NotEquals(this); }
+Node* String::back_NotEquals(Function* _) { return _->NotEquals(this); }
+Node* Array::NotEquals(Node* _) { return _->back_NotEquals(this); }
+Node* Array::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Array::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
+Node* Array::back_NotEquals(Integer* _) { return _->NotEquals(this); }
+Node* Array::back_NotEquals(Double* _) { return _->NotEquals(this); }
+Node* Array::back_NotEquals(String* _) { return _->NotEquals(this); }
+Node* Array::back_NotEquals(Array* _) { return _->NotEquals(this); }
+Node* Array::back_NotEquals(Object* _) { return _->NotEquals(this); }
+Node* Array::back_NotEquals(Function* _) { return _->NotEquals(this); }
+Node* Object::NotEquals(Node* _) { return _->back_NotEquals(this); }
+Node* Object::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Object::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
+Node* Object::back_NotEquals(Integer* _) { return _->NotEquals(this); }
+Node* Object::back_NotEquals(Double* _) { return _->NotEquals(this); }
+Node* Object::back_NotEquals(String* _) { return _->NotEquals(this); }
+Node* Object::back_NotEquals(Array* _) { return _->NotEquals(this); }
+Node* Object::back_NotEquals(Object* _) { return _->NotEquals(this); }
+Node* Object::back_NotEquals(Function* _) { return _->NotEquals(this); }
+Node* Function::NotEquals(Node* _) { return _->back_NotEquals(this); }
+Node* Function::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Function::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
+Node* Function::back_NotEquals(Integer* _) { return _->NotEquals(this); }
+Node* Function::back_NotEquals(Double* _) { return _->NotEquals(this); }
+Node* Function::back_NotEquals(String* _) { return _->NotEquals(this); }
+Node* Function::back_NotEquals(Array* _) { return _->NotEquals(this); }
+Node* Function::back_NotEquals(Object* _) { return _->NotEquals(this); }
+Node* Function::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Error::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Error::back_LessThan(Error* _) { return _->LessThan(this); }
 Node* Error::back_LessThan(Boolean* _) { return _->LessThan(this); }

@@ -177,6 +177,23 @@ class Function;
     virtual Node* Equals(Array*);\
     virtual Node* Equals(Object*);\
     virtual Node* Equals(Function*);\
+    virtual Node* NotEquals(Node*);\
+    virtual Node* back_NotEquals(Error*);\
+    virtual Node* back_NotEquals(Boolean*);\
+    virtual Node* back_NotEquals(Integer*);\
+    virtual Node* back_NotEquals(Double*);\
+    virtual Node* back_NotEquals(String*);\
+    virtual Node* back_NotEquals(Array*);\
+    virtual Node* back_NotEquals(Object*);\
+    virtual Node* back_NotEquals(Function*);\
+    virtual Node* NotEquals(Error*);\
+    virtual Node* NotEquals(Boolean*);\
+    virtual Node* NotEquals(Integer*);\
+    virtual Node* NotEquals(Double*);\
+    virtual Node* NotEquals(String*);\
+    virtual Node* NotEquals(Array*);\
+    virtual Node* NotEquals(Object*);\
+    virtual Node* NotEquals(Function*);\
     virtual Node* LessThan(Node*);\
     virtual Node* back_LessThan(Error*);\
     virtual Node* back_LessThan(Boolean*);\
@@ -343,6 +360,15 @@ public:
     virtual Node* back_Equals(Array*) = 0;
     virtual Node* back_Equals(Object*) = 0;
     virtual Node* back_Equals(Function*) = 0;
+    virtual Node* NotEquals(Node*) = 0;
+    virtual Node* back_NotEquals(Error*) = 0;
+    virtual Node* back_NotEquals(Boolean*) = 0;
+    virtual Node* back_NotEquals(Integer*) = 0;
+    virtual Node* back_NotEquals(Double*) = 0;
+    virtual Node* back_NotEquals(String*) = 0;
+    virtual Node* back_NotEquals(Array*) = 0;
+    virtual Node* back_NotEquals(Object*) = 0;
+    virtual Node* back_NotEquals(Function*) = 0;
     virtual Node* LessThan(Node*) = 0;
     virtual Node* back_LessThan(Error*) = 0;
     virtual Node* back_LessThan(Boolean*) = 0;
