@@ -1310,37 +1310,37 @@ Node* Boolean::Minus(Error* _)
 
 Node* Boolean::Minus(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempted minus with boolean and boolean.");
 }
 
 Node* Boolean::Minus(Integer* _)
 {
-    return new Error;
+    return new Error("Attempted minus with boolean and integer.");
 }
 
 Node* Boolean::Minus(Double* _)
 {
-    return new Error;
+    return new Error("Attempted minus with boolean and double.");
 }
 
 Node* Boolean::Minus(String* _)
 {
-    return new Error;
+    return new Error("Attempted minus with boolean and string.");
 }
 
 Node* Boolean::Minus(Array* _)
 {
-    return new Error;
+    return new Error("Attempted minus with boolean and array.");
 }
 
 Node* Boolean::Minus(Object* _)
 {
-    return new Error;
+    return new Error("Attempted minus with boolean and object.");
 }
 
 Node* Boolean::Minus(Function* _)
 {
-    return new Error;
+    return new Error("Attempted minus with boolean and function.");
 }
 
 Node* Integer::Minus(Error* _)
@@ -1360,27 +1360,27 @@ Node* Integer::Minus(Integer* _)
 
 Node* Integer::Minus(Double* _)
 {
-    return new Error;
+    return new Double(value - _->getValue());
 }
 
 Node* Integer::Minus(String* _)
 {
-    return new Error;
+    return new Error("Attempted minus with integer and string.");
 }
 
 Node* Integer::Minus(Array* _)
 {
-    return new Error;
+    return new Error("Attempted minus with integer and array.");
 }
 
 Node* Integer::Minus(Object* _)
 {
-    return new Error;
+    return new Error("Attempted minus with integer and object.");
 }
 
 Node* Integer::Minus(Function* _)
 {
-    return new Error;
+    return new Error("Attempted minus with integer and function.");
 }
 
 Node* Double::Minus(Error* _)
@@ -1390,37 +1390,37 @@ Node* Double::Minus(Error* _)
 
 Node* Double::Minus(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempted minus with double and boolean.");
 }
 
 Node* Double::Minus(Integer* _)
 {
-    return new Error;
+    return new Double(value - _->getValue());
 }
 
 Node* Double::Minus(Double* _)
 {
-    return new Error;
+    return new Double(value - _->value);
 }
 
 Node* Double::Minus(String* _)
 {
-    return new Error;
+    return new Error("Attempted minus with double and string.");
 }
 
 Node* Double::Minus(Array* _)
 {
-    return new Error;
+    return new Error("Attempted minus with double and array.");
 }
 
 Node* Double::Minus(Object* _)
 {
-    return new Error;
+    return new Error("Attempted minus with double and object.");
 }
 
 Node* Double::Minus(Function* _)
 {
-    return new Error;
+    return new Error("Attempted minus with double and function.");
 }
 
 Node* String::Minus(Error* _)
@@ -1430,27 +1430,27 @@ Node* String::Minus(Error* _)
 
 Node* String::Minus(Boolean* _)
 {
-    return new Error;
+    return new Error("Attempted minus with double and function.");
 }
 
 Node* String::Minus(Integer* _)
 {
-    return new Error;
+    return new Error("Attempted minus with double and integer.");
 }
 
 Node* String::Minus(Double* _)
 {
-    return new Error;
+    return new Error("Attempted minus with string and double.");
 }
 
 Node* String::Minus(String* _)
 {
-    return new Error;
+    return new Error("Attempted minus with string and string.");
 }
 
 Node* String::Minus(Array* _)
 {
-    return new Error;
+    return new Error("Attempted minus with string and array.");
 }
 
 Node* String::Minus(Object* _)

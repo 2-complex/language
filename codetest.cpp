@@ -109,11 +109,11 @@ void testAssignments()
 
 int main(int argc, char** args)
 {
-    testAddSubtract();
+    // testAddSubtract();
     // testBooeanOps();
     // testStringConcat();
     // testArrayConcat();
-    // testAssignments();
+    testAssignments();
 
     return 0;
 }
