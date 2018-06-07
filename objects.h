@@ -21,7 +21,6 @@ class Object;
 class Function;
 
 #define DEFINITIONS \
-    virtual int typeComparor() const;\
     virtual Node* Negation();\
     virtual Node* Negative();\
     virtual Node* And(Node*);\
@@ -270,7 +269,6 @@ public:
     virtual ~Node();
     virtual std::string toString() const;
     virtual bool isTrue() const;
-    virtual int typeComparor() const = 0;
     virtual void setMember(const std::string& name, object::Node* value);
     virtual object::Node* getMember(const std::string& name);
     virtual void setMapping(object::Node* key, object::Node* value);

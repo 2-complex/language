@@ -49,11 +49,6 @@ Error::Error(const std::string& message)
 {
 }
 
-int Error::typeComparor() const
-{
-    return -1;
-}
-
 Node* Error::Negation()
 {
     return this;
@@ -117,11 +112,6 @@ std::string Boolean::toString() const
 Boolean::Boolean(bool value)
     : value(value)
 {
-}
-
-int Boolean::typeComparor() const
-{
-    return 0;
 }
 
 Node* Boolean::Negation()
@@ -194,11 +184,6 @@ std::string Integer::toString() const
     return std::to_string(value);
 }
 
-int Integer::typeComparor() const
-{
-    return 1;
-}
-
 Node* Integer::Negation()
 {
     return new Error("Attempt to negate integer with 'not'");
@@ -269,11 +254,6 @@ std::string Double::toString() const
     return std::to_string(value);
 }
 
-int Double::typeComparor() const
-{
-    return 1;
-}
-
 Node* Double::Negation()
 {
     return new Error("Attempt to negate double with 'not'");
@@ -337,11 +317,6 @@ std::string String::toString() const
 const std::string& String::getValue() const
 {
     return value;
-}
-
-int String::typeComparor() const
-{
-    return 2;
 }
 
 Node* String::Negation()
@@ -413,11 +388,6 @@ std::string Array::toString() const
 void Array::append(Node* node)
 {
     value.push_back(node);
-}
-
-int Array::typeComparor() const
-{
-    return 3;
 }
 
 Node* Array::Negation()
@@ -532,11 +502,6 @@ Node* Object::getMapping(Node* key)
     return itr->second;
 }
 
-int Object::typeComparor() const
-{
-    return 4;
-}
-
 Node* Object::Negation()
 {
     return new Error("Attempt to negate object with 'not'");
@@ -590,11 +555,6 @@ Node* Object::And(Function* _)
 std::string Function::getValue()
 {
     return toString();
-}
-
-int Function::typeComparor() const
-{
-    return 5;
 }
 
 Node* Function::Negation()
