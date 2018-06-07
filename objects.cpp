@@ -104,6 +104,11 @@ Node* Error::And(Function* _)
     return this;
 }
 
+bool Boolean::getValue()
+{
+    return value;
+}
+
 std::string Boolean::toString() const
 {
     return std::string(value ? "true" : "false");
@@ -389,10 +394,15 @@ Node* String::And(Function* _)
     return new Error("Attempted boolean and with string and function");
 }
 
+const std::vector<Node*>& Array::getValue()
+{
+    return value;
+}
+
 std::string Array::toString() const
 {
     std::string result = "[";
-    for( Node* node : elements )
+    for( Node* node : value )
     {
         result += node->toString() + ",";
     }
@@ -402,7 +412,7 @@ std::string Array::toString() const
 
 void Array::append(Node* node)
 {
-    elements.push_back(node);
+    value.push_back(node);
 }
 
 int Array::typeComparor() const
@@ -463,14 +473,31 @@ Node* Array::And(Function* _)
 Key::Key(Node* node)
     : node(node)
 {
-    typeComparor = node->typeComparor();
+}
+
+bool Key::operator == (const class Key& other) const
+{
+    Node* temp = node->Equals(other.node);
+    bool result = temp->isTrue();
+    delete temp;
+    return result;
 }
 
 bool Key::operator < (const class Key& other) const
 {
-    return typeComparor < other.typeComparor ||
-        (typeComparor == other.typeComparor &&
-            node->LessThan(other.node)->isTrue());
+    Node* temp = node->LessThan(other.node);
+    bool result = temp->isTrue();
+    delete temp;
+    return result;
+}
+
+std::pair<
+    std::map<std::string, Node*>,
+    std::map<Key, Node*> > Object::getValue()
+{
+    return std::pair<
+        std::map<std::string, Node*>,
+        std::map<Key, Node*> >( members, mappings );
 }
 
 void Object::setMember(const std::string& name, object::Node* value)
@@ -558,6 +585,11 @@ Node* Object::And(Object* _)
 Node* Object::And(Function* _)
 {
     return new Error("Attempted boolean and with object and function.");
+}
+
+std::string Function::getValue()
+{
+    return toString();
 }
 
 int Function::typeComparor() const
@@ -1164,10 +1196,10 @@ Node* Array::Plus(Array* _)
 {
     Array* array = new Array;
 
-    for (Node* node : elements)
+    for (Node* node : value)
         array->append(node);
 
-    for (Node* node : _->elements)
+    for (Node* node : _->value)
         array->append(node);
 
     return array;
@@ -2910,7 +2942,7 @@ Node* Boolean::Equals(Error* _)
 
 Node* Boolean::Equals(Boolean* _)
 {
-    return new Error;
+    return new Boolean(getValue() == _->getValue());
 }
 
 Node* Boolean::Equals(Integer* _)
@@ -2955,12 +2987,12 @@ Node* Integer::Equals(Boolean* _)
 
 Node* Integer::Equals(Integer* _)
 {
-    return new Error;
+    return new Boolean(getValue() == _->getValue());
 }
 
 Node* Integer::Equals(Double* _)
 {
-    return new Boolean(false);
+    return new Boolean(getValue() == _->getValue());
 }
 
 Node* Integer::Equals(String* _)
@@ -2995,12 +3027,12 @@ Node* Double::Equals(Boolean* _)
 
 Node* Double::Equals(Integer* _)
 {
-    return new Boolean(false);
+    return new Boolean(getValue() == _->getValue());
 }
 
 Node* Double::Equals(Double* _)
 {
-    return new Error;
+    return new Boolean(getValue() == _->getValue());
 }
 
 Node* Double::Equals(String* _)
@@ -3045,7 +3077,7 @@ Node* String::Equals(Double* _)
 
 Node* String::Equals(String* _)
 {
-    return new Error;
+    return new Boolean(getValue() == _->getValue());
 }
 
 Node* String::Equals(Array* _)
@@ -3090,7 +3122,7 @@ Node* Array::Equals(String* _)
 
 Node* Array::Equals(Array* _)
 {
-    return new Error;
+    return new Boolean(getValue() == _->getValue());
 }
 
 Node* Array::Equals(Object* _)
@@ -3135,7 +3167,7 @@ Node* Object::Equals(Array* _)
 
 Node* Object::Equals(Object* _)
 {
-    return new Error;
+    return new Boolean(getValue() == _->getValue());
 }
 
 Node* Object::Equals(Function* _)
@@ -3180,7 +3212,7 @@ Node* Function::Equals(Object* _)
 
 Node* Function::Equals(Function* _)
 {
-    return new Error;
+    return new Boolean(getValue() == _->getValue());
 }
 
 Node* Error::NotEquals(Error* _)
@@ -3230,7 +3262,7 @@ Node* Boolean::NotEquals(Error* _)
 
 Node* Boolean::NotEquals(Boolean* _)
 {
-    return new Error;
+    return new Boolean(getValue() != _->getValue());
 }
 
 Node* Boolean::NotEquals(Integer* _)
@@ -3275,12 +3307,12 @@ Node* Integer::NotEquals(Boolean* _)
 
 Node* Integer::NotEquals(Integer* _)
 {
-    return new Error;
+    return new Boolean(getValue() != _->getValue());
 }
 
 Node* Integer::NotEquals(Double* _)
 {
-    return new Boolean(true);
+    return new Boolean(getValue() != _->getValue());
 }
 
 Node* Integer::NotEquals(String* _)
@@ -3315,12 +3347,12 @@ Node* Double::NotEquals(Boolean* _)
 
 Node* Double::NotEquals(Integer* _)
 {
-    return new Boolean(true);
+    return new Boolean(getValue() != _->getValue());
 }
 
 Node* Double::NotEquals(Double* _)
 {
-    return new Error;
+    return new Boolean(getValue() != _->getValue());
 }
 
 Node* Double::NotEquals(String* _)
@@ -3365,7 +3397,7 @@ Node* String::NotEquals(Double* _)
 
 Node* String::NotEquals(String* _)
 {
-    return new Error;
+    return new Boolean(getValue() != _->getValue());
 }
 
 Node* String::NotEquals(Array* _)
@@ -3410,7 +3442,7 @@ Node* Array::NotEquals(String* _)
 
 Node* Array::NotEquals(Array* _)
 {
-    return new Error;
+    return new Boolean(getValue() != _->getValue());
 }
 
 Node* Array::NotEquals(Object* _)
@@ -3455,7 +3487,7 @@ Node* Object::NotEquals(Array* _)
 
 Node* Object::NotEquals(Object* _)
 {
-    return new Error;
+    return new Boolean(getValue() != _->getValue());
 }
 
 Node* Object::NotEquals(Function* _)
@@ -3500,7 +3532,7 @@ Node* Function::NotEquals(Object* _)
 
 Node* Function::NotEquals(Function* _)
 {
-    return new Error;
+    return new Boolean(getValue() != _->getValue());
 }
 
 Node* Error::LessThan(Error* _)
@@ -3550,7 +3582,7 @@ Node* Boolean::LessThan(Error* _)
 
 Node* Boolean::LessThan(Boolean* _)
 {
-    return new Error;
+    return new Boolean(getValue() < _->getValue());
 }
 
 Node* Boolean::LessThan(Integer* _)
@@ -3595,12 +3627,12 @@ Node* Integer::LessThan(Boolean* _)
 
 Node* Integer::LessThan(Integer* _)
 {
-    return new Error;
+    return new Boolean(getValue() < _->getValue());
 }
 
 Node* Integer::LessThan(Double* _)
 {
-    return new Boolean(true);
+    return new Boolean(getValue() < _->getValue());
 }
 
 Node* Integer::LessThan(String* _)
@@ -3685,7 +3717,7 @@ Node* String::LessThan(Double* _)
 
 Node* String::LessThan(String* _)
 {
-    return new Error;
+    return new Boolean(getValue() < _->getValue());
 }
 
 Node* String::LessThan(Array* _)
@@ -3730,7 +3762,7 @@ Node* Array::LessThan(String* _)
 
 Node* Array::LessThan(Array* _)
 {
-    return new Error;
+    return new Boolean(getValue() < _->getValue());
 }
 
 Node* Array::LessThan(Object* _)
@@ -3775,7 +3807,7 @@ Node* Object::LessThan(Array* _)
 
 Node* Object::LessThan(Object* _)
 {
-    return new Error;
+    return new Boolean(getValue() < _->getValue());
 }
 
 Node* Object::LessThan(Function* _)
@@ -3820,7 +3852,7 @@ Node* Function::LessThan(Object* _)
 
 Node* Function::LessThan(Function* _)
 {
-    return new Error;
+    return new Boolean(getValue() < _->getValue());
 }
 
 Node* Error::GreaterThan(Error* _)
@@ -3870,7 +3902,7 @@ Node* Boolean::GreaterThan(Error* _)
 
 Node* Boolean::GreaterThan(Boolean* _)
 {
-    return new Error;
+    return new Boolean(getValue() > _->getValue());
 }
 
 Node* Boolean::GreaterThan(Integer* _)
@@ -3915,12 +3947,12 @@ Node* Integer::GreaterThan(Boolean* _)
 
 Node* Integer::GreaterThan(Integer* _)
 {
-    return new Error;
+    return new Boolean(getValue() > _->getValue());
 }
 
 Node* Integer::GreaterThan(Double* _)
 {
-    return new Boolean(false);
+    return new Boolean(getValue() > _->getValue());
 }
 
 Node* Integer::GreaterThan(String* _)
@@ -4005,7 +4037,7 @@ Node* String::GreaterThan(Double* _)
 
 Node* String::GreaterThan(String* _)
 {
-    return new Error;
+    return new Boolean(getValue() > _->getValue());
 }
 
 Node* String::GreaterThan(Array* _)
@@ -4050,7 +4082,7 @@ Node* Array::GreaterThan(String* _)
 
 Node* Array::GreaterThan(Array* _)
 {
-    return new Error;
+    return new Boolean(getValue() > _->getValue());
 }
 
 Node* Array::GreaterThan(Object* _)
@@ -4095,7 +4127,7 @@ Node* Object::GreaterThan(Array* _)
 
 Node* Object::GreaterThan(Object* _)
 {
-    return new Error;
+    return new Boolean(getValue() > _->getValue());
 }
 
 Node* Object::GreaterThan(Function* _)
@@ -4140,7 +4172,7 @@ Node* Function::GreaterThan(Object* _)
 
 Node* Function::GreaterThan(Function* _)
 {
-    return new Error;
+    return new Boolean(getValue() > _->getValue());
 }
 
 Node* Error::LessThanOrEqualTo(Error* _)
@@ -4190,7 +4222,7 @@ Node* Boolean::LessThanOrEqualTo(Error* _)
 
 Node* Boolean::LessThanOrEqualTo(Boolean* _)
 {
-    return new Error;
+    return new Boolean(getValue() <= _->getValue());
 }
 
 Node* Boolean::LessThanOrEqualTo(Integer* _)
@@ -4235,12 +4267,12 @@ Node* Integer::LessThanOrEqualTo(Boolean* _)
 
 Node* Integer::LessThanOrEqualTo(Integer* _)
 {
-    return new Error;
+    return new Boolean(getValue() <= _->getValue());
 }
 
 Node* Integer::LessThanOrEqualTo(Double* _)
 {
-    return new Boolean(true);
+    return new Boolean(getValue() <= _->getValue());
 }
 
 Node* Integer::LessThanOrEqualTo(String* _)
@@ -4275,12 +4307,12 @@ Node* Double::LessThanOrEqualTo(Boolean* _)
 
 Node* Double::LessThanOrEqualTo(Integer* _)
 {
-    return new Boolean(false);
+    return new Boolean(getValue() <= _->getValue());
 }
 
 Node* Double::LessThanOrEqualTo(Double* _)
 {
-    return new Error;
+    return new Boolean(getValue() <= _->getValue());
 }
 
 Node* Double::LessThanOrEqualTo(String* _)
@@ -4325,7 +4357,7 @@ Node* String::LessThanOrEqualTo(Double* _)
 
 Node* String::LessThanOrEqualTo(String* _)
 {
-    return new Error;
+    return new Boolean(getValue() <= _->getValue());
 }
 
 Node* String::LessThanOrEqualTo(Array* _)
@@ -4370,7 +4402,7 @@ Node* Array::LessThanOrEqualTo(String* _)
 
 Node* Array::LessThanOrEqualTo(Array* _)
 {
-    return new Error;
+    return new Boolean(getValue() <= _->getValue());
 }
 
 Node* Array::LessThanOrEqualTo(Object* _)
@@ -4415,7 +4447,7 @@ Node* Object::LessThanOrEqualTo(Array* _)
 
 Node* Object::LessThanOrEqualTo(Object* _)
 {
-    return new Error;
+    return new Boolean(getValue() <= _->getValue());
 }
 
 Node* Object::LessThanOrEqualTo(Function* _)
@@ -4460,7 +4492,7 @@ Node* Function::LessThanOrEqualTo(Object* _)
 
 Node* Function::LessThanOrEqualTo(Function* _)
 {
-    return new Error;
+    return new Boolean(getValue() <= _->getValue());
 }
 
 Node* Error::GreaterThanOrEqualTo(Error* _)
@@ -4510,7 +4542,7 @@ Node* Boolean::GreaterThanOrEqualTo(Error* _)
 
 Node* Boolean::GreaterThanOrEqualTo(Boolean* _)
 {
-    return new Error;
+    return new Boolean(getValue() >= _->getValue());
 }
 
 Node* Boolean::GreaterThanOrEqualTo(Integer* _)
@@ -4555,12 +4587,12 @@ Node* Integer::GreaterThanOrEqualTo(Boolean* _)
 
 Node* Integer::GreaterThanOrEqualTo(Integer* _)
 {
-    return new Error;
+    return new Boolean(getValue() >= _->getValue());
 }
 
 Node* Integer::GreaterThanOrEqualTo(Double* _)
 {
-    return new Boolean(false);
+    return new Boolean(getValue() >= _->getValue());
 }
 
 Node* Integer::GreaterThanOrEqualTo(String* _)
@@ -4595,12 +4627,12 @@ Node* Double::GreaterThanOrEqualTo(Boolean* _)
 
 Node* Double::GreaterThanOrEqualTo(Integer* _)
 {
-    return new Boolean(true);
+    return new Boolean(getValue() >= _->getValue());
 }
 
 Node* Double::GreaterThanOrEqualTo(Double* _)
 {
-    return new Error;
+    return new Boolean(getValue() >= _->getValue());
 }
 
 Node* Double::GreaterThanOrEqualTo(String* _)
@@ -4645,7 +4677,7 @@ Node* String::GreaterThanOrEqualTo(Double* _)
 
 Node* String::GreaterThanOrEqualTo(String* _)
 {
-    return new Error;
+    return new Boolean(getValue() >= _->getValue());
 }
 
 Node* String::GreaterThanOrEqualTo(Array* _)
@@ -4690,7 +4722,7 @@ Node* Array::GreaterThanOrEqualTo(String* _)
 
 Node* Array::GreaterThanOrEqualTo(Array* _)
 {
-    return new Error;
+    return new Boolean(getValue() >= _->getValue());
 }
 
 Node* Array::GreaterThanOrEqualTo(Object* _)
@@ -4735,7 +4767,7 @@ Node* Object::GreaterThanOrEqualTo(Array* _)
 
 Node* Object::GreaterThanOrEqualTo(Object* _)
 {
-    return new Error;
+    return new Boolean(getValue() >= _->getValue());
 }
 
 Node* Object::GreaterThanOrEqualTo(Function* _)
@@ -4780,7 +4812,7 @@ Node* Function::GreaterThanOrEqualTo(Object* _)
 
 Node* Function::GreaterThanOrEqualTo(Function* _)
 {
-    return new Error;
+    return new Boolean(getValue() >= _->getValue());
 }
 
 Node* Error::And(Node* _) { return _->back_And(this); }

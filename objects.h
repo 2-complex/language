@@ -423,6 +423,7 @@ class Boolean : public Node
     bool value;
 public:
     Boolean(bool value);
+    bool getValue();
 
     std::string toString() const override;
 DEFINITIONS
@@ -465,8 +466,9 @@ DEFINITIONS
 
 class Array : public Node
 {
-    std::vector<Node*> elements;
+    std::vector<Node*> value;
 public:
+    const std::vector<Node*>& getValue();
     void append(Node*);
 
     std::string toString() const;
@@ -475,19 +477,22 @@ DEFINITIONS
 
 class Key
 {
-    int typeComparor;
     Node* node;
 public:
     Key(Node* node);
 
+    bool operator == (const class Key& other) const;
     bool operator < (const class Key& other) const;
 };
 
 class Object : public Node
 {
+    std::map<std::string, Node*> members;
     std::map<Key, Node*> mappings;
-    std::unordered_map<std::string, Node*> members;
 public:
+    std::pair<
+        std::map<std::string, Node*>,
+        std::map<Key, Node*> > getValue();
 
     virtual void setMember(const std::string& name, object::Node* value) override;
     virtual object::Node* getMember(const std::string& name) override;
@@ -500,6 +505,7 @@ DEFINITIONS
 class Function : public Node
 {
 public:
+    std::string getValue();
 DEFINITIONS
 };
 
