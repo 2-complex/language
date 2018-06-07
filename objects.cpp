@@ -22,7 +22,7 @@ void Node::setMember(const std::string& name, object::Node* value)
 
 object::Node* Node::getMember(const std::string& name)
 {
-    return new Error("Attempt to get member value on non-object.");
+    PLACEHOLDER
 }
 
 void Node::setMapping(object::Node* key, object::Node* value)
@@ -31,7 +31,7 @@ void Node::setMapping(object::Node* key, object::Node* value)
 
 object::Node* Node::getMapping(object::Node* key)
 {
-    return new Error("Attempt to get mapped value on non-object.");
+    PLACEHOLDER
 }
 
 std::string Error::toString() const
@@ -131,7 +131,7 @@ Node* Boolean::Negation()
 
 Node* Boolean::Negative()
 {
-    return new Error("Attempt to arithmetic negate a boolean.");
+    PLACEHOLDER
 }
 
 Node* Boolean::And(Error* _)
@@ -146,32 +146,32 @@ Node* Boolean::And(Boolean* _)
 
 Node* Boolean::And(Integer* _)
 {
-    return new Error("Attempted boolean and with boolean and integer.");
+    PLACEHOLDER
 }
 
 Node* Boolean::And(Double* _)
 {
-    return new Error("Attempted boolean and with boolean and double.");
+    PLACEHOLDER
 }
 
 Node* Boolean::And(String* _)
 {
-    return new Error("Attempted boolean and with boolean and string.");
+    PLACEHOLDER
 }
 
 Node* Boolean::And(Array* _)
 {
-    return new Error("Attempted boolean and with boolean and array.");
+    PLACEHOLDER
 }
 
 Node* Boolean::And(Object* _)
 {
-    return new Error("Attempted boolean and with boolean and object.");
+    PLACEHOLDER
 }
 
 Node* Boolean::And(Function* _)
 {
-    return new Error("Attempted boolean and with boolean and function.");
+    PLACEHOLDER
 }
 
 Integer::Integer(int value)
@@ -201,7 +201,7 @@ int Integer::typeComparor() const
 
 Node* Integer::Negation()
 {
-    return new Error("Attempt to negate integer with 'not'.");
+    PLACEHOLDER
 }
 
 Node* Integer::Negative()
@@ -216,37 +216,37 @@ Node* Integer::And(Error* _)
 
 Node* Integer::And(Boolean* _)
 {
-    return new Error("Attempted booean and with integer and boolean.");
+    PLACEHOLDER
 }
 
 Node* Integer::And(Integer* _)
 {
-    return new Error("Attempted booean and with integer and integer.");
+    PLACEHOLDER
 }
 
 Node* Integer::And(Double* _)
 {
-    return new Error("Attempted booean and with integer and double.");
+    PLACEHOLDER
 }
 
 Node* Integer::And(String* _)
 {
-    return new Error("Attempted booean and with integer and string.");
+    PLACEHOLDER
 }
 
 Node* Integer::And(Array* _)
 {
-    return new Error("Attempted booean and with integer and array.");
+    PLACEHOLDER
 }
 
 Node* Integer::And(Object* _)
 {
-    return new Error("Attempted booean and with integer and object.");
+    PLACEHOLDER
 }
 
 Node* Integer::And(Function* _)
 {
-    return new Error("Attempted booean and with integer and function.");
+    PLACEHOLDER
 }
 
 Double::Double(double value)
@@ -276,7 +276,7 @@ int Double::typeComparor() const
 
 Node* Double::Negation()
 {
-    return new Error("Attempt to negate double with 'not'.");
+    PLACEHOLDER
 }
 
 Node* Double::Negative()
@@ -291,37 +291,37 @@ Node* Double::And(Error* _)
 
 Node* Double::And(Boolean* _)
 {
-    return new Error("Attempted boolean and with double and boolean.");
+    PLACEHOLDER
 }
 
 Node* Double::And(Integer* _)
 {
-    return new Error("Attempted boolean and with double and integer.");
+    PLACEHOLDER
 }
 
 Node* Double::And(Double* _)
 {
-    return new Error("Attempted boolean and with double and double.");
+    PLACEHOLDER
 }
 
 Node* Double::And(String* _)
 {
-    return new Error("Attempted boolean and with double and string.");
+    PLACEHOLDER
 }
 
 Node* Double::And(Array* _)
 {
-    return new Error("Attempted boolean and with double and array.");
+    PLACEHOLDER
 }
 
 Node* Double::And(Object* _)
 {
-    return new Error("Attempted boolean and with double and object.");
+    PLACEHOLDER
 }
 
 Node* Double::And(Function* _)
 {
-    return new Error("Attempted boolean and with double and function.");
+    PLACEHOLDER
 }
 
 String::String(const std::string& value)
@@ -346,12 +346,12 @@ int String::typeComparor() const
 
 Node* String::Negation()
 {
-    return new Error("Attempt to negate string with 'not'.");
+    PLACEHOLDER
 }
 
 Node* String::Negative()
 {
-    return new Error("Attempt to arithmetic negate a string.");
+    PLACEHOLDER
 }
 
 Node* String::And(Error* _)
@@ -361,37 +361,37 @@ Node* String::And(Error* _)
 
 Node* String::And(Boolean* _)
 {
-    return new Error("Attempted boolean and with string and boolean");
+    PLACEHOLDER
 }
 
 Node* String::And(Integer* _)
 {
-    return new Error("Attempted boolean and with string and integer");
+    PLACEHOLDER
 }
 
 Node* String::And(Double* _)
 {
-    return new Error("Attempted boolean and with string and double");
+    PLACEHOLDER
 }
 
 Node* String::And(String* _)
 {
-    return new Error("Attempted boolean and with string and string");
+    PLACEHOLDER
 }
 
 Node* String::And(Array* _)
 {
-    return new Error("Attempted boolean and with string and array");
+    PLACEHOLDER
 }
 
 Node* String::And(Object* _)
 {
-    return new Error("Attempted boolean and with string and object");
+    PLACEHOLDER
 }
 
 Node* String::And(Function* _)
 {
-    return new Error("Attempted boolean and with string and function");
+    PLACEHOLDER
 }
 
 const std::vector<Node*>& Array::getValue()
@@ -422,12 +422,12 @@ int Array::typeComparor() const
 
 Node* Array::Negation()
 {
-    return new Error("Attempt to negate array with 'not'.");
+    PLACEHOLDER
 }
 
 Node* Array::Negative()
 {
-    return new Error("Attempt to arithmetic negate a array.");
+    PLACEHOLDER
 }
 
 Node* Array::And(Error* _)
@@ -437,37 +437,37 @@ Node* Array::And(Error* _)
 
 Node* Array::And(Boolean* _)
 {
-    return new Error("Attempted boolean and with array and boolean.");
+    PLACEHOLDER
 }
 
 Node* Array::And(Integer* _)
 {
-    return new Error("Attempted boolean and with array and integer.");
+    PLACEHOLDER
 }
 
 Node* Array::And(Double* _)
 {
-    return new Error("Attempted boolean and with array and double.");
+    PLACEHOLDER
 }
 
 Node* Array::And(String* _)
 {
-    return new Error("Attempted boolean and with array and string.");
+    PLACEHOLDER
 }
 
 Node* Array::And(Array* _)
 {
-    return new Error("Attempted boolean and with arrays.");
+    PLACEHOLDER
 }
 
 Node* Array::And(Object* _)
 {
-    return new Error("Attempted boolean and with array and object.");
+    PLACEHOLDER
 }
 
 Node* Array::And(Function* _)
 {
-    return new Error("Attempted boolean and with array and function.");
+    PLACEHOLDER
 }
 
 Key::Key(Node* node)
@@ -510,7 +510,7 @@ object::Node* Object::getMember(const std::string& name)
     auto itr = members.find(name);
     if( itr == members.end() )
     {
-        return new Error("Member not found: " + name);
+        PLACEHOLDER
     }
     return itr->second;
 }
@@ -539,12 +539,12 @@ int Object::typeComparor() const
 
 Node* Object::Negation()
 {
-    return new Error("Attempt to negate object with 'not'.");
+    PLACEHOLDER
 }
 
 Node* Object::Negative()
 {
-    return new Error("Attempt to arithmetic negate an object.");
+    PLACEHOLDER
 }
 
 Node* Object::And(Error* _)
@@ -554,37 +554,37 @@ Node* Object::And(Error* _)
 
 Node* Object::And(Boolean* _)
 {
-    return new Error("Attempted boolean and with object and boolean.");
+    PLACEHOLDER
 }
 
 Node* Object::And(Integer* _)
 {
-    return new Error("Attempted boolean and with object and integer.");
+    PLACEHOLDER
 }
 
 Node* Object::And(Double* _)
 {
-    return new Error("Attempted boolean and with object and double.");
+    PLACEHOLDER
 }
 
 Node* Object::And(String* _)
 {
-    return new Error("Attempted boolean and with object and string.");
+    PLACEHOLDER
 }
 
 Node* Object::And(Array* _)
 {
-    return new Error("Attempted boolean and with object and array.");
+    PLACEHOLDER
 }
 
 Node* Object::And(Object* _)
 {
-    return new Error("Attempted boolean and with object and array.");
+    PLACEHOLDER
 }
 
 Node* Object::And(Function* _)
 {
-    return new Error("Attempted boolean and with object and function.");
+    PLACEHOLDER
 }
 
 std::string Function::getValue()
@@ -599,12 +599,12 @@ int Function::typeComparor() const
 
 Node* Function::Negation()
 {
-    return new Error("Attempt to negate function with 'not'.");
+    PLACEHOLDER
 }
 
 Node* Function::Negative()
 {
-    return new Error("Attempt to arithmetic negate a function.");
+    PLACEHOLDER
 }
 
 Node* Function::And(Error* _)
@@ -614,37 +614,37 @@ Node* Function::And(Error* _)
 
 Node* Function::And(Boolean* _)
 {
-    return new Error("Attempted boolean and with function and boolean.");
+    PLACEHOLDER
 }
 
 Node* Function::And(Integer* _)
 {
-    return new Error("Attempted boolean and with function and integer.");
+    PLACEHOLDER
 }
 
 Node* Function::And(Double* _)
 {
-    return new Error("Attempted boolean and with function and double.");
+    PLACEHOLDER
 }
 
 Node* Function::And(String* _)
 {
-    return new Error("Attempted boolean and with function and string.");
+    PLACEHOLDER
 }
 
 Node* Function::And(Array* _)
 {
-    return new Error("Attempted boolean and with function and array.");
+    PLACEHOLDER
 }
 
 Node* Function::And(Object* _)
 {
-    return new Error("Attempted boolean and with function and object.");
+    PLACEHOLDER
 }
 
 Node* Function::And(Function* _)
 {
-    return new Error("Attempted boolean and with function and function.");
+    PLACEHOLDER
 }
 
 Node* Error::Or(Error* _)
@@ -654,37 +654,37 @@ Node* Error::Or(Error* _)
 
 Node* Error::Or(Boolean* _)
 {
-    return new Error("Attempted boolean or with function and boolean.");
+    PLACEHOLDER
 }
 
 Node* Error::Or(Integer* _)
 {
-    return new Error("Attempted boolean or with function and integer.");
+    PLACEHOLDER
 }
 
 Node* Error::Or(Double* _)
 {
-    return new Error("Attempted boolean or with function and boolean.");
+    PLACEHOLDER
 }
 
 Node* Error::Or(String* _)
 {
-    return new Error("Attempted boolean or with function and string.");
+    PLACEHOLDER
 }
 
 Node* Error::Or(Array* _)
 {
-    return new Error("Attempted boolean or with function and array.");
+    PLACEHOLDER
 }
 
 Node* Error::Or(Object* _)
 {
-    return new Error("Attempted boolean or with function and object.");
+    PLACEHOLDER
 }
 
 Node* Error::Or(Function* _)
 {
-    return new Error("Attempted boolean or with function and function.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Or(Error* _)
@@ -699,32 +699,32 @@ Node* Boolean::Or(Boolean* _)
 
 Node* Boolean::Or(Integer* _)
 {
-    return new Error("Attempted boolean or with boolean and integer.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Or(Double* _)
 {
-    return new Error("Attempted boolean or with boolean and double.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Or(String* _)
 {
-    return new Error("Attempted boolean or with boolean and string.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Or(Array* _)
 {
-    return new Error("Attempted boolean or with boolean and array.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Or(Object* _)
 {
-    return new Error("Attempted boolean or with boolean and object.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Or(Function* _)
 {
-    return new Error("Attempted boolean or with boolean and function.");
+    PLACEHOLDER
 }
 
 Node* Integer::Or(Error* _)
@@ -734,37 +734,37 @@ Node* Integer::Or(Error* _)
 
 Node* Integer::Or(Boolean* _)
 {
-    return new Error("Attempted boolean or with integer and boolean.");
+    PLACEHOLDER
 }
 
 Node* Integer::Or(Integer* _)
 {
-    return new Error("Attempted boolean or with integer and integer.");
+    PLACEHOLDER
 }
 
 Node* Integer::Or(Double* _)
 {
-    return new Error("Attempted boolean or with integer and double.");
+    PLACEHOLDER
 }
 
 Node* Integer::Or(String* _)
 {
-    return new Error("Attempted boolean or with integer and string.");
+    PLACEHOLDER
 }
 
 Node* Integer::Or(Array* _)
 {
-    return new Error("Attempted boolean or with integer and array.");
+    PLACEHOLDER
 }
 
 Node* Integer::Or(Object* _)
 {
-    return new Error("Attempted boolean or with integer and object.");
+    PLACEHOLDER
 }
 
 Node* Integer::Or(Function* _)
 {
-    return new Error("Attempted boolean or with integer and function.");
+    PLACEHOLDER
 }
 
 Node* Double::Or(Error* _)
@@ -774,37 +774,37 @@ Node* Double::Or(Error* _)
 
 Node* Double::Or(Boolean* _)
 {
-    return new Error("Attempted boolean or with integer and boolean.");
+    PLACEHOLDER
 }
 
 Node* Double::Or(Integer* _)
 {
-    return new Error("Attempted boolean or with integer and integer.");
+    PLACEHOLDER
 }
 
 Node* Double::Or(Double* _)
 {
-    return new Error("Attempted boolean or with integer and double.");
+    PLACEHOLDER
 }
 
 Node* Double::Or(String* _)
 {
-    return new Error("Attempted boolean or with integer and string.");
+    PLACEHOLDER
 }
 
 Node* Double::Or(Array* _)
 {
-    return new Error("Attempted boolean or with integer and array.");
+    PLACEHOLDER
 }
 
 Node* Double::Or(Object* _)
 {
-    return new Error("Attempted boolean or with integer and object.");
+    PLACEHOLDER
 }
 
 Node* Double::Or(Function* _)
 {
-    return new Error("Attempted boolean or with integer and function.");
+    PLACEHOLDER
 }
 
 Node* String::Or(Error* _)
@@ -814,37 +814,37 @@ Node* String::Or(Error* _)
 
 Node* String::Or(Boolean* _)
 {
-    return new Error("Attempted boolean or with string and boolean.");
+    PLACEHOLDER
 }
 
 Node* String::Or(Integer* _)
 {
-    return new Error("Attempted boolean or with string and integer.");
+    PLACEHOLDER
 }
 
 Node* String::Or(Double* _)
 {
-    return new Error("Attempted boolean or with string and double.");
+    PLACEHOLDER
 }
 
 Node* String::Or(String* _)
 {
-    return new Error("Attempted boolean or with string and string.");
+    PLACEHOLDER
 }
 
 Node* String::Or(Array* _)
 {
-    return new Error("Attempted boolean or with string and array.");
+    PLACEHOLDER
 }
 
 Node* String::Or(Object* _)
 {
-    return new Error("Attempted boolean or with string and object.");
+    PLACEHOLDER
 }
 
 Node* String::Or(Function* _)
 {
-    return new Error("Attempted boolean or with string and function.");
+    PLACEHOLDER
 }
 
 Node* Array::Or(Error* _)
@@ -854,37 +854,37 @@ Node* Array::Or(Error* _)
 
 Node* Array::Or(Boolean* _)
 {
-    return new Error("Attempted boolean or with array and boolean.");
+    PLACEHOLDER
 }
 
 Node* Array::Or(Integer* _)
 {
-    return new Error("Attempted boolean or with array and integer.");
+    PLACEHOLDER
 }
 
 Node* Array::Or(Double* _)
 {
-    return new Error("Attempted boolean or with array and double.");
+    PLACEHOLDER
 }
 
 Node* Array::Or(String* _)
 {
-    return new Error("Attempted boolean or with array and string.");
+    PLACEHOLDER
 }
 
 Node* Array::Or(Array* _)
 {
-    return new Error("Attempted boolean or with array and array.");
+    PLACEHOLDER
 }
 
 Node* Array::Or(Object* _)
 {
-    return new Error("Attempted boolean or with array and object.");
+    PLACEHOLDER
 }
 
 Node* Array::Or(Function* _)
 {
-    return new Error("Attempted boolean or with array and function.");
+    PLACEHOLDER
 }
 
 Node* Object::Or(Error* _)
@@ -894,37 +894,37 @@ Node* Object::Or(Error* _)
 
 Node* Object::Or(Boolean* _)
 {
-    return new Error("Attempted boolean or with object and boolean.");
+    PLACEHOLDER
 }
 
 Node* Object::Or(Integer* _)
 {
-    return new Error("Attempted boolean or with object and integer.");
+    PLACEHOLDER
 }
 
 Node* Object::Or(Double* _)
 {
-    return new Error("Attempted boolean or with object and double.");
+    PLACEHOLDER
 }
 
 Node* Object::Or(String* _)
 {
-    return new Error("Attempted boolean or with object and string.");
+    PLACEHOLDER
 }
 
 Node* Object::Or(Array* _)
 {
-    return new Error("Attempted boolean or with object and array.");
+    PLACEHOLDER
 }
 
 Node* Object::Or(Object* _)
 {
-    return new Error("Attempted boolean or with object and object.");
+    PLACEHOLDER
 }
 
 Node* Object::Or(Function* _)
 {
-    return new Error("Attempted boolean or with object and function.");
+    PLACEHOLDER
 }
 
 Node* Function::Or(Error* _)
@@ -934,37 +934,37 @@ Node* Function::Or(Error* _)
 
 Node* Function::Or(Boolean* _)
 {
-    return new Error("Attempted boolean or with function and boolean.");
+    PLACEHOLDER
 }
 
 Node* Function::Or(Integer* _)
 {
-    return new Error("Attempted boolean or with function and integer.");
+    PLACEHOLDER
 }
 
 Node* Function::Or(Double* _)
 {
-    return new Error("Attempted boolean or with function and double.");
+    PLACEHOLDER
 }
 
 Node* Function::Or(String* _)
 {
-    return new Error("Attempted boolean or with function and string.");
+    PLACEHOLDER
 }
 
 Node* Function::Or(Array* _)
 {
-    return new Error("Attempted boolean or with function and array.");
+    PLACEHOLDER
 }
 
 Node* Function::Or(Object* _)
 {
-    return new Error("Attempted boolean or with function and object.");
+    PLACEHOLDER
 }
 
 Node* Function::Or(Function* _)
 {
-    return new Error("Attempted boolean or with function and function.");
+    PLACEHOLDER
 }
 
 Node* Error::Plus(Error* _)
@@ -1014,17 +1014,17 @@ Node* Boolean::Plus(Error* _)
 
 Node* Boolean::Plus(Boolean* _)
 {
-    return new Error("Attempt to add booleans.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Plus(Integer* _)
 {
-    return new Error("Attempt to add boolean and integer.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Plus(Double* _)
 {
-    return new Error("Attempt to add boolean and double.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Plus(String* _)
@@ -1034,17 +1034,17 @@ Node* Boolean::Plus(String* _)
 
 Node* Boolean::Plus(Array* _)
 {
-    return new Error("Attempt to add boolean and array.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Plus(Object* _)
 {
-    return new Error("Attempt to add boolean and object.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Plus(Function* _)
 {
-    return new Error("Attempt to add boolean and function.");
+    PLACEHOLDER
 }
 
 Node* Integer::Plus(Error* _)
@@ -1054,7 +1054,7 @@ Node* Integer::Plus(Error* _)
 
 Node* Integer::Plus(Boolean* _)
 {
-    return new Error("Attempt to add integer and boolean.");
+    PLACEHOLDER
 }
 
 Node* Integer::Plus(Integer* _)
@@ -1074,17 +1074,17 @@ Node* Integer::Plus(String* _)
 
 Node* Integer::Plus(Array* _)
 {
-    return new Error("Attempt to add integer and array.");
+    PLACEHOLDER
 }
 
 Node* Integer::Plus(Object* _)
 {
-    return new Error("Attempt to add integer and object.");
+    PLACEHOLDER
 }
 
 Node* Integer::Plus(Function* _)
 {
-    return new Error("Attempt to add integer and function.");
+    PLACEHOLDER
 }
 
 Node* Double::Plus(Error* _)
@@ -1094,7 +1094,7 @@ Node* Double::Plus(Error* _)
 
 Node* Double::Plus(Boolean* _)
 {
-    return new Error("Attempt to add double and boolean.");
+    PLACEHOLDER
 }
 
 Node* Double::Plus(Integer* _)
@@ -1114,17 +1114,17 @@ Node* Double::Plus(String* _)
 
 Node* Double::Plus(Array* _)
 {
-    return new Error("Attempt to add double and array.");
+    PLACEHOLDER
 }
 
 Node* Double::Plus(Object* _)
 {
-    return new Error("Attempt to add double and object.");
+    PLACEHOLDER
 }
 
 Node* Double::Plus(Function* _)
 {
-    return new Error("Attempt to add double and function.");
+    PLACEHOLDER
 }
 
 Node* String::Plus(Error* _)
@@ -1174,17 +1174,17 @@ Node* Array::Plus(Error* _)
 
 Node* Array::Plus(Boolean* _)
 {
-    return new Error("Attempt to add array and boolean.");
+    PLACEHOLDER
 }
 
 Node* Array::Plus(Integer* _)
 {
-    return new Error("Attempt to add array and integer.");
+    PLACEHOLDER
 }
 
 Node* Array::Plus(Double* _)
 {
-    return new Error("Attempt to add array and double.");
+    PLACEHOLDER
 }
 
 Node* Array::Plus(String* _)
@@ -1207,12 +1207,12 @@ Node* Array::Plus(Array* _)
 
 Node* Array::Plus(Object* _)
 {
-    return new Error("Attempt to add array and object.");
+    PLACEHOLDER
 }
 
 Node* Array::Plus(Function* _)
 {
-    return new Error("Attempt to add array and function.");
+    PLACEHOLDER
 }
 
 Node* Object::Plus(Error* _)
@@ -1222,17 +1222,17 @@ Node* Object::Plus(Error* _)
 
 Node* Object::Plus(Boolean* _)
 {
-    return new Error("Attempt to add object and boolean.");
+    PLACEHOLDER
 }
 
 Node* Object::Plus(Integer* _)
 {
-    return new Error("Attempt to add object and integer.");
+    PLACEHOLDER
 }
 
 Node* Object::Plus(Double* _)
 {
-    return new Error("Attempt to add object and double.");
+    PLACEHOLDER
 }
 
 Node* Object::Plus(String* _)
@@ -1242,17 +1242,17 @@ Node* Object::Plus(String* _)
 
 Node* Object::Plus(Array* _)
 {
-    return new Error("Attempt to add object and array.");
+    PLACEHOLDER
 }
 
 Node* Object::Plus(Object* _)
 {
-    return new Error("Attempt to add objects.");
+    PLACEHOLDER
 }
 
 Node* Object::Plus(Function* _)
 {
-    return new Error("Attempt to add object and function.");
+    PLACEHOLDER
 }
 
 Node* Function::Plus(Error* _)
@@ -1262,17 +1262,17 @@ Node* Function::Plus(Error* _)
 
 Node* Function::Plus(Boolean* _)
 {
-    return new Error("Attempt to add function and boolean.");
+    PLACEHOLDER
 }
 
 Node* Function::Plus(Integer* _)
 {
-    return new Error("Attempt to add function and integer.");
+    PLACEHOLDER
 }
 
 Node* Function::Plus(Double* _)
 {
-    return new Error("Attempt to add function and double.");
+    PLACEHOLDER
 }
 
 Node* Function::Plus(String* _)
@@ -1282,17 +1282,17 @@ Node* Function::Plus(String* _)
 
 Node* Function::Plus(Array* _)
 {
-    return new Error("Attempt to add function and array.");
+    PLACEHOLDER
 }
 
 Node* Function::Plus(Object* _)
 {
-    return new Error("Attempt to add function and object.");
+    PLACEHOLDER
 }
 
 Node* Function::Plus(Function* _)
 {
-    return new Error("Attempt to add function and function.");
+    PLACEHOLDER
 }
 
 Node* Error::Minus(Error* _)
@@ -1342,37 +1342,37 @@ Node* Boolean::Minus(Error* _)
 
 Node* Boolean::Minus(Boolean* _)
 {
-    return new Error("Attempted minus with boolean and boolean.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Minus(Integer* _)
 {
-    return new Error("Attempted minus with boolean and integer.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Minus(Double* _)
 {
-    return new Error("Attempted minus with boolean and double.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Minus(String* _)
 {
-    return new Error("Attempted minus with boolean and string.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Minus(Array* _)
 {
-    return new Error("Attempted minus with boolean and array.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Minus(Object* _)
 {
-    return new Error("Attempted minus with boolean and object.");
+    PLACEHOLDER
 }
 
 Node* Boolean::Minus(Function* _)
 {
-    return new Error("Attempted minus with boolean and function.");
+    PLACEHOLDER
 }
 
 Node* Integer::Minus(Error* _)
@@ -1382,7 +1382,7 @@ Node* Integer::Minus(Error* _)
 
 Node* Integer::Minus(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Minus(Integer* _)
@@ -1397,22 +1397,22 @@ Node* Integer::Minus(Double* _)
 
 Node* Integer::Minus(String* _)
 {
-    return new Error("Attempted minus with integer and string.");
+    PLACEHOLDER
 }
 
 Node* Integer::Minus(Array* _)
 {
-    return new Error("Attempted minus with integer and array.");
+    PLACEHOLDER
 }
 
 Node* Integer::Minus(Object* _)
 {
-    return new Error("Attempted minus with integer and object.");
+    PLACEHOLDER
 }
 
 Node* Integer::Minus(Function* _)
 {
-    return new Error("Attempted minus with integer and function.");
+    PLACEHOLDER
 }
 
 Node* Double::Minus(Error* _)
@@ -1422,7 +1422,7 @@ Node* Double::Minus(Error* _)
 
 Node* Double::Minus(Boolean* _)
 {
-    return new Error("Attempted minus with double and boolean.");
+    PLACEHOLDER
 }
 
 Node* Double::Minus(Integer* _)
@@ -1437,22 +1437,22 @@ Node* Double::Minus(Double* _)
 
 Node* Double::Minus(String* _)
 {
-    return new Error("Attempted minus with double and string.");
+    PLACEHOLDER
 }
 
 Node* Double::Minus(Array* _)
 {
-    return new Error("Attempted minus with double and array.");
+    PLACEHOLDER
 }
 
 Node* Double::Minus(Object* _)
 {
-    return new Error("Attempted minus with double and object.");
+    PLACEHOLDER
 }
 
 Node* Double::Minus(Function* _)
 {
-    return new Error("Attempted minus with double and function.");
+    PLACEHOLDER
 }
 
 Node* String::Minus(Error* _)
@@ -1462,37 +1462,37 @@ Node* String::Minus(Error* _)
 
 Node* String::Minus(Boolean* _)
 {
-    return new Error("Attempted minus with double and function.");
+    PLACEHOLDER
 }
 
 Node* String::Minus(Integer* _)
 {
-    return new Error("Attempted minus with double and integer.");
+    PLACEHOLDER
 }
 
 Node* String::Minus(Double* _)
 {
-    return new Error("Attempted minus with string and double.");
+    PLACEHOLDER
 }
 
 Node* String::Minus(String* _)
 {
-    return new Error("Attempted minus with string and string.");
+    PLACEHOLDER
 }
 
 Node* String::Minus(Array* _)
 {
-    return new Error("Attempted minus with string and array.");
+    PLACEHOLDER
 }
 
 Node* String::Minus(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Minus(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Minus(Error* _)
@@ -1502,37 +1502,37 @@ Node* Array::Minus(Error* _)
 
 Node* Array::Minus(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Minus(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Minus(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Minus(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Minus(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Minus(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Minus(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Minus(Error* _)
@@ -1542,37 +1542,37 @@ Node* Object::Minus(Error* _)
 
 Node* Object::Minus(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Minus(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Minus(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Minus(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Minus(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Minus(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Minus(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Minus(Error* _)
@@ -1582,37 +1582,37 @@ Node* Function::Minus(Error* _)
 
 Node* Function::Minus(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Minus(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Minus(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Minus(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Minus(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Minus(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Minus(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Times(Error* _)
@@ -1662,37 +1662,37 @@ Node* Boolean::Times(Error* _)
 
 Node* Boolean::Times(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Times(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Times(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Times(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Times(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Times(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Times(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Times(Error* _)
@@ -1702,7 +1702,7 @@ Node* Integer::Times(Error* _)
 
 Node* Integer::Times(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Times(Integer* _)
@@ -1712,27 +1712,27 @@ Node* Integer::Times(Integer* _)
 
 Node* Integer::Times(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Times(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Times(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Times(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Times(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Times(Error* _)
@@ -1742,37 +1742,37 @@ Node* Double::Times(Error* _)
 
 Node* Double::Times(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Times(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Times(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Times(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Times(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Times(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Times(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Times(Error* _)
@@ -1782,37 +1782,37 @@ Node* String::Times(Error* _)
 
 Node* String::Times(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Times(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Times(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Times(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Times(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Times(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Times(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Times(Error* _)
@@ -1822,37 +1822,37 @@ Node* Array::Times(Error* _)
 
 Node* Array::Times(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Times(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Times(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Times(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Times(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Times(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Times(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Times(Error* _)
@@ -1862,37 +1862,37 @@ Node* Object::Times(Error* _)
 
 Node* Object::Times(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Times(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Times(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Times(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Times(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Times(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Times(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Times(Error* _)
@@ -1902,37 +1902,37 @@ Node* Function::Times(Error* _)
 
 Node* Function::Times(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Times(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Times(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Times(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Times(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Times(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Times(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::DividedBy(Error* _)
@@ -1982,37 +1982,37 @@ Node* Boolean::DividedBy(Error* _)
 
 Node* Boolean::DividedBy(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::DividedBy(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::DividedBy(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::DividedBy(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::DividedBy(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::DividedBy(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::DividedBy(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::DividedBy(Error* _)
@@ -2022,7 +2022,7 @@ Node* Integer::DividedBy(Error* _)
 
 Node* Integer::DividedBy(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::DividedBy(Integer* _)
@@ -2032,27 +2032,27 @@ Node* Integer::DividedBy(Integer* _)
 
 Node* Integer::DividedBy(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::DividedBy(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::DividedBy(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::DividedBy(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::DividedBy(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::DividedBy(Error* _)
@@ -2062,37 +2062,37 @@ Node* Double::DividedBy(Error* _)
 
 Node* Double::DividedBy(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::DividedBy(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::DividedBy(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::DividedBy(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::DividedBy(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::DividedBy(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::DividedBy(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::DividedBy(Error* _)
@@ -2102,37 +2102,37 @@ Node* String::DividedBy(Error* _)
 
 Node* String::DividedBy(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::DividedBy(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::DividedBy(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::DividedBy(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::DividedBy(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::DividedBy(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::DividedBy(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::DividedBy(Error* _)
@@ -2142,37 +2142,37 @@ Node* Array::DividedBy(Error* _)
 
 Node* Array::DividedBy(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::DividedBy(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::DividedBy(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::DividedBy(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::DividedBy(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::DividedBy(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::DividedBy(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::DividedBy(Error* _)
@@ -2182,37 +2182,37 @@ Node* Object::DividedBy(Error* _)
 
 Node* Object::DividedBy(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::DividedBy(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::DividedBy(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::DividedBy(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::DividedBy(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::DividedBy(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::DividedBy(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::DividedBy(Error* _)
@@ -2222,37 +2222,37 @@ Node* Function::DividedBy(Error* _)
 
 Node* Function::DividedBy(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::DividedBy(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::DividedBy(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::DividedBy(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::DividedBy(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::DividedBy(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::DividedBy(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Mod(Error* _)
@@ -2262,37 +2262,37 @@ Node* Error::Mod(Error* _)
 
 Node* Error::Mod(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Mod(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Mod(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Mod(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Mod(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Mod(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Mod(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Mod(Error* _)
@@ -2302,37 +2302,37 @@ Node* Boolean::Mod(Error* _)
 
 Node* Boolean::Mod(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Mod(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Mod(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Mod(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Mod(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Mod(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Mod(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Mod(Error* _)
@@ -2342,7 +2342,7 @@ Node* Integer::Mod(Error* _)
 
 Node* Integer::Mod(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Mod(Integer* _)
@@ -2352,27 +2352,27 @@ Node* Integer::Mod(Integer* _)
 
 Node* Integer::Mod(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Mod(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Mod(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Mod(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Mod(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Mod(Error* _)
@@ -2382,37 +2382,37 @@ Node* Double::Mod(Error* _)
 
 Node* Double::Mod(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Mod(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Mod(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Mod(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Mod(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Mod(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Mod(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Mod(Error* _)
@@ -2422,37 +2422,37 @@ Node* String::Mod(Error* _)
 
 Node* String::Mod(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Mod(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Mod(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Mod(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Mod(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Mod(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Mod(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Mod(Error* _)
@@ -2462,37 +2462,37 @@ Node* Array::Mod(Error* _)
 
 Node* Array::Mod(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Mod(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Mod(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Mod(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Mod(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Mod(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Mod(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Mod(Error* _)
@@ -2502,37 +2502,37 @@ Node* Object::Mod(Error* _)
 
 Node* Object::Mod(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Mod(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Mod(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Mod(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Mod(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Mod(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Mod(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Mod(Error* _)
@@ -2542,37 +2542,37 @@ Node* Function::Mod(Error* _)
 
 Node* Function::Mod(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Mod(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Mod(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Mod(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Mod(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Mod(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Mod(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Call(Error* _)
@@ -2582,37 +2582,37 @@ Node* Error::Call(Error* _)
 
 Node* Error::Call(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Call(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Call(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Call(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Call(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Call(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Call(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Call(Error* _)
@@ -2622,37 +2622,37 @@ Node* Boolean::Call(Error* _)
 
 Node* Boolean::Call(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Call(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Call(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Call(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Call(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Call(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Call(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Call(Error* _)
@@ -2662,37 +2662,37 @@ Node* Integer::Call(Error* _)
 
 Node* Integer::Call(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Call(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Call(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Call(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Call(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Call(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Call(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Call(Error* _)
@@ -2702,37 +2702,37 @@ Node* Double::Call(Error* _)
 
 Node* Double::Call(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Call(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Call(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Call(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Call(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Call(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Call(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Call(Error* _)
@@ -2742,37 +2742,37 @@ Node* String::Call(Error* _)
 
 Node* String::Call(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Call(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Call(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Call(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Call(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Call(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Call(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Call(Error* _)
@@ -2782,37 +2782,37 @@ Node* Array::Call(Error* _)
 
 Node* Array::Call(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Call(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Call(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Call(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Call(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Call(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Call(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Call(Error* _)
@@ -2822,37 +2822,37 @@ Node* Object::Call(Error* _)
 
 Node* Object::Call(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Call(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Call(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Call(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Call(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Call(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Call(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Call(Error* _)
@@ -2862,82 +2862,82 @@ Node* Function::Call(Error* _)
 
 Node* Function::Call(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Call(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Call(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Call(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Call(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Call(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Call(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Equals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Equals(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Equals(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Equals(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Equals(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Equals(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Equals(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::Equals(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Equals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::Equals(Boolean* _)
@@ -2977,7 +2977,7 @@ Node* Boolean::Equals(Function* _)
 
 Node* Integer::Equals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::Equals(Boolean* _)
@@ -3017,7 +3017,7 @@ Node* Integer::Equals(Function* _)
 
 Node* Double::Equals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::Equals(Boolean* _)
@@ -3057,7 +3057,7 @@ Node* Double::Equals(Function* _)
 
 Node* String::Equals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::Equals(Boolean* _)
@@ -3097,7 +3097,7 @@ Node* String::Equals(Function* _)
 
 Node* Array::Equals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::Equals(Boolean* _)
@@ -3137,7 +3137,7 @@ Node* Array::Equals(Function* _)
 
 Node* Object::Equals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::Equals(Boolean* _)
@@ -3177,7 +3177,7 @@ Node* Object::Equals(Function* _)
 
 Node* Function::Equals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::Equals(Boolean* _)
@@ -3217,47 +3217,47 @@ Node* Function::Equals(Function* _)
 
 Node* Error::NotEquals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::NotEquals(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::NotEquals(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::NotEquals(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::NotEquals(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::NotEquals(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::NotEquals(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::NotEquals(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::NotEquals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::NotEquals(Boolean* _)
@@ -3297,7 +3297,7 @@ Node* Boolean::NotEquals(Function* _)
 
 Node* Integer::NotEquals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::NotEquals(Boolean* _)
@@ -3337,7 +3337,7 @@ Node* Integer::NotEquals(Function* _)
 
 Node* Double::NotEquals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::NotEquals(Boolean* _)
@@ -3377,7 +3377,7 @@ Node* Double::NotEquals(Function* _)
 
 Node* String::NotEquals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::NotEquals(Boolean* _)
@@ -3417,7 +3417,7 @@ Node* String::NotEquals(Function* _)
 
 Node* Array::NotEquals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::NotEquals(Boolean* _)
@@ -3457,7 +3457,7 @@ Node* Array::NotEquals(Function* _)
 
 Node* Object::NotEquals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::NotEquals(Boolean* _)
@@ -3497,7 +3497,7 @@ Node* Object::NotEquals(Function* _)
 
 Node* Function::NotEquals(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::NotEquals(Boolean* _)
@@ -3537,47 +3537,47 @@ Node* Function::NotEquals(Function* _)
 
 Node* Error::LessThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThan(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThan(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThan(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThan(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThan(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThan(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThan(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::LessThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::LessThan(Boolean* _)
@@ -3617,7 +3617,7 @@ Node* Boolean::LessThan(Function* _)
 
 Node* Integer::LessThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::LessThan(Boolean* _)
@@ -3657,7 +3657,7 @@ Node* Integer::LessThan(Function* _)
 
 Node* Double::LessThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::LessThan(Boolean* _)
@@ -3672,7 +3672,7 @@ Node* Double::LessThan(Integer* _)
 
 Node* Double::LessThan(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::LessThan(String* _)
@@ -3697,7 +3697,7 @@ Node* Double::LessThan(Function* _)
 
 Node* String::LessThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::LessThan(Boolean* _)
@@ -3737,7 +3737,7 @@ Node* String::LessThan(Function* _)
 
 Node* Array::LessThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::LessThan(Boolean* _)
@@ -3777,7 +3777,7 @@ Node* Array::LessThan(Function* _)
 
 Node* Object::LessThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::LessThan(Boolean* _)
@@ -3817,7 +3817,7 @@ Node* Object::LessThan(Function* _)
 
 Node* Function::LessThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::LessThan(Boolean* _)
@@ -3857,47 +3857,47 @@ Node* Function::LessThan(Function* _)
 
 Node* Error::GreaterThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThan(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThan(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThan(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThan(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThan(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThan(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThan(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::GreaterThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::GreaterThan(Boolean* _)
@@ -3937,7 +3937,7 @@ Node* Boolean::GreaterThan(Function* _)
 
 Node* Integer::GreaterThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::GreaterThan(Boolean* _)
@@ -3977,7 +3977,7 @@ Node* Integer::GreaterThan(Function* _)
 
 Node* Double::GreaterThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::GreaterThan(Boolean* _)
@@ -3992,7 +3992,7 @@ Node* Double::GreaterThan(Integer* _)
 
 Node* Double::GreaterThan(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::GreaterThan(String* _)
@@ -4017,7 +4017,7 @@ Node* Double::GreaterThan(Function* _)
 
 Node* String::GreaterThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::GreaterThan(Boolean* _)
@@ -4057,7 +4057,7 @@ Node* String::GreaterThan(Function* _)
 
 Node* Array::GreaterThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::GreaterThan(Boolean* _)
@@ -4097,7 +4097,7 @@ Node* Array::GreaterThan(Function* _)
 
 Node* Object::GreaterThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::GreaterThan(Boolean* _)
@@ -4137,7 +4137,7 @@ Node* Object::GreaterThan(Function* _)
 
 Node* Function::GreaterThan(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::GreaterThan(Boolean* _)
@@ -4177,47 +4177,47 @@ Node* Function::GreaterThan(Function* _)
 
 Node* Error::LessThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThanOrEqualTo(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThanOrEqualTo(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThanOrEqualTo(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThanOrEqualTo(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThanOrEqualTo(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThanOrEqualTo(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::LessThanOrEqualTo(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::LessThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::LessThanOrEqualTo(Boolean* _)
@@ -4257,7 +4257,7 @@ Node* Boolean::LessThanOrEqualTo(Function* _)
 
 Node* Integer::LessThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::LessThanOrEqualTo(Boolean* _)
@@ -4297,7 +4297,7 @@ Node* Integer::LessThanOrEqualTo(Function* _)
 
 Node* Double::LessThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::LessThanOrEqualTo(Boolean* _)
@@ -4337,7 +4337,7 @@ Node* Double::LessThanOrEqualTo(Function* _)
 
 Node* String::LessThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::LessThanOrEqualTo(Boolean* _)
@@ -4377,7 +4377,7 @@ Node* String::LessThanOrEqualTo(Function* _)
 
 Node* Array::LessThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::LessThanOrEqualTo(Boolean* _)
@@ -4417,7 +4417,7 @@ Node* Array::LessThanOrEqualTo(Function* _)
 
 Node* Object::LessThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::LessThanOrEqualTo(Boolean* _)
@@ -4457,7 +4457,7 @@ Node* Object::LessThanOrEqualTo(Function* _)
 
 Node* Function::LessThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::LessThanOrEqualTo(Boolean* _)
@@ -4497,47 +4497,47 @@ Node* Function::LessThanOrEqualTo(Function* _)
 
 Node* Error::GreaterThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThanOrEqualTo(Boolean* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThanOrEqualTo(Integer* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThanOrEqualTo(Double* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThanOrEqualTo(String* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThanOrEqualTo(Array* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThanOrEqualTo(Object* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Error::GreaterThanOrEqualTo(Function* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::GreaterThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Boolean::GreaterThanOrEqualTo(Boolean* _)
@@ -4577,7 +4577,7 @@ Node* Boolean::GreaterThanOrEqualTo(Function* _)
 
 Node* Integer::GreaterThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Integer::GreaterThanOrEqualTo(Boolean* _)
@@ -4617,7 +4617,7 @@ Node* Integer::GreaterThanOrEqualTo(Function* _)
 
 Node* Double::GreaterThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Double::GreaterThanOrEqualTo(Boolean* _)
@@ -4657,7 +4657,7 @@ Node* Double::GreaterThanOrEqualTo(Function* _)
 
 Node* String::GreaterThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* String::GreaterThanOrEqualTo(Boolean* _)
@@ -4697,7 +4697,7 @@ Node* String::GreaterThanOrEqualTo(Function* _)
 
 Node* Array::GreaterThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Array::GreaterThanOrEqualTo(Boolean* _)
@@ -4737,7 +4737,7 @@ Node* Array::GreaterThanOrEqualTo(Function* _)
 
 Node* Object::GreaterThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Object::GreaterThanOrEqualTo(Boolean* _)
@@ -4777,7 +4777,7 @@ Node* Object::GreaterThanOrEqualTo(Function* _)
 
 Node* Function::GreaterThanOrEqualTo(Error* _)
 {
-    return new Error;
+    PLACEHOLDER
 }
 
 Node* Function::GreaterThanOrEqualTo(Boolean* _)
