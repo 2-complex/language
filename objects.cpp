@@ -99,6 +99,106 @@ Node* Error::And(Function* _)
     return this;
 }
 
+Node* Nothing::And(Error* _)
+{
+    return new Error;
+}
+
+Node* Nothing::And(Nothing* _)
+{
+    return new Error;
+}
+
+Node* Nothing::And(Member* _)
+{
+    return new Error;
+}
+
+Node* Nothing::And(Boolean* _)
+{
+    return new Error;
+}
+
+Node* Nothing::And(Integer* _)
+{
+    return new Error;
+}
+
+Node* Nothing::And(Double* _)
+{
+    return new Error;
+}
+
+Node* Nothing::And(String* _)
+{
+    return new Error;
+}
+
+Node* Nothing::And(Array* _)
+{
+    return new Error;
+}
+
+Node* Nothing::And(Object* _)
+{
+    return new Error;
+}
+
+Node* Nothing::And(Function* _)
+{
+    return new Error;
+}
+
+Node* Member::And(Error* _)
+{
+    return new Error;
+}
+
+Node* Member::And(Nothing* _)
+{
+    return new Error;
+}
+
+Node* Member::And(Member* _)
+{
+    return new Error;
+}
+
+Node* Member::And(Boolean* _)
+{
+    return new Error;
+}
+
+Node* Member::And(Integer* _)
+{
+    return new Error;
+}
+
+Node* Member::And(Double* _)
+{
+    return new Error;
+}
+
+Node* Member::And(String* _)
+{
+    return new Error;
+}
+
+Node* Member::And(Array* _)
+{
+    return new Error;
+}
+
+Node* Member::And(Object* _)
+{
+    return new Error;
+}
+
+Node* Member::And(Function* _)
+{
+    return new Error;
+}
+
 bool Boolean::getValue()
 {
     return value;
@@ -4777,6 +4877,8 @@ Node* Function::GreaterThanOrEqualTo(Function* _)
 
 Node* Error::And(Node* _) { return _->back_And(this); }
 Node* Error::back_And(Error* _) { return _->And(this); }
+Node* Error::back_And(Nothing* _) { return _->And(this); }
+Node* Error::back_And(Member* _) { return _->And(this); }
 Node* Error::back_And(Boolean* _) { return _->And(this); }
 Node* Error::back_And(Integer* _) { return _->And(this); }
 Node* Error::back_And(Double* _) { return _->And(this); }
@@ -4784,8 +4886,32 @@ Node* Error::back_And(String* _) { return _->And(this); }
 Node* Error::back_And(Array* _) { return _->And(this); }
 Node* Error::back_And(Object* _) { return _->And(this); }
 Node* Error::back_And(Function* _) { return _->And(this); }
+Node* Nothing::And(Node* _) { return _->back_And(this); }
+Node* Nothing::back_And(Error* _) { return _->And(this); }
+Node* Nothing::back_And(Nothing* _) { return _->And(this); }
+Node* Nothing::back_And(Member* _) { return _->And(this); }
+Node* Nothing::back_And(Boolean* _) { return _->And(this); }
+Node* Nothing::back_And(Integer* _) { return _->And(this); }
+Node* Nothing::back_And(Double* _) { return _->And(this); }
+Node* Nothing::back_And(String* _) { return _->And(this); }
+Node* Nothing::back_And(Array* _) { return _->And(this); }
+Node* Nothing::back_And(Object* _) { return _->And(this); }
+Node* Nothing::back_And(Function* _) { return _->And(this); }
+Node* Member::And(Node* _) { return _->back_And(this); }
+Node* Member::back_And(Error* _) { return _->And(this); }
+Node* Member::back_And(Nothing* _) { return _->And(this); }
+Node* Member::back_And(Member* _) { return _->And(this); }
+Node* Member::back_And(Boolean* _) { return _->And(this); }
+Node* Member::back_And(Integer* _) { return _->And(this); }
+Node* Member::back_And(Double* _) { return _->And(this); }
+Node* Member::back_And(String* _) { return _->And(this); }
+Node* Member::back_And(Array* _) { return _->And(this); }
+Node* Member::back_And(Object* _) { return _->And(this); }
+Node* Member::back_And(Function* _) { return _->And(this); }
 Node* Boolean::And(Node* _) { return _->back_And(this); }
 Node* Boolean::back_And(Error* _) { return _->And(this); }
+Node* Boolean::back_And(Nothing* _) { return _->And(this); }
+Node* Boolean::back_And(Member* _) { return _->And(this); }
 Node* Boolean::back_And(Boolean* _) { return _->And(this); }
 Node* Boolean::back_And(Integer* _) { return _->And(this); }
 Node* Boolean::back_And(Double* _) { return _->And(this); }
@@ -4795,6 +4921,8 @@ Node* Boolean::back_And(Object* _) { return _->And(this); }
 Node* Boolean::back_And(Function* _) { return _->And(this); }
 Node* Integer::And(Node* _) { return _->back_And(this); }
 Node* Integer::back_And(Error* _) { return _->And(this); }
+Node* Integer::back_And(Nothing* _) { return _->And(this); }
+Node* Integer::back_And(Member* _) { return _->And(this); }
 Node* Integer::back_And(Boolean* _) { return _->And(this); }
 Node* Integer::back_And(Integer* _) { return _->And(this); }
 Node* Integer::back_And(Double* _) { return _->And(this); }
@@ -4804,6 +4932,8 @@ Node* Integer::back_And(Object* _) { return _->And(this); }
 Node* Integer::back_And(Function* _) { return _->And(this); }
 Node* Double::And(Node* _) { return _->back_And(this); }
 Node* Double::back_And(Error* _) { return _->And(this); }
+Node* Double::back_And(Nothing* _) { return _->And(this); }
+Node* Double::back_And(Member* _) { return _->And(this); }
 Node* Double::back_And(Boolean* _) { return _->And(this); }
 Node* Double::back_And(Integer* _) { return _->And(this); }
 Node* Double::back_And(Double* _) { return _->And(this); }
@@ -4813,6 +4943,8 @@ Node* Double::back_And(Object* _) { return _->And(this); }
 Node* Double::back_And(Function* _) { return _->And(this); }
 Node* String::And(Node* _) { return _->back_And(this); }
 Node* String::back_And(Error* _) { return _->And(this); }
+Node* String::back_And(Nothing* _) { return _->And(this); }
+Node* String::back_And(Member* _) { return _->And(this); }
 Node* String::back_And(Boolean* _) { return _->And(this); }
 Node* String::back_And(Integer* _) { return _->And(this); }
 Node* String::back_And(Double* _) { return _->And(this); }
@@ -4822,6 +4954,8 @@ Node* String::back_And(Object* _) { return _->And(this); }
 Node* String::back_And(Function* _) { return _->And(this); }
 Node* Array::And(Node* _) { return _->back_And(this); }
 Node* Array::back_And(Error* _) { return _->And(this); }
+Node* Array::back_And(Nothing* _) { return _->And(this); }
+Node* Array::back_And(Member* _) { return _->And(this); }
 Node* Array::back_And(Boolean* _) { return _->And(this); }
 Node* Array::back_And(Integer* _) { return _->And(this); }
 Node* Array::back_And(Double* _) { return _->And(this); }
@@ -4831,6 +4965,8 @@ Node* Array::back_And(Object* _) { return _->And(this); }
 Node* Array::back_And(Function* _) { return _->And(this); }
 Node* Object::And(Node* _) { return _->back_And(this); }
 Node* Object::back_And(Error* _) { return _->And(this); }
+Node* Object::back_And(Nothing* _) { return _->And(this); }
+Node* Object::back_And(Member* _) { return _->And(this); }
 Node* Object::back_And(Boolean* _) { return _->And(this); }
 Node* Object::back_And(Integer* _) { return _->And(this); }
 Node* Object::back_And(Double* _) { return _->And(this); }
@@ -4840,6 +4976,8 @@ Node* Object::back_And(Object* _) { return _->And(this); }
 Node* Object::back_And(Function* _) { return _->And(this); }
 Node* Function::And(Node* _) { return _->back_And(this); }
 Node* Function::back_And(Error* _) { return _->And(this); }
+Node* Function::back_And(Nothing* _) { return _->And(this); }
+Node* Function::back_And(Member* _) { return _->And(this); }
 Node* Function::back_And(Boolean* _) { return _->And(this); }
 Node* Function::back_And(Integer* _) { return _->And(this); }
 Node* Function::back_And(Double* _) { return _->And(this); }
@@ -4849,6 +4987,8 @@ Node* Function::back_And(Object* _) { return _->And(this); }
 Node* Function::back_And(Function* _) { return _->And(this); }
 Node* Error::Or(Node* _) { return _->back_Or(this); }
 Node* Error::back_Or(Error* _) { return _->Or(this); }
+Node* Error::back_Or(Nothing* _) { return _->Or(this); }
+Node* Error::back_Or(Member* _) { return _->Or(this); }
 Node* Error::back_Or(Boolean* _) { return _->Or(this); }
 Node* Error::back_Or(Integer* _) { return _->Or(this); }
 Node* Error::back_Or(Double* _) { return _->Or(this); }
@@ -4856,8 +4996,32 @@ Node* Error::back_Or(String* _) { return _->Or(this); }
 Node* Error::back_Or(Array* _) { return _->Or(this); }
 Node* Error::back_Or(Object* _) { return _->Or(this); }
 Node* Error::back_Or(Function* _) { return _->Or(this); }
+Node* Nothing::Or(Node* _) { return _->back_Or(this); }
+Node* Nothing::back_Or(Error* _) { return _->Or(this); }
+Node* Nothing::back_Or(Nothing* _) { return _->Or(this); }
+Node* Nothing::back_Or(Member* _) { return _->Or(this); }
+Node* Nothing::back_Or(Boolean* _) { return _->Or(this); }
+Node* Nothing::back_Or(Integer* _) { return _->Or(this); }
+Node* Nothing::back_Or(Double* _) { return _->Or(this); }
+Node* Nothing::back_Or(String* _) { return _->Or(this); }
+Node* Nothing::back_Or(Array* _) { return _->Or(this); }
+Node* Nothing::back_Or(Object* _) { return _->Or(this); }
+Node* Nothing::back_Or(Function* _) { return _->Or(this); }
+Node* Member::Or(Node* _) { return _->back_Or(this); }
+Node* Member::back_Or(Error* _) { return _->Or(this); }
+Node* Member::back_Or(Nothing* _) { return _->Or(this); }
+Node* Member::back_Or(Member* _) { return _->Or(this); }
+Node* Member::back_Or(Boolean* _) { return _->Or(this); }
+Node* Member::back_Or(Integer* _) { return _->Or(this); }
+Node* Member::back_Or(Double* _) { return _->Or(this); }
+Node* Member::back_Or(String* _) { return _->Or(this); }
+Node* Member::back_Or(Array* _) { return _->Or(this); }
+Node* Member::back_Or(Object* _) { return _->Or(this); }
+Node* Member::back_Or(Function* _) { return _->Or(this); }
 Node* Boolean::Or(Node* _) { return _->back_Or(this); }
 Node* Boolean::back_Or(Error* _) { return _->Or(this); }
+Node* Boolean::back_Or(Nothing* _) { return _->Or(this); }
+Node* Boolean::back_Or(Member* _) { return _->Or(this); }
 Node* Boolean::back_Or(Boolean* _) { return _->Or(this); }
 Node* Boolean::back_Or(Integer* _) { return _->Or(this); }
 Node* Boolean::back_Or(Double* _) { return _->Or(this); }
@@ -4867,6 +5031,8 @@ Node* Boolean::back_Or(Object* _) { return _->Or(this); }
 Node* Boolean::back_Or(Function* _) { return _->Or(this); }
 Node* Integer::Or(Node* _) { return _->back_Or(this); }
 Node* Integer::back_Or(Error* _) { return _->Or(this); }
+Node* Integer::back_Or(Nothing* _) { return _->Or(this); }
+Node* Integer::back_Or(Member* _) { return _->Or(this); }
 Node* Integer::back_Or(Boolean* _) { return _->Or(this); }
 Node* Integer::back_Or(Integer* _) { return _->Or(this); }
 Node* Integer::back_Or(Double* _) { return _->Or(this); }
@@ -4876,6 +5042,8 @@ Node* Integer::back_Or(Object* _) { return _->Or(this); }
 Node* Integer::back_Or(Function* _) { return _->Or(this); }
 Node* Double::Or(Node* _) { return _->back_Or(this); }
 Node* Double::back_Or(Error* _) { return _->Or(this); }
+Node* Double::back_Or(Nothing* _) { return _->Or(this); }
+Node* Double::back_Or(Member* _) { return _->Or(this); }
 Node* Double::back_Or(Boolean* _) { return _->Or(this); }
 Node* Double::back_Or(Integer* _) { return _->Or(this); }
 Node* Double::back_Or(Double* _) { return _->Or(this); }
@@ -4885,6 +5053,8 @@ Node* Double::back_Or(Object* _) { return _->Or(this); }
 Node* Double::back_Or(Function* _) { return _->Or(this); }
 Node* String::Or(Node* _) { return _->back_Or(this); }
 Node* String::back_Or(Error* _) { return _->Or(this); }
+Node* String::back_Or(Nothing* _) { return _->Or(this); }
+Node* String::back_Or(Member* _) { return _->Or(this); }
 Node* String::back_Or(Boolean* _) { return _->Or(this); }
 Node* String::back_Or(Integer* _) { return _->Or(this); }
 Node* String::back_Or(Double* _) { return _->Or(this); }
@@ -4894,6 +5064,8 @@ Node* String::back_Or(Object* _) { return _->Or(this); }
 Node* String::back_Or(Function* _) { return _->Or(this); }
 Node* Array::Or(Node* _) { return _->back_Or(this); }
 Node* Array::back_Or(Error* _) { return _->Or(this); }
+Node* Array::back_Or(Nothing* _) { return _->Or(this); }
+Node* Array::back_Or(Member* _) { return _->Or(this); }
 Node* Array::back_Or(Boolean* _) { return _->Or(this); }
 Node* Array::back_Or(Integer* _) { return _->Or(this); }
 Node* Array::back_Or(Double* _) { return _->Or(this); }
@@ -4903,6 +5075,8 @@ Node* Array::back_Or(Object* _) { return _->Or(this); }
 Node* Array::back_Or(Function* _) { return _->Or(this); }
 Node* Object::Or(Node* _) { return _->back_Or(this); }
 Node* Object::back_Or(Error* _) { return _->Or(this); }
+Node* Object::back_Or(Nothing* _) { return _->Or(this); }
+Node* Object::back_Or(Member* _) { return _->Or(this); }
 Node* Object::back_Or(Boolean* _) { return _->Or(this); }
 Node* Object::back_Or(Integer* _) { return _->Or(this); }
 Node* Object::back_Or(Double* _) { return _->Or(this); }
@@ -4912,6 +5086,8 @@ Node* Object::back_Or(Object* _) { return _->Or(this); }
 Node* Object::back_Or(Function* _) { return _->Or(this); }
 Node* Function::Or(Node* _) { return _->back_Or(this); }
 Node* Function::back_Or(Error* _) { return _->Or(this); }
+Node* Function::back_Or(Nothing* _) { return _->Or(this); }
+Node* Function::back_Or(Member* _) { return _->Or(this); }
 Node* Function::back_Or(Boolean* _) { return _->Or(this); }
 Node* Function::back_Or(Integer* _) { return _->Or(this); }
 Node* Function::back_Or(Double* _) { return _->Or(this); }
@@ -4921,6 +5097,8 @@ Node* Function::back_Or(Object* _) { return _->Or(this); }
 Node* Function::back_Or(Function* _) { return _->Or(this); }
 Node* Error::Plus(Node* _) { return _->back_Plus(this); }
 Node* Error::back_Plus(Error* _) { return _->Plus(this); }
+Node* Error::back_Plus(Nothing* _) { return _->Plus(this); }
+Node* Error::back_Plus(Member* _) { return _->Plus(this); }
 Node* Error::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Error::back_Plus(Integer* _) { return _->Plus(this); }
 Node* Error::back_Plus(Double* _) { return _->Plus(this); }
@@ -4928,8 +5106,32 @@ Node* Error::back_Plus(String* _) { return _->Plus(this); }
 Node* Error::back_Plus(Array* _) { return _->Plus(this); }
 Node* Error::back_Plus(Object* _) { return _->Plus(this); }
 Node* Error::back_Plus(Function* _) { return _->Plus(this); }
+Node* Nothing::Plus(Node* _) { return _->back_Plus(this); }
+Node* Nothing::back_Plus(Error* _) { return _->Plus(this); }
+Node* Nothing::back_Plus(Nothing* _) { return _->Plus(this); }
+Node* Nothing::back_Plus(Member* _) { return _->Plus(this); }
+Node* Nothing::back_Plus(Boolean* _) { return _->Plus(this); }
+Node* Nothing::back_Plus(Integer* _) { return _->Plus(this); }
+Node* Nothing::back_Plus(Double* _) { return _->Plus(this); }
+Node* Nothing::back_Plus(String* _) { return _->Plus(this); }
+Node* Nothing::back_Plus(Array* _) { return _->Plus(this); }
+Node* Nothing::back_Plus(Object* _) { return _->Plus(this); }
+Node* Nothing::back_Plus(Function* _) { return _->Plus(this); }
+Node* Member::Plus(Node* _) { return _->back_Plus(this); }
+Node* Member::back_Plus(Error* _) { return _->Plus(this); }
+Node* Member::back_Plus(Nothing* _) { return _->Plus(this); }
+Node* Member::back_Plus(Member* _) { return _->Plus(this); }
+Node* Member::back_Plus(Boolean* _) { return _->Plus(this); }
+Node* Member::back_Plus(Integer* _) { return _->Plus(this); }
+Node* Member::back_Plus(Double* _) { return _->Plus(this); }
+Node* Member::back_Plus(String* _) { return _->Plus(this); }
+Node* Member::back_Plus(Array* _) { return _->Plus(this); }
+Node* Member::back_Plus(Object* _) { return _->Plus(this); }
+Node* Member::back_Plus(Function* _) { return _->Plus(this); }
 Node* Boolean::Plus(Node* _) { return _->back_Plus(this); }
 Node* Boolean::back_Plus(Error* _) { return _->Plus(this); }
+Node* Boolean::back_Plus(Nothing* _) { return _->Plus(this); }
+Node* Boolean::back_Plus(Member* _) { return _->Plus(this); }
 Node* Boolean::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Boolean::back_Plus(Integer* _) { return _->Plus(this); }
 Node* Boolean::back_Plus(Double* _) { return _->Plus(this); }
@@ -4939,6 +5141,8 @@ Node* Boolean::back_Plus(Object* _) { return _->Plus(this); }
 Node* Boolean::back_Plus(Function* _) { return _->Plus(this); }
 Node* Integer::Plus(Node* _) { return _->back_Plus(this); }
 Node* Integer::back_Plus(Error* _) { return _->Plus(this); }
+Node* Integer::back_Plus(Nothing* _) { return _->Plus(this); }
+Node* Integer::back_Plus(Member* _) { return _->Plus(this); }
 Node* Integer::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Integer::back_Plus(Integer* _) { return _->Plus(this); }
 Node* Integer::back_Plus(Double* _) { return _->Plus(this); }
@@ -4948,6 +5152,8 @@ Node* Integer::back_Plus(Object* _) { return _->Plus(this); }
 Node* Integer::back_Plus(Function* _) { return _->Plus(this); }
 Node* Double::Plus(Node* _) { return _->back_Plus(this); }
 Node* Double::back_Plus(Error* _) { return _->Plus(this); }
+Node* Double::back_Plus(Nothing* _) { return _->Plus(this); }
+Node* Double::back_Plus(Member* _) { return _->Plus(this); }
 Node* Double::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Double::back_Plus(Integer* _) { return _->Plus(this); }
 Node* Double::back_Plus(Double* _) { return _->Plus(this); }
@@ -4957,6 +5163,8 @@ Node* Double::back_Plus(Object* _) { return _->Plus(this); }
 Node* Double::back_Plus(Function* _) { return _->Plus(this); }
 Node* String::Plus(Node* _) { return _->back_Plus(this); }
 Node* String::back_Plus(Error* _) { return _->Plus(this); }
+Node* String::back_Plus(Nothing* _) { return _->Plus(this); }
+Node* String::back_Plus(Member* _) { return _->Plus(this); }
 Node* String::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* String::back_Plus(Integer* _) { return _->Plus(this); }
 Node* String::back_Plus(Double* _) { return _->Plus(this); }
@@ -4966,6 +5174,8 @@ Node* String::back_Plus(Object* _) { return _->Plus(this); }
 Node* String::back_Plus(Function* _) { return _->Plus(this); }
 Node* Array::Plus(Node* _) { return _->back_Plus(this); }
 Node* Array::back_Plus(Error* _) { return _->Plus(this); }
+Node* Array::back_Plus(Nothing* _) { return _->Plus(this); }
+Node* Array::back_Plus(Member* _) { return _->Plus(this); }
 Node* Array::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Array::back_Plus(Integer* _) { return _->Plus(this); }
 Node* Array::back_Plus(Double* _) { return _->Plus(this); }
@@ -4975,6 +5185,8 @@ Node* Array::back_Plus(Object* _) { return _->Plus(this); }
 Node* Array::back_Plus(Function* _) { return _->Plus(this); }
 Node* Object::Plus(Node* _) { return _->back_Plus(this); }
 Node* Object::back_Plus(Error* _) { return _->Plus(this); }
+Node* Object::back_Plus(Nothing* _) { return _->Plus(this); }
+Node* Object::back_Plus(Member* _) { return _->Plus(this); }
 Node* Object::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Object::back_Plus(Integer* _) { return _->Plus(this); }
 Node* Object::back_Plus(Double* _) { return _->Plus(this); }
@@ -4984,6 +5196,8 @@ Node* Object::back_Plus(Object* _) { return _->Plus(this); }
 Node* Object::back_Plus(Function* _) { return _->Plus(this); }
 Node* Function::Plus(Node* _) { return _->back_Plus(this); }
 Node* Function::back_Plus(Error* _) { return _->Plus(this); }
+Node* Function::back_Plus(Nothing* _) { return _->Plus(this); }
+Node* Function::back_Plus(Member* _) { return _->Plus(this); }
 Node* Function::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Function::back_Plus(Integer* _) { return _->Plus(this); }
 Node* Function::back_Plus(Double* _) { return _->Plus(this); }
@@ -4993,6 +5207,8 @@ Node* Function::back_Plus(Object* _) { return _->Plus(this); }
 Node* Function::back_Plus(Function* _) { return _->Plus(this); }
 Node* Error::Minus(Node* _) { return _->back_Minus(this); }
 Node* Error::back_Minus(Error* _) { return _->Minus(this); }
+Node* Error::back_Minus(Nothing* _) { return _->Minus(this); }
+Node* Error::back_Minus(Member* _) { return _->Minus(this); }
 Node* Error::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Error::back_Minus(Integer* _) { return _->Minus(this); }
 Node* Error::back_Minus(Double* _) { return _->Minus(this); }
@@ -5000,8 +5216,32 @@ Node* Error::back_Minus(String* _) { return _->Minus(this); }
 Node* Error::back_Minus(Array* _) { return _->Minus(this); }
 Node* Error::back_Minus(Object* _) { return _->Minus(this); }
 Node* Error::back_Minus(Function* _) { return _->Minus(this); }
+Node* Nothing::Minus(Node* _) { return _->back_Minus(this); }
+Node* Nothing::back_Minus(Error* _) { return _->Minus(this); }
+Node* Nothing::back_Minus(Nothing* _) { return _->Minus(this); }
+Node* Nothing::back_Minus(Member* _) { return _->Minus(this); }
+Node* Nothing::back_Minus(Boolean* _) { return _->Minus(this); }
+Node* Nothing::back_Minus(Integer* _) { return _->Minus(this); }
+Node* Nothing::back_Minus(Double* _) { return _->Minus(this); }
+Node* Nothing::back_Minus(String* _) { return _->Minus(this); }
+Node* Nothing::back_Minus(Array* _) { return _->Minus(this); }
+Node* Nothing::back_Minus(Object* _) { return _->Minus(this); }
+Node* Nothing::back_Minus(Function* _) { return _->Minus(this); }
+Node* Member::Minus(Node* _) { return _->back_Minus(this); }
+Node* Member::back_Minus(Error* _) { return _->Minus(this); }
+Node* Member::back_Minus(Nothing* _) { return _->Minus(this); }
+Node* Member::back_Minus(Member* _) { return _->Minus(this); }
+Node* Member::back_Minus(Boolean* _) { return _->Minus(this); }
+Node* Member::back_Minus(Integer* _) { return _->Minus(this); }
+Node* Member::back_Minus(Double* _) { return _->Minus(this); }
+Node* Member::back_Minus(String* _) { return _->Minus(this); }
+Node* Member::back_Minus(Array* _) { return _->Minus(this); }
+Node* Member::back_Minus(Object* _) { return _->Minus(this); }
+Node* Member::back_Minus(Function* _) { return _->Minus(this); }
 Node* Boolean::Minus(Node* _) { return _->back_Minus(this); }
 Node* Boolean::back_Minus(Error* _) { return _->Minus(this); }
+Node* Boolean::back_Minus(Nothing* _) { return _->Minus(this); }
+Node* Boolean::back_Minus(Member* _) { return _->Minus(this); }
 Node* Boolean::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Boolean::back_Minus(Integer* _) { return _->Minus(this); }
 Node* Boolean::back_Minus(Double* _) { return _->Minus(this); }
@@ -5011,6 +5251,8 @@ Node* Boolean::back_Minus(Object* _) { return _->Minus(this); }
 Node* Boolean::back_Minus(Function* _) { return _->Minus(this); }
 Node* Integer::Minus(Node* _) { return _->back_Minus(this); }
 Node* Integer::back_Minus(Error* _) { return _->Minus(this); }
+Node* Integer::back_Minus(Nothing* _) { return _->Minus(this); }
+Node* Integer::back_Minus(Member* _) { return _->Minus(this); }
 Node* Integer::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Integer::back_Minus(Integer* _) { return _->Minus(this); }
 Node* Integer::back_Minus(Double* _) { return _->Minus(this); }
@@ -5020,6 +5262,8 @@ Node* Integer::back_Minus(Object* _) { return _->Minus(this); }
 Node* Integer::back_Minus(Function* _) { return _->Minus(this); }
 Node* Double::Minus(Node* _) { return _->back_Minus(this); }
 Node* Double::back_Minus(Error* _) { return _->Minus(this); }
+Node* Double::back_Minus(Nothing* _) { return _->Minus(this); }
+Node* Double::back_Minus(Member* _) { return _->Minus(this); }
 Node* Double::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Double::back_Minus(Integer* _) { return _->Minus(this); }
 Node* Double::back_Minus(Double* _) { return _->Minus(this); }
@@ -5029,6 +5273,8 @@ Node* Double::back_Minus(Object* _) { return _->Minus(this); }
 Node* Double::back_Minus(Function* _) { return _->Minus(this); }
 Node* String::Minus(Node* _) { return _->back_Minus(this); }
 Node* String::back_Minus(Error* _) { return _->Minus(this); }
+Node* String::back_Minus(Nothing* _) { return _->Minus(this); }
+Node* String::back_Minus(Member* _) { return _->Minus(this); }
 Node* String::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* String::back_Minus(Integer* _) { return _->Minus(this); }
 Node* String::back_Minus(Double* _) { return _->Minus(this); }
@@ -5038,6 +5284,8 @@ Node* String::back_Minus(Object* _) { return _->Minus(this); }
 Node* String::back_Minus(Function* _) { return _->Minus(this); }
 Node* Array::Minus(Node* _) { return _->back_Minus(this); }
 Node* Array::back_Minus(Error* _) { return _->Minus(this); }
+Node* Array::back_Minus(Nothing* _) { return _->Minus(this); }
+Node* Array::back_Minus(Member* _) { return _->Minus(this); }
 Node* Array::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Array::back_Minus(Integer* _) { return _->Minus(this); }
 Node* Array::back_Minus(Double* _) { return _->Minus(this); }
@@ -5047,6 +5295,8 @@ Node* Array::back_Minus(Object* _) { return _->Minus(this); }
 Node* Array::back_Minus(Function* _) { return _->Minus(this); }
 Node* Object::Minus(Node* _) { return _->back_Minus(this); }
 Node* Object::back_Minus(Error* _) { return _->Minus(this); }
+Node* Object::back_Minus(Nothing* _) { return _->Minus(this); }
+Node* Object::back_Minus(Member* _) { return _->Minus(this); }
 Node* Object::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Object::back_Minus(Integer* _) { return _->Minus(this); }
 Node* Object::back_Minus(Double* _) { return _->Minus(this); }
@@ -5056,6 +5306,8 @@ Node* Object::back_Minus(Object* _) { return _->Minus(this); }
 Node* Object::back_Minus(Function* _) { return _->Minus(this); }
 Node* Function::Minus(Node* _) { return _->back_Minus(this); }
 Node* Function::back_Minus(Error* _) { return _->Minus(this); }
+Node* Function::back_Minus(Nothing* _) { return _->Minus(this); }
+Node* Function::back_Minus(Member* _) { return _->Minus(this); }
 Node* Function::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Function::back_Minus(Integer* _) { return _->Minus(this); }
 Node* Function::back_Minus(Double* _) { return _->Minus(this); }
@@ -5065,6 +5317,8 @@ Node* Function::back_Minus(Object* _) { return _->Minus(this); }
 Node* Function::back_Minus(Function* _) { return _->Minus(this); }
 Node* Error::Times(Node* _) { return _->back_Times(this); }
 Node* Error::back_Times(Error* _) { return _->Times(this); }
+Node* Error::back_Times(Nothing* _) { return _->Times(this); }
+Node* Error::back_Times(Member* _) { return _->Times(this); }
 Node* Error::back_Times(Boolean* _) { return _->Times(this); }
 Node* Error::back_Times(Integer* _) { return _->Times(this); }
 Node* Error::back_Times(Double* _) { return _->Times(this); }
@@ -5072,8 +5326,32 @@ Node* Error::back_Times(String* _) { return _->Times(this); }
 Node* Error::back_Times(Array* _) { return _->Times(this); }
 Node* Error::back_Times(Object* _) { return _->Times(this); }
 Node* Error::back_Times(Function* _) { return _->Times(this); }
+Node* Nothing::Times(Node* _) { return _->back_Times(this); }
+Node* Nothing::back_Times(Error* _) { return _->Times(this); }
+Node* Nothing::back_Times(Nothing* _) { return _->Times(this); }
+Node* Nothing::back_Times(Member* _) { return _->Times(this); }
+Node* Nothing::back_Times(Boolean* _) { return _->Times(this); }
+Node* Nothing::back_Times(Integer* _) { return _->Times(this); }
+Node* Nothing::back_Times(Double* _) { return _->Times(this); }
+Node* Nothing::back_Times(String* _) { return _->Times(this); }
+Node* Nothing::back_Times(Array* _) { return _->Times(this); }
+Node* Nothing::back_Times(Object* _) { return _->Times(this); }
+Node* Nothing::back_Times(Function* _) { return _->Times(this); }
+Node* Member::Times(Node* _) { return _->back_Times(this); }
+Node* Member::back_Times(Error* _) { return _->Times(this); }
+Node* Member::back_Times(Nothing* _) { return _->Times(this); }
+Node* Member::back_Times(Member* _) { return _->Times(this); }
+Node* Member::back_Times(Boolean* _) { return _->Times(this); }
+Node* Member::back_Times(Integer* _) { return _->Times(this); }
+Node* Member::back_Times(Double* _) { return _->Times(this); }
+Node* Member::back_Times(String* _) { return _->Times(this); }
+Node* Member::back_Times(Array* _) { return _->Times(this); }
+Node* Member::back_Times(Object* _) { return _->Times(this); }
+Node* Member::back_Times(Function* _) { return _->Times(this); }
 Node* Boolean::Times(Node* _) { return _->back_Times(this); }
 Node* Boolean::back_Times(Error* _) { return _->Times(this); }
+Node* Boolean::back_Times(Nothing* _) { return _->Times(this); }
+Node* Boolean::back_Times(Member* _) { return _->Times(this); }
 Node* Boolean::back_Times(Boolean* _) { return _->Times(this); }
 Node* Boolean::back_Times(Integer* _) { return _->Times(this); }
 Node* Boolean::back_Times(Double* _) { return _->Times(this); }
@@ -5083,6 +5361,8 @@ Node* Boolean::back_Times(Object* _) { return _->Times(this); }
 Node* Boolean::back_Times(Function* _) { return _->Times(this); }
 Node* Integer::Times(Node* _) { return _->back_Times(this); }
 Node* Integer::back_Times(Error* _) { return _->Times(this); }
+Node* Integer::back_Times(Nothing* _) { return _->Times(this); }
+Node* Integer::back_Times(Member* _) { return _->Times(this); }
 Node* Integer::back_Times(Boolean* _) { return _->Times(this); }
 Node* Integer::back_Times(Integer* _) { return _->Times(this); }
 Node* Integer::back_Times(Double* _) { return _->Times(this); }
@@ -5092,6 +5372,8 @@ Node* Integer::back_Times(Object* _) { return _->Times(this); }
 Node* Integer::back_Times(Function* _) { return _->Times(this); }
 Node* Double::Times(Node* _) { return _->back_Times(this); }
 Node* Double::back_Times(Error* _) { return _->Times(this); }
+Node* Double::back_Times(Nothing* _) { return _->Times(this); }
+Node* Double::back_Times(Member* _) { return _->Times(this); }
 Node* Double::back_Times(Boolean* _) { return _->Times(this); }
 Node* Double::back_Times(Integer* _) { return _->Times(this); }
 Node* Double::back_Times(Double* _) { return _->Times(this); }
@@ -5101,6 +5383,8 @@ Node* Double::back_Times(Object* _) { return _->Times(this); }
 Node* Double::back_Times(Function* _) { return _->Times(this); }
 Node* String::Times(Node* _) { return _->back_Times(this); }
 Node* String::back_Times(Error* _) { return _->Times(this); }
+Node* String::back_Times(Nothing* _) { return _->Times(this); }
+Node* String::back_Times(Member* _) { return _->Times(this); }
 Node* String::back_Times(Boolean* _) { return _->Times(this); }
 Node* String::back_Times(Integer* _) { return _->Times(this); }
 Node* String::back_Times(Double* _) { return _->Times(this); }
@@ -5110,6 +5394,8 @@ Node* String::back_Times(Object* _) { return _->Times(this); }
 Node* String::back_Times(Function* _) { return _->Times(this); }
 Node* Array::Times(Node* _) { return _->back_Times(this); }
 Node* Array::back_Times(Error* _) { return _->Times(this); }
+Node* Array::back_Times(Nothing* _) { return _->Times(this); }
+Node* Array::back_Times(Member* _) { return _->Times(this); }
 Node* Array::back_Times(Boolean* _) { return _->Times(this); }
 Node* Array::back_Times(Integer* _) { return _->Times(this); }
 Node* Array::back_Times(Double* _) { return _->Times(this); }
@@ -5119,6 +5405,8 @@ Node* Array::back_Times(Object* _) { return _->Times(this); }
 Node* Array::back_Times(Function* _) { return _->Times(this); }
 Node* Object::Times(Node* _) { return _->back_Times(this); }
 Node* Object::back_Times(Error* _) { return _->Times(this); }
+Node* Object::back_Times(Nothing* _) { return _->Times(this); }
+Node* Object::back_Times(Member* _) { return _->Times(this); }
 Node* Object::back_Times(Boolean* _) { return _->Times(this); }
 Node* Object::back_Times(Integer* _) { return _->Times(this); }
 Node* Object::back_Times(Double* _) { return _->Times(this); }
@@ -5128,6 +5416,8 @@ Node* Object::back_Times(Object* _) { return _->Times(this); }
 Node* Object::back_Times(Function* _) { return _->Times(this); }
 Node* Function::Times(Node* _) { return _->back_Times(this); }
 Node* Function::back_Times(Error* _) { return _->Times(this); }
+Node* Function::back_Times(Nothing* _) { return _->Times(this); }
+Node* Function::back_Times(Member* _) { return _->Times(this); }
 Node* Function::back_Times(Boolean* _) { return _->Times(this); }
 Node* Function::back_Times(Integer* _) { return _->Times(this); }
 Node* Function::back_Times(Double* _) { return _->Times(this); }
@@ -5137,6 +5427,8 @@ Node* Function::back_Times(Object* _) { return _->Times(this); }
 Node* Function::back_Times(Function* _) { return _->Times(this); }
 Node* Error::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Error::back_DividedBy(Error* _) { return _->DividedBy(this); }
+Node* Error::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
+Node* Error::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Error::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Error::back_DividedBy(Integer* _) { return _->DividedBy(this); }
 Node* Error::back_DividedBy(Double* _) { return _->DividedBy(this); }
@@ -5144,8 +5436,32 @@ Node* Error::back_DividedBy(String* _) { return _->DividedBy(this); }
 Node* Error::back_DividedBy(Array* _) { return _->DividedBy(this); }
 Node* Error::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Error::back_DividedBy(Function* _) { return _->DividedBy(this); }
+Node* Nothing::DividedBy(Node* _) { return _->back_DividedBy(this); }
+Node* Nothing::back_DividedBy(Error* _) { return _->DividedBy(this); }
+Node* Nothing::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
+Node* Nothing::back_DividedBy(Member* _) { return _->DividedBy(this); }
+Node* Nothing::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
+Node* Nothing::back_DividedBy(Integer* _) { return _->DividedBy(this); }
+Node* Nothing::back_DividedBy(Double* _) { return _->DividedBy(this); }
+Node* Nothing::back_DividedBy(String* _) { return _->DividedBy(this); }
+Node* Nothing::back_DividedBy(Array* _) { return _->DividedBy(this); }
+Node* Nothing::back_DividedBy(Object* _) { return _->DividedBy(this); }
+Node* Nothing::back_DividedBy(Function* _) { return _->DividedBy(this); }
+Node* Member::DividedBy(Node* _) { return _->back_DividedBy(this); }
+Node* Member::back_DividedBy(Error* _) { return _->DividedBy(this); }
+Node* Member::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
+Node* Member::back_DividedBy(Member* _) { return _->DividedBy(this); }
+Node* Member::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
+Node* Member::back_DividedBy(Integer* _) { return _->DividedBy(this); }
+Node* Member::back_DividedBy(Double* _) { return _->DividedBy(this); }
+Node* Member::back_DividedBy(String* _) { return _->DividedBy(this); }
+Node* Member::back_DividedBy(Array* _) { return _->DividedBy(this); }
+Node* Member::back_DividedBy(Object* _) { return _->DividedBy(this); }
+Node* Member::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Boolean::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Boolean::back_DividedBy(Error* _) { return _->DividedBy(this); }
+Node* Boolean::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
+Node* Boolean::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Boolean::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Boolean::back_DividedBy(Integer* _) { return _->DividedBy(this); }
 Node* Boolean::back_DividedBy(Double* _) { return _->DividedBy(this); }
@@ -5155,6 +5471,8 @@ Node* Boolean::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Boolean::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Integer::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Integer::back_DividedBy(Error* _) { return _->DividedBy(this); }
+Node* Integer::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
+Node* Integer::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Integer::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Integer::back_DividedBy(Integer* _) { return _->DividedBy(this); }
 Node* Integer::back_DividedBy(Double* _) { return _->DividedBy(this); }
@@ -5164,6 +5482,8 @@ Node* Integer::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Integer::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Double::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Double::back_DividedBy(Error* _) { return _->DividedBy(this); }
+Node* Double::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
+Node* Double::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Double::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Double::back_DividedBy(Integer* _) { return _->DividedBy(this); }
 Node* Double::back_DividedBy(Double* _) { return _->DividedBy(this); }
@@ -5173,6 +5493,8 @@ Node* Double::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Double::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* String::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* String::back_DividedBy(Error* _) { return _->DividedBy(this); }
+Node* String::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
+Node* String::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* String::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* String::back_DividedBy(Integer* _) { return _->DividedBy(this); }
 Node* String::back_DividedBy(Double* _) { return _->DividedBy(this); }
@@ -5182,6 +5504,8 @@ Node* String::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* String::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Array::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Array::back_DividedBy(Error* _) { return _->DividedBy(this); }
+Node* Array::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
+Node* Array::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Array::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Array::back_DividedBy(Integer* _) { return _->DividedBy(this); }
 Node* Array::back_DividedBy(Double* _) { return _->DividedBy(this); }
@@ -5191,6 +5515,8 @@ Node* Array::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Array::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Object::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Object::back_DividedBy(Error* _) { return _->DividedBy(this); }
+Node* Object::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
+Node* Object::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Object::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Object::back_DividedBy(Integer* _) { return _->DividedBy(this); }
 Node* Object::back_DividedBy(Double* _) { return _->DividedBy(this); }
@@ -5200,6 +5526,8 @@ Node* Object::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Object::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Function::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Function::back_DividedBy(Error* _) { return _->DividedBy(this); }
+Node* Function::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
+Node* Function::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Function::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Function::back_DividedBy(Integer* _) { return _->DividedBy(this); }
 Node* Function::back_DividedBy(Double* _) { return _->DividedBy(this); }
@@ -5209,6 +5537,8 @@ Node* Function::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Function::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Error::Mod(Node* _) { return _->back_Mod(this); }
 Node* Error::back_Mod(Error* _) { return _->Mod(this); }
+Node* Error::back_Mod(Nothing* _) { return _->Mod(this); }
+Node* Error::back_Mod(Member* _) { return _->Mod(this); }
 Node* Error::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Error::back_Mod(Integer* _) { return _->Mod(this); }
 Node* Error::back_Mod(Double* _) { return _->Mod(this); }
@@ -5216,8 +5546,32 @@ Node* Error::back_Mod(String* _) { return _->Mod(this); }
 Node* Error::back_Mod(Array* _) { return _->Mod(this); }
 Node* Error::back_Mod(Object* _) { return _->Mod(this); }
 Node* Error::back_Mod(Function* _) { return _->Mod(this); }
+Node* Nothing::Mod(Node* _) { return _->back_Mod(this); }
+Node* Nothing::back_Mod(Error* _) { return _->Mod(this); }
+Node* Nothing::back_Mod(Nothing* _) { return _->Mod(this); }
+Node* Nothing::back_Mod(Member* _) { return _->Mod(this); }
+Node* Nothing::back_Mod(Boolean* _) { return _->Mod(this); }
+Node* Nothing::back_Mod(Integer* _) { return _->Mod(this); }
+Node* Nothing::back_Mod(Double* _) { return _->Mod(this); }
+Node* Nothing::back_Mod(String* _) { return _->Mod(this); }
+Node* Nothing::back_Mod(Array* _) { return _->Mod(this); }
+Node* Nothing::back_Mod(Object* _) { return _->Mod(this); }
+Node* Nothing::back_Mod(Function* _) { return _->Mod(this); }
+Node* Member::Mod(Node* _) { return _->back_Mod(this); }
+Node* Member::back_Mod(Error* _) { return _->Mod(this); }
+Node* Member::back_Mod(Nothing* _) { return _->Mod(this); }
+Node* Member::back_Mod(Member* _) { return _->Mod(this); }
+Node* Member::back_Mod(Boolean* _) { return _->Mod(this); }
+Node* Member::back_Mod(Integer* _) { return _->Mod(this); }
+Node* Member::back_Mod(Double* _) { return _->Mod(this); }
+Node* Member::back_Mod(String* _) { return _->Mod(this); }
+Node* Member::back_Mod(Array* _) { return _->Mod(this); }
+Node* Member::back_Mod(Object* _) { return _->Mod(this); }
+Node* Member::back_Mod(Function* _) { return _->Mod(this); }
 Node* Boolean::Mod(Node* _) { return _->back_Mod(this); }
 Node* Boolean::back_Mod(Error* _) { return _->Mod(this); }
+Node* Boolean::back_Mod(Nothing* _) { return _->Mod(this); }
+Node* Boolean::back_Mod(Member* _) { return _->Mod(this); }
 Node* Boolean::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Boolean::back_Mod(Integer* _) { return _->Mod(this); }
 Node* Boolean::back_Mod(Double* _) { return _->Mod(this); }
@@ -5227,6 +5581,8 @@ Node* Boolean::back_Mod(Object* _) { return _->Mod(this); }
 Node* Boolean::back_Mod(Function* _) { return _->Mod(this); }
 Node* Integer::Mod(Node* _) { return _->back_Mod(this); }
 Node* Integer::back_Mod(Error* _) { return _->Mod(this); }
+Node* Integer::back_Mod(Nothing* _) { return _->Mod(this); }
+Node* Integer::back_Mod(Member* _) { return _->Mod(this); }
 Node* Integer::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Integer::back_Mod(Integer* _) { return _->Mod(this); }
 Node* Integer::back_Mod(Double* _) { return _->Mod(this); }
@@ -5236,6 +5592,8 @@ Node* Integer::back_Mod(Object* _) { return _->Mod(this); }
 Node* Integer::back_Mod(Function* _) { return _->Mod(this); }
 Node* Double::Mod(Node* _) { return _->back_Mod(this); }
 Node* Double::back_Mod(Error* _) { return _->Mod(this); }
+Node* Double::back_Mod(Nothing* _) { return _->Mod(this); }
+Node* Double::back_Mod(Member* _) { return _->Mod(this); }
 Node* Double::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Double::back_Mod(Integer* _) { return _->Mod(this); }
 Node* Double::back_Mod(Double* _) { return _->Mod(this); }
@@ -5245,6 +5603,8 @@ Node* Double::back_Mod(Object* _) { return _->Mod(this); }
 Node* Double::back_Mod(Function* _) { return _->Mod(this); }
 Node* String::Mod(Node* _) { return _->back_Mod(this); }
 Node* String::back_Mod(Error* _) { return _->Mod(this); }
+Node* String::back_Mod(Nothing* _) { return _->Mod(this); }
+Node* String::back_Mod(Member* _) { return _->Mod(this); }
 Node* String::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* String::back_Mod(Integer* _) { return _->Mod(this); }
 Node* String::back_Mod(Double* _) { return _->Mod(this); }
@@ -5254,6 +5614,8 @@ Node* String::back_Mod(Object* _) { return _->Mod(this); }
 Node* String::back_Mod(Function* _) { return _->Mod(this); }
 Node* Array::Mod(Node* _) { return _->back_Mod(this); }
 Node* Array::back_Mod(Error* _) { return _->Mod(this); }
+Node* Array::back_Mod(Nothing* _) { return _->Mod(this); }
+Node* Array::back_Mod(Member* _) { return _->Mod(this); }
 Node* Array::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Array::back_Mod(Integer* _) { return _->Mod(this); }
 Node* Array::back_Mod(Double* _) { return _->Mod(this); }
@@ -5263,6 +5625,8 @@ Node* Array::back_Mod(Object* _) { return _->Mod(this); }
 Node* Array::back_Mod(Function* _) { return _->Mod(this); }
 Node* Object::Mod(Node* _) { return _->back_Mod(this); }
 Node* Object::back_Mod(Error* _) { return _->Mod(this); }
+Node* Object::back_Mod(Nothing* _) { return _->Mod(this); }
+Node* Object::back_Mod(Member* _) { return _->Mod(this); }
 Node* Object::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Object::back_Mod(Integer* _) { return _->Mod(this); }
 Node* Object::back_Mod(Double* _) { return _->Mod(this); }
@@ -5272,6 +5636,8 @@ Node* Object::back_Mod(Object* _) { return _->Mod(this); }
 Node* Object::back_Mod(Function* _) { return _->Mod(this); }
 Node* Function::Mod(Node* _) { return _->back_Mod(this); }
 Node* Function::back_Mod(Error* _) { return _->Mod(this); }
+Node* Function::back_Mod(Nothing* _) { return _->Mod(this); }
+Node* Function::back_Mod(Member* _) { return _->Mod(this); }
 Node* Function::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Function::back_Mod(Integer* _) { return _->Mod(this); }
 Node* Function::back_Mod(Double* _) { return _->Mod(this); }
@@ -5281,6 +5647,8 @@ Node* Function::back_Mod(Object* _) { return _->Mod(this); }
 Node* Function::back_Mod(Function* _) { return _->Mod(this); }
 Node* Error::Call(Node* _) { return _->back_Call(this); }
 Node* Error::back_Call(Error* _) { return _->Call(this); }
+Node* Error::back_Call(Nothing* _) { return _->Call(this); }
+Node* Error::back_Call(Member* _) { return _->Call(this); }
 Node* Error::back_Call(Boolean* _) { return _->Call(this); }
 Node* Error::back_Call(Integer* _) { return _->Call(this); }
 Node* Error::back_Call(Double* _) { return _->Call(this); }
@@ -5288,8 +5656,32 @@ Node* Error::back_Call(String* _) { return _->Call(this); }
 Node* Error::back_Call(Array* _) { return _->Call(this); }
 Node* Error::back_Call(Object* _) { return _->Call(this); }
 Node* Error::back_Call(Function* _) { return _->Call(this); }
+Node* Nothing::Call(Node* _) { return _->back_Call(this); }
+Node* Nothing::back_Call(Error* _) { return _->Call(this); }
+Node* Nothing::back_Call(Nothing* _) { return _->Call(this); }
+Node* Nothing::back_Call(Member* _) { return _->Call(this); }
+Node* Nothing::back_Call(Boolean* _) { return _->Call(this); }
+Node* Nothing::back_Call(Integer* _) { return _->Call(this); }
+Node* Nothing::back_Call(Double* _) { return _->Call(this); }
+Node* Nothing::back_Call(String* _) { return _->Call(this); }
+Node* Nothing::back_Call(Array* _) { return _->Call(this); }
+Node* Nothing::back_Call(Object* _) { return _->Call(this); }
+Node* Nothing::back_Call(Function* _) { return _->Call(this); }
+Node* Member::Call(Node* _) { return _->back_Call(this); }
+Node* Member::back_Call(Error* _) { return _->Call(this); }
+Node* Member::back_Call(Nothing* _) { return _->Call(this); }
+Node* Member::back_Call(Member* _) { return _->Call(this); }
+Node* Member::back_Call(Boolean* _) { return _->Call(this); }
+Node* Member::back_Call(Integer* _) { return _->Call(this); }
+Node* Member::back_Call(Double* _) { return _->Call(this); }
+Node* Member::back_Call(String* _) { return _->Call(this); }
+Node* Member::back_Call(Array* _) { return _->Call(this); }
+Node* Member::back_Call(Object* _) { return _->Call(this); }
+Node* Member::back_Call(Function* _) { return _->Call(this); }
 Node* Boolean::Call(Node* _) { return _->back_Call(this); }
 Node* Boolean::back_Call(Error* _) { return _->Call(this); }
+Node* Boolean::back_Call(Nothing* _) { return _->Call(this); }
+Node* Boolean::back_Call(Member* _) { return _->Call(this); }
 Node* Boolean::back_Call(Boolean* _) { return _->Call(this); }
 Node* Boolean::back_Call(Integer* _) { return _->Call(this); }
 Node* Boolean::back_Call(Double* _) { return _->Call(this); }
@@ -5299,6 +5691,8 @@ Node* Boolean::back_Call(Object* _) { return _->Call(this); }
 Node* Boolean::back_Call(Function* _) { return _->Call(this); }
 Node* Integer::Call(Node* _) { return _->back_Call(this); }
 Node* Integer::back_Call(Error* _) { return _->Call(this); }
+Node* Integer::back_Call(Nothing* _) { return _->Call(this); }
+Node* Integer::back_Call(Member* _) { return _->Call(this); }
 Node* Integer::back_Call(Boolean* _) { return _->Call(this); }
 Node* Integer::back_Call(Integer* _) { return _->Call(this); }
 Node* Integer::back_Call(Double* _) { return _->Call(this); }
@@ -5308,6 +5702,8 @@ Node* Integer::back_Call(Object* _) { return _->Call(this); }
 Node* Integer::back_Call(Function* _) { return _->Call(this); }
 Node* Double::Call(Node* _) { return _->back_Call(this); }
 Node* Double::back_Call(Error* _) { return _->Call(this); }
+Node* Double::back_Call(Nothing* _) { return _->Call(this); }
+Node* Double::back_Call(Member* _) { return _->Call(this); }
 Node* Double::back_Call(Boolean* _) { return _->Call(this); }
 Node* Double::back_Call(Integer* _) { return _->Call(this); }
 Node* Double::back_Call(Double* _) { return _->Call(this); }
@@ -5317,6 +5713,8 @@ Node* Double::back_Call(Object* _) { return _->Call(this); }
 Node* Double::back_Call(Function* _) { return _->Call(this); }
 Node* String::Call(Node* _) { return _->back_Call(this); }
 Node* String::back_Call(Error* _) { return _->Call(this); }
+Node* String::back_Call(Nothing* _) { return _->Call(this); }
+Node* String::back_Call(Member* _) { return _->Call(this); }
 Node* String::back_Call(Boolean* _) { return _->Call(this); }
 Node* String::back_Call(Integer* _) { return _->Call(this); }
 Node* String::back_Call(Double* _) { return _->Call(this); }
@@ -5326,6 +5724,8 @@ Node* String::back_Call(Object* _) { return _->Call(this); }
 Node* String::back_Call(Function* _) { return _->Call(this); }
 Node* Array::Call(Node* _) { return _->back_Call(this); }
 Node* Array::back_Call(Error* _) { return _->Call(this); }
+Node* Array::back_Call(Nothing* _) { return _->Call(this); }
+Node* Array::back_Call(Member* _) { return _->Call(this); }
 Node* Array::back_Call(Boolean* _) { return _->Call(this); }
 Node* Array::back_Call(Integer* _) { return _->Call(this); }
 Node* Array::back_Call(Double* _) { return _->Call(this); }
@@ -5335,6 +5735,8 @@ Node* Array::back_Call(Object* _) { return _->Call(this); }
 Node* Array::back_Call(Function* _) { return _->Call(this); }
 Node* Object::Call(Node* _) { return _->back_Call(this); }
 Node* Object::back_Call(Error* _) { return _->Call(this); }
+Node* Object::back_Call(Nothing* _) { return _->Call(this); }
+Node* Object::back_Call(Member* _) { return _->Call(this); }
 Node* Object::back_Call(Boolean* _) { return _->Call(this); }
 Node* Object::back_Call(Integer* _) { return _->Call(this); }
 Node* Object::back_Call(Double* _) { return _->Call(this); }
@@ -5344,6 +5746,8 @@ Node* Object::back_Call(Object* _) { return _->Call(this); }
 Node* Object::back_Call(Function* _) { return _->Call(this); }
 Node* Function::Call(Node* _) { return _->back_Call(this); }
 Node* Function::back_Call(Error* _) { return _->Call(this); }
+Node* Function::back_Call(Nothing* _) { return _->Call(this); }
+Node* Function::back_Call(Member* _) { return _->Call(this); }
 Node* Function::back_Call(Boolean* _) { return _->Call(this); }
 Node* Function::back_Call(Integer* _) { return _->Call(this); }
 Node* Function::back_Call(Double* _) { return _->Call(this); }
@@ -5353,6 +5757,8 @@ Node* Function::back_Call(Object* _) { return _->Call(this); }
 Node* Function::back_Call(Function* _) { return _->Call(this); }
 Node* Error::Equals(Node* _) { return _->back_Equals(this); }
 Node* Error::back_Equals(Error* _) { return _->Equals(this); }
+Node* Error::back_Equals(Nothing* _) { return _->Equals(this); }
+Node* Error::back_Equals(Member* _) { return _->Equals(this); }
 Node* Error::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Error::back_Equals(Integer* _) { return _->Equals(this); }
 Node* Error::back_Equals(Double* _) { return _->Equals(this); }
@@ -5360,8 +5766,32 @@ Node* Error::back_Equals(String* _) { return _->Equals(this); }
 Node* Error::back_Equals(Array* _) { return _->Equals(this); }
 Node* Error::back_Equals(Object* _) { return _->Equals(this); }
 Node* Error::back_Equals(Function* _) { return _->Equals(this); }
+Node* Nothing::Equals(Node* _) { return _->back_Equals(this); }
+Node* Nothing::back_Equals(Error* _) { return _->Equals(this); }
+Node* Nothing::back_Equals(Nothing* _) { return _->Equals(this); }
+Node* Nothing::back_Equals(Member* _) { return _->Equals(this); }
+Node* Nothing::back_Equals(Boolean* _) { return _->Equals(this); }
+Node* Nothing::back_Equals(Integer* _) { return _->Equals(this); }
+Node* Nothing::back_Equals(Double* _) { return _->Equals(this); }
+Node* Nothing::back_Equals(String* _) { return _->Equals(this); }
+Node* Nothing::back_Equals(Array* _) { return _->Equals(this); }
+Node* Nothing::back_Equals(Object* _) { return _->Equals(this); }
+Node* Nothing::back_Equals(Function* _) { return _->Equals(this); }
+Node* Member::Equals(Node* _) { return _->back_Equals(this); }
+Node* Member::back_Equals(Error* _) { return _->Equals(this); }
+Node* Member::back_Equals(Nothing* _) { return _->Equals(this); }
+Node* Member::back_Equals(Member* _) { return _->Equals(this); }
+Node* Member::back_Equals(Boolean* _) { return _->Equals(this); }
+Node* Member::back_Equals(Integer* _) { return _->Equals(this); }
+Node* Member::back_Equals(Double* _) { return _->Equals(this); }
+Node* Member::back_Equals(String* _) { return _->Equals(this); }
+Node* Member::back_Equals(Array* _) { return _->Equals(this); }
+Node* Member::back_Equals(Object* _) { return _->Equals(this); }
+Node* Member::back_Equals(Function* _) { return _->Equals(this); }
 Node* Boolean::Equals(Node* _) { return _->back_Equals(this); }
 Node* Boolean::back_Equals(Error* _) { return _->Equals(this); }
+Node* Boolean::back_Equals(Nothing* _) { return _->Equals(this); }
+Node* Boolean::back_Equals(Member* _) { return _->Equals(this); }
 Node* Boolean::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Boolean::back_Equals(Integer* _) { return _->Equals(this); }
 Node* Boolean::back_Equals(Double* _) { return _->Equals(this); }
@@ -5371,6 +5801,8 @@ Node* Boolean::back_Equals(Object* _) { return _->Equals(this); }
 Node* Boolean::back_Equals(Function* _) { return _->Equals(this); }
 Node* Integer::Equals(Node* _) { return _->back_Equals(this); }
 Node* Integer::back_Equals(Error* _) { return _->Equals(this); }
+Node* Integer::back_Equals(Nothing* _) { return _->Equals(this); }
+Node* Integer::back_Equals(Member* _) { return _->Equals(this); }
 Node* Integer::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Integer::back_Equals(Integer* _) { return _->Equals(this); }
 Node* Integer::back_Equals(Double* _) { return _->Equals(this); }
@@ -5380,6 +5812,8 @@ Node* Integer::back_Equals(Object* _) { return _->Equals(this); }
 Node* Integer::back_Equals(Function* _) { return _->Equals(this); }
 Node* Double::Equals(Node* _) { return _->back_Equals(this); }
 Node* Double::back_Equals(Error* _) { return _->Equals(this); }
+Node* Double::back_Equals(Nothing* _) { return _->Equals(this); }
+Node* Double::back_Equals(Member* _) { return _->Equals(this); }
 Node* Double::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Double::back_Equals(Integer* _) { return _->Equals(this); }
 Node* Double::back_Equals(Double* _) { return _->Equals(this); }
@@ -5389,6 +5823,8 @@ Node* Double::back_Equals(Object* _) { return _->Equals(this); }
 Node* Double::back_Equals(Function* _) { return _->Equals(this); }
 Node* String::Equals(Node* _) { return _->back_Equals(this); }
 Node* String::back_Equals(Error* _) { return _->Equals(this); }
+Node* String::back_Equals(Nothing* _) { return _->Equals(this); }
+Node* String::back_Equals(Member* _) { return _->Equals(this); }
 Node* String::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* String::back_Equals(Integer* _) { return _->Equals(this); }
 Node* String::back_Equals(Double* _) { return _->Equals(this); }
@@ -5398,6 +5834,8 @@ Node* String::back_Equals(Object* _) { return _->Equals(this); }
 Node* String::back_Equals(Function* _) { return _->Equals(this); }
 Node* Array::Equals(Node* _) { return _->back_Equals(this); }
 Node* Array::back_Equals(Error* _) { return _->Equals(this); }
+Node* Array::back_Equals(Nothing* _) { return _->Equals(this); }
+Node* Array::back_Equals(Member* _) { return _->Equals(this); }
 Node* Array::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Array::back_Equals(Integer* _) { return _->Equals(this); }
 Node* Array::back_Equals(Double* _) { return _->Equals(this); }
@@ -5407,6 +5845,8 @@ Node* Array::back_Equals(Object* _) { return _->Equals(this); }
 Node* Array::back_Equals(Function* _) { return _->Equals(this); }
 Node* Object::Equals(Node* _) { return _->back_Equals(this); }
 Node* Object::back_Equals(Error* _) { return _->Equals(this); }
+Node* Object::back_Equals(Nothing* _) { return _->Equals(this); }
+Node* Object::back_Equals(Member* _) { return _->Equals(this); }
 Node* Object::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Object::back_Equals(Integer* _) { return _->Equals(this); }
 Node* Object::back_Equals(Double* _) { return _->Equals(this); }
@@ -5416,6 +5856,8 @@ Node* Object::back_Equals(Object* _) { return _->Equals(this); }
 Node* Object::back_Equals(Function* _) { return _->Equals(this); }
 Node* Function::Equals(Node* _) { return _->back_Equals(this); }
 Node* Function::back_Equals(Error* _) { return _->Equals(this); }
+Node* Function::back_Equals(Nothing* _) { return _->Equals(this); }
+Node* Function::back_Equals(Member* _) { return _->Equals(this); }
 Node* Function::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Function::back_Equals(Integer* _) { return _->Equals(this); }
 Node* Function::back_Equals(Double* _) { return _->Equals(this); }
@@ -5425,6 +5867,8 @@ Node* Function::back_Equals(Object* _) { return _->Equals(this); }
 Node* Function::back_Equals(Function* _) { return _->Equals(this); }
 Node* Error::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Error::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Error::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
+Node* Error::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Error::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Error::back_NotEquals(Integer* _) { return _->NotEquals(this); }
 Node* Error::back_NotEquals(Double* _) { return _->NotEquals(this); }
@@ -5432,8 +5876,32 @@ Node* Error::back_NotEquals(String* _) { return _->NotEquals(this); }
 Node* Error::back_NotEquals(Array* _) { return _->NotEquals(this); }
 Node* Error::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Error::back_NotEquals(Function* _) { return _->NotEquals(this); }
+Node* Nothing::NotEquals(Node* _) { return _->back_NotEquals(this); }
+Node* Nothing::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Nothing::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
+Node* Nothing::back_NotEquals(Member* _) { return _->NotEquals(this); }
+Node* Nothing::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
+Node* Nothing::back_NotEquals(Integer* _) { return _->NotEquals(this); }
+Node* Nothing::back_NotEquals(Double* _) { return _->NotEquals(this); }
+Node* Nothing::back_NotEquals(String* _) { return _->NotEquals(this); }
+Node* Nothing::back_NotEquals(Array* _) { return _->NotEquals(this); }
+Node* Nothing::back_NotEquals(Object* _) { return _->NotEquals(this); }
+Node* Nothing::back_NotEquals(Function* _) { return _->NotEquals(this); }
+Node* Member::NotEquals(Node* _) { return _->back_NotEquals(this); }
+Node* Member::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Member::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
+Node* Member::back_NotEquals(Member* _) { return _->NotEquals(this); }
+Node* Member::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
+Node* Member::back_NotEquals(Integer* _) { return _->NotEquals(this); }
+Node* Member::back_NotEquals(Double* _) { return _->NotEquals(this); }
+Node* Member::back_NotEquals(String* _) { return _->NotEquals(this); }
+Node* Member::back_NotEquals(Array* _) { return _->NotEquals(this); }
+Node* Member::back_NotEquals(Object* _) { return _->NotEquals(this); }
+Node* Member::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Boolean::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Boolean::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Boolean::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
+Node* Boolean::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Boolean::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Boolean::back_NotEquals(Integer* _) { return _->NotEquals(this); }
 Node* Boolean::back_NotEquals(Double* _) { return _->NotEquals(this); }
@@ -5443,6 +5911,8 @@ Node* Boolean::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Boolean::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Integer::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Integer::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Integer::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
+Node* Integer::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Integer::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Integer::back_NotEquals(Integer* _) { return _->NotEquals(this); }
 Node* Integer::back_NotEquals(Double* _) { return _->NotEquals(this); }
@@ -5452,6 +5922,8 @@ Node* Integer::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Integer::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Double::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Double::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Double::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
+Node* Double::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Double::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Double::back_NotEquals(Integer* _) { return _->NotEquals(this); }
 Node* Double::back_NotEquals(Double* _) { return _->NotEquals(this); }
@@ -5461,6 +5933,8 @@ Node* Double::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Double::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* String::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* String::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* String::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
+Node* String::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* String::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* String::back_NotEquals(Integer* _) { return _->NotEquals(this); }
 Node* String::back_NotEquals(Double* _) { return _->NotEquals(this); }
@@ -5470,6 +5944,8 @@ Node* String::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* String::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Array::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Array::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Array::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
+Node* Array::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Array::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Array::back_NotEquals(Integer* _) { return _->NotEquals(this); }
 Node* Array::back_NotEquals(Double* _) { return _->NotEquals(this); }
@@ -5479,6 +5955,8 @@ Node* Array::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Array::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Object::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Object::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Object::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
+Node* Object::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Object::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Object::back_NotEquals(Integer* _) { return _->NotEquals(this); }
 Node* Object::back_NotEquals(Double* _) { return _->NotEquals(this); }
@@ -5488,6 +5966,8 @@ Node* Object::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Object::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Function::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Function::back_NotEquals(Error* _) { return _->NotEquals(this); }
+Node* Function::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
+Node* Function::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Function::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Function::back_NotEquals(Integer* _) { return _->NotEquals(this); }
 Node* Function::back_NotEquals(Double* _) { return _->NotEquals(this); }
@@ -5497,6 +5977,8 @@ Node* Function::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Function::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Error::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Error::back_LessThan(Error* _) { return _->LessThan(this); }
+Node* Error::back_LessThan(Nothing* _) { return _->LessThan(this); }
+Node* Error::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Error::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Error::back_LessThan(Integer* _) { return _->LessThan(this); }
 Node* Error::back_LessThan(Double* _) { return _->LessThan(this); }
@@ -5504,8 +5986,32 @@ Node* Error::back_LessThan(String* _) { return _->LessThan(this); }
 Node* Error::back_LessThan(Array* _) { return _->LessThan(this); }
 Node* Error::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Error::back_LessThan(Function* _) { return _->LessThan(this); }
+Node* Nothing::LessThan(Node* _) { return _->back_LessThan(this); }
+Node* Nothing::back_LessThan(Error* _) { return _->LessThan(this); }
+Node* Nothing::back_LessThan(Nothing* _) { return _->LessThan(this); }
+Node* Nothing::back_LessThan(Member* _) { return _->LessThan(this); }
+Node* Nothing::back_LessThan(Boolean* _) { return _->LessThan(this); }
+Node* Nothing::back_LessThan(Integer* _) { return _->LessThan(this); }
+Node* Nothing::back_LessThan(Double* _) { return _->LessThan(this); }
+Node* Nothing::back_LessThan(String* _) { return _->LessThan(this); }
+Node* Nothing::back_LessThan(Array* _) { return _->LessThan(this); }
+Node* Nothing::back_LessThan(Object* _) { return _->LessThan(this); }
+Node* Nothing::back_LessThan(Function* _) { return _->LessThan(this); }
+Node* Member::LessThan(Node* _) { return _->back_LessThan(this); }
+Node* Member::back_LessThan(Error* _) { return _->LessThan(this); }
+Node* Member::back_LessThan(Nothing* _) { return _->LessThan(this); }
+Node* Member::back_LessThan(Member* _) { return _->LessThan(this); }
+Node* Member::back_LessThan(Boolean* _) { return _->LessThan(this); }
+Node* Member::back_LessThan(Integer* _) { return _->LessThan(this); }
+Node* Member::back_LessThan(Double* _) { return _->LessThan(this); }
+Node* Member::back_LessThan(String* _) { return _->LessThan(this); }
+Node* Member::back_LessThan(Array* _) { return _->LessThan(this); }
+Node* Member::back_LessThan(Object* _) { return _->LessThan(this); }
+Node* Member::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Boolean::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Boolean::back_LessThan(Error* _) { return _->LessThan(this); }
+Node* Boolean::back_LessThan(Nothing* _) { return _->LessThan(this); }
+Node* Boolean::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Boolean::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Boolean::back_LessThan(Integer* _) { return _->LessThan(this); }
 Node* Boolean::back_LessThan(Double* _) { return _->LessThan(this); }
@@ -5515,6 +6021,8 @@ Node* Boolean::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Boolean::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Integer::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Integer::back_LessThan(Error* _) { return _->LessThan(this); }
+Node* Integer::back_LessThan(Nothing* _) { return _->LessThan(this); }
+Node* Integer::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Integer::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Integer::back_LessThan(Integer* _) { return _->LessThan(this); }
 Node* Integer::back_LessThan(Double* _) { return _->LessThan(this); }
@@ -5524,6 +6032,8 @@ Node* Integer::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Integer::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Double::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Double::back_LessThan(Error* _) { return _->LessThan(this); }
+Node* Double::back_LessThan(Nothing* _) { return _->LessThan(this); }
+Node* Double::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Double::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Double::back_LessThan(Integer* _) { return _->LessThan(this); }
 Node* Double::back_LessThan(Double* _) { return _->LessThan(this); }
@@ -5533,6 +6043,8 @@ Node* Double::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Double::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* String::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* String::back_LessThan(Error* _) { return _->LessThan(this); }
+Node* String::back_LessThan(Nothing* _) { return _->LessThan(this); }
+Node* String::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* String::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* String::back_LessThan(Integer* _) { return _->LessThan(this); }
 Node* String::back_LessThan(Double* _) { return _->LessThan(this); }
@@ -5542,6 +6054,8 @@ Node* String::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* String::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Array::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Array::back_LessThan(Error* _) { return _->LessThan(this); }
+Node* Array::back_LessThan(Nothing* _) { return _->LessThan(this); }
+Node* Array::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Array::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Array::back_LessThan(Integer* _) { return _->LessThan(this); }
 Node* Array::back_LessThan(Double* _) { return _->LessThan(this); }
@@ -5551,6 +6065,8 @@ Node* Array::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Array::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Object::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Object::back_LessThan(Error* _) { return _->LessThan(this); }
+Node* Object::back_LessThan(Nothing* _) { return _->LessThan(this); }
+Node* Object::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Object::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Object::back_LessThan(Integer* _) { return _->LessThan(this); }
 Node* Object::back_LessThan(Double* _) { return _->LessThan(this); }
@@ -5560,6 +6076,8 @@ Node* Object::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Object::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Function::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Function::back_LessThan(Error* _) { return _->LessThan(this); }
+Node* Function::back_LessThan(Nothing* _) { return _->LessThan(this); }
+Node* Function::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Function::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Function::back_LessThan(Integer* _) { return _->LessThan(this); }
 Node* Function::back_LessThan(Double* _) { return _->LessThan(this); }
@@ -5569,6 +6087,8 @@ Node* Function::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Function::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Error::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Error::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
+Node* Error::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
+Node* Error::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Error::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Error::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
 Node* Error::back_GreaterThan(Double* _) { return _->GreaterThan(this); }
@@ -5576,8 +6096,32 @@ Node* Error::back_GreaterThan(String* _) { return _->GreaterThan(this); }
 Node* Error::back_GreaterThan(Array* _) { return _->GreaterThan(this); }
 Node* Error::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Error::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
+Node* Nothing::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
+Node* Nothing::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
+Node* Nothing::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
+Node* Nothing::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
+Node* Nothing::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
+Node* Nothing::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
+Node* Nothing::back_GreaterThan(Double* _) { return _->GreaterThan(this); }
+Node* Nothing::back_GreaterThan(String* _) { return _->GreaterThan(this); }
+Node* Nothing::back_GreaterThan(Array* _) { return _->GreaterThan(this); }
+Node* Nothing::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
+Node* Nothing::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
+Node* Member::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
+Node* Member::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
+Node* Member::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
+Node* Member::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
+Node* Member::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
+Node* Member::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
+Node* Member::back_GreaterThan(Double* _) { return _->GreaterThan(this); }
+Node* Member::back_GreaterThan(String* _) { return _->GreaterThan(this); }
+Node* Member::back_GreaterThan(Array* _) { return _->GreaterThan(this); }
+Node* Member::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
+Node* Member::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Boolean::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Boolean::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
+Node* Boolean::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
+Node* Boolean::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Boolean::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Boolean::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
 Node* Boolean::back_GreaterThan(Double* _) { return _->GreaterThan(this); }
@@ -5587,6 +6131,8 @@ Node* Boolean::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Boolean::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Integer::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Integer::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
+Node* Integer::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
+Node* Integer::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Integer::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Integer::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
 Node* Integer::back_GreaterThan(Double* _) { return _->GreaterThan(this); }
@@ -5596,6 +6142,8 @@ Node* Integer::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Integer::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Double::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Double::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
+Node* Double::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
+Node* Double::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Double::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Double::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
 Node* Double::back_GreaterThan(Double* _) { return _->GreaterThan(this); }
@@ -5605,6 +6153,8 @@ Node* Double::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Double::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* String::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* String::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
+Node* String::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
+Node* String::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* String::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* String::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
 Node* String::back_GreaterThan(Double* _) { return _->GreaterThan(this); }
@@ -5614,6 +6164,8 @@ Node* String::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* String::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Array::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Array::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
+Node* Array::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
+Node* Array::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Array::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Array::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
 Node* Array::back_GreaterThan(Double* _) { return _->GreaterThan(this); }
@@ -5623,6 +6175,8 @@ Node* Array::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Array::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Object::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Object::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
+Node* Object::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
+Node* Object::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Object::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Object::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
 Node* Object::back_GreaterThan(Double* _) { return _->GreaterThan(this); }
@@ -5632,6 +6186,8 @@ Node* Object::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Object::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Function::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Function::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
+Node* Function::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
+Node* Function::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Function::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Function::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
 Node* Function::back_GreaterThan(Double* _) { return _->GreaterThan(this); }
@@ -5641,6 +6197,8 @@ Node* Function::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Function::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Error::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Error::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
+Node* Error::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
+Node* Error::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Error::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Error::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
 Node* Error::back_LessThanOrEqualTo(Double* _) { return _->LessThanOrEqualTo(this); }
@@ -5648,8 +6206,32 @@ Node* Error::back_LessThanOrEqualTo(String* _) { return _->LessThanOrEqualTo(thi
 Node* Error::back_LessThanOrEqualTo(Array* _) { return _->LessThanOrEqualTo(this); }
 Node* Error::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(this); }
 Node* Error::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
+Node* Nothing::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
+Node* Nothing::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
+Node* Nothing::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
+Node* Nothing::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
+Node* Nothing::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
+Node* Nothing::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
+Node* Nothing::back_LessThanOrEqualTo(Double* _) { return _->LessThanOrEqualTo(this); }
+Node* Nothing::back_LessThanOrEqualTo(String* _) { return _->LessThanOrEqualTo(this); }
+Node* Nothing::back_LessThanOrEqualTo(Array* _) { return _->LessThanOrEqualTo(this); }
+Node* Nothing::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(this); }
+Node* Nothing::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
+Node* Member::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
+Node* Member::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
+Node* Member::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
+Node* Member::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
+Node* Member::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
+Node* Member::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
+Node* Member::back_LessThanOrEqualTo(Double* _) { return _->LessThanOrEqualTo(this); }
+Node* Member::back_LessThanOrEqualTo(String* _) { return _->LessThanOrEqualTo(this); }
+Node* Member::back_LessThanOrEqualTo(Array* _) { return _->LessThanOrEqualTo(this); }
+Node* Member::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(this); }
+Node* Member::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Boolean::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Boolean::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
+Node* Boolean::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
+Node* Boolean::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Boolean::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Boolean::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
 Node* Boolean::back_LessThanOrEqualTo(Double* _) { return _->LessThanOrEqualTo(this); }
@@ -5659,6 +6241,8 @@ Node* Boolean::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(t
 Node* Boolean::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Integer::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Integer::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
+Node* Integer::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
+Node* Integer::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Integer::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Integer::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
 Node* Integer::back_LessThanOrEqualTo(Double* _) { return _->LessThanOrEqualTo(this); }
@@ -5668,6 +6252,8 @@ Node* Integer::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(t
 Node* Integer::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Double::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Double::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
+Node* Double::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
+Node* Double::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Double::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Double::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
 Node* Double::back_LessThanOrEqualTo(Double* _) { return _->LessThanOrEqualTo(this); }
@@ -5677,6 +6263,8 @@ Node* Double::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(th
 Node* Double::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* String::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* String::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
+Node* String::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
+Node* String::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* String::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* String::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
 Node* String::back_LessThanOrEqualTo(Double* _) { return _->LessThanOrEqualTo(this); }
@@ -5686,6 +6274,8 @@ Node* String::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(th
 Node* String::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Array::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Array::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
+Node* Array::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
+Node* Array::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Array::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Array::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
 Node* Array::back_LessThanOrEqualTo(Double* _) { return _->LessThanOrEqualTo(this); }
@@ -5695,6 +6285,8 @@ Node* Array::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(thi
 Node* Array::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Object::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Object::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
+Node* Object::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
+Node* Object::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Object::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Object::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
 Node* Object::back_LessThanOrEqualTo(Double* _) { return _->LessThanOrEqualTo(this); }
@@ -5704,6 +6296,8 @@ Node* Object::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(th
 Node* Object::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Function::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Function::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
+Node* Function::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
+Node* Function::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Function::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Function::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
 Node* Function::back_LessThanOrEqualTo(Double* _) { return _->LessThanOrEqualTo(this); }
@@ -5713,6 +6307,8 @@ Node* Function::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(
 Node* Function::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Error::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Error::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Error::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Error::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Error::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Error::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Error::back_GreaterThanOrEqualTo(Double* _) { return _->GreaterThanOrEqualTo(this); }
@@ -5720,8 +6316,32 @@ Node* Error::back_GreaterThanOrEqualTo(String* _) { return _->GreaterThanOrEqual
 Node* Error::back_GreaterThanOrEqualTo(Array* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Error::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Error::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Nothing::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
+Node* Nothing::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Nothing::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Nothing::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Nothing::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Nothing::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Nothing::back_GreaterThanOrEqualTo(Double* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Nothing::back_GreaterThanOrEqualTo(String* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Nothing::back_GreaterThanOrEqualTo(Array* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Nothing::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Nothing::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Member::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
+Node* Member::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Member::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Member::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Member::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Member::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Member::back_GreaterThanOrEqualTo(Double* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Member::back_GreaterThanOrEqualTo(String* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Member::back_GreaterThanOrEqualTo(Array* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Member::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Member::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Boolean::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Boolean::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Boolean::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Boolean::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Boolean::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Boolean::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Boolean::back_GreaterThanOrEqualTo(Double* _) { return _->GreaterThanOrEqualTo(this); }
@@ -5731,6 +6351,8 @@ Node* Boolean::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqu
 Node* Boolean::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Integer::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Integer::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Integer::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Integer::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Integer::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Integer::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Integer::back_GreaterThanOrEqualTo(Double* _) { return _->GreaterThanOrEqualTo(this); }
@@ -5740,6 +6362,8 @@ Node* Integer::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqu
 Node* Integer::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Double::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Double::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Double::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Double::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Double::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Double::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Double::back_GreaterThanOrEqualTo(Double* _) { return _->GreaterThanOrEqualTo(this); }
@@ -5749,6 +6373,8 @@ Node* Double::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqua
 Node* Double::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* String::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* String::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
+Node* String::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
+Node* String::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* String::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* String::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
 Node* String::back_GreaterThanOrEqualTo(Double* _) { return _->GreaterThanOrEqualTo(this); }
@@ -5758,6 +6384,8 @@ Node* String::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqua
 Node* String::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Array::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Array::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Array::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Array::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Array::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Array::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Array::back_GreaterThanOrEqualTo(Double* _) { return _->GreaterThanOrEqualTo(this); }
@@ -5767,6 +6395,8 @@ Node* Array::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqual
 Node* Array::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Object::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Object::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Object::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Object::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Object::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Object::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Object::back_GreaterThanOrEqualTo(Double* _) { return _->GreaterThanOrEqualTo(this); }
@@ -5776,6 +6406,8 @@ Node* Object::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqua
 Node* Object::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Function::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Function::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Function::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
+Node* Function::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Function::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Function::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Function::back_GreaterThanOrEqualTo(Double* _) { return _->GreaterThanOrEqualTo(this); }
