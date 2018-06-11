@@ -510,7 +510,9 @@ DEFINITIONS
 
 class Member : public Node
 {
+    std::string value;
 public:
+    std::string getValue();
 DEFINITIONS
 };
 

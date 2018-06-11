@@ -64,6 +64,16 @@ Node* Error::And(Error* _)
     return _;
 }
 
+Node* Error::And(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::And(Member* _)
+{
+    return this;
+}
+
 Node* Error::And(Boolean* _)
 {
     return this;
@@ -99,6 +109,111 @@ Node* Error::And(Function* _)
     return this;
 }
 
+Node* Nothing::And(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::And(Nothing* _)
+{
+    return new Error("Logical 'and' with nothing and nothing");
+}
+
+Node* Nothing::And(Member* _)
+{
+    return new Error("Logical 'and' with nothing and member");
+}
+
+Node* Nothing::And(Boolean* _)
+{
+    return new Error("Logical 'and' with nothing and boolean");
+}
+
+Node* Nothing::And(Integer* _)
+{
+    return new Error("Logical 'and' with nothing and integer");
+}
+
+Node* Nothing::And(Double* _)
+{
+    return new Error("Logical 'and' with nothing and double");
+}
+
+Node* Nothing::And(String* _)
+{
+    return new Error("Logical 'and' with nothing and string");
+}
+
+Node* Nothing::And(Array* _)
+{
+    return new Error("Logical 'and' with nothing and array");
+}
+
+Node* Nothing::And(Object* _)
+{
+    return new Error("Logical 'and' with nothing and object");
+}
+
+Node* Nothing::And(Function* _)
+{
+    return new Error("Logical 'and' with nothing and function");
+}
+
+std::string Member::getValue()
+{
+    return value;
+}
+
+Node* Member::And(Error* _)
+{
+    return _;
+}
+
+Node* Member::And(Nothing* _)
+{
+    return new Error("Logical 'and' with member and nothing");
+}
+
+Node* Member::And(Member* _)
+{
+    return new Error("Logical 'and' with member and member");
+}
+
+Node* Member::And(Boolean* _)
+{
+    return new Error("Logical 'and' with member and boolean");
+}
+
+Node* Member::And(Integer* _)
+{
+    return new Error("Logical 'and' with member and integer");
+}
+
+Node* Member::And(Double* _)
+{
+    return new Error("Logical 'and' with member and double");
+}
+
+Node* Member::And(String* _)
+{
+    return new Error("Logical 'and' with member and string");
+}
+
+Node* Member::And(Array* _)
+{
+    return new Error("Logical 'and' with member and array");
+}
+
+Node* Member::And(Object* _)
+{
+    return new Error("Logical 'and' with member and object");
+}
+
+Node* Member::And(Function* _)
+{
+    return new Error("Logical 'and' with member and function");
+}
+
 bool Boolean::getValue()
 {
     return value;
@@ -127,6 +242,16 @@ Node* Boolean::Negative()
 Node* Boolean::And(Error* _)
 {
     return _;
+}
+
+Node* Boolean::And(Nothing* _)
+{
+    return new Error("Logical 'and' with boolean and nothing");
+}
+
+Node* Boolean::And(Member* _)
+{
+    return new Error("Logical 'and' with boolean and member");
 }
 
 Node* Boolean::And(Boolean* _)
@@ -199,6 +324,16 @@ Node* Integer::And(Error* _)
     return _;
 }
 
+Node* Integer::And(Nothing* _)
+{
+    return new Error("Logical 'and' with integer and nothing");
+}
+
+Node* Integer::And(Member* _)
+{
+    return new Error("Logical 'and' with integer and member");
+}
+
 Node* Integer::And(Boolean* _)
 {
     return new Error("Logical 'and' with integer and boolean");
@@ -269,6 +404,16 @@ Node* Double::And(Error* _)
     return _;
 }
 
+Node* Double::And(Nothing* _)
+{
+    return new Error("Logical 'and' with double and nothing");
+}
+
+Node* Double::And(Member* _)
+{
+    return new Error("Logical 'and' with double and member");
+}
+
 Node* Double::And(Boolean* _)
 {
     return new Error("Logical 'and' with double and boolean");
@@ -332,6 +477,16 @@ Node* String::Negative()
 Node* String::And(Error* _)
 {
     return _;
+}
+
+Node* String::And(Nothing* _)
+{
+    return new Error("Logical 'and' with string and nothing");
+}
+
+Node* String::And(Member* _)
+{
+    return new Error("Logical 'and' with string and member");
 }
 
 Node* String::And(Boolean* _)
@@ -403,6 +558,16 @@ Node* Array::Negative()
 Node* Array::And(Error* _)
 {
     return _;
+}
+
+Node* Array::And(Nothing* _)
+{
+    return new Error("Logical 'and' with array and nothing");
+}
+
+Node* Array::And(Member* _)
+{
+    return new Error("Logical 'and' with array and member");
 }
 
 Node* Array::And(Boolean* _)
@@ -517,6 +682,16 @@ Node* Object::And(Error* _)
     return _;
 }
 
+Node* Object::And(Nothing* _)
+{
+    return new Error("Logical 'and' with object and nothing");
+}
+
+Node* Object::And(Member* _)
+{
+    return new Error("Logical 'and' with object and member");
+}
+
 Node* Object::And(Boolean* _)
 {
     return new Error("Logical 'and' with object and boolean");
@@ -572,6 +747,16 @@ Node* Function::And(Error* _)
     return _;
 }
 
+Node* Function::And(Nothing* _)
+{
+    return new Error("Logical 'and' with function and nothing");
+}
+
+Node* Function::And(Member* _)
+{
+    return new Error("Logical 'and' with function and member");
+}
+
 Node* Function::And(Boolean* _)
 {
     return new Error("Logical 'and' with function and boolean");
@@ -612,6 +797,16 @@ Node* Error::Or(Error* _)
     return _;
 }
 
+Node* Error::Or(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::Or(Member* _)
+{
+    return this;
+}
+
 Node* Error::Or(Boolean* _)
 {
     return this;
@@ -647,9 +842,119 @@ Node* Error::Or(Function* _)
     return this;
 }
 
+Node* Nothing::Or(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::Or(Nothing* _)
+{
+    return new Error("Logical 'or' with nothing and nothing");
+}
+
+Node* Nothing::Or(Member* _)
+{
+    return new Error("Logical 'or' with nothing and member");
+}
+
+Node* Nothing::Or(Boolean* _)
+{
+    return new Error("Logical 'or' with nothing and boolean");
+}
+
+Node* Nothing::Or(Integer* _)
+{
+    return new Error("Logical 'or' with nothing and integer");
+}
+
+Node* Nothing::Or(Double* _)
+{
+    return new Error("Logical 'or' with nothing and double");
+}
+
+Node* Nothing::Or(String* _)
+{
+    return new Error("Logical 'or' with nothing and string");
+}
+
+Node* Nothing::Or(Array* _)
+{
+    return new Error("Logical 'or' with nothing and array");
+}
+
+Node* Nothing::Or(Object* _)
+{
+    return new Error("Logical 'or' with nothing and object");
+}
+
+Node* Nothing::Or(Function* _)
+{
+    return new Error("Logical 'or' with nothing and function");
+}
+
+Node* Member::Or(Error* _)
+{
+    return _;
+}
+
+Node* Member::Or(Nothing* _)
+{
+    return new Error("Logical 'or' with member and nothing");
+}
+
+Node* Member::Or(Member* _)
+{
+    return new Error("Logical 'or' with member and member");
+}
+
+Node* Member::Or(Boolean* _)
+{
+    return new Error("Logical 'or' with member and boolean");
+}
+
+Node* Member::Or(Integer* _)
+{
+    return new Error("Logical 'or' with member and integer");
+}
+
+Node* Member::Or(Double* _)
+{
+    return new Error("Logical 'or' with member and double");
+}
+
+Node* Member::Or(String* _)
+{
+    return new Error("Logical 'or' with member and string");
+}
+
+Node* Member::Or(Array* _)
+{
+    return new Error("Logical 'or' with member and array");
+}
+
+Node* Member::Or(Object* _)
+{
+    return new Error("Logical 'or' with member and object");
+}
+
+Node* Member::Or(Function* _)
+{
+    return new Error("Logical 'or' with member and function");
+}
+
 Node* Boolean::Or(Error* _)
 {
     return _;
+}
+
+Node* Boolean::Or(Nothing* _)
+{
+    return new Error("Logical 'or' with boolean and nothing");
+}
+
+Node* Boolean::Or(Member* _)
+{
+    return new Error("Logical 'or' with boolean and member");
 }
 
 Node* Boolean::Or(Boolean* _)
@@ -692,6 +997,16 @@ Node* Integer::Or(Error* _)
     return _;
 }
 
+Node* Integer::Or(Nothing* _)
+{
+    return new Error("Logical 'or' with integer and nothing");
+}
+
+Node* Integer::Or(Member* _)
+{
+    return new Error("Logical 'or' with integer and member");
+}
+
 Node* Integer::Or(Boolean* _)
 {
     return new Error("Logical 'or' with integer and boolean");
@@ -730,6 +1045,16 @@ Node* Integer::Or(Function* _)
 Node* Double::Or(Error* _)
 {
     return _;
+}
+
+Node* Double::Or(Nothing* _)
+{
+    return new Error("Logical 'or' with double and nothing");
+}
+
+Node* Double::Or(Member* _)
+{
+    return new Error("Logical 'or' with double and member");
 }
 
 Node* Double::Or(Boolean* _)
@@ -772,6 +1097,16 @@ Node* String::Or(Error* _)
     return _;
 }
 
+Node* String::Or(Nothing* _)
+{
+    return new Error("Logical 'or' with string and nothing");
+}
+
+Node* String::Or(Member* _)
+{
+    return new Error("Logical 'or' with string and member");
+}
+
 Node* String::Or(Boolean* _)
 {
     return new Error("Logical 'or' with string and boolean");
@@ -810,6 +1145,16 @@ Node* String::Or(Function* _)
 Node* Array::Or(Error* _)
 {
     return _;
+}
+
+Node* Array::Or(Nothing* _)
+{
+    return new Error("Logical 'or' with array and nothing");
+}
+
+Node* Array::Or(Member* _)
+{
+    return new Error("Logical 'or' with array and member");
 }
 
 Node* Array::Or(Boolean* _)
@@ -852,6 +1197,16 @@ Node* Object::Or(Error* _)
     return _;
 }
 
+Node* Object::Or(Nothing* _)
+{
+    return new Error("Logical 'or' with object and nothing");
+}
+
+Node* Object::Or(Member* _)
+{
+    return new Error("Logical 'or' with object and member");
+}
+
 Node* Object::Or(Boolean* _)
 {
     return new Error("Logical 'or' with object and boolean");
@@ -890,6 +1245,16 @@ Node* Object::Or(Function* _)
 Node* Function::Or(Error* _)
 {
     return _;
+}
+
+Node* Function::Or(Nothing* _)
+{
+    return new Error("Logical 'or' with function and nothing");
+}
+
+Node* Function::Or(Member* _)
+{
+    return new Error("Logical 'or' with function and member");
 }
 
 Node* Function::Or(Boolean* _)
@@ -932,6 +1297,16 @@ Node* Error::Plus(Error* _)
     return _;
 }
 
+Node* Error::Plus(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::Plus(Member* _)
+{
+    return this;
+}
+
 Node* Error::Plus(Boolean* _)
 {
     return this;
@@ -967,9 +1342,119 @@ Node* Error::Plus(Function* _)
     return this;
 }
 
+Node* Nothing::Plus(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::Plus(Nothing* _)
+{
+    return new Error("Attempt to add nothing and nothing with '+'");
+}
+
+Node* Nothing::Plus(Member* _)
+{
+    return new Error("Attempt to add nothing and member with '+'");
+}
+
+Node* Nothing::Plus(Boolean* _)
+{
+    return new Error("Attempt to add nothing and boolean with '+'");
+}
+
+Node* Nothing::Plus(Integer* _)
+{
+    return new Error("Attempt to add nothing and integer with '+'");
+}
+
+Node* Nothing::Plus(Double* _)
+{
+    return new Error("Attempt to add nothing and double with '+'");
+}
+
+Node* Nothing::Plus(String* _)
+{
+    return new Error("Attempt to add nothing and string with '+'");
+}
+
+Node* Nothing::Plus(Array* _)
+{
+    return new Error("Attempt to add nothing and array with '+'");
+}
+
+Node* Nothing::Plus(Object* _)
+{
+    return new Error("Attempt to add nothing and object with '+'");
+}
+
+Node* Nothing::Plus(Function* _)
+{
+    return new Error("Attempt to add nothing and function with '+'");
+}
+
+Node* Member::Plus(Error* _)
+{
+    return _;
+}
+
+Node* Member::Plus(Nothing* _)
+{
+    return new Error("Attempt to add member and nothing with '+'");
+}
+
+Node* Member::Plus(Member* _)
+{
+    return new Error("Attempt to add member and member with '+'");
+}
+
+Node* Member::Plus(Boolean* _)
+{
+    return new Error("Attempt to add member and boolean with '+'");
+}
+
+Node* Member::Plus(Integer* _)
+{
+    return new Error("Attempt to add member and integer with '+'");
+}
+
+Node* Member::Plus(Double* _)
+{
+    return new Error("Attempt to add member and double with '+'");
+}
+
+Node* Member::Plus(String* _)
+{
+    return new Error("Attempt to add member and string with '+'");
+}
+
+Node* Member::Plus(Array* _)
+{
+    return new Error("Attempt to add member and array with '+'");
+}
+
+Node* Member::Plus(Object* _)
+{
+    return new Error("Attempt to add member and object with '+'");
+}
+
+Node* Member::Plus(Function* _)
+{
+    return new Error("Attempt to add member and function with '+'");
+}
+
 Node* Boolean::Plus(Error* _)
 {
     return _;
+}
+
+Node* Boolean::Plus(Nothing* _)
+{
+    return new Error("Attempt to add boolean and nothing with '+'");
+}
+
+Node* Boolean::Plus(Member* _)
+{
+    return new Error("Attempt to add boolean and member with '+'");
 }
 
 Node* Boolean::Plus(Boolean* _)
@@ -1012,6 +1497,16 @@ Node* Integer::Plus(Error* _)
     return _;
 }
 
+Node* Integer::Plus(Nothing* _)
+{
+    return new Error("Attempt to add integer and nothing with '+'");
+}
+
+Node* Integer::Plus(Member* _)
+{
+    return new Error("Attempt to add integer and member with '+'");
+}
+
 Node* Integer::Plus(Boolean* _)
 {
     return new Error("Attempt to add integer and boolean with '+'");
@@ -1050,6 +1545,16 @@ Node* Integer::Plus(Function* _)
 Node* Double::Plus(Error* _)
 {
     return _;
+}
+
+Node* Double::Plus(Nothing* _)
+{
+    return new Error("Attempt to add double and nothing with '+'");
+}
+
+Node* Double::Plus(Member* _)
+{
+    return new Error("Attempt to add double and member with '+'");
 }
 
 Node* Double::Plus(Boolean* _)
@@ -1092,6 +1597,16 @@ Node* String::Plus(Error* _)
     return _;
 }
 
+Node* String::Plus(Nothing* _)
+{
+    return new Error("Attempt to add string and nothing with '+'");
+}
+
+Node* String::Plus(Member* _)
+{
+    return new Error("Attempt to add string and member with '+'");
+}
+
 Node* String::Plus(Boolean* _)
 {
     return new String(value + _->toString());
@@ -1130,6 +1645,16 @@ Node* String::Plus(Function* _)
 Node* Array::Plus(Error* _)
 {
     return _;
+}
+
+Node* Array::Plus(Nothing* _)
+{
+    return new Error("Attempt to add array and nothing with '+'");
+}
+
+Node* Array::Plus(Member* _)
+{
+    return new Error("Attempt to add array and member with '+'");
 }
 
 Node* Array::Plus(Boolean* _)
@@ -1180,6 +1705,16 @@ Node* Object::Plus(Error* _)
     return _;
 }
 
+Node* Object::Plus(Nothing* _)
+{
+    return new Error("Attempt to add object and nothing with '+'");
+}
+
+Node* Object::Plus(Member* _)
+{
+    return new Error("Attempt to add object and member with '+'");
+}
+
 Node* Object::Plus(Boolean* _)
 {
     return new Error("Attempt to add object and boolean with '+'");
@@ -1218,6 +1753,16 @@ Node* Object::Plus(Function* _)
 Node* Function::Plus(Error* _)
 {
     return _;
+}
+
+Node* Function::Plus(Nothing* _)
+{
+    return new Error("Attempt to add function and nothing with '+'");
+}
+
+Node* Function::Plus(Member* _)
+{
+    return new Error("Attempt to add function and member with '+'");
 }
 
 Node* Function::Plus(Boolean* _)
@@ -1260,6 +1805,16 @@ Node* Error::Minus(Error* _)
     return _;
 }
 
+Node* Error::Minus(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::Minus(Member* _)
+{
+    return this;
+}
+
 Node* Error::Minus(Boolean* _)
 {
     return this;
@@ -1295,9 +1850,119 @@ Node* Error::Minus(Function* _)
     return this;
 }
 
+Node* Nothing::Minus(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::Minus(Nothing* _)
+{
+    return new Error("Attempt to subtract nothing and nothing with '-'");
+}
+
+Node* Nothing::Minus(Member* _)
+{
+    return new Error("Attempt to subtract nothing and member with '-'");
+}
+
+Node* Nothing::Minus(Boolean* _)
+{
+    return new Error("Attempt to subtract nothing and boolean with '-'");
+}
+
+Node* Nothing::Minus(Integer* _)
+{
+    return new Error("Attempt to subtract nothing and integer with '-'");
+}
+
+Node* Nothing::Minus(Double* _)
+{
+    return new Error("Attempt to subtract nothing and double with '-'");
+}
+
+Node* Nothing::Minus(String* _)
+{
+    return new Error("Attempt to subtract nothing and string with '-'");
+}
+
+Node* Nothing::Minus(Array* _)
+{
+    return new Error("Attempt to subtract nothing and array with '-'");
+}
+
+Node* Nothing::Minus(Object* _)
+{
+    return new Error("Attempt to subtract nothing and object with '-'");
+}
+
+Node* Nothing::Minus(Function* _)
+{
+    return new Error("Attempt to subtract nothing and function with '-'");
+}
+
+Node* Member::Minus(Error* _)
+{
+    return _;
+}
+
+Node* Member::Minus(Nothing* _)
+{
+    return new Error("Attempt to subtract member and nothing with '-'");
+}
+
+Node* Member::Minus(Member* _)
+{
+    return new Error("Attempt to subtract member and member with '-'");
+}
+
+Node* Member::Minus(Boolean* _)
+{
+    return new Error("Attempt to subtract member and boolean with '-'");
+}
+
+Node* Member::Minus(Integer* _)
+{
+    return new Error("Attempt to subtract member and integer with '-'");
+}
+
+Node* Member::Minus(Double* _)
+{
+    return new Error("Attempt to subtract member and double with '-'");
+}
+
+Node* Member::Minus(String* _)
+{
+    return new Error("Attempt to subtract member and string with '-'");
+}
+
+Node* Member::Minus(Array* _)
+{
+    return new Error("Attempt to subtract member and array with '-'");
+}
+
+Node* Member::Minus(Object* _)
+{
+    return new Error("Attempt to subtract member and object with '-'");
+}
+
+Node* Member::Minus(Function* _)
+{
+    return new Error("Attempt to subtract member and function with '-'");
+}
+
 Node* Boolean::Minus(Error* _)
 {
     return _;
+}
+
+Node* Boolean::Minus(Nothing* _)
+{
+    return new Error("Attempt to subtract boolean and nothing with '-'");
+}
+
+Node* Boolean::Minus(Member* _)
+{
+    return new Error("Attempt to subtract boolean and member with '-'");
 }
 
 Node* Boolean::Minus(Boolean* _)
@@ -1340,6 +2005,16 @@ Node* Integer::Minus(Error* _)
     return _;
 }
 
+Node* Integer::Minus(Nothing* _)
+{
+    return new Error("Attempt to subtract integer and nothing with '-'");
+}
+
+Node* Integer::Minus(Member* _)
+{
+    return new Error("Attempt to subtract integer and member with '-'");
+}
+
 Node* Integer::Minus(Boolean* _)
 {
     return new Error("Attempt to subtract integer and boolean with '-'");
@@ -1378,6 +2053,16 @@ Node* Integer::Minus(Function* _)
 Node* Double::Minus(Error* _)
 {
     return _;
+}
+
+Node* Double::Minus(Nothing* _)
+{
+    return new Error("Attempt to subtract double and nothing with '-'");
+}
+
+Node* Double::Minus(Member* _)
+{
+    return new Error("Attempt to subtract double and member with '-'");
 }
 
 Node* Double::Minus(Boolean* _)
@@ -1420,6 +2105,16 @@ Node* String::Minus(Error* _)
     return _;
 }
 
+Node* String::Minus(Nothing* _)
+{
+    return new Error("Attempt to subtract string and nothing with '-'");
+}
+
+Node* String::Minus(Member* _)
+{
+    return new Error("Attempt to subtract string and member with '-'");
+}
+
 Node* String::Minus(Boolean* _)
 {
     return new Error("Attempt to subtract string and boolean with '-'");
@@ -1458,6 +2153,16 @@ Node* String::Minus(Function* _)
 Node* Array::Minus(Error* _)
 {
     return _;
+}
+
+Node* Array::Minus(Nothing* _)
+{
+    return new Error("Attempt to subtract array and nothing with '-'");
+}
+
+Node* Array::Minus(Member* _)
+{
+    return new Error("Attempt to subtract array and member with '-'");
 }
 
 Node* Array::Minus(Boolean* _)
@@ -1500,6 +2205,16 @@ Node* Object::Minus(Error* _)
     return _;
 }
 
+Node* Object::Minus(Nothing* _)
+{
+    return new Error("Attempt to subtract object and nothing with '-'");
+}
+
+Node* Object::Minus(Member* _)
+{
+    return new Error("Attempt to subtract object and member with '-'");
+}
+
 Node* Object::Minus(Boolean* _)
 {
     return new Error("Attempt to subtract object and boolean with '-'");
@@ -1538,6 +2253,16 @@ Node* Object::Minus(Function* _)
 Node* Function::Minus(Error* _)
 {
     return _;
+}
+
+Node* Function::Minus(Nothing* _)
+{
+    return new Error("Attempt to subtract function and nothing with '-'");
+}
+
+Node* Function::Minus(Member* _)
+{
+    return new Error("Attempt to subtract function and member with '-'");
 }
 
 Node* Function::Minus(Boolean* _)
@@ -1580,6 +2305,16 @@ Node* Error::Times(Error* _)
     return this;
 }
 
+Node* Error::Times(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::Times(Member* _)
+{
+    return this;
+}
+
 Node* Error::Times(Boolean* _)
 {
     return this;
@@ -1615,9 +2350,119 @@ Node* Error::Times(Function* _)
     return this;
 }
 
+Node* Nothing::Times(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::Times(Nothing* _)
+{
+    return new Error("Attempt to multiply nothing by nothing with '*'");
+}
+
+Node* Nothing::Times(Member* _)
+{
+    return new Error("Attempt to multiply nothing by member with '*'");
+}
+
+Node* Nothing::Times(Boolean* _)
+{
+    return new Error("Attempt to multiply nothing by boolean with '*'");
+}
+
+Node* Nothing::Times(Integer* _)
+{
+    return new Error("Attempt to multiply nothing by integer with '*'");
+}
+
+Node* Nothing::Times(Double* _)
+{
+    return new Error("Attempt to multiply nothing by double with '*'");
+}
+
+Node* Nothing::Times(String* _)
+{
+    return new Error("Attempt to multiply nothing by string with '*'");
+}
+
+Node* Nothing::Times(Array* _)
+{
+    return new Error("Attempt to multiply nothing by array with '*'");
+}
+
+Node* Nothing::Times(Object* _)
+{
+    return new Error("Attempt to multiply nothing by object with '*'");
+}
+
+Node* Nothing::Times(Function* _)
+{
+    return new Error("Attempt to multiply nothing by function with '*'");
+}
+
+Node* Member::Times(Error* _)
+{
+    return _;
+}
+
+Node* Member::Times(Nothing* _)
+{
+    return new Error("Attempt to multiply member by nothing with '*'");
+}
+
+Node* Member::Times(Member* _)
+{
+    return new Error("Attempt to multiply member by member with '*'");
+}
+
+Node* Member::Times(Boolean* _)
+{
+    return new Error("Attempt to multiply member by boolean with '*'");
+}
+
+Node* Member::Times(Integer* _)
+{
+    return new Error("Attempt to multiply member by integer with '*'");
+}
+
+Node* Member::Times(Double* _)
+{
+    return new Error("Attempt to multiply member by double with '*'");
+}
+
+Node* Member::Times(String* _)
+{
+    return new Error("Attempt to multiply member by string with '*'");
+}
+
+Node* Member::Times(Array* _)
+{
+    return new Error("Attempt to multiply member by array with '*'");
+}
+
+Node* Member::Times(Object* _)
+{
+    return new Error("Attempt to multiply member by object with '*'");
+}
+
+Node* Member::Times(Function* _)
+{
+    return new Error("Attempt to multiply member by function with '*'");
+}
+
 Node* Boolean::Times(Error* _)
 {
     return _;
+}
+
+Node* Boolean::Times(Nothing* _)
+{
+    return new Error("Attempt to multiply boolean by nothing with '*'");
+}
+
+Node* Boolean::Times(Member* _)
+{
+    return new Error("Attempt to multiply boolean by member with '*'");
 }
 
 Node* Boolean::Times(Boolean* _)
@@ -1660,6 +2505,16 @@ Node* Integer::Times(Error* _)
     return _;
 }
 
+Node* Integer::Times(Nothing* _)
+{
+    return new Error("Attempt to multiply integer by nothing with '*'");
+}
+
+Node* Integer::Times(Member* _)
+{
+    return new Error("Attempt to multiply integer by member with '*'");
+}
+
 Node* Integer::Times(Boolean* _)
 {
     return new Error("Attempt to multiply integer by boolean with '*'");
@@ -1698,6 +2553,16 @@ Node* Integer::Times(Function* _)
 Node* Double::Times(Error* _)
 {
     return _;
+}
+
+Node* Double::Times(Nothing* _)
+{
+    return new Error("Attempt to multiply double by nothing with '*'");
+}
+
+Node* Double::Times(Member* _)
+{
+    return new Error("Attempt to multiply double by member with '*'");
 }
 
 Node* Double::Times(Boolean* _)
@@ -1740,6 +2605,16 @@ Node* String::Times(Error* _)
     return _;
 }
 
+Node* String::Times(Nothing* _)
+{
+    return new Error("Attempt to multiply string by nothing with '*'");
+}
+
+Node* String::Times(Member* _)
+{
+    return new Error("Attempt to multiply string by member with '*'");
+}
+
 Node* String::Times(Boolean* _)
 {
     return new Error("Attempt to multiply string by boolean with '*'");
@@ -1778,6 +2653,16 @@ Node* String::Times(Function* _)
 Node* Array::Times(Error* _)
 {
     return _;
+}
+
+Node* Array::Times(Nothing* _)
+{
+    return new Error("Attempt to multiply array by nothing with '*'");
+}
+
+Node* Array::Times(Member* _)
+{
+    return new Error("Attempt to multiply array by member with '*'");
 }
 
 Node* Array::Times(Boolean* _)
@@ -1820,6 +2705,16 @@ Node* Object::Times(Error* _)
     return _;
 }
 
+Node* Object::Times(Nothing* _)
+{
+    return new Error("Attempt to multiply object by nothing with '*'");
+}
+
+Node* Object::Times(Member* _)
+{
+    return new Error("Attempt to multiply object by member with '*'");
+}
+
 Node* Object::Times(Boolean* _)
 {
     return new Error("Attempt to multiply object by boolean with '*'");
@@ -1858,6 +2753,16 @@ Node* Object::Times(Function* _)
 Node* Function::Times(Error* _)
 {
     return _;
+}
+
+Node* Function::Times(Nothing* _)
+{
+    return new Error("Attempt to multiply function by nothing with '*'");
+}
+
+Node* Function::Times(Member* _)
+{
+    return new Error("Attempt to multiply function by member with '*'");
 }
 
 Node* Function::Times(Boolean* _)
@@ -1900,6 +2805,16 @@ Node* Error::DividedBy(Error* _)
     return _;
 }
 
+Node* Error::DividedBy(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::DividedBy(Member* _)
+{
+    return this;
+}
+
 Node* Error::DividedBy(Boolean* _)
 {
     return this;
@@ -1935,9 +2850,119 @@ Node* Error::DividedBy(Function* _)
     return this;
 }
 
+Node* Nothing::DividedBy(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::DividedBy(Nothing* _)
+{
+    return new Error("Attempt to divide nothing by nothing with '/'");
+}
+
+Node* Nothing::DividedBy(Member* _)
+{
+    return new Error("Attempt to divide nothing by member with '/'");
+}
+
+Node* Nothing::DividedBy(Boolean* _)
+{
+    return new Error("Attempt to divide nothing by boolean with '/'");
+}
+
+Node* Nothing::DividedBy(Integer* _)
+{
+    return new Error("Attempt to divide nothing by integer with '/'");
+}
+
+Node* Nothing::DividedBy(Double* _)
+{
+    return new Error("Attempt to divide nothing by double with '/'");
+}
+
+Node* Nothing::DividedBy(String* _)
+{
+    return new Error("Attempt to divide nothing by string with '/'");
+}
+
+Node* Nothing::DividedBy(Array* _)
+{
+    return new Error("Attempt to divide nothing by array with '/'");
+}
+
+Node* Nothing::DividedBy(Object* _)
+{
+    return new Error("Attempt to divide nothing by object with '/'");
+}
+
+Node* Nothing::DividedBy(Function* _)
+{
+    return new Error("Attempt to divide nothing by function with '/'");
+}
+
+Node* Member::DividedBy(Error* _)
+{
+    return _;
+}
+
+Node* Member::DividedBy(Nothing* _)
+{
+    return new Error("Attempt to divide member by nothing with '/'");
+}
+
+Node* Member::DividedBy(Member* _)
+{
+    return new Error("Attempt to divide member by member with '/'");
+}
+
+Node* Member::DividedBy(Boolean* _)
+{
+    return new Error("Attempt to divide member by boolean with '/'");
+}
+
+Node* Member::DividedBy(Integer* _)
+{
+    return new Error("Attempt to divide member by integer with '/'");
+}
+
+Node* Member::DividedBy(Double* _)
+{
+    return new Error("Attempt to divide member by double with '/'");
+}
+
+Node* Member::DividedBy(String* _)
+{
+    return new Error("Attempt to divide member by string with '/'");
+}
+
+Node* Member::DividedBy(Array* _)
+{
+    return new Error("Attempt to divide member by array with '/'");
+}
+
+Node* Member::DividedBy(Object* _)
+{
+    return new Error("Attempt to divide member by object with '/'");
+}
+
+Node* Member::DividedBy(Function* _)
+{
+    return new Error("Attempt to divide member by function with '/'");
+}
+
 Node* Boolean::DividedBy(Error* _)
 {
     return _;
+}
+
+Node* Boolean::DividedBy(Nothing* _)
+{
+    return new Error("Attempt to divide boolean by nothing with '/'");
+}
+
+Node* Boolean::DividedBy(Member* _)
+{
+    return new Error("Attempt to divide boolean by member with '/'");
 }
 
 Node* Boolean::DividedBy(Boolean* _)
@@ -1980,6 +3005,16 @@ Node* Integer::DividedBy(Error* _)
     return _;
 }
 
+Node* Integer::DividedBy(Nothing* _)
+{
+    return new Error("Attempt to divide integer by nothing with '/'");
+}
+
+Node* Integer::DividedBy(Member* _)
+{
+    return new Error("Attempt to divide integer by member with '/'");
+}
+
 Node* Integer::DividedBy(Boolean* _)
 {
     return new Error("Attempt to divide integer by boolean with '/'");
@@ -2018,6 +3053,16 @@ Node* Integer::DividedBy(Function* _)
 Node* Double::DividedBy(Error* _)
 {
     return _;
+}
+
+Node* Double::DividedBy(Nothing* _)
+{
+    return new Error("Attempt to divide double by nothing with '/'");
+}
+
+Node* Double::DividedBy(Member* _)
+{
+    return new Error("Attempt to divide double by member with '/'");
 }
 
 Node* Double::DividedBy(Boolean* _)
@@ -2060,6 +3105,16 @@ Node* String::DividedBy(Error* _)
     return _;
 }
 
+Node* String::DividedBy(Nothing* _)
+{
+    return new Error("Attempt to divide string by nothing with '/'");
+}
+
+Node* String::DividedBy(Member* _)
+{
+    return new Error("Attempt to divide string by member with '/'");
+}
+
 Node* String::DividedBy(Boolean* _)
 {
     return new Error("Attempt to divide string by boolean with '/'");
@@ -2098,6 +3153,16 @@ Node* String::DividedBy(Function* _)
 Node* Array::DividedBy(Error* _)
 {
     return _;
+}
+
+Node* Array::DividedBy(Nothing* _)
+{
+    return new Error("Attempt to divide array by nothing with '/'");
+}
+
+Node* Array::DividedBy(Member* _)
+{
+    return new Error("Attempt to divide array by member with '/'");
 }
 
 Node* Array::DividedBy(Boolean* _)
@@ -2140,6 +3205,16 @@ Node* Object::DividedBy(Error* _)
     return _;
 }
 
+Node* Object::DividedBy(Nothing* _)
+{
+    return new Error("Attempt to divide object by nothing with '/'");
+}
+
+Node* Object::DividedBy(Member* _)
+{
+    return new Error("Attempt to divide object by member with '/'");
+}
+
 Node* Object::DividedBy(Boolean* _)
 {
     return new Error("Attempt to divide object by boolean with '/'");
@@ -2178,6 +3253,16 @@ Node* Object::DividedBy(Function* _)
 Node* Function::DividedBy(Error* _)
 {
     return _;
+}
+
+Node* Function::DividedBy(Nothing* _)
+{
+    return new Error("Attempt to divide function by nothing with '/'");
+}
+
+Node* Function::DividedBy(Member* _)
+{
+    return new Error("Attempt to divide function by member with '/'");
 }
 
 Node* Function::DividedBy(Boolean* _)
@@ -2220,6 +3305,16 @@ Node* Error::Mod(Error* _)
     return _;
 }
 
+Node* Error::Mod(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::Mod(Member* _)
+{
+    return this;
+}
+
 Node* Error::Mod(Boolean* _)
 {
     return this;
@@ -2255,9 +3350,119 @@ Node* Error::Mod(Function* _)
     return this;
 }
 
+Node* Nothing::Mod(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::Mod(Nothing* _)
+{
+    return new Error("Attempt to mod nothing and nothing with '%'");
+}
+
+Node* Nothing::Mod(Member* _)
+{
+    return new Error("Attempt to mod nothing and member with '%'");
+}
+
+Node* Nothing::Mod(Boolean* _)
+{
+    return new Error("Attempt to mod nothing and boolean with '%'");
+}
+
+Node* Nothing::Mod(Integer* _)
+{
+    return new Error("Attempt to mod nothing and integer with '%'");
+}
+
+Node* Nothing::Mod(Double* _)
+{
+    return new Error("Attempt to mod nothing and double with '%'");
+}
+
+Node* Nothing::Mod(String* _)
+{
+    return new Error("Attempt to mod nothing and string with '%'");
+}
+
+Node* Nothing::Mod(Array* _)
+{
+    return new Error("Attempt to mod nothing and array with '%'");
+}
+
+Node* Nothing::Mod(Object* _)
+{
+    return new Error("Attempt to mod nothing and object with '%'");
+}
+
+Node* Nothing::Mod(Function* _)
+{
+    return new Error("Attempt to mod nothing and function with '%'");
+}
+
+Node* Member::Mod(Error* _)
+{
+    return _;
+}
+
+Node* Member::Mod(Nothing* _)
+{
+    return new Error("Attempt to mod member and nothing with '%'");
+}
+
+Node* Member::Mod(Member* _)
+{
+    return new Error("Attempt to mod member and member with '%'");
+}
+
+Node* Member::Mod(Boolean* _)
+{
+    return new Error("Attempt to mod member and boolean with '%'");
+}
+
+Node* Member::Mod(Integer* _)
+{
+    return new Error("Attempt to mod member and integer with '%'");
+}
+
+Node* Member::Mod(Double* _)
+{
+    return new Error("Attempt to mod member and double with '%'");
+}
+
+Node* Member::Mod(String* _)
+{
+    return new Error("Attempt to mod member and string with '%'");
+}
+
+Node* Member::Mod(Array* _)
+{
+    return new Error("Attempt to mod member and array with '%'");
+}
+
+Node* Member::Mod(Object* _)
+{
+    return new Error("Attempt to mod member and object with '%'");
+}
+
+Node* Member::Mod(Function* _)
+{
+    return new Error("Attempt to mod member and function with '%'");
+}
+
 Node* Boolean::Mod(Error* _)
 {
     return _;
+}
+
+Node* Boolean::Mod(Nothing* _)
+{
+    return new Error("Attempt to mod boolean and nothing with '%'");
+}
+
+Node* Boolean::Mod(Member* _)
+{
+    return new Error("Attempt to mod boolean and member with '%'");
 }
 
 Node* Boolean::Mod(Boolean* _)
@@ -2300,6 +3505,16 @@ Node* Integer::Mod(Error* _)
     return _;
 }
 
+Node* Integer::Mod(Nothing* _)
+{
+    return new Error("Attempt to mod integer and nothing with '%'");
+}
+
+Node* Integer::Mod(Member* _)
+{
+    return new Error("Attempt to mod integer and member with '%'");
+}
+
 Node* Integer::Mod(Boolean* _)
 {
     return new Error("Attempt to mod integer and boolean with '%'");
@@ -2338,6 +3553,16 @@ Node* Integer::Mod(Function* _)
 Node* Double::Mod(Error* _)
 {
     return _;
+}
+
+Node* Double::Mod(Nothing* _)
+{
+    return new Error("Attempt to mod double and nothing with '%'");
+}
+
+Node* Double::Mod(Member* _)
+{
+    return new Error("Attempt to mod double and member with '%'");
 }
 
 Node* Double::Mod(Boolean* _)
@@ -2380,6 +3605,16 @@ Node* String::Mod(Error* _)
     return _;
 }
 
+Node* String::Mod(Nothing* _)
+{
+    return new Error("Attempt to mod string and nothing with '%'");
+}
+
+Node* String::Mod(Member* _)
+{
+    return new Error("Attempt to mod string and member with '%'");
+}
+
 Node* String::Mod(Boolean* _)
 {
     return new Error("Attempt to mod string and boolean with '%'");
@@ -2418,6 +3653,16 @@ Node* String::Mod(Function* _)
 Node* Array::Mod(Error* _)
 {
     return _;
+}
+
+Node* Array::Mod(Nothing* _)
+{
+    return new Error("Attempt to mod array and nothing with '%'");
+}
+
+Node* Array::Mod(Member* _)
+{
+    return new Error("Attempt to mod array and member with '%'");
 }
 
 Node* Array::Mod(Boolean* _)
@@ -2460,6 +3705,16 @@ Node* Object::Mod(Error* _)
     return _;
 }
 
+Node* Object::Mod(Nothing* _)
+{
+    return new Error("Attempt to mod object and nothing with '%'");
+}
+
+Node* Object::Mod(Member* _)
+{
+    return new Error("Attempt to mod object and member with '%'");
+}
+
 Node* Object::Mod(Boolean* _)
 {
     return new Error("Attempt to mod object and boolean with '%'");
@@ -2498,6 +3753,16 @@ Node* Object::Mod(Function* _)
 Node* Function::Mod(Error* _)
 {
     return _;
+}
+
+Node* Function::Mod(Nothing* _)
+{
+    return new Error("Attempt to mod function and nothing with '%'");
+}
+
+Node* Function::Mod(Member* _)
+{
+    return new Error("Attempt to mod function and member with '%'");
 }
 
 Node* Function::Mod(Boolean* _)
@@ -2540,6 +3805,16 @@ Node* Error::Call(Error* _)
     return _;
 }
 
+Node* Error::Call(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::Call(Member* _)
+{
+    return this;
+}
+
 Node* Error::Call(Boolean* _)
 {
     return this;
@@ -2575,9 +3850,119 @@ Node* Error::Call(Function* _)
     return this;
 }
 
+Node* Nothing::Call(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::Call(Nothing* _)
+{
+    return new Error("Attmept to call nothing with nothing as argument");
+}
+
+Node* Nothing::Call(Member* _)
+{
+    return new Error("Attmept to call nothing with member as argument");
+}
+
+Node* Nothing::Call(Boolean* _)
+{
+    return new Error("Attmept to call nothing with boolean as argument");
+}
+
+Node* Nothing::Call(Integer* _)
+{
+    return new Error("Attmept to call nothing with integer as argument");
+}
+
+Node* Nothing::Call(Double* _)
+{
+    return new Error("Attmept to call nothing with double as argument");
+}
+
+Node* Nothing::Call(String* _)
+{
+    return new Error("Attmept to call nothing with string as argument");
+}
+
+Node* Nothing::Call(Array* _)
+{
+    return new Error("Attmept to call nothing with array as argument");
+}
+
+Node* Nothing::Call(Object* _)
+{
+    return new Error("Attmept to call nothing with object as argument");
+}
+
+Node* Nothing::Call(Function* _)
+{
+    return new Error("Attmept to call nothing with function as argument");
+}
+
+Node* Member::Call(Error* _)
+{
+    return _;
+}
+
+Node* Member::Call(Nothing* _)
+{
+    return new Error("Attmept to call member with nothing as argument");
+}
+
+Node* Member::Call(Member* _)
+{
+    return new Error("Attmept to call member with member as argument");
+}
+
+Node* Member::Call(Boolean* _)
+{
+    return new Error("Attmept to call member with boolean as argument");
+}
+
+Node* Member::Call(Integer* _)
+{
+    return new Error("Attmept to call member with integer as argument");
+}
+
+Node* Member::Call(Double* _)
+{
+    return new Error("Attmept to call member with double as argument");
+}
+
+Node* Member::Call(String* _)
+{
+    return new Error("Attmept to call member with string as argument");
+}
+
+Node* Member::Call(Array* _)
+{
+    return new Error("Attmept to call member with array as argument");
+}
+
+Node* Member::Call(Object* _)
+{
+    return new Error("Attmept to call member with object as argument");
+}
+
+Node* Member::Call(Function* _)
+{
+    return new Error("Attmept to call member with function as argument");
+}
+
 Node* Boolean::Call(Error* _)
 {
     return _;
+}
+
+Node* Boolean::Call(Nothing* _)
+{
+    return new Error("Attmept to call boolean with nothing as argument");
+}
+
+Node* Boolean::Call(Member* _)
+{
+    return new Error("Attmept to call boolean with member as argument");
 }
 
 Node* Boolean::Call(Boolean* _)
@@ -2620,6 +4005,16 @@ Node* Integer::Call(Error* _)
     return _;
 }
 
+Node* Integer::Call(Nothing* _)
+{
+    return new Error("Attmept to call integer with nothing as argument");
+}
+
+Node* Integer::Call(Member* _)
+{
+    return new Error("Attmept to call integer with member as argument");
+}
+
 Node* Integer::Call(Boolean* _)
 {
     return new Error("Attmept to call integer with boolean as argument");
@@ -2658,6 +4053,16 @@ Node* Integer::Call(Function* _)
 Node* Double::Call(Error* _)
 {
     return _;
+}
+
+Node* Double::Call(Nothing* _)
+{
+    return new Error("Attmept to call double with nothing as argument");
+}
+
+Node* Double::Call(Member* _)
+{
+    return new Error("Attmept to call double with member as argument");
 }
 
 Node* Double::Call(Boolean* _)
@@ -2700,6 +4105,16 @@ Node* String::Call(Error* _)
     return _;
 }
 
+Node* String::Call(Nothing* _)
+{
+    return new Error("Attmept to call string with nothing as argument");
+}
+
+Node* String::Call(Member* _)
+{
+    return new Error("Attmept to call string with member as argument");
+}
+
 Node* String::Call(Boolean* _)
 {
     return new Error("Attmept to call string with boolean as argument");
@@ -2738,6 +4153,16 @@ Node* String::Call(Function* _)
 Node* Array::Call(Error* _)
 {
     return _;
+}
+
+Node* Array::Call(Nothing* _)
+{
+    return new Error("Attmept to call array with nothing as argument");
+}
+
+Node* Array::Call(Member* _)
+{
+    return new Error("Attmept to call array with member as argument");
 }
 
 Node* Array::Call(Boolean* _)
@@ -2780,6 +4205,16 @@ Node* Object::Call(Error* _)
     return _;
 }
 
+Node* Object::Call(Nothing* _)
+{
+    return new Error("Attmept to call object with nothing as argument");
+}
+
+Node* Object::Call(Member* _)
+{
+    return new Error("Attmept to call object with member as argument");
+}
+
 Node* Object::Call(Boolean* _)
 {
     return new Error("Attmept to call object with boolean as argument");
@@ -2818,6 +4253,16 @@ Node* Object::Call(Function* _)
 Node* Function::Call(Error* _)
 {
     return _;
+}
+
+Node* Function::Call(Nothing* _)
+{
+    return new Error("Attmept to call function with nothing as argument");
+}
+
+Node* Function::Call(Member* _)
+{
+    return new Error("Attmept to call function with member as argument");
 }
 
 Node* Function::Call(Boolean* _)
@@ -2860,6 +4305,16 @@ Node* Error::Equals(Error* _)
     return _;
 }
 
+Node* Error::Equals(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::Equals(Member* _)
+{
+    return this;
+}
+
 Node* Error::Equals(Boolean* _)
 {
     return this;
@@ -2895,9 +4350,119 @@ Node* Error::Equals(Function* _)
     return this;
 }
 
+Node* Nothing::Equals(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::Equals(Nothing* _)
+{
+    return new Error("Attempt to compare nothing");
+}
+
+Node* Nothing::Equals(Member* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::Equals(Boolean* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::Equals(Integer* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::Equals(Double* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::Equals(String* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::Equals(Array* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::Equals(Object* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::Equals(Function* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::Equals(Error* _)
+{
+    return _;
+}
+
+Node* Member::Equals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Member::Equals(Member* _)
+{
+    return new Boolean( getValue() == _->getValue() );
+}
+
+Node* Member::Equals(Boolean* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::Equals(Integer* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::Equals(Double* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::Equals(String* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::Equals(Array* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::Equals(Object* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::Equals(Function* _)
+{
+    return new Boolean(true);
+}
+
 Node* Boolean::Equals(Error* _)
 {
     return _;
+}
+
+Node* Boolean::Equals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Boolean::Equals(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Boolean::Equals(Boolean* _)
@@ -2940,6 +4505,16 @@ Node* Integer::Equals(Error* _)
     return _;
 }
 
+Node* Integer::Equals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Integer::Equals(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* Integer::Equals(Boolean* _)
 {
     return new Boolean(false);
@@ -2978,6 +4553,16 @@ Node* Integer::Equals(Function* _)
 Node* Double::Equals(Error* _)
 {
     return _;
+}
+
+Node* Double::Equals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Double::Equals(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Double::Equals(Boolean* _)
@@ -3020,6 +4605,16 @@ Node* String::Equals(Error* _)
     return _;
 }
 
+Node* String::Equals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* String::Equals(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* String::Equals(Boolean* _)
 {
     return new Boolean(false);
@@ -3058,6 +4653,16 @@ Node* String::Equals(Function* _)
 Node* Array::Equals(Error* _)
 {
     return _;
+}
+
+Node* Array::Equals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Array::Equals(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Array::Equals(Boolean* _)
@@ -3100,6 +4705,16 @@ Node* Object::Equals(Error* _)
     return _;
 }
 
+Node* Object::Equals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Object::Equals(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* Object::Equals(Boolean* _)
 {
     return new Boolean(false);
@@ -3138,6 +4753,16 @@ Node* Object::Equals(Function* _)
 Node* Function::Equals(Error* _)
 {
     return _;
+}
+
+Node* Function::Equals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Function::Equals(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Function::Equals(Boolean* _)
@@ -3180,6 +4805,16 @@ Node* Error::NotEquals(Error* _)
     return _;
 }
 
+Node* Error::NotEquals(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::NotEquals(Member* _)
+{
+    return this;
+}
+
 Node* Error::NotEquals(Boolean* _)
 {
     return this;
@@ -3215,9 +4850,119 @@ Node* Error::NotEquals(Function* _)
     return this;
 }
 
+Node* Nothing::NotEquals(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::NotEquals(Nothing* _)
+{
+    return new Error("Attempt to compare nothing");
+}
+
+Node* Nothing::NotEquals(Member* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::NotEquals(Boolean* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::NotEquals(Integer* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::NotEquals(Double* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::NotEquals(String* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::NotEquals(Array* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::NotEquals(Object* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::NotEquals(Function* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::NotEquals(Error* _)
+{
+    return _;
+}
+
+Node* Member::NotEquals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Member::NotEquals(Member* _)
+{
+    return new Boolean( getValue() != _->getValue() );
+}
+
+Node* Member::NotEquals(Boolean* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::NotEquals(Integer* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::NotEquals(Double* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::NotEquals(String* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::NotEquals(Array* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::NotEquals(Object* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::NotEquals(Function* _)
+{
+    return new Boolean(true);
+}
+
 Node* Boolean::NotEquals(Error* _)
 {
     return _;
+}
+
+Node* Boolean::NotEquals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Boolean::NotEquals(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Boolean::NotEquals(Boolean* _)
@@ -3260,6 +5005,16 @@ Node* Integer::NotEquals(Error* _)
     return _;
 }
 
+Node* Integer::NotEquals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Integer::NotEquals(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* Integer::NotEquals(Boolean* _)
 {
     return new Boolean(true);
@@ -3298,6 +5053,16 @@ Node* Integer::NotEquals(Function* _)
 Node* Double::NotEquals(Error* _)
 {
     return _;
+}
+
+Node* Double::NotEquals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Double::NotEquals(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Double::NotEquals(Boolean* _)
@@ -3340,6 +5105,16 @@ Node* String::NotEquals(Error* _)
     return _;
 }
 
+Node* String::NotEquals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* String::NotEquals(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* String::NotEquals(Boolean* _)
 {
     return new Boolean(true);
@@ -3378,6 +5153,16 @@ Node* String::NotEquals(Function* _)
 Node* Array::NotEquals(Error* _)
 {
     return _;
+}
+
+Node* Array::NotEquals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Array::NotEquals(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Array::NotEquals(Boolean* _)
@@ -3420,6 +5205,16 @@ Node* Object::NotEquals(Error* _)
     return _;
 }
 
+Node* Object::NotEquals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Object::NotEquals(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* Object::NotEquals(Boolean* _)
 {
     return new Boolean(true);
@@ -3458,6 +5253,16 @@ Node* Object::NotEquals(Function* _)
 Node* Function::NotEquals(Error* _)
 {
     return _;
+}
+
+Node* Function::NotEquals(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Function::NotEquals(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Function::NotEquals(Boolean* _)
@@ -3500,6 +5305,16 @@ Node* Error::LessThan(Error* _)
     return this;
 }
 
+Node* Error::LessThan(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::LessThan(Member* _)
+{
+    return this;
+}
+
 Node* Error::LessThan(Boolean* _)
 {
     return this;
@@ -3535,9 +5350,119 @@ Node* Error::LessThan(Function* _)
     return this;
 }
 
+Node* Nothing::LessThan(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::LessThan(Nothing* _)
+{
+    return new Error("Attempt to compare nothing");
+}
+
+Node* Nothing::LessThan(Member* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThan(Boolean* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThan(Integer* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThan(Double* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThan(String* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThan(Array* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThan(Object* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThan(Function* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThan(Error* _)
+{
+    return _;
+}
+
+Node* Member::LessThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Member::LessThan(Member* _)
+{
+    return new Boolean( getValue() < _->getValue() );
+}
+
+Node* Member::LessThan(Boolean* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThan(Integer* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThan(Double* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThan(String* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThan(Array* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThan(Object* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThan(Function* _)
+{
+    return new Boolean(true);
+}
+
 Node* Boolean::LessThan(Error* _)
 {
     return _;
+}
+
+Node* Boolean::LessThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Boolean::LessThan(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Boolean::LessThan(Boolean* _)
@@ -3580,6 +5505,16 @@ Node* Integer::LessThan(Error* _)
     return _;
 }
 
+Node* Integer::LessThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Integer::LessThan(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* Integer::LessThan(Boolean* _)
 {
     return new Boolean(false);
@@ -3618,6 +5553,16 @@ Node* Integer::LessThan(Function* _)
 Node* Double::LessThan(Error* _)
 {
     return _;
+}
+
+Node* Double::LessThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Double::LessThan(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Double::LessThan(Boolean* _)
@@ -3660,6 +5605,16 @@ Node* String::LessThan(Error* _)
     return _;
 }
 
+Node* String::LessThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* String::LessThan(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* String::LessThan(Boolean* _)
 {
     return new Boolean(false);
@@ -3698,6 +5653,16 @@ Node* String::LessThan(Function* _)
 Node* Array::LessThan(Error* _)
 {
     return _;
+}
+
+Node* Array::LessThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Array::LessThan(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Array::LessThan(Boolean* _)
@@ -3740,6 +5705,16 @@ Node* Object::LessThan(Error* _)
     return _;
 }
 
+Node* Object::LessThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Object::LessThan(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* Object::LessThan(Boolean* _)
 {
     return new Boolean(false);
@@ -3778,6 +5753,16 @@ Node* Object::LessThan(Function* _)
 Node* Function::LessThan(Error* _)
 {
     return _;
+}
+
+Node* Function::LessThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Function::LessThan(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Function::LessThan(Boolean* _)
@@ -3820,6 +5805,16 @@ Node* Error::GreaterThan(Error* _)
     return _;
 }
 
+Node* Error::GreaterThan(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::GreaterThan(Member* _)
+{
+    return this;
+}
+
 Node* Error::GreaterThan(Boolean* _)
 {
     return this;
@@ -3855,9 +5850,119 @@ Node* Error::GreaterThan(Function* _)
     return this;
 }
 
+Node* Nothing::GreaterThan(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::GreaterThan(Nothing* _)
+{
+    return new Error("Attempt to compare nothing");
+}
+
+Node* Nothing::GreaterThan(Member* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThan(Boolean* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThan(Integer* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThan(Double* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThan(String* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThan(Array* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThan(Object* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThan(Function* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThan(Error* _)
+{
+    return _;
+}
+
+Node* Member::GreaterThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Member::GreaterThan(Member* _)
+{
+    return new Boolean( getValue() > _->getValue() );
+}
+
+Node* Member::GreaterThan(Boolean* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThan(Integer* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThan(Double* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThan(String* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThan(Array* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThan(Object* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThan(Function* _)
+{
+    return new Boolean(true);
+}
+
 Node* Boolean::GreaterThan(Error* _)
 {
     return _;
+}
+
+Node* Boolean::GreaterThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Boolean::GreaterThan(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Boolean::GreaterThan(Boolean* _)
@@ -3900,6 +6005,16 @@ Node* Integer::GreaterThan(Error* _)
     return _;
 }
 
+Node* Integer::GreaterThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Integer::GreaterThan(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* Integer::GreaterThan(Boolean* _)
 {
     return new Boolean(true);
@@ -3938,6 +6053,16 @@ Node* Integer::GreaterThan(Function* _)
 Node* Double::GreaterThan(Error* _)
 {
     return _;
+}
+
+Node* Double::GreaterThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Double::GreaterThan(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Double::GreaterThan(Boolean* _)
@@ -3980,6 +6105,16 @@ Node* String::GreaterThan(Error* _)
     return _;
 }
 
+Node* String::GreaterThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* String::GreaterThan(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* String::GreaterThan(Boolean* _)
 {
     return new Boolean(true);
@@ -4018,6 +6153,16 @@ Node* String::GreaterThan(Function* _)
 Node* Array::GreaterThan(Error* _)
 {
     return _;
+}
+
+Node* Array::GreaterThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Array::GreaterThan(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Array::GreaterThan(Boolean* _)
@@ -4060,6 +6205,16 @@ Node* Object::GreaterThan(Error* _)
     return _;
 }
 
+Node* Object::GreaterThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Object::GreaterThan(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* Object::GreaterThan(Boolean* _)
 {
     return new Boolean(true);
@@ -4098,6 +6253,16 @@ Node* Object::GreaterThan(Function* _)
 Node* Function::GreaterThan(Error* _)
 {
     return _;
+}
+
+Node* Function::GreaterThan(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Function::GreaterThan(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Function::GreaterThan(Boolean* _)
@@ -4140,6 +6305,16 @@ Node* Error::LessThanOrEqualTo(Error* _)
     return _;
 }
 
+Node* Error::LessThanOrEqualTo(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::LessThanOrEqualTo(Member* _)
+{
+    return this;
+}
+
 Node* Error::LessThanOrEqualTo(Boolean* _)
 {
     return this;
@@ -4175,9 +6350,119 @@ Node* Error::LessThanOrEqualTo(Function* _)
     return this;
 }
 
+Node* Nothing::LessThanOrEqualTo(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::LessThanOrEqualTo(Nothing* _)
+{
+    return new Error("Attempt to compare nothing");
+}
+
+Node* Nothing::LessThanOrEqualTo(Member* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThanOrEqualTo(Boolean* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThanOrEqualTo(Integer* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThanOrEqualTo(Double* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThanOrEqualTo(String* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThanOrEqualTo(Array* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThanOrEqualTo(Object* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::LessThanOrEqualTo(Function* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThanOrEqualTo(Error* _)
+{
+    return _;
+}
+
+Node* Member::LessThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Member::LessThanOrEqualTo(Member* _)
+{
+    return new Boolean( getValue() <= _->getValue() );
+}
+
+Node* Member::LessThanOrEqualTo(Boolean* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThanOrEqualTo(Integer* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThanOrEqualTo(Double* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThanOrEqualTo(String* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThanOrEqualTo(Array* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThanOrEqualTo(Object* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::LessThanOrEqualTo(Function* _)
+{
+    return new Boolean(true);
+}
+
 Node* Boolean::LessThanOrEqualTo(Error* _)
 {
     return _;
+}
+
+Node* Boolean::LessThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Boolean::LessThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Boolean::LessThanOrEqualTo(Boolean* _)
@@ -4220,6 +6505,16 @@ Node* Integer::LessThanOrEqualTo(Error* _)
     return _;
 }
 
+Node* Integer::LessThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Integer::LessThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* Integer::LessThanOrEqualTo(Boolean* _)
 {
     return new Boolean(false);
@@ -4258,6 +6553,16 @@ Node* Integer::LessThanOrEqualTo(Function* _)
 Node* Double::LessThanOrEqualTo(Error* _)
 {
     return _;
+}
+
+Node* Double::LessThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Double::LessThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Double::LessThanOrEqualTo(Boolean* _)
@@ -4300,6 +6605,16 @@ Node* String::LessThanOrEqualTo(Error* _)
     return _;
 }
 
+Node* String::LessThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* String::LessThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* String::LessThanOrEqualTo(Boolean* _)
 {
     return new Boolean(false);
@@ -4338,6 +6653,16 @@ Node* String::LessThanOrEqualTo(Function* _)
 Node* Array::LessThanOrEqualTo(Error* _)
 {
     return _;
+}
+
+Node* Array::LessThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Array::LessThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Array::LessThanOrEqualTo(Boolean* _)
@@ -4380,6 +6705,16 @@ Node* Object::LessThanOrEqualTo(Error* _)
     return _;
 }
 
+Node* Object::LessThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Object::LessThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* Object::LessThanOrEqualTo(Boolean* _)
 {
     return new Boolean(false);
@@ -4418,6 +6753,16 @@ Node* Object::LessThanOrEqualTo(Function* _)
 Node* Function::LessThanOrEqualTo(Error* _)
 {
     return _;
+}
+
+Node* Function::LessThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Function::LessThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Function::LessThanOrEqualTo(Boolean* _)
@@ -4460,6 +6805,16 @@ Node* Error::GreaterThanOrEqualTo(Error* _)
     return _;
 }
 
+Node* Error::GreaterThanOrEqualTo(Nothing* _)
+{
+    return this;
+}
+
+Node* Error::GreaterThanOrEqualTo(Member* _)
+{
+    return this;
+}
+
 Node* Error::GreaterThanOrEqualTo(Boolean* _)
 {
     return this;
@@ -4495,9 +6850,119 @@ Node* Error::GreaterThanOrEqualTo(Function* _)
     return this;
 }
 
+Node* Nothing::GreaterThanOrEqualTo(Error* _)
+{
+    return _;
+}
+
+Node* Nothing::GreaterThanOrEqualTo(Nothing* _)
+{
+    return new Error("Attempt to compare nothing");
+}
+
+Node* Nothing::GreaterThanOrEqualTo(Member* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThanOrEqualTo(Boolean* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThanOrEqualTo(Integer* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThanOrEqualTo(Double* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThanOrEqualTo(String* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThanOrEqualTo(Array* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThanOrEqualTo(Object* _)
+{
+    return new Boolean(true);
+}
+
+Node* Nothing::GreaterThanOrEqualTo(Function* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThanOrEqualTo(Error* _)
+{
+    return _;
+}
+
+Node* Member::GreaterThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Member::GreaterThanOrEqualTo(Member* _)
+{
+    return new Boolean( getValue() >= _->getValue() );
+}
+
+Node* Member::GreaterThanOrEqualTo(Boolean* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThanOrEqualTo(Integer* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThanOrEqualTo(Double* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThanOrEqualTo(String* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThanOrEqualTo(Array* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThanOrEqualTo(Object* _)
+{
+    return new Boolean(true);
+}
+
+Node* Member::GreaterThanOrEqualTo(Function* _)
+{
+    return new Boolean(true);
+}
+
 Node* Boolean::GreaterThanOrEqualTo(Error* _)
 {
     return _;
+}
+
+Node* Boolean::GreaterThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Boolean::GreaterThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Boolean::GreaterThanOrEqualTo(Boolean* _)
@@ -4540,6 +7005,16 @@ Node* Integer::GreaterThanOrEqualTo(Error* _)
     return _;
 }
 
+Node* Integer::GreaterThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Integer::GreaterThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* Integer::GreaterThanOrEqualTo(Boolean* _)
 {
     return new Boolean(true);
@@ -4578,6 +7053,16 @@ Node* Integer::GreaterThanOrEqualTo(Function* _)
 Node* Double::GreaterThanOrEqualTo(Error* _)
 {
     return _;
+}
+
+Node* Double::GreaterThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Double::GreaterThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Double::GreaterThanOrEqualTo(Boolean* _)
@@ -4620,6 +7105,16 @@ Node* String::GreaterThanOrEqualTo(Error* _)
     return _;
 }
 
+Node* String::GreaterThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* String::GreaterThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* String::GreaterThanOrEqualTo(Boolean* _)
 {
     return new Boolean(true);
@@ -4658,6 +7153,16 @@ Node* String::GreaterThanOrEqualTo(Function* _)
 Node* Array::GreaterThanOrEqualTo(Error* _)
 {
     return _;
+}
+
+Node* Array::GreaterThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Array::GreaterThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Array::GreaterThanOrEqualTo(Boolean* _)
@@ -4700,6 +7205,16 @@ Node* Object::GreaterThanOrEqualTo(Error* _)
     return _;
 }
 
+Node* Object::GreaterThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Object::GreaterThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
+}
+
 Node* Object::GreaterThanOrEqualTo(Boolean* _)
 {
     return new Boolean(true);
@@ -4738,6 +7253,16 @@ Node* Object::GreaterThanOrEqualTo(Function* _)
 Node* Function::GreaterThanOrEqualTo(Error* _)
 {
     return _;
+}
+
+Node* Function::GreaterThanOrEqualTo(Nothing* _)
+{
+    return new Boolean(false);
+}
+
+Node* Function::GreaterThanOrEqualTo(Member* _)
+{
+    return new Boolean(false);
 }
 
 Node* Function::GreaterThanOrEqualTo(Boolean* _)
