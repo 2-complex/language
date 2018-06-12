@@ -4362,42 +4362,42 @@ Node* Nothing::Equals(Nothing* _)
 
 Node* Nothing::Equals(Member* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to member with '=='");
 }
 
 Node* Nothing::Equals(Boolean* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to boolean with '=='");
 }
 
 Node* Nothing::Equals(Integer* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to error with '=='");
 }
 
 Node* Nothing::Equals(Double* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to double with '=='");
 }
 
 Node* Nothing::Equals(String* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to string with '=='");
 }
 
 Node* Nothing::Equals(Array* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to array with '=='");
 }
 
 Node* Nothing::Equals(Object* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to object with '=='");
 }
 
 Node* Nothing::Equals(Function* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to function with '=='");
 }
 
 Node* Member::Equals(Error* _)
@@ -4407,7 +4407,7 @@ Node* Member::Equals(Error* _)
 
 Node* Member::Equals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare member to nothing with '=='");
 }
 
 Node* Member::Equals(Member* _)
@@ -4457,7 +4457,7 @@ Node* Boolean::Equals(Error* _)
 
 Node* Boolean::Equals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare boolean to nothing with '=='");
 }
 
 Node* Boolean::Equals(Member* _)
@@ -4507,7 +4507,7 @@ Node* Integer::Equals(Error* _)
 
 Node* Integer::Equals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare integer to nothing with '=='");
 }
 
 Node* Integer::Equals(Member* _)
@@ -4557,7 +4557,7 @@ Node* Double::Equals(Error* _)
 
 Node* Double::Equals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare double to nothing with '=='");
 }
 
 Node* Double::Equals(Member* _)
@@ -4607,7 +4607,7 @@ Node* String::Equals(Error* _)
 
 Node* String::Equals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare string to nothing with '=='");
 }
 
 Node* String::Equals(Member* _)
@@ -4657,7 +4657,7 @@ Node* Array::Equals(Error* _)
 
 Node* Array::Equals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare array to nothing with '=='");
 }
 
 Node* Array::Equals(Member* _)
@@ -4707,7 +4707,7 @@ Node* Object::Equals(Error* _)
 
 Node* Object::Equals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare object to nothing with '=='");
 }
 
 Node* Object::Equals(Member* _)
@@ -4757,7 +4757,7 @@ Node* Function::Equals(Error* _)
 
 Node* Function::Equals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare function to nothing with '=='");
 }
 
 Node* Function::Equals(Member* _)
@@ -4862,42 +4862,42 @@ Node* Nothing::NotEquals(Nothing* _)
 
 Node* Nothing::NotEquals(Member* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to member with '!='");
 }
 
 Node* Nothing::NotEquals(Boolean* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to boolean with '!='");
 }
 
 Node* Nothing::NotEquals(Integer* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to error with '!='");
 }
 
 Node* Nothing::NotEquals(Double* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to double with '!='");
 }
 
 Node* Nothing::NotEquals(String* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to string with '!='");
 }
 
 Node* Nothing::NotEquals(Array* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to array with '!='");
 }
 
 Node* Nothing::NotEquals(Object* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to object with '!='");
 }
 
 Node* Nothing::NotEquals(Function* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to function with '!='");
 }
 
 Node* Member::NotEquals(Error* _)
@@ -4907,7 +4907,7 @@ Node* Member::NotEquals(Error* _)
 
 Node* Member::NotEquals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare member to nothing with '!='");
 }
 
 Node* Member::NotEquals(Member* _)
@@ -4957,7 +4957,7 @@ Node* Boolean::NotEquals(Error* _)
 
 Node* Boolean::NotEquals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare boolean to nothing with '!='");
 }
 
 Node* Boolean::NotEquals(Member* _)
@@ -5007,7 +5007,7 @@ Node* Integer::NotEquals(Error* _)
 
 Node* Integer::NotEquals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare integer to nothing with '!='");
 }
 
 Node* Integer::NotEquals(Member* _)
@@ -5057,7 +5057,7 @@ Node* Double::NotEquals(Error* _)
 
 Node* Double::NotEquals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare double to nothing with '!='");
 }
 
 Node* Double::NotEquals(Member* _)
@@ -5107,7 +5107,7 @@ Node* String::NotEquals(Error* _)
 
 Node* String::NotEquals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare string to nothing with '!='");
 }
 
 Node* String::NotEquals(Member* _)
@@ -5157,7 +5157,7 @@ Node* Array::NotEquals(Error* _)
 
 Node* Array::NotEquals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare array to nothing with '!='");
 }
 
 Node* Array::NotEquals(Member* _)
@@ -5207,7 +5207,7 @@ Node* Object::NotEquals(Error* _)
 
 Node* Object::NotEquals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare object to nothing with '!='");
 }
 
 Node* Object::NotEquals(Member* _)
@@ -5257,7 +5257,7 @@ Node* Function::NotEquals(Error* _)
 
 Node* Function::NotEquals(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare function to nothing with '!='");
 }
 
 Node* Function::NotEquals(Member* _)
@@ -5362,42 +5362,42 @@ Node* Nothing::LessThan(Nothing* _)
 
 Node* Nothing::LessThan(Member* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to member with '<'");
 }
 
 Node* Nothing::LessThan(Boolean* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to boolean with '<'");
 }
 
 Node* Nothing::LessThan(Integer* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to error with '<'");
 }
 
 Node* Nothing::LessThan(Double* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to double with '<'");
 }
 
 Node* Nothing::LessThan(String* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to string with '<'");
 }
 
 Node* Nothing::LessThan(Array* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to array with '<'");
 }
 
 Node* Nothing::LessThan(Object* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to object with '<'");
 }
 
 Node* Nothing::LessThan(Function* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to function with '<'");
 }
 
 Node* Member::LessThan(Error* _)
@@ -5407,7 +5407,7 @@ Node* Member::LessThan(Error* _)
 
 Node* Member::LessThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare member to nothing with '<'");
 }
 
 Node* Member::LessThan(Member* _)
@@ -5457,7 +5457,7 @@ Node* Boolean::LessThan(Error* _)
 
 Node* Boolean::LessThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare boolean to nothing with '<'");
 }
 
 Node* Boolean::LessThan(Member* _)
@@ -5507,7 +5507,7 @@ Node* Integer::LessThan(Error* _)
 
 Node* Integer::LessThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare integer to nothing with '<'");
 }
 
 Node* Integer::LessThan(Member* _)
@@ -5557,7 +5557,7 @@ Node* Double::LessThan(Error* _)
 
 Node* Double::LessThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare double to nothing with '<'");
 }
 
 Node* Double::LessThan(Member* _)
@@ -5607,7 +5607,7 @@ Node* String::LessThan(Error* _)
 
 Node* String::LessThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare string to nothing with '<'");
 }
 
 Node* String::LessThan(Member* _)
@@ -5657,7 +5657,7 @@ Node* Array::LessThan(Error* _)
 
 Node* Array::LessThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare array to nothing with '<'");
 }
 
 Node* Array::LessThan(Member* _)
@@ -5707,7 +5707,7 @@ Node* Object::LessThan(Error* _)
 
 Node* Object::LessThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare object to nothing with '<'");
 }
 
 Node* Object::LessThan(Member* _)
@@ -5757,7 +5757,7 @@ Node* Function::LessThan(Error* _)
 
 Node* Function::LessThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare function to nothing with '<'");
 }
 
 Node* Function::LessThan(Member* _)
@@ -5862,42 +5862,42 @@ Node* Nothing::GreaterThan(Nothing* _)
 
 Node* Nothing::GreaterThan(Member* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to member with '>'");
 }
 
 Node* Nothing::GreaterThan(Boolean* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to boolean with '>'");
 }
 
 Node* Nothing::GreaterThan(Integer* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to error with '>'");
 }
 
 Node* Nothing::GreaterThan(Double* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to double with '>'");
 }
 
 Node* Nothing::GreaterThan(String* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to string with '>'");
 }
 
 Node* Nothing::GreaterThan(Array* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to array with '>'");
 }
 
 Node* Nothing::GreaterThan(Object* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to object with '>'");
 }
 
 Node* Nothing::GreaterThan(Function* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to function with '>'");
 }
 
 Node* Member::GreaterThan(Error* _)
@@ -5907,7 +5907,7 @@ Node* Member::GreaterThan(Error* _)
 
 Node* Member::GreaterThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare member to nothing with '>'");
 }
 
 Node* Member::GreaterThan(Member* _)
@@ -5957,7 +5957,7 @@ Node* Boolean::GreaterThan(Error* _)
 
 Node* Boolean::GreaterThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare boolean to nothing with '>'");
 }
 
 Node* Boolean::GreaterThan(Member* _)
@@ -6007,7 +6007,7 @@ Node* Integer::GreaterThan(Error* _)
 
 Node* Integer::GreaterThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare integer to nothing with '>'");
 }
 
 Node* Integer::GreaterThan(Member* _)
@@ -6057,7 +6057,7 @@ Node* Double::GreaterThan(Error* _)
 
 Node* Double::GreaterThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare double to nothing with '>'");
 }
 
 Node* Double::GreaterThan(Member* _)
@@ -6107,7 +6107,7 @@ Node* String::GreaterThan(Error* _)
 
 Node* String::GreaterThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare string to nothing with '>'");
 }
 
 Node* String::GreaterThan(Member* _)
@@ -6157,7 +6157,7 @@ Node* Array::GreaterThan(Error* _)
 
 Node* Array::GreaterThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare array to nothing with '>'");
 }
 
 Node* Array::GreaterThan(Member* _)
@@ -6207,7 +6207,7 @@ Node* Object::GreaterThan(Error* _)
 
 Node* Object::GreaterThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare object to nothing with '>'");
 }
 
 Node* Object::GreaterThan(Member* _)
@@ -6257,7 +6257,7 @@ Node* Function::GreaterThan(Error* _)
 
 Node* Function::GreaterThan(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare function to nothing with '>'");
 }
 
 Node* Function::GreaterThan(Member* _)
@@ -6362,42 +6362,42 @@ Node* Nothing::LessThanOrEqualTo(Nothing* _)
 
 Node* Nothing::LessThanOrEqualTo(Member* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to member with '<='");
 }
 
 Node* Nothing::LessThanOrEqualTo(Boolean* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to boolean with '<='");
 }
 
 Node* Nothing::LessThanOrEqualTo(Integer* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to error with '<='");
 }
 
 Node* Nothing::LessThanOrEqualTo(Double* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to double with '<='");
 }
 
 Node* Nothing::LessThanOrEqualTo(String* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to string with '<='");
 }
 
 Node* Nothing::LessThanOrEqualTo(Array* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to array with '<='");
 }
 
 Node* Nothing::LessThanOrEqualTo(Object* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to object with '<='");
 }
 
 Node* Nothing::LessThanOrEqualTo(Function* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to function with '<='");
 }
 
 Node* Member::LessThanOrEqualTo(Error* _)
@@ -6407,7 +6407,7 @@ Node* Member::LessThanOrEqualTo(Error* _)
 
 Node* Member::LessThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare member to nothing with '<='");
 }
 
 Node* Member::LessThanOrEqualTo(Member* _)
@@ -6457,7 +6457,7 @@ Node* Boolean::LessThanOrEqualTo(Error* _)
 
 Node* Boolean::LessThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare boolean to nothing with '<='");
 }
 
 Node* Boolean::LessThanOrEqualTo(Member* _)
@@ -6507,7 +6507,7 @@ Node* Integer::LessThanOrEqualTo(Error* _)
 
 Node* Integer::LessThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare integer to nothing with '<='");
 }
 
 Node* Integer::LessThanOrEqualTo(Member* _)
@@ -6557,7 +6557,7 @@ Node* Double::LessThanOrEqualTo(Error* _)
 
 Node* Double::LessThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare double to nothing with '<='");
 }
 
 Node* Double::LessThanOrEqualTo(Member* _)
@@ -6607,7 +6607,7 @@ Node* String::LessThanOrEqualTo(Error* _)
 
 Node* String::LessThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare string to nothing with '<='");
 }
 
 Node* String::LessThanOrEqualTo(Member* _)
@@ -6657,7 +6657,7 @@ Node* Array::LessThanOrEqualTo(Error* _)
 
 Node* Array::LessThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare array to nothing with '<='");
 }
 
 Node* Array::LessThanOrEqualTo(Member* _)
@@ -6707,7 +6707,7 @@ Node* Object::LessThanOrEqualTo(Error* _)
 
 Node* Object::LessThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare object to nothing with '<='");
 }
 
 Node* Object::LessThanOrEqualTo(Member* _)
@@ -6757,7 +6757,7 @@ Node* Function::LessThanOrEqualTo(Error* _)
 
 Node* Function::LessThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare function to nothing with '<='");
 }
 
 Node* Function::LessThanOrEqualTo(Member* _)
@@ -6862,42 +6862,42 @@ Node* Nothing::GreaterThanOrEqualTo(Nothing* _)
 
 Node* Nothing::GreaterThanOrEqualTo(Member* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to member with '>='");
 }
 
 Node* Nothing::GreaterThanOrEqualTo(Boolean* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to boolean with '>='");
 }
 
 Node* Nothing::GreaterThanOrEqualTo(Integer* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to error with '>='");
 }
 
 Node* Nothing::GreaterThanOrEqualTo(Double* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to double with '>='");
 }
 
 Node* Nothing::GreaterThanOrEqualTo(String* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to string with '>='");
 }
 
 Node* Nothing::GreaterThanOrEqualTo(Array* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to array with '>='");
 }
 
 Node* Nothing::GreaterThanOrEqualTo(Object* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to object with '>='");
 }
 
 Node* Nothing::GreaterThanOrEqualTo(Function* _)
 {
-    return new Boolean(true);
+    return new Error("Attempt to compare nothing to function with '>='");
 }
 
 Node* Member::GreaterThanOrEqualTo(Error* _)
@@ -6907,7 +6907,7 @@ Node* Member::GreaterThanOrEqualTo(Error* _)
 
 Node* Member::GreaterThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare member to nothing with '>='");
 }
 
 Node* Member::GreaterThanOrEqualTo(Member* _)
@@ -6957,7 +6957,7 @@ Node* Boolean::GreaterThanOrEqualTo(Error* _)
 
 Node* Boolean::GreaterThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare boolean to nothing with '>='");
 }
 
 Node* Boolean::GreaterThanOrEqualTo(Member* _)
@@ -7007,7 +7007,7 @@ Node* Integer::GreaterThanOrEqualTo(Error* _)
 
 Node* Integer::GreaterThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare integer to nothing with '>='");
 }
 
 Node* Integer::GreaterThanOrEqualTo(Member* _)
@@ -7057,7 +7057,7 @@ Node* Double::GreaterThanOrEqualTo(Error* _)
 
 Node* Double::GreaterThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare double to nothing with '>='");
 }
 
 Node* Double::GreaterThanOrEqualTo(Member* _)
@@ -7107,7 +7107,7 @@ Node* String::GreaterThanOrEqualTo(Error* _)
 
 Node* String::GreaterThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare string to nothing with '>='");
 }
 
 Node* String::GreaterThanOrEqualTo(Member* _)
@@ -7157,7 +7157,7 @@ Node* Array::GreaterThanOrEqualTo(Error* _)
 
 Node* Array::GreaterThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare array to nothing with '>='");
 }
 
 Node* Array::GreaterThanOrEqualTo(Member* _)
@@ -7207,7 +7207,7 @@ Node* Object::GreaterThanOrEqualTo(Error* _)
 
 Node* Object::GreaterThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare object to nothing with '>='");
 }
 
 Node* Object::GreaterThanOrEqualTo(Member* _)
@@ -7257,7 +7257,7 @@ Node* Function::GreaterThanOrEqualTo(Error* _)
 
 Node* Function::GreaterThanOrEqualTo(Nothing* _)
 {
-    return new Boolean(false);
+    return new Error("Attempt to compare function to nothing with '>='");
 }
 
 Node* Function::GreaterThanOrEqualTo(Member* _)
