@@ -22,7 +22,7 @@ void Node::setMember(const std::string& name, object::Node* value)
 
 object::Node* Node::getMember(const std::string& name)
 {
-    return this;
+    return NULL;
 }
 
 void Node::setMapping(object::Node* key, object::Node* value)
@@ -31,7 +31,7 @@ void Node::setMapping(object::Node* key, object::Node* value)
 
 object::Node* Node::getMapping(object::Node* key)
 {
-    return this;
+    return NULL;
 }
 
 std::string Error::toString() const
@@ -645,7 +645,7 @@ object::Node* Object::getMember(const std::string& name)
     auto itr = members.find(name);
     if( itr == members.end() )
     {
-        return new Error;
+        return NULL;
     }
     return itr->second;
 }

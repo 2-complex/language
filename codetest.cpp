@@ -3,7 +3,7 @@
 
 void testAddSubtract()
 {
-    Environment env;
+    Environment env(new object::Object);
 
     code::Number a("3");
     code::Number b("4");
@@ -28,7 +28,7 @@ void testAddSubtract()
 
 void testBooeanOps()
 {
-    Environment env;
+    Environment env(new object::Object);
 
     code::Boolean codeTrue("true");
     code::Boolean codeFalse("false");
@@ -55,7 +55,7 @@ void testBooeanOps()
 
 void testStringConcat()
 {
-    Environment env;
+    Environment env(new object::Object);
 
     code::String codeA("\"apples\"");
     code::String codeB("\"bananas\"");
@@ -69,7 +69,7 @@ void testStringConcat()
 
 void testArrayConcat()
 {
-    Environment env;
+    Environment env(new object::Object);
 
     code::Array A;
     code::Array B;
@@ -95,7 +95,7 @@ void testArrayConcat()
 
 void testAssignments()
 {
-    Environment env;
+    Environment env(new object::Object);
 
     code::Word x("x");
     code::Number three("3");

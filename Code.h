@@ -10,9 +10,13 @@
 
 class Environment
 {
-    object::Object obj;
+    object::Node* argument;
+    class Environment* context;
 
 public:
+    explicit Environment(object::Object* argument);
+    Environment(Environment* context, object::Object* argument);
+
     void setMember(const std::string& name, object::Node* value);
     object::Node* getMember(const std::string& name);
 

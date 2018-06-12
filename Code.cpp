@@ -3,24 +3,49 @@
 
 #include <stdlib.h>
 
+Environment::Environment(object::Object* argument)
+    : context(NULL)
+    , argument(argument)
+{
+}
+
+Environment::Environment(Environment* context, object::Object* argument)
+    : context(context)
+    , argument(argument)
+{
+}
+
 void Environment::setMember(const std::string& name, object::Node* value)
 {
-    return obj.setMember(name, value);
+    return argument->setMember(name, value);
 }
 
 object::Node* Environment::getMember(const std::string& name)
 {
-    return obj.getMember(name);
+    object::Node* node = argument->getMember(name);
+    if( node )
+    {
+        return node;
+    }
+
+    if( context )
+    {
+        return context->getMember(name);
+    }
+    else
+    {
+        return new object::Error("Member not found: " + name);
+    }
 }
 
 void Environment::setMapping(object::Node* key, object::Node* value)
 {
-    return obj.setMapping(key, value);
+    return argument->setMapping(key, value);
 }
 
 object::Node* Environment::getMapping(object::Node* key)
 {
-    return obj.getMapping(key);
+    return argument->getMapping(key);
 }
 
 namespace code
