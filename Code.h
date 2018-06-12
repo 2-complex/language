@@ -22,6 +22,8 @@ public:
 
     void setMapping(object::Node* key, object::Node* value);
     object::Node* getMapping(object::Node* key);
+
+    object::Node* getArgument();
 };
 
 

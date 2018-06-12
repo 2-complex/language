@@ -48,6 +48,11 @@ object::Node* Environment::getMapping(object::Node* key)
     return argument->getMapping(key);
 }
 
+object::Node* Environment::getArgument()
+{
+    return argument;
+}
+
 namespace code
 {
 
@@ -98,7 +103,7 @@ std::string Assignment::toString() const
 object::Node* Assignment::evaluate(Environment& env) const
 {
     reference->setMember(env, expression->evaluate(env));
-    return NULL;
+    return env.getArgument();
 }
 
 std::string Program::toString() const
@@ -113,7 +118,12 @@ std::string Program::toString() const
 
 object::Node* Program::evaluate(Environment& env) const
 {
-    return (*(lines.rbegin()))->evaluate(env);
+    object::Node* result = env.getArgument();
+    for( std::vector<Line*>::const_iterator itr = lines.begin(); itr != lines.end(); itr++)
+    {
+        result = (*itr)->evaluate(env);
+    }
+    return result;
 }
 
 std::string Call::toString() const
@@ -407,7 +417,8 @@ std::string Group::toString() const
 
 object::Node* Group::evaluate(Environment& env) const
 {
-    return program->evaluate(env);
+    Environment ext(&env, new object::Object);
+    return program->evaluate(ext);
 }
 
 Array::Array()
