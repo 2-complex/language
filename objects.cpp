@@ -1,4 +1,5 @@
 #include "objects.h"
+#include "code.h"
 
 namespace object
 {
@@ -725,6 +726,12 @@ Node* Object::And(Object* _)
 Node* Object::And(Function* _)
 {
     return new Error("Logical 'and' with object and function");
+}
+
+Function::Function(Environment* context, code::Program* program)
+    : context(context)
+    , program(program)
+{
 }
 
 std::string Function::getValue()

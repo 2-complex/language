@@ -405,8 +405,13 @@ std::string Function::toString() const
     return std::string("{") + program->toString() + std::string("}");
 }
 
+object::Node* Function::evaluate(Environment& env) const
+{
+    return new object::Function(&env, program);
+}
+
 Group::Group(Program* program)
-        : program(program)
+    : program(program)
 {
 }
 

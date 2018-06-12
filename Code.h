@@ -196,7 +196,7 @@ public:
         Comparable* right);
 
     virtual std::string toString() const override;
-    virtual object::Node* evaluate(Environment& env) const;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Function : public Expression
@@ -207,6 +207,7 @@ private:
 public:
     Function(Program* program);
     virtual std::string toString() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Group : public Expression

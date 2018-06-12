@@ -8,6 +8,12 @@
 
 #include <stdlib.h>
 
+class Environment;
+namespace code
+{
+    class Program;
+}
+
 namespace object
 {
 class Node;
@@ -602,7 +608,12 @@ DEFINITIONS
 
 class Function : public Node
 {
+    code::Program* program;
+    Environment* context;
+
 public:
+    Function(Environment* context, code::Program* program);
+
     std::string getValue();
 DEFINITIONS
 };
