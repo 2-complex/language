@@ -330,7 +330,14 @@ class Function;
 class Node
 {
 public:
+    Node();
     virtual ~Node();
+
+    mutable int refCount;
+
+    void retain();
+    void release();
+
     virtual std::string toString() const;
     virtual bool isTrue() const;
     virtual void setMember(const std::string& name, object::Node* value);
@@ -587,6 +594,8 @@ public:
 
     bool operator == (const class Key& other) const;
     bool operator < (const class Key& other) const;
+
+    std::string toString() const;
 };
 
 class Object : public Node
@@ -603,6 +612,8 @@ public:
 
     virtual void setMapping(object::Node* key, object::Node* value);
     virtual object::Node* getMapping(object::Node* key);
+
+    std::string toString() const;
 DEFINITIONS
 };
 

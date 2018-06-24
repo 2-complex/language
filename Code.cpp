@@ -103,6 +103,8 @@ std::string Assignment::toString() const
 object::Node* Assignment::evaluate(Environment& env) const
 {
     reference->setMember(env, expression->evaluate(env));
+    object::Node* result = env.getArgument();
+    result->retain();
     return env.getArgument();
 }
 
@@ -155,8 +157,8 @@ object::Node* AddedList::evaluate(Environment& env) const
             object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->Plus(next);
 
-            delete accum;
-            delete next;
+            accum->release();
+            next->release();
 
             accum = newNode;
         }
@@ -165,8 +167,8 @@ object::Node* AddedList::evaluate(Environment& env) const
             object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->Minus(next);
 
-            delete accum;
-            delete next;
+            accum->release();
+            next->release();
 
             accum = newNode;
         }
@@ -250,8 +252,8 @@ object::Node* Product::evaluate(Environment& env) const
             object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->Times(next);
 
-            delete accum;
-            delete next;
+            accum->release();;
+            next->release();;
 
             accum = newNode;
         }
@@ -260,8 +262,8 @@ object::Node* Product::evaluate(Environment& env) const
             object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->DividedBy(next);
 
-            delete accum;
-            delete next;
+            accum->release();;
+            next->release();;
 
             accum = newNode;
         }
@@ -270,8 +272,8 @@ object::Node* Product::evaluate(Environment& env) const
             object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->Mod(next);
 
-            delete accum;
-            delete next;
+            accum->release();;
+            next->release();;
 
             accum = newNode;
         }
@@ -317,8 +319,8 @@ object::Node* Conjunction::evaluate(Environment& env) const
             object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->And(next);
 
-            delete accum;
-            delete next;
+            accum->release();;
+            next->release();;
 
             accum = newNode;
         }
@@ -327,8 +329,8 @@ object::Node* Conjunction::evaluate(Environment& env) const
             object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->Or(next);
 
-            delete accum;
-            delete next;
+            accum->release();;
+            next->release();;
 
             accum = newNode;
         }

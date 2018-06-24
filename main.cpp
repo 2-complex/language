@@ -209,10 +209,8 @@ class MainVisitor : public CalamityBaseVisitor
 
     virtual Any visitNegation(CalamityParser::NegationContext* ctx) override
     {
-        Negation* negation = new Negation;
         HType h = visit(ctx->children[1]);
-        negation->operand = static_cast<Logicable*>(h.code);
-        return HType(negation);
+        return HType(new Negation(static_cast<Logicable*>(h.code)));
     }
 
     virtual Any visitBoolean(CalamityParser::BooleanContext* ctx) override
@@ -273,6 +271,9 @@ int main(int argc, const char* argv[])
     }
     else if(argc == 1)
     {
+        object::Object* obj = new object::Object;
+        Environment env(obj);
+
         for(;;)
         {
             printf("> ");
@@ -291,12 +292,10 @@ int main(int argc, const char* argv[])
             MainVisitor vistor;
             HType a = vistor.visit(tree);
 
-            Environment env;
             object::Node* answer = a.code->evaluate(env);
 
             printf( "%s\n", answer->toString().c_str() );
-
-            delete answer;
+            answer->release();
         }
     }
 }
