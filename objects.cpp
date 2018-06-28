@@ -5,6 +5,12 @@
 
 namespace object
 {
+
+Node::Node()
+    : refCount(1)
+{
+}
+
 Node::~Node()
 {
 }
@@ -12,6 +18,28 @@ Node::~Node()
 std::string Node::toString() const
 {
     return "STANDIN STRING";
+}
+
+void Node::retain()
+{
+    refCount++;
+    printf( "   refcount for %s : %d\n", toString().c_str(), refCount );
+}
+
+void Node::release()
+{
+    refCount--;
+
+    if (refCount < 0)
+    {
+        printf( "something is wrong, there was a negative refcount\n" );
+    }
+
+    if (refCount == 0)
+    {
+        printf( "   deleting %s\n", toString().c_str() );
+        delete this;
+    }
 }
 
 bool Node::isTrue() const
@@ -617,7 +645,7 @@ bool Key::operator == (const class Key& other) const
 {
     Node* temp = node->Equals(other.node);
     bool result = temp->isTrue();
-    delete temp;
+    temp->release();
     return result;
 }
 
@@ -625,8 +653,13 @@ bool Key::operator < (const class Key& other) const
 {
     Node* temp = node->LessThan(other.node);
     bool result = temp->isTrue();
-    delete temp;
+    temp->release();
     return result;
+}
+
+std::string Key::toString() const
+{
+    return node->toString();
 }
 
 std::pair<
@@ -640,6 +673,18 @@ std::pair<
 
 void Object::setMember(const std::string& name, object::Node* value)
 {
+    auto itr = members.find(name);
+    if (itr == members.end())
+    {
+        members[name] = value;
+    }
+    else
+    {
+        itr->second->release();
+        itr->second = value;
+    }
+
+
     members[name] = value;
 }
 
@@ -648,14 +693,28 @@ object::Node* Object::getMember(const std::string& name)
     auto itr = members.find(name);
     if( itr == members.end() )
     {
+        printf( "This should never happen.\nn" );
         return NULL;
     }
+
+    itr->second->retain();
     return itr->second;
 }
 
 void Object::setMapping(Node* key, Node* value)
 {
-    mappings[Key(key)] = value;
+    Key k(key);
+
+    auto itr = mappings.find(k);
+    if (itr == mappings.end())
+    {
+        mappings[k] = value;
+    }
+    else
+    {
+        itr->second->release();
+        itr->second = value;
+    }
 }
 
 Node* Object::getMapping(Node* key)
@@ -667,7 +726,29 @@ Node* Object::getMapping(Node* key)
         return new Object;
     }
 
+    itr->second->retain();
     return itr->second;
+}
+
+std::string Object::toString() const
+{
+    std::string result = "(";
+
+    for( auto itr = members.begin(); itr != members.end(); itr++ )
+    {
+        result += itr->first + "=" + itr->second->toString();
+        result += ",";
+    }
+
+    for( auto itr = mappings.begin(); itr != mappings.end(); itr++ )
+    {
+        result += itr->first.toString() + ":" + itr->second->toString();
+        result += ",";
+    }
+
+    result += ")";
+
+    return result;
 }
 
 Node* Object::Negation()
