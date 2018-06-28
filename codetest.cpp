@@ -26,6 +26,32 @@ void testAddSubtract()
     printf( "%s\n", n.evaluate(env)->toString().c_str() );
 }
 
+void testMultiplyDivide()
+{
+    Environment env(new object::Object);
+
+    code::Number a("3");
+    code::Number b("4");
+
+    code::Product product(&a);
+    product.append("*", &b);
+
+    printf( "%s = \n", product.toString().c_str() );
+    printf( "%s\n", product.evaluate(env)->toString().c_str() );
+
+    code::Product quotient(&a);
+    quotient.append("/", &b);
+
+    printf( "%s = \n", quotient.toString().c_str() );
+    printf( "%s\n", quotient.evaluate(env)->toString().c_str() );
+
+    code::Product mod(&a);
+    mod.append("%", &b);
+
+    printf( "%s = \n", mod.toString().c_str() );
+    printf( "%s\n", mod.evaluate(env)->toString().c_str() );
+}
+
 void testBooeanOps()
 {
     Environment env(new object::Object);
@@ -93,15 +119,18 @@ void testArrayConcat()
     printf( "%s\n", sum.evaluate(env)->toString().c_str() );
 }
 
-void testAssignments()
+void testAssignmentAndPair()
 {
     Environment env(new object::Object);
 
     code::Word x("x");
     code::Number three("3");
+    code::Number four("4");
     code::Assignment codeA(&x, "=", &three);
+    code::Assignment codeB(&x, "+=", &four);
 
     codeA.evaluate(env);
+    codeB.evaluate(env);
 
     printf( "%s = \n", x.toString().c_str() );
     printf( "%s\n", x.evaluate(env)->toString().c_str() );
@@ -113,7 +142,8 @@ int main(int argc, char** args)
     // testBooeanOps();
     // testStringConcat();
     // testArrayConcat();
-    testAssignments();
+    testAssignmentAndPair();
+    // testMultiplyDivide();
 
     return 0;
 }

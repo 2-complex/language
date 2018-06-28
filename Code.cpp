@@ -102,7 +102,27 @@ std::string Assignment::toString() const
 
 object::Node* Assignment::evaluate(Environment& env) const
 {
-    reference->setMember(env, expression->evaluate(env));
+    if( operation == "=" )
+    {
+        reference->setValue(env, expression->evaluate(env));
+    }
+    else if( operation == "+=" )
+    {
+        reference->setValue(env, reference->evaluate(env)->Plus(expression->evaluate(env)));
+    }
+    else if( operation == "-=" )
+    {
+        reference->setValue(env, reference->evaluate(env)->Minus(expression->evaluate(env)));
+    }
+    else if( operation == "*=" )
+    {
+        reference->setValue(env, reference->evaluate(env)->Times(expression->evaluate(env)));
+    }
+    else if( operation == "/=" )
+    {
+        reference->setValue(env, reference->evaluate(env)->DividedBy(expression->evaluate(env)));
+    }
+
     return env.getArgument();
 }
 
@@ -549,7 +569,7 @@ object::Node* Word::evaluate(Environment& env) const
     return env.getMember(name);
 }
 
-void Word::setMember(Environment& env, object::Node* value) const
+void Word::setValue(Environment& env, object::Node* value) const
 {
     env.setMember(name, value);
 }

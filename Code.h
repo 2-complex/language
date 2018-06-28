@@ -43,7 +43,7 @@ class Line : public Code
 class Expression : public Line
 {
 public:
-    virtual void setMember(Environment& env, object::Node* value) const {}
+    virtual void setValue(Environment& env, object::Node* value) const {}
 };
 
 class Pair : public Line
@@ -231,7 +231,9 @@ public:
     virtual object::Node* evaluate(Environment& env) const override;
 };
 
-class Number : public Addable
+class Number
+    : public Addable
+    , public Multiplyable
 {
 private:
     std::string text;
@@ -269,7 +271,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void setMember(Environment& env, object::Node* value) const;
+    virtual void setValue(Environment& env, object::Node* value) const;
 };
 
 class Member : public Expression

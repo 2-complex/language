@@ -1,6 +1,8 @@
 #include "objects.h"
 #include "code.h"
 
+#include <math.h>
+
 namespace object
 {
 Node::~Node()
@@ -3534,7 +3536,7 @@ Node* Integer::Mod(Integer* _)
 
 Node* Integer::Mod(Double* _)
 {
-    return new Error("Attempt to mod integer and double with '%'");
+    return new Double(fmod(value, _->getValue()));
 }
 
 Node* Integer::Mod(String* _)
@@ -3579,12 +3581,12 @@ Node* Double::Mod(Boolean* _)
 
 Node* Double::Mod(Integer* _)
 {
-    return new Error("Attempt to mod double and integer with '%'");
+    return new Double(fmod(value, _->getValue()));
 }
 
 Node* Double::Mod(Double* _)
 {
-    return new Error("Attempt to mod double and double with '%'");
+    return new Double(fmod(value, _->value));
 }
 
 Node* Double::Mod(String* _)
