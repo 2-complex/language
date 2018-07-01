@@ -151,7 +151,7 @@ class MainVisitor : public CalamityBaseVisitor
     virtual Any visitProduct(CalamityParser::ProductContext* ctx) override
     {
         HType firstH = visit(ctx->children[0]);
-        Product* product = new Product(static_cast<Multiplyable*>(firstH.code));
+        Product* product = new Product(static_cast<Expression*>(firstH.code));
 
         size_t n = ctx->children.size();
 
@@ -159,7 +159,7 @@ class MainVisitor : public CalamityBaseVisitor
         {
             HType h = visit(ctx->children[i+1]);
             product->append( ctx->children[i]->getText(),
-                static_cast<Multiplyable*>(static_cast<Multiplyable*>(h.code)));
+                static_cast<Expression*>(static_cast<Expression*>(h.code)));
         }
 
         return HType(product);

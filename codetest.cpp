@@ -138,12 +138,12 @@ void testAssignmentAndPair()
 
 int main(int argc, char** args)
 {
-    // testAddSubtract();
-    // testBooeanOps();
-    // testStringConcat();
-    // testArrayConcat();
+    testAddSubtract();
+    testBooeanOps();
+    testStringConcat();
+    testArrayConcat();
     testAssignmentAndPair();
-    // testMultiplyDivide();
+    testMultiplyDivide();
 
     return 0;
 }

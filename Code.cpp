@@ -102,7 +102,7 @@ std::string Assignment::toString() const
 
 object::Node* Assignment::evaluate(Environment& env) const
 {
-        if( operation == "=" )
+    if( operation == "=" )
     {
         reference->setValue(env, expression->evaluate(env));
     }
@@ -124,8 +124,7 @@ object::Node* Assignment::evaluate(Environment& env) const
     }
 
     object::Node* result = env.getArgument();
-    result->retain();
-    return env.getArgument();
+    return result;
 }
 
 std::string Program::toString() const
@@ -145,6 +144,7 @@ object::Node* Program::evaluate(Environment& env) const
     {
         result = (*itr)->evaluate(env);
     }
+    result->retain();
     return result;
 }
 
@@ -235,12 +235,12 @@ object::Node* Negative::evaluate(Environment& env) const
     return operand->evaluate(env)->Negative();
 }
 
-Product::Product(Multiplyable* first)
+Product::Product(Expression* first)
 {
     operands.push_back(first);
 }
 
-void Product::append(const std::string& op, Multiplyable* operand)
+void Product::append(const std::string& op, Expression* operand)
 {
     ops.push_back(op);
     operands.push_back(operand);

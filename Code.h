@@ -100,10 +100,6 @@ public:
     virtual object::Node* evaluate(Environment& env) const = 0;
 };
 
-class Multiplyable : public Code
-{
-};
-
 class Evaluable : public Code
 {
 };
@@ -146,12 +142,12 @@ public:
 class Product : public Code
 {
 public:
-    Product(Multiplyable* first);
+    Product(Expression* first);
 
-    std::vector<Multiplyable*> operands;
+    std::vector<Expression*> operands;
     std::vector<std::string> ops;
 
-    void append(const std::string& op, Multiplyable* operand);
+    void append(const std::string& op, Expression* operand);
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
@@ -233,7 +229,6 @@ public:
 
 class Number
     : public Addable
-    , public Multiplyable
 {
 private:
     std::string text;
