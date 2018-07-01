@@ -171,10 +171,7 @@ class MainVisitor : public CalamityBaseVisitor
 
         size_t n = ctx->children.size();
 
-        HType h = visit(ctx->children[0]);
-        call->evaluable = static_cast<Evaluable*>(h.code);
-
-        for (size_t i = 1; i < n; i++)
+        for (size_t i = 0; i < n; i++)
         {
             HType h = visit(ctx->children[i]);
             call->expressions.push_back(static_cast<Expression*>(h.code));

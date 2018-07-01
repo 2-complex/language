@@ -100,17 +100,13 @@ public:
     virtual object::Node* evaluate(Environment& env) const = 0;
 };
 
-class Evaluable : public Code
-{
-};
-
 class Call : public Code
 {
 public:
-    Evaluable* evaluable;
     std::vector<Expression*> expressions;
 
     virtual std::string toString() const override;
+    virtual object::Node* evaluate(Environment& env) const;
 };
 
 class AddedList : public Code

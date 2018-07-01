@@ -23,12 +23,14 @@ std::string Node::toString() const
 void Node::retain()
 {
     refCount++;
-    printf( "   refcount for %s : %d\n", toString().c_str(), refCount );
+    printf( "   retain -> %d : %s\n", refCount, toString().c_str() );
 }
 
 void Node::release()
 {
     refCount--;
+
+    printf( "   release -> %d : %s\n", refCount, toString().c_str() );
 
     if (refCount < 0)
     {
@@ -693,8 +695,7 @@ object::Node* Object::getMember(const std::string& name)
     auto itr = members.find(name);
     if( itr == members.end() )
     {
-        printf( "This should never happen.\nn" );
-        return NULL;
+        return new Error("Attempt to access nonexistant member: " + name);
     }
 
     itr->second->retain();
