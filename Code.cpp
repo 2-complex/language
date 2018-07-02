@@ -471,7 +471,6 @@ object::Node* Group::evaluate(Environment& env) const
 {
     Environment ext(&env, new object::Object);
     object::Node* result = program->evaluate(ext);
-    result->release();
     return result;
 }
 
