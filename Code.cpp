@@ -125,6 +125,7 @@ object::Node* Assignment::evaluate(Environment& env) const
 
     object::Node* result = env.getArgument();
     result->retain();
+
     return result;
 }
 
@@ -141,10 +142,14 @@ std::string Program::toString() const
 object::Node* Program::evaluate(Environment& env) const
 {
     object::Node* result = env.getArgument();
+    result->retain();
+
     for( std::vector<Line*>::const_iterator itr = lines.begin(); itr != lines.end(); itr++)
     {
+        result->release();
         result = (*itr)->evaluate(env);
     }
+
     return result;
 }
 
@@ -292,8 +297,8 @@ object::Node* Product::evaluate(Environment& env) const
             object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->Times(next);
 
-            accum->release();;
-            next->release();;
+            accum->release();
+            next->release();
 
             accum = newNode;
         }
@@ -302,8 +307,8 @@ object::Node* Product::evaluate(Environment& env) const
             object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->DividedBy(next);
 
-            accum->release();;
-            next->release();;
+            accum->release();
+            next->release();
 
             accum = newNode;
         }
@@ -312,8 +317,8 @@ object::Node* Product::evaluate(Environment& env) const
             object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->Mod(next);
 
-            accum->release();;
-            next->release();;
+            accum->release();
+            next->release();
 
             accum = newNode;
         }
@@ -359,8 +364,8 @@ object::Node* Conjunction::evaluate(Environment& env) const
             object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->And(next);
 
-            accum->release();;
-            next->release();;
+            accum->release();
+            next->release();
 
             accum = newNode;
         }
@@ -369,8 +374,8 @@ object::Node* Conjunction::evaluate(Environment& env) const
             object::Node* next = operands[i+1]->evaluate(env);
             object::Node* newNode = accum->Or(next);
 
-            accum->release();;
-            next->release();;
+            accum->release();
+            next->release();
 
             accum = newNode;
         }
@@ -466,7 +471,7 @@ object::Node* Group::evaluate(Environment& env) const
 {
     Environment ext(&env, new object::Object);
     object::Node* result = program->evaluate(ext);
-    result->retain();
+    result->release();
     return result;
 }
 

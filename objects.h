@@ -603,6 +603,8 @@ class Object : public Node
     std::map<std::string, Node*> members;
     std::map<Key, Node*> mappings;
 public:
+    virtual ~Object();
+
     std::pair<
         std::map<std::string, Node*>,
         std::map<Key, Node*> > getValue();

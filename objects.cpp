@@ -1283,6 +1283,19 @@ Node* Array::Or(Function* _)
     return new Error("Logical 'or' with array and function");
 }
 
+Object::~Object()
+{
+    for( auto itr = members.begin(); itr != members.end(); itr++ )
+    {
+        itr->second->release();
+    }
+
+    for( auto itr = mappings.begin(); itr != mappings.end(); itr++ )
+    {
+        itr->second->release();
+    }
+}
+
 Node* Object::Or(Error* _)
 {
     return _;
