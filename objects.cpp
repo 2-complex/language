@@ -4262,7 +4262,7 @@ Node* Array::Call(Boolean* _)
 
 Node* Array::Call(Integer* _)
 {
-    return new Error("Attmept to call array with integer as argument");
+    return value[_->getValue()];
 }
 
 Node* Array::Call(Double* _)

@@ -150,12 +150,31 @@ object::Node* Program::evaluate(Environment& env) const
 
 std::string Call::toString() const
 {
-    std::string accum = evaluable->toString() + " ";
+    std::string accum;
     for( std::vector<Expression*>::const_iterator itr = expressions.begin();
         itr != expressions.end(); itr++ )
     {
         accum += (*itr)->toString() + " ";
     }
+    return accum;
+}
+
+object::Node* Call::evaluate(Environment& env) const
+{
+    object::Node* accum = expressions[0]->evaluate(env);
+
+    size_t n = expressions.size();
+    for( size_t i = 1; i < n; i++ )
+    {
+        object::Node* next = expressions[i]->evaluate(env);
+        object::Node* newNode = accum->Call(next);
+
+        accum->release();
+        next->release();
+
+        accum = newNode;
+    }
+
     return accum;
 }
 
