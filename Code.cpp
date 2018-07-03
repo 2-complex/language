@@ -476,7 +476,6 @@ object::Node* Array::evaluate(Environment& env) const
         array->append((*itr)->evaluate(env));
     }
 
-    printf( "returning array %s\n", array->toString().c_str() );
     return array;
 }
 

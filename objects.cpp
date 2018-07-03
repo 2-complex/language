@@ -1769,10 +1769,6 @@ Node* Array::Plus(String* _)
 
 Node* Array::Plus(Array* _)
 {
-    printf( "adding array to array\n" );
-    printf( "%s\n", this->toString().c_str() );
-    printf( "%s\n", _->toString().c_str() );
-
     Array* array = new Array;
 
     for (Node* node : value)
