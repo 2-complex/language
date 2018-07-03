@@ -42,6 +42,7 @@ addable
    : group
    | call
    | number
+   | array
    | word
    | product
    | string
