@@ -525,7 +525,10 @@ class Member : public Node
 {
     std::string value;
 public:
+    Member(const std::string& name);
     std::string getValue();
+
+    virtual std::string toString() const override;
 DEFINITIONS
 };
 

@@ -983,6 +983,26 @@ Node* Nothing::Or(Function* _)
     return new Error("Logical 'or' with nothing and function");
 }
 
+Member::Member(const std::string& value)
+    : value(value)
+{
+}
+
+std::string Member::toString() const
+{
+    return "." + value;
+}
+
+Node* Member::Negation()
+{
+    return new Error("Attempt to negate member with 'not'");
+}
+
+Node* Member::Negative()
+{
+    return new Error("Attempt to negate member with '-'");
+}
+
 Node* Member::Or(Error* _)
 {
     return _;
@@ -4316,7 +4336,7 @@ Node* Object::Call(Nothing* _)
 
 Node* Object::Call(Member* _)
 {
-    return new Error("Attmept to call object with member as argument");
+    return getMember(_->getValue());
 }
 
 Node* Object::Call(Boolean* _)

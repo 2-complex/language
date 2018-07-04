@@ -271,9 +271,9 @@ private:
     std::string name;
 public:
 
-    Member();
     Member(const std::string& text);
     virtual std::string toString() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class String : public Addable

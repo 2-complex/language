@@ -78,7 +78,9 @@ std::string Pair::toString() const
 object::Node* Pair::evaluate(Environment& env) const
 {
     env.setMapping(left->evaluate(env), right->evaluate(env));
-    return NULL;
+    object::Node* result = env.getArgument();
+    result->retain();
+    return result;
 }
 
 Assignment::Assignment()
@@ -602,10 +604,6 @@ void Word::setValue(Environment& env, object::Node* value) const
     env.setMember(name, value);
 }
 
-Member::Member()
-{
-}
-
 Member::Member(const std::string& text)
     : name(text.substr(1, text.size()-1))
 {
@@ -614,6 +612,11 @@ Member::Member(const std::string& text)
 std::string Member::toString() const
 {
     return std::string(".") + name;
+}
+
+object::Node* Member::evaluate(Environment& env) const
+{
+    return new object::Member(name);
 }
 
 }
