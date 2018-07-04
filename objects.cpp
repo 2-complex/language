@@ -15,11 +15,6 @@ Node::~Node()
 {
 }
 
-std::string Node::toString() const
-{
-    return "STANDIN STRING";
-}
-
 void Node::retain()
 {
     refCount++;
@@ -826,6 +821,11 @@ Function::Function(Environment* context, code::Program* program)
 std::string Function::getValue()
 {
     return toString();
+}
+
+std::string Function::toString() const
+{
+    return std::string("{") + program->toString() + std::string("}");
 }
 
 Node* Function::Negation()

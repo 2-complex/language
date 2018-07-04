@@ -338,7 +338,7 @@ public:
     void retain();
     void release();
 
-    virtual std::string toString() const;
+    virtual std::string toString() const = 0;
     virtual bool isTrue();
     virtual void setMember(const std::string& name, object::Node* value);
     virtual object::Node* getMember(const std::string& name);
@@ -540,7 +540,7 @@ public:
     bool getValue();
     bool isTrue();
 
-    std::string toString() const override;
+    virtual std::string toString() const override;
 DEFINITIONS
 };
 
@@ -573,7 +573,7 @@ class String : public Node
     std::string value;
 public:
     String(const std::string& value);
-    std::string toString() const;
+    virtual std::string toString() const override;
     const std::string& getValue() const;
 
 DEFINITIONS
@@ -586,7 +586,7 @@ public:
     const std::vector<Node*>& getValue();
     void append(Node*);
 
-    std::string toString() const;
+    virtual std::string toString() const override;
 DEFINITIONS
 };
 
@@ -619,7 +619,7 @@ public:
     virtual void setMapping(object::Node* key, object::Node* value);
     virtual object::Node* getMapping(object::Node* key);
 
-    std::string toString() const;
+    virtual std::string toString() const override;
 DEFINITIONS
 };
 
@@ -630,8 +630,9 @@ class Function : public Node
 
 public:
     Function(Environment* context, code::Program* program);
-
     std::string getValue();
+
+    virtual std::string toString() const override;
 DEFINITIONS
 };
 
