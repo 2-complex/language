@@ -44,7 +44,7 @@ void Node::release()
     }
 }
 
-bool Node::isTrue() const
+bool Node::isTrue()
 {
     return false;
 }
@@ -706,13 +706,18 @@ void Object::setMapping(Node* key, Node* value)
 {
     Key k(key);
 
+    printf( "    mapping %s to %s\n", k.toString().c_str(), value->toString().c_str() );
+    printf( "    keynode = %p\n", k.node );
+
     auto itr = mappings.find(k);
     if (itr == mappings.end())
     {
+        printf( "not found!\n" );
         mappings[k] = value;
     }
     else
     {
+        printf( "found!\n" );
         itr->second->release();
         itr->second = value;
     }
@@ -1051,6 +1056,11 @@ Node* Member::Or(Object* _)
 Node* Member::Or(Function* _)
 {
     return new Error("Logical 'or' with member and function");
+}
+
+bool Boolean::isTrue()
+{
+    return getValue();
 }
 
 Node* Boolean::Or(Error* _)
@@ -4341,37 +4351,37 @@ Node* Object::Call(Member* _)
 
 Node* Object::Call(Boolean* _)
 {
-    return new Error("Attmept to call object with boolean as argument");
+    return getMapping(_);
 }
 
 Node* Object::Call(Integer* _)
 {
-    return new Error("Attmept to call object with integer as argument");
+    return getMapping(_);
 }
 
 Node* Object::Call(Double* _)
 {
-    return new Error("Attmept to call object with double as argument");
+    return getMapping(_);
 }
 
 Node* Object::Call(String* _)
 {
-    return new Error("Attmept to call object with string as argument");
+    return getMapping(_);
 }
 
 Node* Object::Call(Array* _)
 {
-    return new Error("Attmept to call object with array as argument");
+    return getMapping(_);
 }
 
 Node* Object::Call(Object* _)
 {
-    return new Error("Attmept to call object with object as argument");
+    return getMapping(_);
 }
 
 Node* Object::Call(Function* _)
 {
-    return new Error("Attmept to call object with function as argument");
+    return getMapping(_);
 }
 
 Node* Function::Call(Error* _)

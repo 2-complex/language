@@ -339,7 +339,7 @@ public:
     void release();
 
     virtual std::string toString() const;
-    virtual bool isTrue() const;
+    virtual bool isTrue();
     virtual void setMember(const std::string& name, object::Node* value);
     virtual object::Node* getMember(const std::string& name);
     virtual void setMapping(object::Node* key, object::Node* value);
@@ -538,6 +538,7 @@ class Boolean : public Node
 public:
     Boolean(bool value);
     bool getValue();
+    bool isTrue();
 
     std::string toString() const override;
 DEFINITIONS
@@ -591,8 +592,8 @@ DEFINITIONS
 
 class Key
 {
-    Node* node;
 public:
+    Node* node;
     Key(Node* node);
 
     bool operator == (const class Key& other) const;
