@@ -4251,7 +4251,11 @@ Node* String::Call(Boolean* _)
 
 Node* String::Call(Integer* _)
 {
-    return new Error("Attmept to call string with integer as argument");
+    int index = _->getValue();
+    if( index < 0 || index >= getValue().size() )
+        return new Error("String index out of range");
+
+    return new String(getValue().substr(_->getValue(),1));
 }
 
 Node* String::Call(Double* _)
