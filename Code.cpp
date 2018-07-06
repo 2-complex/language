@@ -104,25 +104,36 @@ std::string Assignment::toString() const
 
 object::Node* Assignment::evaluate(Environment& env) const
 {
+    object::Node* target = reference->evaluateButLast(env);
+    object::Node* index = reference->evaluateLast(env);
+
+    printf( "target = %s\n", target->toString().c_str() );
+    printf( "index = %s\n", index->toString().c_str() );
+
     if( operation == "=" )
     {
-        reference->setValue(env, expression->evaluate(env));
+        target->setMapping(index, expression->evaluate(env));
     }
-    else if( operation == "+=" )
+    else
     {
-        reference->setValue(env, reference->evaluate(env)->Plus(expression->evaluate(env)));
-    }
-    else if( operation == "-=" )
-    {
-        reference->setValue(env, reference->evaluate(env)->Minus(expression->evaluate(env)));
-    }
-    else if( operation == "*=" )
-    {
-        reference->setValue(env, reference->evaluate(env)->Times(expression->evaluate(env)));
-    }
-    else if( operation == "/=" )
-    {
-        reference->setValue(env, reference->evaluate(env)->DividedBy(expression->evaluate(env)));
+        object::Node* original = reference->evaluate(env);
+
+        if( operation == "+=" )
+        {
+            target->setMapping(index, original->Plus(expression->evaluate(env)));
+        }
+        else if( operation == "-=" )
+        {
+            target->setMapping(index, original->Minus(expression->evaluate(env)));
+        }
+        else if( operation == "*=" )
+        {
+            target->setMapping(index, original->Times(expression->evaluate(env)));
+        }
+        else if( operation == "/=" )
+        {
+            target->setMapping(index, original->DividedBy(expression->evaluate(env)));
+        }
     }
 
     object::Node* result = env.getArgument();
@@ -184,6 +195,30 @@ object::Node* Call::evaluate(Environment& env) const
     }
 
     return accum;
+}
+
+object::Node* Call::evaluateButLast(Environment& env) const
+{
+    object::Node* accum = expressions[0]->evaluate(env);
+
+    size_t n = expressions.size()-1;
+    for( size_t i = 1; i < n; i++ )
+    {
+        object::Node* next = expressions[i]->evaluate(env);
+        object::Node* newNode = accum->Call(next);
+
+        accum->release();
+        next->release();
+
+        accum = newNode;
+    }
+
+    return accum;
+}
+
+object::Node* Call::evaluateLast(Environment& env) const
+{
+    return (*(expressions.rbegin()))->evaluate(env);
 }
 
 AddedList::AddedList(Addable* first)
@@ -596,7 +631,28 @@ std::string Word::toString() const
 
 object::Node* Word::evaluate(Environment& env) const
 {
-    return env.getMember(name);
+    object::Member member(name);
+    return env.getMapping(&member);
+}
+
+object::Node* Word::evaluateLast(Environment& env) const
+{
+    return new object::Member(name);
+}
+
+void Expression::setValue(Environment& env, object::Node* value) const
+{
+    env.setMapping(evaluate(env), value);
+}
+
+object::Node* Expression::evaluateButLast(Environment& env) const
+{
+    return env.getArgument();
+}
+
+object::Node* Expression::evaluateLast(Environment& env) const
+{
+    return evaluate(env);
 }
 
 void Word::setValue(Environment& env, object::Node* value) const

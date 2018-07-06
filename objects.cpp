@@ -701,18 +701,13 @@ void Object::setMapping(Node* key, Node* value)
 {
     Key k(key);
 
-    printf( "    mapping %s to %s\n", k.toString().c_str(), value->toString().c_str() );
-    printf( "    keynode = %p\n", k.node );
-
     auto itr = mappings.find(k);
     if (itr == mappings.end())
     {
-        printf( "not found!\n" );
         mappings[k] = value;
     }
     else
     {
-        printf( "found!\n" );
         itr->second->release();
         itr->second = value;
     }
@@ -4346,7 +4341,7 @@ Node* Object::Call(Nothing* _)
 
 Node* Object::Call(Member* _)
 {
-    return getMember(_->getValue());
+    return getMapping(_);
 }
 
 Node* Object::Call(Boolean* _)

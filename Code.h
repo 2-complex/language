@@ -43,7 +43,10 @@ class Line : public Code
 class Expression : public Line
 {
 public:
-    virtual void setValue(Environment& env, object::Node* value) const {}
+    virtual void setValue(Environment& env, object::Node* value) const;
+
+    virtual object::Node* evaluateButLast(Environment& env) const;
+    virtual object::Node* evaluateLast(Environment& env) const;
 };
 
 class Pair : public Line
@@ -100,13 +103,15 @@ public:
     virtual object::Node* evaluate(Environment& env) const = 0;
 };
 
-class Call : public Code
+class Call : public Expression
 {
 public:
     std::vector<Expression*> expressions;
 
     virtual std::string toString() const override;
-    virtual object::Node* evaluate(Environment& env) const;
+    virtual object::Node* evaluate(Environment& env) const override;
+    virtual object::Node* evaluateButLast(Environment& env) const override;
+    virtual object::Node* evaluateLast(Environment& env) const override;
 };
 
 class AddedList : public Code
@@ -262,6 +267,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
+    virtual object::Node* evaluateLast(Environment& env) const;
     virtual void setValue(Environment& env, object::Node* value) const;
 };
 
