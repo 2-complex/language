@@ -11,19 +11,25 @@
 class Environment
 {
     object::Node* argument;
-    class Environment* context;
 
 public:
     explicit Environment(object::Object* argument);
-    Environment(Environment* context, object::Object* argument);
 
-    void setMember(const std::string& name, object::Node* value);
-    object::Node* getMember(const std::string& name);
+    object::Node* getArgument() const;
+    void setMapping(object::Node* index, object::Node* value);
+    virtual object::Node* getMapping(object::Node* index);
+    virtual std::string toString() const;
+};
 
-    void setMapping(object::Node* key, object::Node* value);
-    object::Node* getMapping(object::Node* key);
+class EnvironmentExtension : public Environment
+{
+    Environment& context;
 
-    object::Node* getArgument();
+public:
+    EnvironmentExtension(Environment& context, object::Object* argument);
+
+    virtual object::Node* getMapping(object::Node* index) override;
+    virtual std::string toString() const;
 };
 
 
@@ -43,8 +49,6 @@ class Line : public Code
 class Expression : public Line
 {
 public:
-    virtual void setValue(Environment& env, object::Node* value) const;
-
     virtual object::Node* evaluateButLast(Environment& env) const;
     virtual object::Node* evaluateLast(Environment& env) const;
 };
@@ -268,7 +272,6 @@ public:
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
     virtual object::Node* evaluateLast(Environment& env) const;
-    virtual void setValue(Environment& env, object::Node* value) const;
 };
 
 class Member : public Expression

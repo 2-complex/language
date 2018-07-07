@@ -4,53 +4,49 @@
 #include <stdlib.h>
 
 Environment::Environment(object::Object* argument)
-    : context(NULL)
-    , argument(argument)
+    : argument(argument)
 {
 }
 
-Environment::Environment(Environment* context, object::Object* argument)
-    : context(context)
-    , argument(argument)
+void Environment::setMapping(object::Node* index, object::Node* value)
 {
+    return argument->setMapping(index, value);
 }
 
-void Environment::setMember(const std::string& name, object::Node* value)
+object::Node* Environment::getMapping(object::Node* index)
 {
-    return argument->setMember(name, value);
+    return argument->getMapping(index);
 }
 
-object::Node* Environment::getMember(const std::string& name)
-{
-    object::Node* node = argument->getMember(name);
-    if( node )
-    {
-        return node;
-    }
-
-    if( context )
-    {
-        return context->getMember(name);
-    }
-    else
-    {
-        return new object::Error("Member not found: " + name);
-    }
-}
-
-void Environment::setMapping(object::Node* key, object::Node* value)
-{
-    return argument->setMapping(key, value);
-}
-
-object::Node* Environment::getMapping(object::Node* key)
-{
-    return argument->getMapping(key);
-}
-
-object::Node* Environment::getArgument()
+object::Node* Environment::getArgument() const
 {
     return argument;
+}
+
+std::string Environment::toString() const
+{
+    return argument->toString();
+}
+
+EnvironmentExtension::EnvironmentExtension(Environment& context, object::Object* argument)
+    : Environment(argument)
+    , context(context)
+{
+}
+
+std::string EnvironmentExtension::toString() const
+{
+    return getArgument()->toString() + "/" + context.toString();
+}
+
+object::Node* EnvironmentExtension::getMapping(object::Node* index)
+{
+    object::Node* result = getArgument()->getMapping(index);
+    if( ! result )
+    {
+        return context.getMapping(index);
+    }
+    return result;
 }
 
 namespace code
@@ -106,9 +102,6 @@ object::Node* Assignment::evaluate(Environment& env) const
 {
     object::Node* target = reference->evaluateButLast(env);
     object::Node* index = reference->evaluateLast(env);
-
-    printf( "target = %s\n", target->toString().c_str() );
-    printf( "index = %s\n", index->toString().c_str() );
 
     if( operation == "=" )
     {
@@ -170,8 +163,7 @@ std::string Call::toString() const
 {
     std::string accum;
 
-    for( std::vector<Expression*>::const_iterator itr = expressions.begin();
-        itr != expressions.end(); itr++ )
+    for( std::vector<Expression*>::const_iterator itr = expressions.begin(); itr != expressions.end(); itr++ )
     {
         accum += (*itr)->toString() + " ";
     }
@@ -506,8 +498,8 @@ std::string Group::toString() const
 
 object::Node* Group::evaluate(Environment& env) const
 {
-    Environment ext(&env, new object::Object);
-    object::Node* result = program->evaluate(ext);
+    EnvironmentExtension extension(env, new object::Object);
+    object::Node* result = program->evaluate(extension);
     return result;
 }
 
@@ -632,17 +624,18 @@ std::string Word::toString() const
 object::Node* Word::evaluate(Environment& env) const
 {
     object::Member member(name);
-    return env.getMapping(&member);
+    object::Node* result = env.getMapping(&member);
+    if ( ! result )
+    {
+        return new object::Error("Member not found: " + name);
+    }
+
+    return result;
 }
 
 object::Node* Word::evaluateLast(Environment& env) const
 {
     return new object::Member(name);
-}
-
-void Expression::setValue(Environment& env, object::Node* value) const
-{
-    env.setMapping(evaluate(env), value);
 }
 
 object::Node* Expression::evaluateButLast(Environment& env) const
@@ -653,11 +646,6 @@ object::Node* Expression::evaluateButLast(Environment& env) const
 object::Node* Expression::evaluateLast(Environment& env) const
 {
     return evaluate(env);
-}
-
-void Word::setValue(Environment& env, object::Node* value) const
-{
-    env.setMember(name, value);
 }
 
 Member::Member(const std::string& text)

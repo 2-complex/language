@@ -18,14 +18,11 @@ Node::~Node()
 void Node::retain()
 {
     refCount++;
-    printf( "   retain -> %d : %s\n", refCount, toString().c_str() );
 }
 
 void Node::release()
 {
     refCount--;
-
-    printf( "   release -> %d : %s\n", refCount, toString().c_str() );
 
     if (refCount < 0)
     {
@@ -34,7 +31,6 @@ void Node::release()
 
     if (refCount == 0)
     {
-        printf( "   deleting %s\n", toString().c_str() );
         delete this;
     }
 }
@@ -44,13 +40,9 @@ bool Node::isTrue()
     return false;
 }
 
-void Node::setMember(const std::string& name, object::Node* value)
+std::string Node::mappingToString(Node* node) const
 {
-}
-
-object::Node* Node::getMember(const std::string& name)
-{
-    return NULL;
+    return toString() + ":" + node->toString();
 }
 
 void Node::setMapping(object::Node* key, object::Node* value)
@@ -659,52 +651,19 @@ std::string Key::toString() const
     return node->toString();
 }
 
-std::pair<
-    std::map<std::string, Node*>,
-    std::map<Key, Node*> > Object::getValue()
+std::map<Key, Node*> Object::getValue()
 {
-    return std::pair<
-        std::map<std::string, Node*>,
-        std::map<Key, Node*> >( members, mappings );
+    return mappings;
 }
 
-void Object::setMember(const std::string& name, object::Node* value)
+void Object::setMapping(Node* index, Node* value)
 {
-    auto itr = members.find(name);
-    if (itr == members.end())
-    {
-        members[name] = value;
-    }
-    else
-    {
-        itr->second->release();
-        itr->second = value;
-    }
+    Key key(index);
 
-
-    members[name] = value;
-}
-
-object::Node* Object::getMember(const std::string& name)
-{
-    auto itr = members.find(name);
-    if( itr == members.end() )
-    {
-        return new Error("Attempt to access nonexistant member: " + name);
-    }
-
-    itr->second->retain();
-    return itr->second;
-}
-
-void Object::setMapping(Node* key, Node* value)
-{
-    Key k(key);
-
-    auto itr = mappings.find(k);
+    auto itr = mappings.find(key);
     if (itr == mappings.end())
     {
-        mappings[k] = value;
+        mappings[key] = value;
     }
     else
     {
@@ -719,7 +678,7 @@ Node* Object::getMapping(Node* key)
 
     if( itr == mappings.end() )
     {
-        return new Object;
+        return NULL;
     }
 
     itr->second->retain();
@@ -730,15 +689,9 @@ std::string Object::toString() const
 {
     std::string result = "(";
 
-    for( auto itr = members.begin(); itr != members.end(); itr++ )
-    {
-        result += itr->first + "=" + itr->second->toString();
-        result += ",";
-    }
-
     for( auto itr = mappings.begin(); itr != mappings.end(); itr++ )
     {
-        result += itr->first.toString() + ":" + itr->second->toString();
+        result += itr->first.node->mappingToString(itr->second);
         result += ",";
     }
 
@@ -991,6 +944,11 @@ Member::Member(const std::string& value)
 std::string Member::toString() const
 {
     return "." + value;
+}
+
+std::string Member::mappingToString(Node* node) const
+{
+    return value + "=" + node->toString();
 }
 
 Node* Member::Negation()
@@ -1310,11 +1268,6 @@ Node* Array::Or(Function* _)
 
 Object::~Object()
 {
-    for( auto itr = members.begin(); itr != members.end(); itr++ )
-    {
-        itr->second->release();
-    }
-
     for( auto itr = mappings.begin(); itr != mappings.end(); itr++ )
     {
         itr->second->release();
@@ -4345,42 +4298,82 @@ Node* Object::Call(Nothing* _)
 
 Node* Object::Call(Member* _)
 {
-    return getMapping(_);
+    Node* result = getMapping(_);
+    if( ! result )
+    {
+        return new Error("Attemt to access non-existant member " + _->getValue());
+    }
+    return result;
 }
 
 Node* Object::Call(Boolean* _)
 {
-    return getMapping(_);
+    Node* result = getMapping(_);
+    if( ! result )
+    {
+        return new Object;
+    }
+    return result;
 }
 
 Node* Object::Call(Integer* _)
 {
-    return getMapping(_);
+    Node* result = getMapping(_);
+    if( ! result )
+    {
+        return new Object;
+    }
+    return result;
 }
 
 Node* Object::Call(Double* _)
 {
-    return getMapping(_);
+    Node* result = getMapping(_);
+    if( ! result )
+    {
+        return new Object;
+    }
+    return result;
 }
 
 Node* Object::Call(String* _)
 {
-    return getMapping(_);
+    Node* result = getMapping(_);
+    if( ! result )
+    {
+        return new Object;
+    }
+    return result;
 }
 
 Node* Object::Call(Array* _)
 {
-    return getMapping(_);
+    Node* result = getMapping(_);
+    if( ! result )
+    {
+        return new Object;
+    }
+    return result;
 }
 
 Node* Object::Call(Object* _)
 {
-    return getMapping(_);
+    Node* result = getMapping(_);
+    if( ! result )
+    {
+        return new Object;
+    }
+    return result;
 }
 
 Node* Object::Call(Function* _)
 {
-    return getMapping(_);
+    Node* result = getMapping(_);
+    if( ! result )
+    {
+        return new Object;
+    }
+    return result;
 }
 
 Node* Function::Call(Error* _)
@@ -4425,7 +4418,8 @@ Node* Function::Call(Array* _)
 
 Node* Function::Call(Object* _)
 {
-    return new Error("Attmept to call function with object as argument");
+    EnvironmentExtension extension(*context, _);
+    return program->evaluate(extension);
 }
 
 Node* Function::Call(Function* _)

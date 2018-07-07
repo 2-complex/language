@@ -339,9 +339,9 @@ public:
     void release();
 
     virtual std::string toString() const = 0;
+    virtual std::string mappingToString(Node* node) const;
+
     virtual bool isTrue();
-    virtual void setMember(const std::string& name, object::Node* value);
-    virtual object::Node* getMember(const std::string& name);
     virtual void setMapping(object::Node* key, object::Node* value);
     virtual object::Node* getMapping(object::Node* key);
 
@@ -529,6 +529,7 @@ public:
     std::string getValue();
 
     virtual std::string toString() const override;
+    virtual std::string mappingToString(Node* node) const override;
 DEFINITIONS
 };
 
@@ -604,17 +605,12 @@ public:
 
 class Object : public Node
 {
-    std::map<std::string, Node*> members;
     std::map<Key, Node*> mappings;
+
 public:
     virtual ~Object();
 
-    std::pair<
-        std::map<std::string, Node*>,
-        std::map<Key, Node*> > getValue();
-
-    virtual void setMember(const std::string& name, object::Node* value) override;
-    virtual object::Node* getMember(const std::string& name) override;
+    std::map<Key, Node*> getValue();
 
     virtual void setMapping(object::Node* key, object::Node* value);
     virtual object::Node* getMapping(object::Node* key);

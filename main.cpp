@@ -291,7 +291,7 @@ int main(int argc, const char* argv[])
 
             object::Node* answer = a.code->evaluate(env);
 
-            printf( "%s\n", answer->toString().c_str() );
+            printf( "%s\n\n", answer->toString().c_str() );
             answer->release();
         }
     }

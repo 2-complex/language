@@ -98,7 +98,7 @@ CalamityParser.h: Calamity.g4
 	$(ANTLR) -Dlanguage=Cpp -visitor Calamity.g4
 
 
-CPP = c++ -std=gnu++11
+CPP = c++ -std=gnu++11 -g3
 
 INCLUDES = \
 	-Iantlr4-cpp-runtime-4.7.1-macos/antlr4-runtime
