@@ -22,3 +22,5 @@ calam
 codetest
 
 temp_*
+
+*.dSYM
