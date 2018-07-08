@@ -38,8 +38,8 @@ namespace code
 class Code
 {
 public:
-    virtual std::string toString() const;
-    virtual object::Node* evaluate(Environment& env) const;
+    virtual std::string toString() const = 0;
+    virtual object::Node* evaluate(Environment& env) const = 0;
 };
 
 class Line : public Code

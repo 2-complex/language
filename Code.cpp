@@ -52,16 +52,6 @@ object::Node* EnvironmentExtension::getMapping(object::Node* index)
 namespace code
 {
 
-std::string Code::toString() const
-{
-    return std::string("********");
-}
-
-object::Node* Code::evaluate(Environment& env) const
-{
-    return new object::Error("Attempt to evaluate code baseclass.");
-}
-
 Pair::Pair()
 {
 }
