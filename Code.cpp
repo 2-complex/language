@@ -618,7 +618,9 @@ object::Node* Word::evaluate(Environment& env) const
     object::Node* result = env.getMapping(&member);
     if ( ! result )
     {
-        return new object::Error("Member not found: " + name);
+        object::Error* error = new object::Error("Member not found: " + name);
+        error->retain();
+        return error;
     }
 
     return result;
