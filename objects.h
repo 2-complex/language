@@ -342,7 +342,8 @@ public:
     virtual std::string mappingToString(Node* node) const;
 
     virtual bool isTrue();
-    virtual void setMapping(object::Node* key, object::Node* value);
+    virtual bool isError() const;
+    virtual object::Node* setMapping(object::Node* key, object::Node* value);
     virtual object::Node* getMapping(object::Node* key);
 
     virtual Node* Negation() = 0;
@@ -508,8 +509,8 @@ class Error : public Node
 {
     std::string message;
 public:
-    Error();
     Error(const std::string& message);
+    virtual bool isError() const;
 
     virtual std::string toString() const override;
 DEFINITIONS
@@ -612,7 +613,7 @@ public:
 
     std::map<Key, Node*> getValue();
 
-    virtual void setMapping(object::Node* key, object::Node* value);
+    virtual object::Node* setMapping(object::Node* key, object::Node* value);
     virtual object::Node* getMapping(object::Node* key);
 
     virtual std::string toString() const override;

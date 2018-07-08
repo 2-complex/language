@@ -16,7 +16,7 @@ public:
     explicit Environment(object::Object* argument);
 
     object::Node* getArgument() const;
-    void setMapping(object::Node* index, object::Node* value);
+    object::Node* setMapping(object::Node* index, object::Node* value);
     virtual object::Node* getMapping(object::Node* index);
     virtual std::string toString() const;
 };

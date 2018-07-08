@@ -40,13 +40,22 @@ bool Node::isTrue()
     return false;
 }
 
+bool Node::isError() const
+{
+    return false;
+}
+
 std::string Node::mappingToString(Node* node) const
 {
     return toString() + ":" + node->toString();
 }
 
-void Node::setMapping(object::Node* key, object::Node* value)
+object::Node* Node::setMapping(object::Node* key, object::Node* value)
 {
+    return new Error("Attemt to set member "
+        + key->toString()
+        + " on non-object: "
+        + toString());
 }
 
 object::Node* Node::getMapping(object::Node* key)
@@ -59,14 +68,14 @@ std::string Error::toString() const
     return "ERROR: " + message;
 }
 
-Error::Error()
-    : message("SOME ERROR.  PLEASE REPLACE WITH MEANINGFUL MESSAGE.")
-{
-}
-
 Error::Error(const std::string& message)
     : message(message)
 {
+}
+
+bool Error::isError() const
+{
+    return true;
 }
 
 Node* Error::Negation()
@@ -656,9 +665,19 @@ std::map<Key, Node*> Object::getValue()
     return mappings;
 }
 
-void Object::setMapping(Node* index, Node* value)
+object::Node* Object::setMapping(Node* index, Node* value)
 {
     Key key(index);
+
+    if( index->isError() )
+    {
+        return index;
+    }
+
+    if( value->isError() )
+    {
+        return value;
+    }
 
     auto itr = mappings.find(key);
     if (itr == mappings.end())
@@ -670,6 +689,8 @@ void Object::setMapping(Node* index, Node* value)
         itr->second->release();
         itr->second = value;
     }
+
+    return this;
 }
 
 Node* Object::getMapping(Node* key)

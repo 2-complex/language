@@ -8,7 +8,7 @@ Environment::Environment(object::Object* argument)
 {
 }
 
-void Environment::setMapping(object::Node* index, object::Node* value)
+object::Node* Environment::setMapping(object::Node* index, object::Node* value)
 {
     return argument->setMapping(index, value);
 }
@@ -59,7 +59,7 @@ std::string Code::toString() const
 
 object::Node* Code::evaluate(Environment& env) const
 {
-    return new object::Error;
+    return new object::Error("Attempt to evaluate code baseclass.");
 }
 
 Pair::Pair()
@@ -103,9 +103,11 @@ object::Node* Assignment::evaluate(Environment& env) const
     object::Node* target = reference->evaluateButLast(env);
     object::Node* index = reference->evaluateLast(env);
 
+    object::Node* result = NULL;
+
     if( operation == "=" )
     {
-        target->setMapping(index, expression->evaluate(env));
+        result = target->setMapping(index, expression->evaluate(env));
     }
     else
     {
@@ -113,23 +115,22 @@ object::Node* Assignment::evaluate(Environment& env) const
 
         if( operation == "+=" )
         {
-            target->setMapping(index, original->Plus(expression->evaluate(env)));
+            result = target->setMapping(index, original->Plus(expression->evaluate(env)));
         }
         else if( operation == "-=" )
         {
-            target->setMapping(index, original->Minus(expression->evaluate(env)));
+            result = target->setMapping(index, original->Minus(expression->evaluate(env)));
         }
         else if( operation == "*=" )
         {
-            target->setMapping(index, original->Times(expression->evaluate(env)));
+            result = target->setMapping(index, original->Times(expression->evaluate(env)));
         }
         else if( operation == "/=" )
         {
-            target->setMapping(index, original->DividedBy(expression->evaluate(env)));
+            result = target->setMapping(index, original->DividedBy(expression->evaluate(env)));
         }
     }
 
-    object::Node* result = env.getArgument();
     result->retain();
 
     return result;
