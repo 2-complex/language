@@ -33,14 +33,18 @@ CPP_GENERATED_CODE = \
 run: calam
 	./calam programs/boolean-logic.cal
 
+
+Environment.o: Environment.h Environment.cpp
+	$(CPP) -c Environment.cpp
+
 Code.o: Code.h Code.cpp
 	$(CPP) -c Code.cpp
 
 objects.o: objects.cpp objects.h
 	$(CPP) -c objects.cpp
 
-codetest: codetest.cpp objects.o Code.o
-	$(CPP) codetest.cpp objects.o Code.o -o codetest
+codetest: codetest.cpp objects.o Code.o Environment.o
+	$(CPP) codetest.cpp objects.o Code.o Environment.o -o codetest
 
 test: printtree.py $(GENERATED_CODE)
 	python printtree.py
@@ -131,6 +135,7 @@ TreeShapeListener.o: TreeShapeListener.h TreeShapeListener.cpp
 CALAMITY_OBJETS = \
 	Code.o \
 	objects.o \
+	Environment.o \
 	CalamityBaseListener.o \
 	CalamityLexer.o \
 	CalamityListener.o \

@@ -693,10 +693,13 @@ object::Node* Object::setMapping(Node* index, Node* value)
     return this;
 }
 
-Node* Object::getMapping(Node* key)
+Node* Object::getMapping(Node* index)
 {
-    auto itr = mappings.find(key);
+    printf( "  Object::getMapping %s\n", index->toString().c_str() );
+    printf( "    this = %s\n", toString().c_str() );
 
+    Key key(index);
+    auto itr = mappings.find(key);
     if( itr == mappings.end() )
     {
         return NULL;
@@ -781,8 +784,10 @@ Node* Object::And(Function* _)
     return new Error("Logical 'and' with object and function");
 }
 
-Function::Function(Environment* context, code::Program* program)
-    : context(context)
+Function::Function(
+    Environment& environment,
+    code::Program* program)
+    : environment(environment)
     , program(program)
 {
 }
@@ -4439,7 +4444,7 @@ Node* Function::Call(Array* _)
 
 Node* Function::Call(Object* _)
 {
-    EnvironmentExtension extension(*context, _);
+    EnvironmentExtension extension(environment, _);
     return program->evaluate(extension);
 }
 

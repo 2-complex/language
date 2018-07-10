@@ -24,3 +24,5 @@ codetest
 temp_*
 
 *.dSYM
+
+.DS_Store

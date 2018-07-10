@@ -1,53 +1,10 @@
 #include "Code.h"
+
 #include "objects.h"
+#include "Environment.h"
 
 #include <stdlib.h>
 
-Environment::Environment(object::Object* argument)
-    : argument(argument)
-{
-}
-
-object::Node* Environment::setMapping(object::Node* index, object::Node* value)
-{
-    return argument->setMapping(index, value);
-}
-
-object::Node* Environment::getMapping(object::Node* index)
-{
-    return argument->getMapping(index);
-}
-
-object::Node* Environment::getArgument() const
-{
-    return argument;
-}
-
-std::string Environment::toString() const
-{
-    return argument->toString();
-}
-
-EnvironmentExtension::EnvironmentExtension(Environment& context, object::Object* argument)
-    : Environment(argument)
-    , context(context)
-{
-}
-
-std::string EnvironmentExtension::toString() const
-{
-    return getArgument()->toString() + "/" + context.toString();
-}
-
-object::Node* EnvironmentExtension::getMapping(object::Node* index)
-{
-    object::Node* result = getArgument()->getMapping(index);
-    if( ! result )
-    {
-        return context.getMapping(index);
-    }
-    return result;
-}
 
 namespace code
 {
@@ -63,8 +20,7 @@ std::string Pair::toString() const
 
 object::Node* Pair::evaluate(Environment& env) const
 {
-    env.setMapping(left->evaluate(env), right->evaluate(env));
-    object::Node* result = env.getArgument();
+    object::Node* result = env.setMapping(left->evaluate(env), right->evaluate(env));
     result->retain();
     return result;
 }
@@ -474,7 +430,7 @@ std::string Function::toString() const
 
 object::Node* Function::evaluate(Environment& env) const
 {
-    return new object::Function(&env, program);
+    return new object::Function(env, program);
 }
 
 Group::Group(Program* program)
@@ -489,6 +445,13 @@ std::string Group::toString() const
 
 object::Node* Group::evaluate(Environment& env) const
 {
+    // This is a problem:  EnvironmentExtension on the stack, disapperas when this
+    // evaluate is over, but a pointer to it gets saved.  Ick  ICK!
+    // Plan:
+    //     Put Evironment in its own file, include Environment.h in both code and object
+    //     Make Environment a copied object inside function with a pointer to an object
+    //     Retain the object as needed
+
     EnvironmentExtension extension(env, new object::Object);
     object::Node* result = program->evaluate(extension);
     return result;

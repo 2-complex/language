@@ -8,31 +8,6 @@
 
 #include "objects.h"
 
-class Environment
-{
-    object::Node* argument;
-
-public:
-    explicit Environment(object::Object* argument);
-
-    object::Node* getArgument() const;
-    object::Node* setMapping(object::Node* index, object::Node* value);
-    virtual object::Node* getMapping(object::Node* index);
-    virtual std::string toString() const;
-};
-
-class EnvironmentExtension : public Environment
-{
-    Environment& context;
-
-public:
-    EnvironmentExtension(Environment& context, object::Object* argument);
-
-    virtual object::Node* getMapping(object::Node* index) override;
-    virtual std::string toString() const;
-};
-
-
 namespace code
 {
 class Code

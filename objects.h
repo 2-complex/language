@@ -1,5 +1,7 @@
-#ifndef _objects_h_
-#define _objects_h_
+#ifndef _objects_
+#define _objects_
+
+#include "Environment.h"
 
 #include <string>
 #include <map>
@@ -8,7 +10,6 @@
 
 #include <stdlib.h>
 
-class Environment;
 namespace code
 {
     class Program;
@@ -623,10 +624,10 @@ DEFINITIONS
 class Function : public Node
 {
     code::Program* program;
-    Environment* context;
+    Environment environment;
 
 public:
-    Function(Environment* context, code::Program* program);
+    Function(Environment& environment, code::Program* program);
     std::string getValue();
 
     virtual std::string toString() const override;

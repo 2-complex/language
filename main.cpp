@@ -271,6 +271,8 @@ int main(int argc, const char* argv[])
         object::Object* obj = new object::Object;
         Environment env(obj);
 
+        printf( "First grand environment: %p\n", &env );
+
         for(;;)
         {
             printf("> ");
