@@ -269,9 +269,7 @@ int main(int argc, const char* argv[])
     else if(argc == 1)
     {
         object::Object* obj = new object::Object;
-        Environment env(obj);
-
-        printf( "First grand environment: %p\n", &env );
+        Environment environment(obj);
 
         for(;;)
         {
@@ -291,7 +289,7 @@ int main(int argc, const char* argv[])
             MainVisitor vistor;
             HType a = vistor.visit(tree);
 
-            object::Node* answer = a.code->evaluate(env);
+            object::Node* answer = a.code->evaluate(environment);
 
             printf( "%s\n\n", answer->toString().c_str() );
             answer->release();

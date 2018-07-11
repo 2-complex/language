@@ -3,6 +3,7 @@
 #define _Environment_
 
 #include <string>
+#include <vector>
 
 namespace object
 {
@@ -11,28 +12,20 @@ namespace object
 
 class Environment
 {
-    object::Node* argument;
+    std::vector<object::Node*> chain;
 
 public:
     explicit Environment(object::Node* argument);
+    Environment(Environment& parent, object::Node* argument);
+    Environment(const Environment& environment);
+
     virtual ~Environment();
 
     object::Node* getArgument() const;
     object::Node* setMapping(object::Node* index, object::Node* value);
-    virtual object::Node* getMapping(object::Node* index);
-    virtual std::string toString() const;
-};
 
-class EnvironmentExtension : public Environment
-{
-    Environment& parent;
-
-public:
-    EnvironmentExtension(Environment& parent, object::Node* argument);
-    virtual ~EnvironmentExtension();
-
-    virtual object::Node* getMapping(object::Node* index) override;
-    virtual std::string toString() const;
+    object::Node* getMapping(object::Node* index);
+    std::string toString() const;
 };
 
 #endif

@@ -4,59 +4,63 @@
 
 #include <stdio.h>
 
+
 Environment::Environment(object::Node* argument)
-    : argument(argument)
 {
+    chain.push_back(argument);
     argument->retain();
+}
+
+Environment::Environment(Environment& parent, object::Node* argument)
+    : chain(parent.chain)
+{
+    chain.push_back(argument);
+
+    for( object::Node* c : chain )
+        c->retain();
+}
+
+Environment::Environment(const Environment& env)
+    : chain(env.chain)
+{
+    for( object::Node* c : chain )
+        c->retain();
 }
 
 Environment::~Environment()
 {
-    argument->release();
-}
-
-object::Node* Environment::setMapping(object::Node* index, object::Node* value)
-{
-    return argument->setMapping(index, value);
-}
-
-object::Node* Environment::getMapping(object::Node* index)
-{
-    return argument->getMapping(index);
-}
-
-object::Node* Environment::getArgument() const
-{
-    return argument;
+    for( object::Node* c : chain )
+        c->release();
 }
 
 std::string Environment::toString() const
 {
-    return argument->toString();
-}
+    std::string result = "";
 
-EnvironmentExtension::EnvironmentExtension(Environment& parent, object::Node* argument)
-    : Environment(argument)
-    , parent(parent)
-{
-}
+    for( object::Node* c : chain )
+        result += c->toString() + "/";
 
-EnvironmentExtension::~EnvironmentExtension()
-{
-}
-
-std::string EnvironmentExtension::toString() const
-{
-    return getArgument()->toString() + "/" + parent.toString();
-}
-
-object::Node* EnvironmentExtension::getMapping(object::Node* index)
-{
-    object::Node* result = getArgument()->getMapping(index);
-
-    if( ! result )
-    {
-        return parent.getMapping(index);
-    }
     return result;
+}
+
+object::Node* Environment::setMapping(object::Node* index, object::Node* value)
+{
+    return getArgument()->setMapping(index, value);
+}
+
+object::Node* Environment::getArgument() const
+{
+    return *(chain.rbegin());
+}
+
+object::Node* Environment::getMapping(object::Node* index)
+{
+    for( std::vector<object::Node*>::reverse_iterator itr = chain.rbegin(); itr != chain.rend(); ++itr )
+    {
+        object::Node* result = (*itr)->getMapping(index);
+        if( result )
+            return result;
+    }
+
+    return NULL;
 }

@@ -695,9 +695,6 @@ object::Node* Object::setMapping(Node* index, Node* value)
 
 Node* Object::getMapping(Node* index)
 {
-    printf( "  Object::getMapping %s\n", index->toString().c_str() );
-    printf( "    this = %s\n", toString().c_str() );
-
     Key key(index);
     auto itr = mappings.find(key);
     if( itr == mappings.end() )
@@ -4444,7 +4441,7 @@ Node* Function::Call(Array* _)
 
 Node* Function::Call(Object* _)
 {
-    EnvironmentExtension extension(environment, _);
+    Environment extension(environment, _);
     return program->evaluate(extension);
 }
 

@@ -445,14 +445,7 @@ std::string Group::toString() const
 
 object::Node* Group::evaluate(Environment& env) const
 {
-    // This is a problem:  EnvironmentExtension on the stack, disapperas when this
-    // evaluate is over, but a pointer to it gets saved.  Ick  ICK!
-    // Plan:
-    //     Put Evironment in its own file, include Environment.h in both code and object
-    //     Make Environment a copied object inside function with a pointer to an object
-    //     Retain the object as needed
-
-    EnvironmentExtension extension(env, new object::Object);
+    Environment extension(env, new object::Object);
     object::Node* result = program->evaluate(extension);
     return result;
 }
