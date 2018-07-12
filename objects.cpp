@@ -2677,12 +2677,12 @@ Node* Double::Times(Boolean* _)
 
 Node* Double::Times(Integer* _)
 {
-    return new Error("Attempt to multiply double by integer with '*'");
+    return new Double(getValue() * _->getValue().toDouble());
 }
 
 Node* Double::Times(Double* _)
 {
-    return new Error("Attempt to multiply double by double with '*'");
+    return new Double(getValue() * _->getValue());
 }
 
 Node* Double::Times(String* _)
@@ -3177,12 +3177,12 @@ Node* Double::DividedBy(Boolean* _)
 
 Node* Double::DividedBy(Integer* _)
 {
-    return new Error("Attempt to divide double by integer with '/'");
+    return new Double(getValue() / _->getValue().toDouble());
 }
 
 Node* Double::DividedBy(Double* _)
 {
-    return new Error("Attempt to divide double by double with '/'");
+    return new Double(getValue() / _->getValue());
 }
 
 Node* Double::DividedBy(String* _)
