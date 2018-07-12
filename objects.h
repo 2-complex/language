@@ -2,6 +2,7 @@
 #define _objects_
 
 #include "Environment.h"
+#include "BigInteger.h"
 
 #include <string>
 #include <map>
@@ -549,11 +550,11 @@ DEFINITIONS
 
 class Integer : public Node
 {
-    int value;
+    BigInteger value;
 public:
     Integer(int value);
     Integer(const std::string& text);
-    int getValue();
+    BigInteger getValue();
 
     virtual std::string toString() const override;
 DEFINITIONS

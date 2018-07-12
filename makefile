@@ -37,6 +37,9 @@ run: calam
 Environment.o: Environment.h Environment.cpp
 	$(CPP) -c Environment.cpp
 
+BigInteger.o: BigInteger.h BigInteger.cpp
+	$(CPP) -c BigInteger.cpp
+
 Code.o: Code.h Code.cpp
 	$(CPP) -c Code.cpp
 
@@ -135,6 +138,7 @@ TreeShapeListener.o: TreeShapeListener.h TreeShapeListener.cpp
 CALAMITY_OBJETS = \
 	Code.o \
 	objects.o \
+	BigInteger.o \
 	Environment.o \
 	CalamityBaseListener.o \
 	CalamityLexer.o \

@@ -325,17 +325,17 @@ Integer::Integer(int value)
 
 Integer::Integer(const std::string& text)
 {
-    value = atoi(text.c_str());
+    value = text;
 }
 
-int Integer::getValue()
+BigInteger Integer::getValue()
 {
     return value;
 }
 
 std::string Integer::toString() const
 {
-    return std::to_string(value);
+    return value.toString();
 }
 
 Node* Integer::Negation()
@@ -1669,7 +1669,7 @@ Node* Double::Plus(Boolean* _)
 
 Node* Double::Plus(Integer* _)
 {
-    return new Double(value + _->getValue());
+    return new Double(value + _->getValue().toDouble());
 }
 
 Node* Double::Plus(Double* _)
@@ -2177,7 +2177,7 @@ Node* Double::Minus(Boolean* _)
 
 Node* Double::Minus(Integer* _)
 {
-    return new Double(value - _->getValue());
+    return new Double(value - _->getValue().toDouble());
 }
 
 Node* Double::Minus(Double* _)
@@ -3632,7 +3632,7 @@ Node* Integer::Mod(Integer* _)
 
 Node* Integer::Mod(Double* _)
 {
-    return new Double(fmod(value, _->getValue()));
+    return new Double(fmod(value.toDouble(), _->getValue()));
 }
 
 Node* Integer::Mod(String* _)
@@ -3677,7 +3677,7 @@ Node* Double::Mod(Boolean* _)
 
 Node* Double::Mod(Integer* _)
 {
-    return new Double(fmod(value, _->getValue()));
+    return new Double(fmod(value, _->getValue().toDouble()));
 }
 
 Node* Double::Mod(Double* _)
@@ -4227,11 +4227,10 @@ Node* String::Call(Boolean* _)
 
 Node* String::Call(Integer* _)
 {
-    int index = _->getValue();
-    if( index < 0 || index >= getValue().size() )
+    if( _->getValue() < 0 || _->getValue() >= getValue().size() )
         return new Error("String index out of range");
 
-    return new String(getValue().substr(_->getValue(),1));
+    return new String(getValue().substr(_->getValue().toSizeT(),1));
 }
 
 Node* String::Call(Double* _)
@@ -4281,7 +4280,10 @@ Node* Array::Call(Boolean* _)
 
 Node* Array::Call(Integer* _)
 {
-    return value[_->getValue()];
+    if( _->getValue() < 0 || _->getValue() > value.size() )
+        return new Error("Array index out of bounds");
+
+    return value[_->getValue().toSizeT()];
 }
 
 Node* Array::Call(Double* _)
@@ -4722,7 +4724,7 @@ Node* Double::Equals(Boolean* _)
 
 Node* Double::Equals(Integer* _)
 {
-    return new Boolean(getValue() == _->getValue());
+    return new Boolean(getValue() == _->getValue().toDouble());
 }
 
 Node* Double::Equals(Double* _)
@@ -5222,7 +5224,7 @@ Node* Double::NotEquals(Boolean* _)
 
 Node* Double::NotEquals(Integer* _)
 {
-    return new Boolean(getValue() != _->getValue());
+    return new Boolean(getValue() != _->getValue().toDouble());
 }
 
 Node* Double::NotEquals(Double* _)
@@ -6722,7 +6724,7 @@ Node* Double::LessThanOrEqualTo(Boolean* _)
 
 Node* Double::LessThanOrEqualTo(Integer* _)
 {
-    return new Boolean(getValue() <= _->getValue());
+    return new Boolean(getValue() <= _->getValue().toDouble());
 }
 
 Node* Double::LessThanOrEqualTo(Double* _)
@@ -7222,7 +7224,7 @@ Node* Double::GreaterThanOrEqualTo(Boolean* _)
 
 Node* Double::GreaterThanOrEqualTo(Integer* _)
 {
-    return new Boolean(getValue() >= _->getValue());
+    return new Boolean(getValue() >= _->getValue().toDouble());
 }
 
 Node* Double::GreaterThanOrEqualTo(Double* _)
