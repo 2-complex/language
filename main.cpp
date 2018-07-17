@@ -279,20 +279,29 @@ int main(int argc, const char* argv[])
 
             std::stringstream ss(mystr);
 
-            ANTLRInputStream input(ss);
-            CalamityLexer lexer(&input);
-            CommonTokenStream tokens(&lexer);
-            CalamityParser parser(&tokens);
+            try
+            {
+                ANTLRInputStream input(ss);
+                CalamityLexer lexer(&input);
+                CommonTokenStream tokens(&lexer);
+                CalamityParser parser(&tokens);
 
-            tree::ParseTree *tree = parser.program();
+                tree::ParseTree *tree = parser.program();
 
-            MainVisitor vistor;
-            HType a = vistor.visit(tree);
+                MainVisitor vistor;
+                HType a = vistor.visit(tree);
 
-            object::Node* answer = a.code->evaluate(environment);
+                object::Node* answer = a.code->evaluate(environment);
 
-            printf( "%s\n\n", answer->toString().c_str() );
-            answer->release();
+                printf( "%s\n\n", answer->toString().c_str() );
+                answer->release();
+            }
+            catch(std::exception)
+            {
+                printf("PARSE ERROR\n\n");
+                continue;
+            }
+
         }
     }
 }
