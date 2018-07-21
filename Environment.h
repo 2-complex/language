@@ -8,23 +8,26 @@
 namespace object
 {
     class Node;
+    class Object;
 }
 
 class Environment
 {
-    std::vector<object::Node*> chain;
+    std::vector<object::Object*> chain;
 
 public:
-    explicit Environment(object::Node* argument);
-    Environment(Environment& parent, object::Node* argument);
+    explicit Environment(object::Object* argument);
+    Environment(Environment& parent, object::Object* argument);
     Environment(const Environment& environment);
 
     virtual ~Environment();
 
-    object::Node* getArgument() const;
-    object::Node* setMapping(object::Node* index, object::Node* value);
+    object::Object* getArgument() const;
+    object::Node* getUnderscore() const;
 
+    object::Node* setMapping(object::Node* index, object::Node* value);
     object::Node* getMapping(object::Node* index);
+
     std::string toString() const;
 };
 

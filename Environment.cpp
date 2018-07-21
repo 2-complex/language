@@ -5,13 +5,13 @@
 #include <stdio.h>
 
 
-Environment::Environment(object::Node* argument)
+Environment::Environment(object::Object* argument)
 {
     chain.push_back(argument);
     argument->retain();
 }
 
-Environment::Environment(Environment& parent, object::Node* argument)
+Environment::Environment(Environment& parent, object::Object* argument)
     : chain(parent.chain)
 {
     chain.push_back(argument);
@@ -48,14 +48,19 @@ object::Node* Environment::setMapping(object::Node* index, object::Node* value)
     return getArgument()->setMapping(index, value);
 }
 
-object::Node* Environment::getArgument() const
+object::Object* Environment::getArgument() const
 {
     return *(chain.rbegin());
 }
 
+object::Node* Environment::getUnderscore() const
+{
+    return (*(chain.rbegin()))->getUnderscore();
+}
+
 object::Node* Environment::getMapping(object::Node* index)
 {
-    for( std::vector<object::Node*>::reverse_iterator itr = chain.rbegin(); itr != chain.rend(); ++itr )
+    for( std::vector<object::Object*>::reverse_iterator itr = chain.rbegin(); itr != chain.rend(); ++itr )
     {
         object::Node* result = (*itr)->getMapping(index);
         if( result )

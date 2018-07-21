@@ -609,11 +609,15 @@ public:
 class Object : public Node
 {
     std::map<Key, Node*> mappings;
+    Node* underscore;
 
 public:
+    Object();
+    Object(Node* underscore);
     virtual ~Object();
 
     std::map<Key, Node*> getValue();
+    object::Node* getUnderscore();
 
     virtual object::Node* setMapping(object::Node* key, object::Node* value);
     virtual object::Node* getMapping(object::Node* key);

@@ -570,9 +570,19 @@ std::string Word::toString() const
 
 object::Node* Word::evaluate(Environment& env) const
 {
-    object::Member member(name);
-    object::Node* result = env.getMapping(&member);
-    if ( ! result )
+    object::Node* result = NULL;
+
+    if( name == "_" )
+    {
+        result = env.getUnderscore();
+    }
+    else
+    {
+        object::Member member(name);
+        result = env.getMapping(&member);
+    }
+
+    if( ! result )
     {
         object::Error* error = new object::Error("Member not found: " + name);
         error->retain();

@@ -660,6 +660,28 @@ std::string Key::toString() const
     return node->toString();
 }
 
+Object::Object()
+{
+    underscore = this;
+}
+
+Object::Object(Node* underscore)
+    : underscore(underscore)
+{
+    underscore->retain();
+}
+
+Object::~Object()
+{
+    if( underscore != this )
+        underscore->release();
+
+    for( auto itr = mappings.begin(); itr != mappings.end(); itr++ )
+    {
+        itr->second->release();
+    }
+}
+
 std::map<Key, Node*> Object::getValue()
 {
     return mappings;
@@ -704,6 +726,11 @@ Node* Object::getMapping(Node* index)
 
     itr->second->retain();
     return itr->second;
+}
+
+Node* Object::getUnderscore()
+{
+    return underscore;
 }
 
 std::string Object::toString() const
@@ -1287,14 +1314,6 @@ Node* Array::Or(Object* _)
 Node* Array::Or(Function* _)
 {
     return new Error("Logical 'or' with array and function");
-}
-
-Object::~Object()
-{
-    for( auto itr = mappings.begin(); itr != mappings.end(); itr++ )
-    {
-        itr->second->release();
-    }
 }
 
 Node* Object::Or(Error* _)
@@ -4408,37 +4427,44 @@ Node* Function::Call(Error* _)
 
 Node* Function::Call(Nothing* _)
 {
-    return new Error("Attmept to call function with nothing as argument");
+    Environment extension(environment, new Object(_));
+    return program->evaluate(extension);
 }
 
 Node* Function::Call(Member* _)
 {
-    return new Error("Attmept to call function with member as argument");
+    Environment extension(environment, new Object(_));
+    return program->evaluate(extension);
 }
 
 Node* Function::Call(Boolean* _)
 {
-    return new Error("Attmept to call function with boolean as argument");
+    Environment extension(environment, new Object(_));
+    return program->evaluate(extension);
 }
 
 Node* Function::Call(Integer* _)
 {
-    return new Error("Attmept to call function with integer as argument");
+    Environment extension(environment, new Object(_));
+    return program->evaluate(extension);
 }
 
 Node* Function::Call(Double* _)
 {
-    return new Error("Attmept to call function with double as argument");
+    Environment extension(environment, new Object(_));
+    return program->evaluate(extension);
 }
 
 Node* Function::Call(String* _)
 {
-    return new Error("Attmept to call function with string as argument");
+    Environment extension(environment, new Object(_));
+    return program->evaluate(extension);
 }
 
 Node* Function::Call(Array* _)
 {
-    return new Error("Attmept to call function with array as argument");
+    Environment extension(environment, new Object(_));
+    return program->evaluate(extension);
 }
 
 Node* Function::Call(Object* _)
@@ -4449,7 +4475,8 @@ Node* Function::Call(Object* _)
 
 Node* Function::Call(Function* _)
 {
-    return new Error("Attmept to call function with function as argument");
+    Environment extension(environment, new Object(_));
+    return program->evaluate(extension);
 }
 
 Node* Error::Equals(Error* _)
