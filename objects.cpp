@@ -93,11 +93,6 @@ Node* Error::And(Error* _)
     return _;
 }
 
-Node* Error::And(Nothing* _)
-{
-    return this;
-}
-
 Node* Error::And(Member* _)
 {
     return this;
@@ -138,56 +133,6 @@ Node* Error::And(Function* _)
     return this;
 }
 
-Node* Nothing::And(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::And(Nothing* _)
-{
-    return new Error("Logical 'and' with nothing and nothing");
-}
-
-Node* Nothing::And(Member* _)
-{
-    return new Error("Logical 'and' with nothing and member");
-}
-
-Node* Nothing::And(Boolean* _)
-{
-    return new Error("Logical 'and' with nothing and boolean");
-}
-
-Node* Nothing::And(Integer* _)
-{
-    return new Error("Logical 'and' with nothing and integer");
-}
-
-Node* Nothing::And(Double* _)
-{
-    return new Error("Logical 'and' with nothing and double");
-}
-
-Node* Nothing::And(String* _)
-{
-    return new Error("Logical 'and' with nothing and string");
-}
-
-Node* Nothing::And(Array* _)
-{
-    return new Error("Logical 'and' with nothing and array");
-}
-
-Node* Nothing::And(Object* _)
-{
-    return new Error("Logical 'and' with nothing and object");
-}
-
-Node* Nothing::And(Function* _)
-{
-    return new Error("Logical 'and' with nothing and function");
-}
-
 std::string Member::getValue()
 {
     return value;
@@ -196,11 +141,6 @@ std::string Member::getValue()
 Node* Member::And(Error* _)
 {
     return _;
-}
-
-Node* Member::And(Nothing* _)
-{
-    return new Error("Logical 'and' with member and nothing");
 }
 
 Node* Member::And(Member* _)
@@ -271,11 +211,6 @@ Node* Boolean::Negative()
 Node* Boolean::And(Error* _)
 {
     return _;
-}
-
-Node* Boolean::And(Nothing* _)
-{
-    return new Error("Logical 'and' with boolean and nothing");
 }
 
 Node* Boolean::And(Member* _)
@@ -353,11 +288,6 @@ Node* Integer::And(Error* _)
     return _;
 }
 
-Node* Integer::And(Nothing* _)
-{
-    return new Error("Logical 'and' with integer and nothing");
-}
-
 Node* Integer::And(Member* _)
 {
     return new Error("Logical 'and' with integer and member");
@@ -433,11 +363,6 @@ Node* Double::And(Error* _)
     return _;
 }
 
-Node* Double::And(Nothing* _)
-{
-    return new Error("Logical 'and' with double and nothing");
-}
-
 Node* Double::And(Member* _)
 {
     return new Error("Logical 'and' with double and member");
@@ -506,11 +431,6 @@ Node* String::Negative()
 Node* String::And(Error* _)
 {
     return _;
-}
-
-Node* String::And(Nothing* _)
-{
-    return new Error("Logical 'and' with string and nothing");
 }
 
 Node* String::And(Member* _)
@@ -587,11 +507,6 @@ Node* Array::Negative()
 Node* Array::And(Error* _)
 {
     return _;
-}
-
-Node* Array::And(Nothing* _)
-{
-    return new Error("Logical 'and' with array and nothing");
 }
 
 Node* Array::And(Member* _)
@@ -763,11 +678,6 @@ Node* Object::And(Error* _)
     return _;
 }
 
-Node* Object::And(Nothing* _)
-{
-    return new Error("Logical 'and' with object and nothing");
-}
-
 Node* Object::And(Member* _)
 {
     return new Error("Logical 'and' with object and member");
@@ -841,11 +751,6 @@ Node* Function::And(Error* _)
     return _;
 }
 
-Node* Function::And(Nothing* _)
-{
-    return new Error("Logical 'and' with function and nothing");
-}
-
 Node* Function::And(Member* _)
 {
     return new Error("Logical 'and' with function and member");
@@ -891,11 +796,6 @@ Node* Error::Or(Error* _)
     return _;
 }
 
-Node* Error::Or(Nothing* _)
-{
-    return this;
-}
-
 Node* Error::Or(Member* _)
 {
     return this;
@@ -936,56 +836,6 @@ Node* Error::Or(Function* _)
     return this;
 }
 
-Node* Nothing::Or(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::Or(Nothing* _)
-{
-    return new Error("Logical 'or' with nothing and nothing");
-}
-
-Node* Nothing::Or(Member* _)
-{
-    return new Error("Logical 'or' with nothing and member");
-}
-
-Node* Nothing::Or(Boolean* _)
-{
-    return new Error("Logical 'or' with nothing and boolean");
-}
-
-Node* Nothing::Or(Integer* _)
-{
-    return new Error("Logical 'or' with nothing and integer");
-}
-
-Node* Nothing::Or(Double* _)
-{
-    return new Error("Logical 'or' with nothing and double");
-}
-
-Node* Nothing::Or(String* _)
-{
-    return new Error("Logical 'or' with nothing and string");
-}
-
-Node* Nothing::Or(Array* _)
-{
-    return new Error("Logical 'or' with nothing and array");
-}
-
-Node* Nothing::Or(Object* _)
-{
-    return new Error("Logical 'or' with nothing and object");
-}
-
-Node* Nothing::Or(Function* _)
-{
-    return new Error("Logical 'or' with nothing and function");
-}
-
 Member::Member(const std::string& value)
     : value(value)
 {
@@ -1014,11 +864,6 @@ Node* Member::Negative()
 Node* Member::Or(Error* _)
 {
     return _;
-}
-
-Node* Member::Or(Nothing* _)
-{
-    return new Error("Logical 'or' with member and nothing");
 }
 
 Node* Member::Or(Member* _)
@@ -1071,11 +916,6 @@ Node* Boolean::Or(Error* _)
     return _;
 }
 
-Node* Boolean::Or(Nothing* _)
-{
-    return new Error("Logical 'or' with boolean and nothing");
-}
-
 Node* Boolean::Or(Member* _)
 {
     return new Error("Logical 'or' with boolean and member");
@@ -1119,11 +959,6 @@ Node* Boolean::Or(Function* _)
 Node* Integer::Or(Error* _)
 {
     return _;
-}
-
-Node* Integer::Or(Nothing* _)
-{
-    return new Error("Logical 'or' with integer and nothing");
 }
 
 Node* Integer::Or(Member* _)
@@ -1171,11 +1006,6 @@ Node* Double::Or(Error* _)
     return _;
 }
 
-Node* Double::Or(Nothing* _)
-{
-    return new Error("Logical 'or' with double and nothing");
-}
-
 Node* Double::Or(Member* _)
 {
     return new Error("Logical 'or' with double and member");
@@ -1219,11 +1049,6 @@ Node* Double::Or(Function* _)
 Node* String::Or(Error* _)
 {
     return _;
-}
-
-Node* String::Or(Nothing* _)
-{
-    return new Error("Logical 'or' with string and nothing");
 }
 
 Node* String::Or(Member* _)
@@ -1271,11 +1096,6 @@ Node* Array::Or(Error* _)
     return _;
 }
 
-Node* Array::Or(Nothing* _)
-{
-    return new Error("Logical 'or' with array and nothing");
-}
-
 Node* Array::Or(Member* _)
 {
     return new Error("Logical 'or' with array and member");
@@ -1319,11 +1139,6 @@ Node* Array::Or(Function* _)
 Node* Object::Or(Error* _)
 {
     return _;
-}
-
-Node* Object::Or(Nothing* _)
-{
-    return new Error("Logical 'or' with object and nothing");
 }
 
 Node* Object::Or(Member* _)
@@ -1371,11 +1186,6 @@ Node* Function::Or(Error* _)
     return _;
 }
 
-Node* Function::Or(Nothing* _)
-{
-    return new Error("Logical 'or' with function and nothing");
-}
-
 Node* Function::Or(Member* _)
 {
     return new Error("Logical 'or' with function and member");
@@ -1417,11 +1227,6 @@ Node* Function::Or(Function* _)
 }
 
 Node* Error::Plus(Error* _)
-{
-    return _;
-}
-
-Node* Error::Plus(Nothing* _)
 {
     return this;
 }
@@ -1466,64 +1271,9 @@ Node* Error::Plus(Function* _)
     return this;
 }
 
-Node* Nothing::Plus(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::Plus(Nothing* _)
-{
-    return new Error("Attempt to add nothing and nothing with '+'");
-}
-
-Node* Nothing::Plus(Member* _)
-{
-    return new Error("Attempt to add nothing and member with '+'");
-}
-
-Node* Nothing::Plus(Boolean* _)
-{
-    return new Error("Attempt to add nothing and boolean with '+'");
-}
-
-Node* Nothing::Plus(Integer* _)
-{
-    return new Error("Attempt to add nothing and integer with '+'");
-}
-
-Node* Nothing::Plus(Double* _)
-{
-    return new Error("Attempt to add nothing and double with '+'");
-}
-
-Node* Nothing::Plus(String* _)
-{
-    return new Error("Attempt to add nothing and string with '+'");
-}
-
-Node* Nothing::Plus(Array* _)
-{
-    return new Error("Attempt to add nothing and array with '+'");
-}
-
-Node* Nothing::Plus(Object* _)
-{
-    return new Error("Attempt to add nothing and object with '+'");
-}
-
-Node* Nothing::Plus(Function* _)
-{
-    return new Error("Attempt to add nothing and function with '+'");
-}
-
 Node* Member::Plus(Error* _)
 {
     return _;
-}
-
-Node* Member::Plus(Nothing* _)
-{
-    return new Error("Attempt to add member and nothing with '+'");
 }
 
 Node* Member::Plus(Member* _)
@@ -1571,11 +1321,6 @@ Node* Boolean::Plus(Error* _)
     return _;
 }
 
-Node* Boolean::Plus(Nothing* _)
-{
-    return new Error("Attempt to add boolean and nothing with '+'");
-}
-
 Node* Boolean::Plus(Member* _)
 {
     return new Error("Attempt to add boolean and member with '+'");
@@ -1619,11 +1364,6 @@ Node* Boolean::Plus(Function* _)
 Node* Integer::Plus(Error* _)
 {
     return _;
-}
-
-Node* Integer::Plus(Nothing* _)
-{
-    return new Error("Attempt to add integer and nothing with '+'");
 }
 
 Node* Integer::Plus(Member* _)
@@ -1671,11 +1411,6 @@ Node* Double::Plus(Error* _)
     return _;
 }
 
-Node* Double::Plus(Nothing* _)
-{
-    return new Error("Attempt to add double and nothing with '+'");
-}
-
 Node* Double::Plus(Member* _)
 {
     return new Error("Attempt to add double and member with '+'");
@@ -1721,11 +1456,6 @@ Node* String::Plus(Error* _)
     return _;
 }
 
-Node* String::Plus(Nothing* _)
-{
-    return new Error("Attempt to add string and nothing with '+'");
-}
-
 Node* String::Plus(Member* _)
 {
     return new Error("Attempt to add string and member with '+'");
@@ -1769,11 +1499,6 @@ Node* String::Plus(Function* _)
 Node* Array::Plus(Error* _)
 {
     return _;
-}
-
-Node* Array::Plus(Nothing* _)
-{
-    return new Error("Attempt to add array and nothing with '+'");
 }
 
 Node* Array::Plus(Member* _)
@@ -1829,11 +1554,6 @@ Node* Object::Plus(Error* _)
     return _;
 }
 
-Node* Object::Plus(Nothing* _)
-{
-    return new Error("Attempt to add object and nothing with '+'");
-}
-
 Node* Object::Plus(Member* _)
 {
     return new Error("Attempt to add object and member with '+'");
@@ -1877,11 +1597,6 @@ Node* Object::Plus(Function* _)
 Node* Function::Plus(Error* _)
 {
     return _;
-}
-
-Node* Function::Plus(Nothing* _)
-{
-    return new Error("Attempt to add function and nothing with '+'");
 }
 
 Node* Function::Plus(Member* _)
@@ -1929,11 +1644,6 @@ Node* Error::Minus(Error* _)
     return _;
 }
 
-Node* Error::Minus(Nothing* _)
-{
-    return this;
-}
-
 Node* Error::Minus(Member* _)
 {
     return this;
@@ -1974,64 +1684,9 @@ Node* Error::Minus(Function* _)
     return this;
 }
 
-Node* Nothing::Minus(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::Minus(Nothing* _)
-{
-    return new Error("Attempt to subtract nothing and nothing with '-'");
-}
-
-Node* Nothing::Minus(Member* _)
-{
-    return new Error("Attempt to subtract nothing and member with '-'");
-}
-
-Node* Nothing::Minus(Boolean* _)
-{
-    return new Error("Attempt to subtract nothing and boolean with '-'");
-}
-
-Node* Nothing::Minus(Integer* _)
-{
-    return new Error("Attempt to subtract nothing and integer with '-'");
-}
-
-Node* Nothing::Minus(Double* _)
-{
-    return new Error("Attempt to subtract nothing and double with '-'");
-}
-
-Node* Nothing::Minus(String* _)
-{
-    return new Error("Attempt to subtract nothing and string with '-'");
-}
-
-Node* Nothing::Minus(Array* _)
-{
-    return new Error("Attempt to subtract nothing and array with '-'");
-}
-
-Node* Nothing::Minus(Object* _)
-{
-    return new Error("Attempt to subtract nothing and object with '-'");
-}
-
-Node* Nothing::Minus(Function* _)
-{
-    return new Error("Attempt to subtract nothing and function with '-'");
-}
-
 Node* Member::Minus(Error* _)
 {
     return _;
-}
-
-Node* Member::Minus(Nothing* _)
-{
-    return new Error("Attempt to subtract member and nothing with '-'");
 }
 
 Node* Member::Minus(Member* _)
@@ -2079,11 +1734,6 @@ Node* Boolean::Minus(Error* _)
     return _;
 }
 
-Node* Boolean::Minus(Nothing* _)
-{
-    return new Error("Attempt to subtract boolean and nothing with '-'");
-}
-
 Node* Boolean::Minus(Member* _)
 {
     return new Error("Attempt to subtract boolean and member with '-'");
@@ -2127,11 +1777,6 @@ Node* Boolean::Minus(Function* _)
 Node* Integer::Minus(Error* _)
 {
     return _;
-}
-
-Node* Integer::Minus(Nothing* _)
-{
-    return new Error("Attempt to subtract integer and nothing with '-'");
 }
 
 Node* Integer::Minus(Member* _)
@@ -2179,11 +1824,6 @@ Node* Double::Minus(Error* _)
     return _;
 }
 
-Node* Double::Minus(Nothing* _)
-{
-    return new Error("Attempt to subtract double and nothing with '-'");
-}
-
 Node* Double::Minus(Member* _)
 {
     return new Error("Attempt to subtract double and member with '-'");
@@ -2227,11 +1867,6 @@ Node* Double::Minus(Function* _)
 Node* String::Minus(Error* _)
 {
     return _;
-}
-
-Node* String::Minus(Nothing* _)
-{
-    return new Error("Attempt to subtract string and nothing with '-'");
 }
 
 Node* String::Minus(Member* _)
@@ -2279,11 +1914,6 @@ Node* Array::Minus(Error* _)
     return _;
 }
 
-Node* Array::Minus(Nothing* _)
-{
-    return new Error("Attempt to subtract array and nothing with '-'");
-}
-
 Node* Array::Minus(Member* _)
 {
     return new Error("Attempt to subtract array and member with '-'");
@@ -2327,11 +1957,6 @@ Node* Array::Minus(Function* _)
 Node* Object::Minus(Error* _)
 {
     return _;
-}
-
-Node* Object::Minus(Nothing* _)
-{
-    return new Error("Attempt to subtract object and nothing with '-'");
 }
 
 Node* Object::Minus(Member* _)
@@ -2379,11 +2004,6 @@ Node* Function::Minus(Error* _)
     return _;
 }
 
-Node* Function::Minus(Nothing* _)
-{
-    return new Error("Attempt to subtract function and nothing with '-'");
-}
-
 Node* Function::Minus(Member* _)
 {
     return new Error("Attempt to subtract function and member with '-'");
@@ -2429,11 +2049,6 @@ Node* Error::Times(Error* _)
     return this;
 }
 
-Node* Error::Times(Nothing* _)
-{
-    return this;
-}
-
 Node* Error::Times(Member* _)
 {
     return this;
@@ -2474,64 +2089,9 @@ Node* Error::Times(Function* _)
     return this;
 }
 
-Node* Nothing::Times(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::Times(Nothing* _)
-{
-    return new Error("Attempt to multiply nothing by nothing with '*'");
-}
-
-Node* Nothing::Times(Member* _)
-{
-    return new Error("Attempt to multiply nothing by member with '*'");
-}
-
-Node* Nothing::Times(Boolean* _)
-{
-    return new Error("Attempt to multiply nothing by boolean with '*'");
-}
-
-Node* Nothing::Times(Integer* _)
-{
-    return new Error("Attempt to multiply nothing by integer with '*'");
-}
-
-Node* Nothing::Times(Double* _)
-{
-    return new Error("Attempt to multiply nothing by double with '*'");
-}
-
-Node* Nothing::Times(String* _)
-{
-    return new Error("Attempt to multiply nothing by string with '*'");
-}
-
-Node* Nothing::Times(Array* _)
-{
-    return new Error("Attempt to multiply nothing by array with '*'");
-}
-
-Node* Nothing::Times(Object* _)
-{
-    return new Error("Attempt to multiply nothing by object with '*'");
-}
-
-Node* Nothing::Times(Function* _)
-{
-    return new Error("Attempt to multiply nothing by function with '*'");
-}
-
 Node* Member::Times(Error* _)
 {
     return _;
-}
-
-Node* Member::Times(Nothing* _)
-{
-    return new Error("Attempt to multiply member by nothing with '*'");
 }
 
 Node* Member::Times(Member* _)
@@ -2579,11 +2139,6 @@ Node* Boolean::Times(Error* _)
     return _;
 }
 
-Node* Boolean::Times(Nothing* _)
-{
-    return new Error("Attempt to multiply boolean by nothing with '*'");
-}
-
 Node* Boolean::Times(Member* _)
 {
     return new Error("Attempt to multiply boolean by member with '*'");
@@ -2627,11 +2182,6 @@ Node* Boolean::Times(Function* _)
 Node* Integer::Times(Error* _)
 {
     return _;
-}
-
-Node* Integer::Times(Nothing* _)
-{
-    return new Error("Attempt to multiply integer by nothing with '*'");
 }
 
 Node* Integer::Times(Member* _)
@@ -2679,11 +2229,6 @@ Node* Double::Times(Error* _)
     return _;
 }
 
-Node* Double::Times(Nothing* _)
-{
-    return new Error("Attempt to multiply double by nothing with '*'");
-}
-
 Node* Double::Times(Member* _)
 {
     return new Error("Attempt to multiply double by member with '*'");
@@ -2727,11 +2272,6 @@ Node* Double::Times(Function* _)
 Node* String::Times(Error* _)
 {
     return _;
-}
-
-Node* String::Times(Nothing* _)
-{
-    return new Error("Attempt to multiply string by nothing with '*'");
 }
 
 Node* String::Times(Member* _)
@@ -2779,11 +2319,6 @@ Node* Array::Times(Error* _)
     return _;
 }
 
-Node* Array::Times(Nothing* _)
-{
-    return new Error("Attempt to multiply array by nothing with '*'");
-}
-
 Node* Array::Times(Member* _)
 {
     return new Error("Attempt to multiply array by member with '*'");
@@ -2827,11 +2362,6 @@ Node* Array::Times(Function* _)
 Node* Object::Times(Error* _)
 {
     return _;
-}
-
-Node* Object::Times(Nothing* _)
-{
-    return new Error("Attempt to multiply object by nothing with '*'");
 }
 
 Node* Object::Times(Member* _)
@@ -2879,11 +2409,6 @@ Node* Function::Times(Error* _)
     return _;
 }
 
-Node* Function::Times(Nothing* _)
-{
-    return new Error("Attempt to multiply function by nothing with '*'");
-}
-
 Node* Function::Times(Member* _)
 {
     return new Error("Attempt to multiply function by member with '*'");
@@ -2929,11 +2454,6 @@ Node* Error::DividedBy(Error* _)
     return _;
 }
 
-Node* Error::DividedBy(Nothing* _)
-{
-    return this;
-}
-
 Node* Error::DividedBy(Member* _)
 {
     return this;
@@ -2974,64 +2494,9 @@ Node* Error::DividedBy(Function* _)
     return this;
 }
 
-Node* Nothing::DividedBy(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::DividedBy(Nothing* _)
-{
-    return new Error("Attempt to divide nothing by nothing with '/'");
-}
-
-Node* Nothing::DividedBy(Member* _)
-{
-    return new Error("Attempt to divide nothing by member with '/'");
-}
-
-Node* Nothing::DividedBy(Boolean* _)
-{
-    return new Error("Attempt to divide nothing by boolean with '/'");
-}
-
-Node* Nothing::DividedBy(Integer* _)
-{
-    return new Error("Attempt to divide nothing by integer with '/'");
-}
-
-Node* Nothing::DividedBy(Double* _)
-{
-    return new Error("Attempt to divide nothing by double with '/'");
-}
-
-Node* Nothing::DividedBy(String* _)
-{
-    return new Error("Attempt to divide nothing by string with '/'");
-}
-
-Node* Nothing::DividedBy(Array* _)
-{
-    return new Error("Attempt to divide nothing by array with '/'");
-}
-
-Node* Nothing::DividedBy(Object* _)
-{
-    return new Error("Attempt to divide nothing by object with '/'");
-}
-
-Node* Nothing::DividedBy(Function* _)
-{
-    return new Error("Attempt to divide nothing by function with '/'");
-}
-
 Node* Member::DividedBy(Error* _)
 {
     return _;
-}
-
-Node* Member::DividedBy(Nothing* _)
-{
-    return new Error("Attempt to divide member by nothing with '/'");
 }
 
 Node* Member::DividedBy(Member* _)
@@ -3079,11 +2544,6 @@ Node* Boolean::DividedBy(Error* _)
     return _;
 }
 
-Node* Boolean::DividedBy(Nothing* _)
-{
-    return new Error("Attempt to divide boolean by nothing with '/'");
-}
-
 Node* Boolean::DividedBy(Member* _)
 {
     return new Error("Attempt to divide boolean by member with '/'");
@@ -3127,11 +2587,6 @@ Node* Boolean::DividedBy(Function* _)
 Node* Integer::DividedBy(Error* _)
 {
     return _;
-}
-
-Node* Integer::DividedBy(Nothing* _)
-{
-    return new Error("Attempt to divide integer by nothing with '/'");
 }
 
 Node* Integer::DividedBy(Member* _)
@@ -3179,11 +2634,6 @@ Node* Double::DividedBy(Error* _)
     return _;
 }
 
-Node* Double::DividedBy(Nothing* _)
-{
-    return new Error("Attempt to divide double by nothing with '/'");
-}
-
 Node* Double::DividedBy(Member* _)
 {
     return new Error("Attempt to divide double by member with '/'");
@@ -3227,11 +2677,6 @@ Node* Double::DividedBy(Function* _)
 Node* String::DividedBy(Error* _)
 {
     return _;
-}
-
-Node* String::DividedBy(Nothing* _)
-{
-    return new Error("Attempt to divide string by nothing with '/'");
 }
 
 Node* String::DividedBy(Member* _)
@@ -3279,11 +2724,6 @@ Node* Array::DividedBy(Error* _)
     return _;
 }
 
-Node* Array::DividedBy(Nothing* _)
-{
-    return new Error("Attempt to divide array by nothing with '/'");
-}
-
 Node* Array::DividedBy(Member* _)
 {
     return new Error("Attempt to divide array by member with '/'");
@@ -3327,11 +2767,6 @@ Node* Array::DividedBy(Function* _)
 Node* Object::DividedBy(Error* _)
 {
     return _;
-}
-
-Node* Object::DividedBy(Nothing* _)
-{
-    return new Error("Attempt to divide object by nothing with '/'");
 }
 
 Node* Object::DividedBy(Member* _)
@@ -3379,11 +2814,6 @@ Node* Function::DividedBy(Error* _)
     return _;
 }
 
-Node* Function::DividedBy(Nothing* _)
-{
-    return new Error("Attempt to divide function by nothing with '/'");
-}
-
 Node* Function::DividedBy(Member* _)
 {
     return new Error("Attempt to divide function by member with '/'");
@@ -3429,11 +2859,6 @@ Node* Error::Mod(Error* _)
     return _;
 }
 
-Node* Error::Mod(Nothing* _)
-{
-    return this;
-}
-
 Node* Error::Mod(Member* _)
 {
     return this;
@@ -3474,64 +2899,9 @@ Node* Error::Mod(Function* _)
     return this;
 }
 
-Node* Nothing::Mod(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::Mod(Nothing* _)
-{
-    return new Error("Attempt to mod nothing and nothing with '%'");
-}
-
-Node* Nothing::Mod(Member* _)
-{
-    return new Error("Attempt to mod nothing and member with '%'");
-}
-
-Node* Nothing::Mod(Boolean* _)
-{
-    return new Error("Attempt to mod nothing and boolean with '%'");
-}
-
-Node* Nothing::Mod(Integer* _)
-{
-    return new Error("Attempt to mod nothing and integer with '%'");
-}
-
-Node* Nothing::Mod(Double* _)
-{
-    return new Error("Attempt to mod nothing and double with '%'");
-}
-
-Node* Nothing::Mod(String* _)
-{
-    return new Error("Attempt to mod nothing and string with '%'");
-}
-
-Node* Nothing::Mod(Array* _)
-{
-    return new Error("Attempt to mod nothing and array with '%'");
-}
-
-Node* Nothing::Mod(Object* _)
-{
-    return new Error("Attempt to mod nothing and object with '%'");
-}
-
-Node* Nothing::Mod(Function* _)
-{
-    return new Error("Attempt to mod nothing and function with '%'");
-}
-
 Node* Member::Mod(Error* _)
 {
     return _;
-}
-
-Node* Member::Mod(Nothing* _)
-{
-    return new Error("Attempt to mod member and nothing with '%'");
 }
 
 Node* Member::Mod(Member* _)
@@ -3579,11 +2949,6 @@ Node* Boolean::Mod(Error* _)
     return _;
 }
 
-Node* Boolean::Mod(Nothing* _)
-{
-    return new Error("Attempt to mod boolean and nothing with '%'");
-}
-
 Node* Boolean::Mod(Member* _)
 {
     return new Error("Attempt to mod boolean and member with '%'");
@@ -3627,11 +2992,6 @@ Node* Boolean::Mod(Function* _)
 Node* Integer::Mod(Error* _)
 {
     return _;
-}
-
-Node* Integer::Mod(Nothing* _)
-{
-    return new Error("Attempt to mod integer and nothing with '%'");
 }
 
 Node* Integer::Mod(Member* _)
@@ -3679,11 +3039,6 @@ Node* Double::Mod(Error* _)
     return _;
 }
 
-Node* Double::Mod(Nothing* _)
-{
-    return new Error("Attempt to mod double and nothing with '%'");
-}
-
 Node* Double::Mod(Member* _)
 {
     return new Error("Attempt to mod double and member with '%'");
@@ -3727,11 +3082,6 @@ Node* Double::Mod(Function* _)
 Node* String::Mod(Error* _)
 {
     return _;
-}
-
-Node* String::Mod(Nothing* _)
-{
-    return new Error("Attempt to mod string and nothing with '%'");
 }
 
 Node* String::Mod(Member* _)
@@ -3779,11 +3129,6 @@ Node* Array::Mod(Error* _)
     return _;
 }
 
-Node* Array::Mod(Nothing* _)
-{
-    return new Error("Attempt to mod array and nothing with '%'");
-}
-
 Node* Array::Mod(Member* _)
 {
     return new Error("Attempt to mod array and member with '%'");
@@ -3827,11 +3172,6 @@ Node* Array::Mod(Function* _)
 Node* Object::Mod(Error* _)
 {
     return _;
-}
-
-Node* Object::Mod(Nothing* _)
-{
-    return new Error("Attempt to mod object and nothing with '%'");
 }
 
 Node* Object::Mod(Member* _)
@@ -3879,11 +3219,6 @@ Node* Function::Mod(Error* _)
     return _;
 }
 
-Node* Function::Mod(Nothing* _)
-{
-    return new Error("Attempt to mod function and nothing with '%'");
-}
-
 Node* Function::Mod(Member* _)
 {
     return new Error("Attempt to mod function and member with '%'");
@@ -3929,11 +3264,6 @@ Node* Error::Call(Error* _)
     return _;
 }
 
-Node* Error::Call(Nothing* _)
-{
-    return this;
-}
-
 Node* Error::Call(Member* _)
 {
     return this;
@@ -3974,64 +3304,9 @@ Node* Error::Call(Function* _)
     return this;
 }
 
-Node* Nothing::Call(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::Call(Nothing* _)
-{
-    return new Error("Attmept to call nothing with nothing as argument");
-}
-
-Node* Nothing::Call(Member* _)
-{
-    return new Error("Attmept to call nothing with member as argument");
-}
-
-Node* Nothing::Call(Boolean* _)
-{
-    return new Error("Attmept to call nothing with boolean as argument");
-}
-
-Node* Nothing::Call(Integer* _)
-{
-    return new Error("Attmept to call nothing with integer as argument");
-}
-
-Node* Nothing::Call(Double* _)
-{
-    return new Error("Attmept to call nothing with double as argument");
-}
-
-Node* Nothing::Call(String* _)
-{
-    return new Error("Attmept to call nothing with string as argument");
-}
-
-Node* Nothing::Call(Array* _)
-{
-    return new Error("Attmept to call nothing with array as argument");
-}
-
-Node* Nothing::Call(Object* _)
-{
-    return new Error("Attmept to call nothing with object as argument");
-}
-
-Node* Nothing::Call(Function* _)
-{
-    return new Error("Attmept to call nothing with function as argument");
-}
-
 Node* Member::Call(Error* _)
 {
     return _;
-}
-
-Node* Member::Call(Nothing* _)
-{
-    return new Error("Attmept to call member with nothing as argument");
 }
 
 Node* Member::Call(Member* _)
@@ -4079,11 +3354,6 @@ Node* Boolean::Call(Error* _)
     return _;
 }
 
-Node* Boolean::Call(Nothing* _)
-{
-    return new Error("Attmept to call boolean with nothing as argument");
-}
-
 Node* Boolean::Call(Member* _)
 {
     return new Error("Attmept to call boolean with member as argument");
@@ -4127,11 +3397,6 @@ Node* Boolean::Call(Function* _)
 Node* Integer::Call(Error* _)
 {
     return _;
-}
-
-Node* Integer::Call(Nothing* _)
-{
-    return new Error("Attmept to call integer with nothing as argument");
 }
 
 Node* Integer::Call(Member* _)
@@ -4179,11 +3444,6 @@ Node* Double::Call(Error* _)
     return _;
 }
 
-Node* Double::Call(Nothing* _)
-{
-    return new Error("Attmept to call double with nothing as argument");
-}
-
 Node* Double::Call(Member* _)
 {
     return new Error("Attmept to call double with member as argument");
@@ -4227,11 +3487,6 @@ Node* Double::Call(Function* _)
 Node* String::Call(Error* _)
 {
     return _;
-}
-
-Node* String::Call(Nothing* _)
-{
-    return new Error("Attmept to call string with nothing as argument");
 }
 
 Node* String::Call(Member* _)
@@ -4282,11 +3537,6 @@ Node* Array::Call(Error* _)
     return _;
 }
 
-Node* Array::Call(Nothing* _)
-{
-    return new Error("Attmept to call array with nothing as argument");
-}
-
 Node* Array::Call(Member* _)
 {
     return new Error("Attmept to call array with member as argument");
@@ -4333,11 +3583,6 @@ Node* Array::Call(Function* _)
 Node* Object::Call(Error* _)
 {
     return _;
-}
-
-Node* Object::Call(Nothing* _)
-{
-    return new Error("Attmept to call object with nothing as argument");
 }
 
 Node* Object::Call(Member* _)
@@ -4425,12 +3670,6 @@ Node* Function::Call(Error* _)
     return _;
 }
 
-Node* Function::Call(Nothing* _)
-{
-    Environment extension(environment, new Object(_));
-    return program->evaluate(extension);
-}
-
 Node* Function::Call(Member* _)
 {
     Environment extension(environment, new Object(_));
@@ -4484,11 +3723,6 @@ Node* Error::Equals(Error* _)
     return _;
 }
 
-Node* Error::Equals(Nothing* _)
-{
-    return this;
-}
-
 Node* Error::Equals(Member* _)
 {
     return this;
@@ -4529,64 +3763,9 @@ Node* Error::Equals(Function* _)
     return this;
 }
 
-Node* Nothing::Equals(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::Equals(Nothing* _)
-{
-    return new Error("Attempt to compare nothing");
-}
-
-Node* Nothing::Equals(Member* _)
-{
-    return new Error("Attempt to compare nothing to member with '=='");
-}
-
-Node* Nothing::Equals(Boolean* _)
-{
-    return new Error("Attempt to compare nothing to boolean with '=='");
-}
-
-Node* Nothing::Equals(Integer* _)
-{
-    return new Error("Attempt to compare nothing to error with '=='");
-}
-
-Node* Nothing::Equals(Double* _)
-{
-    return new Error("Attempt to compare nothing to double with '=='");
-}
-
-Node* Nothing::Equals(String* _)
-{
-    return new Error("Attempt to compare nothing to string with '=='");
-}
-
-Node* Nothing::Equals(Array* _)
-{
-    return new Error("Attempt to compare nothing to array with '=='");
-}
-
-Node* Nothing::Equals(Object* _)
-{
-    return new Error("Attempt to compare nothing to object with '=='");
-}
-
-Node* Nothing::Equals(Function* _)
-{
-    return new Error("Attempt to compare nothing to function with '=='");
-}
-
 Node* Member::Equals(Error* _)
 {
     return _;
-}
-
-Node* Member::Equals(Nothing* _)
-{
-    return new Error("Attempt to compare member to nothing with '=='");
 }
 
 Node* Member::Equals(Member* _)
@@ -4634,11 +3813,6 @@ Node* Boolean::Equals(Error* _)
     return _;
 }
 
-Node* Boolean::Equals(Nothing* _)
-{
-    return new Error("Attempt to compare boolean to nothing with '=='");
-}
-
 Node* Boolean::Equals(Member* _)
 {
     return new Boolean(false);
@@ -4682,11 +3856,6 @@ Node* Boolean::Equals(Function* _)
 Node* Integer::Equals(Error* _)
 {
     return _;
-}
-
-Node* Integer::Equals(Nothing* _)
-{
-    return new Error("Attempt to compare integer to nothing with '=='");
 }
 
 Node* Integer::Equals(Member* _)
@@ -4734,11 +3903,6 @@ Node* Double::Equals(Error* _)
     return _;
 }
 
-Node* Double::Equals(Nothing* _)
-{
-    return new Error("Attempt to compare double to nothing with '=='");
-}
-
 Node* Double::Equals(Member* _)
 {
     return new Boolean(false);
@@ -4782,11 +3946,6 @@ Node* Double::Equals(Function* _)
 Node* String::Equals(Error* _)
 {
     return _;
-}
-
-Node* String::Equals(Nothing* _)
-{
-    return new Error("Attempt to compare string to nothing with '=='");
 }
 
 Node* String::Equals(Member* _)
@@ -4834,11 +3993,6 @@ Node* Array::Equals(Error* _)
     return _;
 }
 
-Node* Array::Equals(Nothing* _)
-{
-    return new Error("Attempt to compare array to nothing with '=='");
-}
-
 Node* Array::Equals(Member* _)
 {
     return new Boolean(false);
@@ -4882,11 +4036,6 @@ Node* Array::Equals(Function* _)
 Node* Object::Equals(Error* _)
 {
     return _;
-}
-
-Node* Object::Equals(Nothing* _)
-{
-    return new Error("Attempt to compare object to nothing with '=='");
 }
 
 Node* Object::Equals(Member* _)
@@ -4934,11 +4083,6 @@ Node* Function::Equals(Error* _)
     return _;
 }
 
-Node* Function::Equals(Nothing* _)
-{
-    return new Error("Attempt to compare function to nothing with '=='");
-}
-
 Node* Function::Equals(Member* _)
 {
     return new Boolean(false);
@@ -4984,11 +4128,6 @@ Node* Error::NotEquals(Error* _)
     return _;
 }
 
-Node* Error::NotEquals(Nothing* _)
-{
-    return this;
-}
-
 Node* Error::NotEquals(Member* _)
 {
     return this;
@@ -5029,64 +4168,9 @@ Node* Error::NotEquals(Function* _)
     return this;
 }
 
-Node* Nothing::NotEquals(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::NotEquals(Nothing* _)
-{
-    return new Error("Attempt to compare nothing");
-}
-
-Node* Nothing::NotEquals(Member* _)
-{
-    return new Error("Attempt to compare nothing to member with '!='");
-}
-
-Node* Nothing::NotEquals(Boolean* _)
-{
-    return new Error("Attempt to compare nothing to boolean with '!='");
-}
-
-Node* Nothing::NotEquals(Integer* _)
-{
-    return new Error("Attempt to compare nothing to error with '!='");
-}
-
-Node* Nothing::NotEquals(Double* _)
-{
-    return new Error("Attempt to compare nothing to double with '!='");
-}
-
-Node* Nothing::NotEquals(String* _)
-{
-    return new Error("Attempt to compare nothing to string with '!='");
-}
-
-Node* Nothing::NotEquals(Array* _)
-{
-    return new Error("Attempt to compare nothing to array with '!='");
-}
-
-Node* Nothing::NotEquals(Object* _)
-{
-    return new Error("Attempt to compare nothing to object with '!='");
-}
-
-Node* Nothing::NotEquals(Function* _)
-{
-    return new Error("Attempt to compare nothing to function with '!='");
-}
-
 Node* Member::NotEquals(Error* _)
 {
     return _;
-}
-
-Node* Member::NotEquals(Nothing* _)
-{
-    return new Error("Attempt to compare member to nothing with '!='");
 }
 
 Node* Member::NotEquals(Member* _)
@@ -5134,11 +4218,6 @@ Node* Boolean::NotEquals(Error* _)
     return _;
 }
 
-Node* Boolean::NotEquals(Nothing* _)
-{
-    return new Error("Attempt to compare boolean to nothing with '!='");
-}
-
 Node* Boolean::NotEquals(Member* _)
 {
     return new Boolean(false);
@@ -5182,11 +4261,6 @@ Node* Boolean::NotEquals(Function* _)
 Node* Integer::NotEquals(Error* _)
 {
     return _;
-}
-
-Node* Integer::NotEquals(Nothing* _)
-{
-    return new Error("Attempt to compare integer to nothing with '!='");
 }
 
 Node* Integer::NotEquals(Member* _)
@@ -5234,11 +4308,6 @@ Node* Double::NotEquals(Error* _)
     return _;
 }
 
-Node* Double::NotEquals(Nothing* _)
-{
-    return new Error("Attempt to compare double to nothing with '!='");
-}
-
 Node* Double::NotEquals(Member* _)
 {
     return new Boolean(false);
@@ -5282,11 +4351,6 @@ Node* Double::NotEquals(Function* _)
 Node* String::NotEquals(Error* _)
 {
     return _;
-}
-
-Node* String::NotEquals(Nothing* _)
-{
-    return new Error("Attempt to compare string to nothing with '!='");
 }
 
 Node* String::NotEquals(Member* _)
@@ -5334,11 +4398,6 @@ Node* Array::NotEquals(Error* _)
     return _;
 }
 
-Node* Array::NotEquals(Nothing* _)
-{
-    return new Error("Attempt to compare array to nothing with '!='");
-}
-
 Node* Array::NotEquals(Member* _)
 {
     return new Boolean(false);
@@ -5382,11 +4441,6 @@ Node* Array::NotEquals(Function* _)
 Node* Object::NotEquals(Error* _)
 {
     return _;
-}
-
-Node* Object::NotEquals(Nothing* _)
-{
-    return new Error("Attempt to compare object to nothing with '!='");
 }
 
 Node* Object::NotEquals(Member* _)
@@ -5434,11 +4488,6 @@ Node* Function::NotEquals(Error* _)
     return _;
 }
 
-Node* Function::NotEquals(Nothing* _)
-{
-    return new Error("Attempt to compare function to nothing with '!='");
-}
-
 Node* Function::NotEquals(Member* _)
 {
     return new Boolean(false);
@@ -5484,11 +4533,6 @@ Node* Error::LessThan(Error* _)
     return this;
 }
 
-Node* Error::LessThan(Nothing* _)
-{
-    return this;
-}
-
 Node* Error::LessThan(Member* _)
 {
     return this;
@@ -5529,64 +4573,9 @@ Node* Error::LessThan(Function* _)
     return this;
 }
 
-Node* Nothing::LessThan(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::LessThan(Nothing* _)
-{
-    return new Error("Attempt to compare nothing");
-}
-
-Node* Nothing::LessThan(Member* _)
-{
-    return new Error("Attempt to compare nothing to member with '<'");
-}
-
-Node* Nothing::LessThan(Boolean* _)
-{
-    return new Error("Attempt to compare nothing to boolean with '<'");
-}
-
-Node* Nothing::LessThan(Integer* _)
-{
-    return new Error("Attempt to compare nothing to error with '<'");
-}
-
-Node* Nothing::LessThan(Double* _)
-{
-    return new Error("Attempt to compare nothing to double with '<'");
-}
-
-Node* Nothing::LessThan(String* _)
-{
-    return new Error("Attempt to compare nothing to string with '<'");
-}
-
-Node* Nothing::LessThan(Array* _)
-{
-    return new Error("Attempt to compare nothing to array with '<'");
-}
-
-Node* Nothing::LessThan(Object* _)
-{
-    return new Error("Attempt to compare nothing to object with '<'");
-}
-
-Node* Nothing::LessThan(Function* _)
-{
-    return new Error("Attempt to compare nothing to function with '<'");
-}
-
 Node* Member::LessThan(Error* _)
 {
     return _;
-}
-
-Node* Member::LessThan(Nothing* _)
-{
-    return new Error("Attempt to compare member to nothing with '<'");
 }
 
 Node* Member::LessThan(Member* _)
@@ -5634,11 +4623,6 @@ Node* Boolean::LessThan(Error* _)
     return _;
 }
 
-Node* Boolean::LessThan(Nothing* _)
-{
-    return new Error("Attempt to compare boolean to nothing with '<'");
-}
-
 Node* Boolean::LessThan(Member* _)
 {
     return new Boolean(false);
@@ -5682,11 +4666,6 @@ Node* Boolean::LessThan(Function* _)
 Node* Integer::LessThan(Error* _)
 {
     return _;
-}
-
-Node* Integer::LessThan(Nothing* _)
-{
-    return new Error("Attempt to compare integer to nothing with '<'");
 }
 
 Node* Integer::LessThan(Member* _)
@@ -5734,11 +4713,6 @@ Node* Double::LessThan(Error* _)
     return _;
 }
 
-Node* Double::LessThan(Nothing* _)
-{
-    return new Error("Attempt to compare double to nothing with '<'");
-}
-
 Node* Double::LessThan(Member* _)
 {
     return new Boolean(false);
@@ -5782,11 +4756,6 @@ Node* Double::LessThan(Function* _)
 Node* String::LessThan(Error* _)
 {
     return _;
-}
-
-Node* String::LessThan(Nothing* _)
-{
-    return new Error("Attempt to compare string to nothing with '<'");
 }
 
 Node* String::LessThan(Member* _)
@@ -5834,11 +4803,6 @@ Node* Array::LessThan(Error* _)
     return _;
 }
 
-Node* Array::LessThan(Nothing* _)
-{
-    return new Error("Attempt to compare array to nothing with '<'");
-}
-
 Node* Array::LessThan(Member* _)
 {
     return new Boolean(false);
@@ -5882,11 +4846,6 @@ Node* Array::LessThan(Function* _)
 Node* Object::LessThan(Error* _)
 {
     return _;
-}
-
-Node* Object::LessThan(Nothing* _)
-{
-    return new Error("Attempt to compare object to nothing with '<'");
 }
 
 Node* Object::LessThan(Member* _)
@@ -5934,11 +4893,6 @@ Node* Function::LessThan(Error* _)
     return _;
 }
 
-Node* Function::LessThan(Nothing* _)
-{
-    return new Error("Attempt to compare function to nothing with '<'");
-}
-
 Node* Function::LessThan(Member* _)
 {
     return new Boolean(false);
@@ -5984,11 +4938,6 @@ Node* Error::GreaterThan(Error* _)
     return _;
 }
 
-Node* Error::GreaterThan(Nothing* _)
-{
-    return this;
-}
-
 Node* Error::GreaterThan(Member* _)
 {
     return this;
@@ -6029,64 +4978,9 @@ Node* Error::GreaterThan(Function* _)
     return this;
 }
 
-Node* Nothing::GreaterThan(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::GreaterThan(Nothing* _)
-{
-    return new Error("Attempt to compare nothing");
-}
-
-Node* Nothing::GreaterThan(Member* _)
-{
-    return new Error("Attempt to compare nothing to member with '>'");
-}
-
-Node* Nothing::GreaterThan(Boolean* _)
-{
-    return new Error("Attempt to compare nothing to boolean with '>'");
-}
-
-Node* Nothing::GreaterThan(Integer* _)
-{
-    return new Error("Attempt to compare nothing to error with '>'");
-}
-
-Node* Nothing::GreaterThan(Double* _)
-{
-    return new Error("Attempt to compare nothing to double with '>'");
-}
-
-Node* Nothing::GreaterThan(String* _)
-{
-    return new Error("Attempt to compare nothing to string with '>'");
-}
-
-Node* Nothing::GreaterThan(Array* _)
-{
-    return new Error("Attempt to compare nothing to array with '>'");
-}
-
-Node* Nothing::GreaterThan(Object* _)
-{
-    return new Error("Attempt to compare nothing to object with '>'");
-}
-
-Node* Nothing::GreaterThan(Function* _)
-{
-    return new Error("Attempt to compare nothing to function with '>'");
-}
-
 Node* Member::GreaterThan(Error* _)
 {
     return _;
-}
-
-Node* Member::GreaterThan(Nothing* _)
-{
-    return new Error("Attempt to compare member to nothing with '>'");
 }
 
 Node* Member::GreaterThan(Member* _)
@@ -6134,11 +5028,6 @@ Node* Boolean::GreaterThan(Error* _)
     return _;
 }
 
-Node* Boolean::GreaterThan(Nothing* _)
-{
-    return new Error("Attempt to compare boolean to nothing with '>'");
-}
-
 Node* Boolean::GreaterThan(Member* _)
 {
     return new Boolean(false);
@@ -6182,11 +5071,6 @@ Node* Boolean::GreaterThan(Function* _)
 Node* Integer::GreaterThan(Error* _)
 {
     return _;
-}
-
-Node* Integer::GreaterThan(Nothing* _)
-{
-    return new Error("Attempt to compare integer to nothing with '>'");
 }
 
 Node* Integer::GreaterThan(Member* _)
@@ -6234,11 +5118,6 @@ Node* Double::GreaterThan(Error* _)
     return _;
 }
 
-Node* Double::GreaterThan(Nothing* _)
-{
-    return new Error("Attempt to compare double to nothing with '>'");
-}
-
 Node* Double::GreaterThan(Member* _)
 {
     return new Boolean(false);
@@ -6256,7 +5135,7 @@ Node* Double::GreaterThan(Integer* _)
 
 Node* Double::GreaterThan(Double* _)
 {
-    return this;
+    return new Boolean(getValue() > _->getValue());
 }
 
 Node* Double::GreaterThan(String* _)
@@ -6282,11 +5161,6 @@ Node* Double::GreaterThan(Function* _)
 Node* String::GreaterThan(Error* _)
 {
     return _;
-}
-
-Node* String::GreaterThan(Nothing* _)
-{
-    return new Error("Attempt to compare string to nothing with '>'");
 }
 
 Node* String::GreaterThan(Member* _)
@@ -6334,11 +5208,6 @@ Node* Array::GreaterThan(Error* _)
     return _;
 }
 
-Node* Array::GreaterThan(Nothing* _)
-{
-    return new Error("Attempt to compare array to nothing with '>'");
-}
-
 Node* Array::GreaterThan(Member* _)
 {
     return new Boolean(false);
@@ -6382,11 +5251,6 @@ Node* Array::GreaterThan(Function* _)
 Node* Object::GreaterThan(Error* _)
 {
     return _;
-}
-
-Node* Object::GreaterThan(Nothing* _)
-{
-    return new Error("Attempt to compare object to nothing with '>'");
 }
 
 Node* Object::GreaterThan(Member* _)
@@ -6434,11 +5298,6 @@ Node* Function::GreaterThan(Error* _)
     return _;
 }
 
-Node* Function::GreaterThan(Nothing* _)
-{
-    return new Error("Attempt to compare function to nothing with '>'");
-}
-
 Node* Function::GreaterThan(Member* _)
 {
     return new Boolean(false);
@@ -6484,11 +5343,6 @@ Node* Error::LessThanOrEqualTo(Error* _)
     return _;
 }
 
-Node* Error::LessThanOrEqualTo(Nothing* _)
-{
-    return this;
-}
-
 Node* Error::LessThanOrEqualTo(Member* _)
 {
     return this;
@@ -6529,64 +5383,9 @@ Node* Error::LessThanOrEqualTo(Function* _)
     return this;
 }
 
-Node* Nothing::LessThanOrEqualTo(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::LessThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare nothing");
-}
-
-Node* Nothing::LessThanOrEqualTo(Member* _)
-{
-    return new Error("Attempt to compare nothing to member with '<='");
-}
-
-Node* Nothing::LessThanOrEqualTo(Boolean* _)
-{
-    return new Error("Attempt to compare nothing to boolean with '<='");
-}
-
-Node* Nothing::LessThanOrEqualTo(Integer* _)
-{
-    return new Error("Attempt to compare nothing to error with '<='");
-}
-
-Node* Nothing::LessThanOrEqualTo(Double* _)
-{
-    return new Error("Attempt to compare nothing to double with '<='");
-}
-
-Node* Nothing::LessThanOrEqualTo(String* _)
-{
-    return new Error("Attempt to compare nothing to string with '<='");
-}
-
-Node* Nothing::LessThanOrEqualTo(Array* _)
-{
-    return new Error("Attempt to compare nothing to array with '<='");
-}
-
-Node* Nothing::LessThanOrEqualTo(Object* _)
-{
-    return new Error("Attempt to compare nothing to object with '<='");
-}
-
-Node* Nothing::LessThanOrEqualTo(Function* _)
-{
-    return new Error("Attempt to compare nothing to function with '<='");
-}
-
 Node* Member::LessThanOrEqualTo(Error* _)
 {
     return _;
-}
-
-Node* Member::LessThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare member to nothing with '<='");
 }
 
 Node* Member::LessThanOrEqualTo(Member* _)
@@ -6634,11 +5433,6 @@ Node* Boolean::LessThanOrEqualTo(Error* _)
     return _;
 }
 
-Node* Boolean::LessThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare boolean to nothing with '<='");
-}
-
 Node* Boolean::LessThanOrEqualTo(Member* _)
 {
     return new Boolean(false);
@@ -6682,11 +5476,6 @@ Node* Boolean::LessThanOrEqualTo(Function* _)
 Node* Integer::LessThanOrEqualTo(Error* _)
 {
     return _;
-}
-
-Node* Integer::LessThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare integer to nothing with '<='");
 }
 
 Node* Integer::LessThanOrEqualTo(Member* _)
@@ -6734,11 +5523,6 @@ Node* Double::LessThanOrEqualTo(Error* _)
     return _;
 }
 
-Node* Double::LessThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare double to nothing with '<='");
-}
-
 Node* Double::LessThanOrEqualTo(Member* _)
 {
     return new Boolean(false);
@@ -6782,11 +5566,6 @@ Node* Double::LessThanOrEqualTo(Function* _)
 Node* String::LessThanOrEqualTo(Error* _)
 {
     return _;
-}
-
-Node* String::LessThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare string to nothing with '<='");
 }
 
 Node* String::LessThanOrEqualTo(Member* _)
@@ -6834,11 +5613,6 @@ Node* Array::LessThanOrEqualTo(Error* _)
     return _;
 }
 
-Node* Array::LessThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare array to nothing with '<='");
-}
-
 Node* Array::LessThanOrEqualTo(Member* _)
 {
     return new Boolean(false);
@@ -6882,11 +5656,6 @@ Node* Array::LessThanOrEqualTo(Function* _)
 Node* Object::LessThanOrEqualTo(Error* _)
 {
     return _;
-}
-
-Node* Object::LessThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare object to nothing with '<='");
 }
 
 Node* Object::LessThanOrEqualTo(Member* _)
@@ -6934,11 +5703,6 @@ Node* Function::LessThanOrEqualTo(Error* _)
     return _;
 }
 
-Node* Function::LessThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare function to nothing with '<='");
-}
-
 Node* Function::LessThanOrEqualTo(Member* _)
 {
     return new Boolean(false);
@@ -6984,11 +5748,6 @@ Node* Error::GreaterThanOrEqualTo(Error* _)
     return _;
 }
 
-Node* Error::GreaterThanOrEqualTo(Nothing* _)
-{
-    return this;
-}
-
 Node* Error::GreaterThanOrEqualTo(Member* _)
 {
     return this;
@@ -7029,64 +5788,9 @@ Node* Error::GreaterThanOrEqualTo(Function* _)
     return this;
 }
 
-Node* Nothing::GreaterThanOrEqualTo(Error* _)
-{
-    return _;
-}
-
-Node* Nothing::GreaterThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare nothing");
-}
-
-Node* Nothing::GreaterThanOrEqualTo(Member* _)
-{
-    return new Error("Attempt to compare nothing to member with '>='");
-}
-
-Node* Nothing::GreaterThanOrEqualTo(Boolean* _)
-{
-    return new Error("Attempt to compare nothing to boolean with '>='");
-}
-
-Node* Nothing::GreaterThanOrEqualTo(Integer* _)
-{
-    return new Error("Attempt to compare nothing to error with '>='");
-}
-
-Node* Nothing::GreaterThanOrEqualTo(Double* _)
-{
-    return new Error("Attempt to compare nothing to double with '>='");
-}
-
-Node* Nothing::GreaterThanOrEqualTo(String* _)
-{
-    return new Error("Attempt to compare nothing to string with '>='");
-}
-
-Node* Nothing::GreaterThanOrEqualTo(Array* _)
-{
-    return new Error("Attempt to compare nothing to array with '>='");
-}
-
-Node* Nothing::GreaterThanOrEqualTo(Object* _)
-{
-    return new Error("Attempt to compare nothing to object with '>='");
-}
-
-Node* Nothing::GreaterThanOrEqualTo(Function* _)
-{
-    return new Error("Attempt to compare nothing to function with '>='");
-}
-
 Node* Member::GreaterThanOrEqualTo(Error* _)
 {
     return _;
-}
-
-Node* Member::GreaterThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare member to nothing with '>='");
 }
 
 Node* Member::GreaterThanOrEqualTo(Member* _)
@@ -7134,11 +5838,6 @@ Node* Boolean::GreaterThanOrEqualTo(Error* _)
     return _;
 }
 
-Node* Boolean::GreaterThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare boolean to nothing with '>='");
-}
-
 Node* Boolean::GreaterThanOrEqualTo(Member* _)
 {
     return new Boolean(false);
@@ -7182,11 +5881,6 @@ Node* Boolean::GreaterThanOrEqualTo(Function* _)
 Node* Integer::GreaterThanOrEqualTo(Error* _)
 {
     return _;
-}
-
-Node* Integer::GreaterThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare integer to nothing with '>='");
 }
 
 Node* Integer::GreaterThanOrEqualTo(Member* _)
@@ -7234,11 +5928,6 @@ Node* Double::GreaterThanOrEqualTo(Error* _)
     return _;
 }
 
-Node* Double::GreaterThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare double to nothing with '>='");
-}
-
 Node* Double::GreaterThanOrEqualTo(Member* _)
 {
     return new Boolean(false);
@@ -7282,11 +5971,6 @@ Node* Double::GreaterThanOrEqualTo(Function* _)
 Node* String::GreaterThanOrEqualTo(Error* _)
 {
     return _;
-}
-
-Node* String::GreaterThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare string to nothing with '>='");
 }
 
 Node* String::GreaterThanOrEqualTo(Member* _)
@@ -7334,11 +6018,6 @@ Node* Array::GreaterThanOrEqualTo(Error* _)
     return _;
 }
 
-Node* Array::GreaterThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare array to nothing with '>='");
-}
-
 Node* Array::GreaterThanOrEqualTo(Member* _)
 {
     return new Boolean(false);
@@ -7382,11 +6061,6 @@ Node* Array::GreaterThanOrEqualTo(Function* _)
 Node* Object::GreaterThanOrEqualTo(Error* _)
 {
     return _;
-}
-
-Node* Object::GreaterThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare object to nothing with '>='");
 }
 
 Node* Object::GreaterThanOrEqualTo(Member* _)
@@ -7434,11 +6108,6 @@ Node* Function::GreaterThanOrEqualTo(Error* _)
     return _;
 }
 
-Node* Function::GreaterThanOrEqualTo(Nothing* _)
-{
-    return new Error("Attempt to compare function to nothing with '>='");
-}
-
 Node* Function::GreaterThanOrEqualTo(Member* _)
 {
     return new Boolean(false);
@@ -7481,7 +6150,6 @@ Node* Function::GreaterThanOrEqualTo(Function* _)
 
 Node* Error::And(Node* _) { return _->back_And(this); }
 Node* Error::back_And(Error* _) { return _->And(this); }
-Node* Error::back_And(Nothing* _) { return _->And(this); }
 Node* Error::back_And(Member* _) { return _->And(this); }
 Node* Error::back_And(Boolean* _) { return _->And(this); }
 Node* Error::back_And(Integer* _) { return _->And(this); }
@@ -7490,20 +6158,8 @@ Node* Error::back_And(String* _) { return _->And(this); }
 Node* Error::back_And(Array* _) { return _->And(this); }
 Node* Error::back_And(Object* _) { return _->And(this); }
 Node* Error::back_And(Function* _) { return _->And(this); }
-Node* Nothing::And(Node* _) { return _->back_And(this); }
-Node* Nothing::back_And(Error* _) { return _->And(this); }
-Node* Nothing::back_And(Nothing* _) { return _->And(this); }
-Node* Nothing::back_And(Member* _) { return _->And(this); }
-Node* Nothing::back_And(Boolean* _) { return _->And(this); }
-Node* Nothing::back_And(Integer* _) { return _->And(this); }
-Node* Nothing::back_And(Double* _) { return _->And(this); }
-Node* Nothing::back_And(String* _) { return _->And(this); }
-Node* Nothing::back_And(Array* _) { return _->And(this); }
-Node* Nothing::back_And(Object* _) { return _->And(this); }
-Node* Nothing::back_And(Function* _) { return _->And(this); }
 Node* Member::And(Node* _) { return _->back_And(this); }
 Node* Member::back_And(Error* _) { return _->And(this); }
-Node* Member::back_And(Nothing* _) { return _->And(this); }
 Node* Member::back_And(Member* _) { return _->And(this); }
 Node* Member::back_And(Boolean* _) { return _->And(this); }
 Node* Member::back_And(Integer* _) { return _->And(this); }
@@ -7514,7 +6170,6 @@ Node* Member::back_And(Object* _) { return _->And(this); }
 Node* Member::back_And(Function* _) { return _->And(this); }
 Node* Boolean::And(Node* _) { return _->back_And(this); }
 Node* Boolean::back_And(Error* _) { return _->And(this); }
-Node* Boolean::back_And(Nothing* _) { return _->And(this); }
 Node* Boolean::back_And(Member* _) { return _->And(this); }
 Node* Boolean::back_And(Boolean* _) { return _->And(this); }
 Node* Boolean::back_And(Integer* _) { return _->And(this); }
@@ -7525,7 +6180,6 @@ Node* Boolean::back_And(Object* _) { return _->And(this); }
 Node* Boolean::back_And(Function* _) { return _->And(this); }
 Node* Integer::And(Node* _) { return _->back_And(this); }
 Node* Integer::back_And(Error* _) { return _->And(this); }
-Node* Integer::back_And(Nothing* _) { return _->And(this); }
 Node* Integer::back_And(Member* _) { return _->And(this); }
 Node* Integer::back_And(Boolean* _) { return _->And(this); }
 Node* Integer::back_And(Integer* _) { return _->And(this); }
@@ -7536,7 +6190,6 @@ Node* Integer::back_And(Object* _) { return _->And(this); }
 Node* Integer::back_And(Function* _) { return _->And(this); }
 Node* Double::And(Node* _) { return _->back_And(this); }
 Node* Double::back_And(Error* _) { return _->And(this); }
-Node* Double::back_And(Nothing* _) { return _->And(this); }
 Node* Double::back_And(Member* _) { return _->And(this); }
 Node* Double::back_And(Boolean* _) { return _->And(this); }
 Node* Double::back_And(Integer* _) { return _->And(this); }
@@ -7547,7 +6200,6 @@ Node* Double::back_And(Object* _) { return _->And(this); }
 Node* Double::back_And(Function* _) { return _->And(this); }
 Node* String::And(Node* _) { return _->back_And(this); }
 Node* String::back_And(Error* _) { return _->And(this); }
-Node* String::back_And(Nothing* _) { return _->And(this); }
 Node* String::back_And(Member* _) { return _->And(this); }
 Node* String::back_And(Boolean* _) { return _->And(this); }
 Node* String::back_And(Integer* _) { return _->And(this); }
@@ -7558,7 +6210,6 @@ Node* String::back_And(Object* _) { return _->And(this); }
 Node* String::back_And(Function* _) { return _->And(this); }
 Node* Array::And(Node* _) { return _->back_And(this); }
 Node* Array::back_And(Error* _) { return _->And(this); }
-Node* Array::back_And(Nothing* _) { return _->And(this); }
 Node* Array::back_And(Member* _) { return _->And(this); }
 Node* Array::back_And(Boolean* _) { return _->And(this); }
 Node* Array::back_And(Integer* _) { return _->And(this); }
@@ -7569,7 +6220,6 @@ Node* Array::back_And(Object* _) { return _->And(this); }
 Node* Array::back_And(Function* _) { return _->And(this); }
 Node* Object::And(Node* _) { return _->back_And(this); }
 Node* Object::back_And(Error* _) { return _->And(this); }
-Node* Object::back_And(Nothing* _) { return _->And(this); }
 Node* Object::back_And(Member* _) { return _->And(this); }
 Node* Object::back_And(Boolean* _) { return _->And(this); }
 Node* Object::back_And(Integer* _) { return _->And(this); }
@@ -7580,7 +6230,6 @@ Node* Object::back_And(Object* _) { return _->And(this); }
 Node* Object::back_And(Function* _) { return _->And(this); }
 Node* Function::And(Node* _) { return _->back_And(this); }
 Node* Function::back_And(Error* _) { return _->And(this); }
-Node* Function::back_And(Nothing* _) { return _->And(this); }
 Node* Function::back_And(Member* _) { return _->And(this); }
 Node* Function::back_And(Boolean* _) { return _->And(this); }
 Node* Function::back_And(Integer* _) { return _->And(this); }
@@ -7591,7 +6240,6 @@ Node* Function::back_And(Object* _) { return _->And(this); }
 Node* Function::back_And(Function* _) { return _->And(this); }
 Node* Error::Or(Node* _) { return _->back_Or(this); }
 Node* Error::back_Or(Error* _) { return _->Or(this); }
-Node* Error::back_Or(Nothing* _) { return _->Or(this); }
 Node* Error::back_Or(Member* _) { return _->Or(this); }
 Node* Error::back_Or(Boolean* _) { return _->Or(this); }
 Node* Error::back_Or(Integer* _) { return _->Or(this); }
@@ -7600,20 +6248,8 @@ Node* Error::back_Or(String* _) { return _->Or(this); }
 Node* Error::back_Or(Array* _) { return _->Or(this); }
 Node* Error::back_Or(Object* _) { return _->Or(this); }
 Node* Error::back_Or(Function* _) { return _->Or(this); }
-Node* Nothing::Or(Node* _) { return _->back_Or(this); }
-Node* Nothing::back_Or(Error* _) { return _->Or(this); }
-Node* Nothing::back_Or(Nothing* _) { return _->Or(this); }
-Node* Nothing::back_Or(Member* _) { return _->Or(this); }
-Node* Nothing::back_Or(Boolean* _) { return _->Or(this); }
-Node* Nothing::back_Or(Integer* _) { return _->Or(this); }
-Node* Nothing::back_Or(Double* _) { return _->Or(this); }
-Node* Nothing::back_Or(String* _) { return _->Or(this); }
-Node* Nothing::back_Or(Array* _) { return _->Or(this); }
-Node* Nothing::back_Or(Object* _) { return _->Or(this); }
-Node* Nothing::back_Or(Function* _) { return _->Or(this); }
 Node* Member::Or(Node* _) { return _->back_Or(this); }
 Node* Member::back_Or(Error* _) { return _->Or(this); }
-Node* Member::back_Or(Nothing* _) { return _->Or(this); }
 Node* Member::back_Or(Member* _) { return _->Or(this); }
 Node* Member::back_Or(Boolean* _) { return _->Or(this); }
 Node* Member::back_Or(Integer* _) { return _->Or(this); }
@@ -7624,7 +6260,6 @@ Node* Member::back_Or(Object* _) { return _->Or(this); }
 Node* Member::back_Or(Function* _) { return _->Or(this); }
 Node* Boolean::Or(Node* _) { return _->back_Or(this); }
 Node* Boolean::back_Or(Error* _) { return _->Or(this); }
-Node* Boolean::back_Or(Nothing* _) { return _->Or(this); }
 Node* Boolean::back_Or(Member* _) { return _->Or(this); }
 Node* Boolean::back_Or(Boolean* _) { return _->Or(this); }
 Node* Boolean::back_Or(Integer* _) { return _->Or(this); }
@@ -7635,7 +6270,6 @@ Node* Boolean::back_Or(Object* _) { return _->Or(this); }
 Node* Boolean::back_Or(Function* _) { return _->Or(this); }
 Node* Integer::Or(Node* _) { return _->back_Or(this); }
 Node* Integer::back_Or(Error* _) { return _->Or(this); }
-Node* Integer::back_Or(Nothing* _) { return _->Or(this); }
 Node* Integer::back_Or(Member* _) { return _->Or(this); }
 Node* Integer::back_Or(Boolean* _) { return _->Or(this); }
 Node* Integer::back_Or(Integer* _) { return _->Or(this); }
@@ -7646,7 +6280,6 @@ Node* Integer::back_Or(Object* _) { return _->Or(this); }
 Node* Integer::back_Or(Function* _) { return _->Or(this); }
 Node* Double::Or(Node* _) { return _->back_Or(this); }
 Node* Double::back_Or(Error* _) { return _->Or(this); }
-Node* Double::back_Or(Nothing* _) { return _->Or(this); }
 Node* Double::back_Or(Member* _) { return _->Or(this); }
 Node* Double::back_Or(Boolean* _) { return _->Or(this); }
 Node* Double::back_Or(Integer* _) { return _->Or(this); }
@@ -7657,7 +6290,6 @@ Node* Double::back_Or(Object* _) { return _->Or(this); }
 Node* Double::back_Or(Function* _) { return _->Or(this); }
 Node* String::Or(Node* _) { return _->back_Or(this); }
 Node* String::back_Or(Error* _) { return _->Or(this); }
-Node* String::back_Or(Nothing* _) { return _->Or(this); }
 Node* String::back_Or(Member* _) { return _->Or(this); }
 Node* String::back_Or(Boolean* _) { return _->Or(this); }
 Node* String::back_Or(Integer* _) { return _->Or(this); }
@@ -7668,7 +6300,6 @@ Node* String::back_Or(Object* _) { return _->Or(this); }
 Node* String::back_Or(Function* _) { return _->Or(this); }
 Node* Array::Or(Node* _) { return _->back_Or(this); }
 Node* Array::back_Or(Error* _) { return _->Or(this); }
-Node* Array::back_Or(Nothing* _) { return _->Or(this); }
 Node* Array::back_Or(Member* _) { return _->Or(this); }
 Node* Array::back_Or(Boolean* _) { return _->Or(this); }
 Node* Array::back_Or(Integer* _) { return _->Or(this); }
@@ -7679,7 +6310,6 @@ Node* Array::back_Or(Object* _) { return _->Or(this); }
 Node* Array::back_Or(Function* _) { return _->Or(this); }
 Node* Object::Or(Node* _) { return _->back_Or(this); }
 Node* Object::back_Or(Error* _) { return _->Or(this); }
-Node* Object::back_Or(Nothing* _) { return _->Or(this); }
 Node* Object::back_Or(Member* _) { return _->Or(this); }
 Node* Object::back_Or(Boolean* _) { return _->Or(this); }
 Node* Object::back_Or(Integer* _) { return _->Or(this); }
@@ -7690,7 +6320,6 @@ Node* Object::back_Or(Object* _) { return _->Or(this); }
 Node* Object::back_Or(Function* _) { return _->Or(this); }
 Node* Function::Or(Node* _) { return _->back_Or(this); }
 Node* Function::back_Or(Error* _) { return _->Or(this); }
-Node* Function::back_Or(Nothing* _) { return _->Or(this); }
 Node* Function::back_Or(Member* _) { return _->Or(this); }
 Node* Function::back_Or(Boolean* _) { return _->Or(this); }
 Node* Function::back_Or(Integer* _) { return _->Or(this); }
@@ -7701,7 +6330,6 @@ Node* Function::back_Or(Object* _) { return _->Or(this); }
 Node* Function::back_Or(Function* _) { return _->Or(this); }
 Node* Error::Plus(Node* _) { return _->back_Plus(this); }
 Node* Error::back_Plus(Error* _) { return _->Plus(this); }
-Node* Error::back_Plus(Nothing* _) { return _->Plus(this); }
 Node* Error::back_Plus(Member* _) { return _->Plus(this); }
 Node* Error::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Error::back_Plus(Integer* _) { return _->Plus(this); }
@@ -7710,20 +6338,8 @@ Node* Error::back_Plus(String* _) { return _->Plus(this); }
 Node* Error::back_Plus(Array* _) { return _->Plus(this); }
 Node* Error::back_Plus(Object* _) { return _->Plus(this); }
 Node* Error::back_Plus(Function* _) { return _->Plus(this); }
-Node* Nothing::Plus(Node* _) { return _->back_Plus(this); }
-Node* Nothing::back_Plus(Error* _) { return _->Plus(this); }
-Node* Nothing::back_Plus(Nothing* _) { return _->Plus(this); }
-Node* Nothing::back_Plus(Member* _) { return _->Plus(this); }
-Node* Nothing::back_Plus(Boolean* _) { return _->Plus(this); }
-Node* Nothing::back_Plus(Integer* _) { return _->Plus(this); }
-Node* Nothing::back_Plus(Double* _) { return _->Plus(this); }
-Node* Nothing::back_Plus(String* _) { return _->Plus(this); }
-Node* Nothing::back_Plus(Array* _) { return _->Plus(this); }
-Node* Nothing::back_Plus(Object* _) { return _->Plus(this); }
-Node* Nothing::back_Plus(Function* _) { return _->Plus(this); }
 Node* Member::Plus(Node* _) { return _->back_Plus(this); }
 Node* Member::back_Plus(Error* _) { return _->Plus(this); }
-Node* Member::back_Plus(Nothing* _) { return _->Plus(this); }
 Node* Member::back_Plus(Member* _) { return _->Plus(this); }
 Node* Member::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Member::back_Plus(Integer* _) { return _->Plus(this); }
@@ -7734,7 +6350,6 @@ Node* Member::back_Plus(Object* _) { return _->Plus(this); }
 Node* Member::back_Plus(Function* _) { return _->Plus(this); }
 Node* Boolean::Plus(Node* _) { return _->back_Plus(this); }
 Node* Boolean::back_Plus(Error* _) { return _->Plus(this); }
-Node* Boolean::back_Plus(Nothing* _) { return _->Plus(this); }
 Node* Boolean::back_Plus(Member* _) { return _->Plus(this); }
 Node* Boolean::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Boolean::back_Plus(Integer* _) { return _->Plus(this); }
@@ -7745,7 +6360,6 @@ Node* Boolean::back_Plus(Object* _) { return _->Plus(this); }
 Node* Boolean::back_Plus(Function* _) { return _->Plus(this); }
 Node* Integer::Plus(Node* _) { return _->back_Plus(this); }
 Node* Integer::back_Plus(Error* _) { return _->Plus(this); }
-Node* Integer::back_Plus(Nothing* _) { return _->Plus(this); }
 Node* Integer::back_Plus(Member* _) { return _->Plus(this); }
 Node* Integer::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Integer::back_Plus(Integer* _) { return _->Plus(this); }
@@ -7756,7 +6370,6 @@ Node* Integer::back_Plus(Object* _) { return _->Plus(this); }
 Node* Integer::back_Plus(Function* _) { return _->Plus(this); }
 Node* Double::Plus(Node* _) { return _->back_Plus(this); }
 Node* Double::back_Plus(Error* _) { return _->Plus(this); }
-Node* Double::back_Plus(Nothing* _) { return _->Plus(this); }
 Node* Double::back_Plus(Member* _) { return _->Plus(this); }
 Node* Double::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Double::back_Plus(Integer* _) { return _->Plus(this); }
@@ -7767,7 +6380,6 @@ Node* Double::back_Plus(Object* _) { return _->Plus(this); }
 Node* Double::back_Plus(Function* _) { return _->Plus(this); }
 Node* String::Plus(Node* _) { return _->back_Plus(this); }
 Node* String::back_Plus(Error* _) { return _->Plus(this); }
-Node* String::back_Plus(Nothing* _) { return _->Plus(this); }
 Node* String::back_Plus(Member* _) { return _->Plus(this); }
 Node* String::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* String::back_Plus(Integer* _) { return _->Plus(this); }
@@ -7778,7 +6390,6 @@ Node* String::back_Plus(Object* _) { return _->Plus(this); }
 Node* String::back_Plus(Function* _) { return _->Plus(this); }
 Node* Array::Plus(Node* _) { return _->back_Plus(this); }
 Node* Array::back_Plus(Error* _) { return _->Plus(this); }
-Node* Array::back_Plus(Nothing* _) { return _->Plus(this); }
 Node* Array::back_Plus(Member* _) { return _->Plus(this); }
 Node* Array::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Array::back_Plus(Integer* _) { return _->Plus(this); }
@@ -7789,7 +6400,6 @@ Node* Array::back_Plus(Object* _) { return _->Plus(this); }
 Node* Array::back_Plus(Function* _) { return _->Plus(this); }
 Node* Object::Plus(Node* _) { return _->back_Plus(this); }
 Node* Object::back_Plus(Error* _) { return _->Plus(this); }
-Node* Object::back_Plus(Nothing* _) { return _->Plus(this); }
 Node* Object::back_Plus(Member* _) { return _->Plus(this); }
 Node* Object::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Object::back_Plus(Integer* _) { return _->Plus(this); }
@@ -7800,7 +6410,6 @@ Node* Object::back_Plus(Object* _) { return _->Plus(this); }
 Node* Object::back_Plus(Function* _) { return _->Plus(this); }
 Node* Function::Plus(Node* _) { return _->back_Plus(this); }
 Node* Function::back_Plus(Error* _) { return _->Plus(this); }
-Node* Function::back_Plus(Nothing* _) { return _->Plus(this); }
 Node* Function::back_Plus(Member* _) { return _->Plus(this); }
 Node* Function::back_Plus(Boolean* _) { return _->Plus(this); }
 Node* Function::back_Plus(Integer* _) { return _->Plus(this); }
@@ -7811,7 +6420,6 @@ Node* Function::back_Plus(Object* _) { return _->Plus(this); }
 Node* Function::back_Plus(Function* _) { return _->Plus(this); }
 Node* Error::Minus(Node* _) { return _->back_Minus(this); }
 Node* Error::back_Minus(Error* _) { return _->Minus(this); }
-Node* Error::back_Minus(Nothing* _) { return _->Minus(this); }
 Node* Error::back_Minus(Member* _) { return _->Minus(this); }
 Node* Error::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Error::back_Minus(Integer* _) { return _->Minus(this); }
@@ -7820,20 +6428,8 @@ Node* Error::back_Minus(String* _) { return _->Minus(this); }
 Node* Error::back_Minus(Array* _) { return _->Minus(this); }
 Node* Error::back_Minus(Object* _) { return _->Minus(this); }
 Node* Error::back_Minus(Function* _) { return _->Minus(this); }
-Node* Nothing::Minus(Node* _) { return _->back_Minus(this); }
-Node* Nothing::back_Minus(Error* _) { return _->Minus(this); }
-Node* Nothing::back_Minus(Nothing* _) { return _->Minus(this); }
-Node* Nothing::back_Minus(Member* _) { return _->Minus(this); }
-Node* Nothing::back_Minus(Boolean* _) { return _->Minus(this); }
-Node* Nothing::back_Minus(Integer* _) { return _->Minus(this); }
-Node* Nothing::back_Minus(Double* _) { return _->Minus(this); }
-Node* Nothing::back_Minus(String* _) { return _->Minus(this); }
-Node* Nothing::back_Minus(Array* _) { return _->Minus(this); }
-Node* Nothing::back_Minus(Object* _) { return _->Minus(this); }
-Node* Nothing::back_Minus(Function* _) { return _->Minus(this); }
 Node* Member::Minus(Node* _) { return _->back_Minus(this); }
 Node* Member::back_Minus(Error* _) { return _->Minus(this); }
-Node* Member::back_Minus(Nothing* _) { return _->Minus(this); }
 Node* Member::back_Minus(Member* _) { return _->Minus(this); }
 Node* Member::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Member::back_Minus(Integer* _) { return _->Minus(this); }
@@ -7844,7 +6440,6 @@ Node* Member::back_Minus(Object* _) { return _->Minus(this); }
 Node* Member::back_Minus(Function* _) { return _->Minus(this); }
 Node* Boolean::Minus(Node* _) { return _->back_Minus(this); }
 Node* Boolean::back_Minus(Error* _) { return _->Minus(this); }
-Node* Boolean::back_Minus(Nothing* _) { return _->Minus(this); }
 Node* Boolean::back_Minus(Member* _) { return _->Minus(this); }
 Node* Boolean::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Boolean::back_Minus(Integer* _) { return _->Minus(this); }
@@ -7855,7 +6450,6 @@ Node* Boolean::back_Minus(Object* _) { return _->Minus(this); }
 Node* Boolean::back_Minus(Function* _) { return _->Minus(this); }
 Node* Integer::Minus(Node* _) { return _->back_Minus(this); }
 Node* Integer::back_Minus(Error* _) { return _->Minus(this); }
-Node* Integer::back_Minus(Nothing* _) { return _->Minus(this); }
 Node* Integer::back_Minus(Member* _) { return _->Minus(this); }
 Node* Integer::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Integer::back_Minus(Integer* _) { return _->Minus(this); }
@@ -7866,7 +6460,6 @@ Node* Integer::back_Minus(Object* _) { return _->Minus(this); }
 Node* Integer::back_Minus(Function* _) { return _->Minus(this); }
 Node* Double::Minus(Node* _) { return _->back_Minus(this); }
 Node* Double::back_Minus(Error* _) { return _->Minus(this); }
-Node* Double::back_Minus(Nothing* _) { return _->Minus(this); }
 Node* Double::back_Minus(Member* _) { return _->Minus(this); }
 Node* Double::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Double::back_Minus(Integer* _) { return _->Minus(this); }
@@ -7877,7 +6470,6 @@ Node* Double::back_Minus(Object* _) { return _->Minus(this); }
 Node* Double::back_Minus(Function* _) { return _->Minus(this); }
 Node* String::Minus(Node* _) { return _->back_Minus(this); }
 Node* String::back_Minus(Error* _) { return _->Minus(this); }
-Node* String::back_Minus(Nothing* _) { return _->Minus(this); }
 Node* String::back_Minus(Member* _) { return _->Minus(this); }
 Node* String::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* String::back_Minus(Integer* _) { return _->Minus(this); }
@@ -7888,7 +6480,6 @@ Node* String::back_Minus(Object* _) { return _->Minus(this); }
 Node* String::back_Minus(Function* _) { return _->Minus(this); }
 Node* Array::Minus(Node* _) { return _->back_Minus(this); }
 Node* Array::back_Minus(Error* _) { return _->Minus(this); }
-Node* Array::back_Minus(Nothing* _) { return _->Minus(this); }
 Node* Array::back_Minus(Member* _) { return _->Minus(this); }
 Node* Array::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Array::back_Minus(Integer* _) { return _->Minus(this); }
@@ -7899,7 +6490,6 @@ Node* Array::back_Minus(Object* _) { return _->Minus(this); }
 Node* Array::back_Minus(Function* _) { return _->Minus(this); }
 Node* Object::Minus(Node* _) { return _->back_Minus(this); }
 Node* Object::back_Minus(Error* _) { return _->Minus(this); }
-Node* Object::back_Minus(Nothing* _) { return _->Minus(this); }
 Node* Object::back_Minus(Member* _) { return _->Minus(this); }
 Node* Object::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Object::back_Minus(Integer* _) { return _->Minus(this); }
@@ -7910,7 +6500,6 @@ Node* Object::back_Minus(Object* _) { return _->Minus(this); }
 Node* Object::back_Minus(Function* _) { return _->Minus(this); }
 Node* Function::Minus(Node* _) { return _->back_Minus(this); }
 Node* Function::back_Minus(Error* _) { return _->Minus(this); }
-Node* Function::back_Minus(Nothing* _) { return _->Minus(this); }
 Node* Function::back_Minus(Member* _) { return _->Minus(this); }
 Node* Function::back_Minus(Boolean* _) { return _->Minus(this); }
 Node* Function::back_Minus(Integer* _) { return _->Minus(this); }
@@ -7921,7 +6510,6 @@ Node* Function::back_Minus(Object* _) { return _->Minus(this); }
 Node* Function::back_Minus(Function* _) { return _->Minus(this); }
 Node* Error::Times(Node* _) { return _->back_Times(this); }
 Node* Error::back_Times(Error* _) { return _->Times(this); }
-Node* Error::back_Times(Nothing* _) { return _->Times(this); }
 Node* Error::back_Times(Member* _) { return _->Times(this); }
 Node* Error::back_Times(Boolean* _) { return _->Times(this); }
 Node* Error::back_Times(Integer* _) { return _->Times(this); }
@@ -7930,20 +6518,8 @@ Node* Error::back_Times(String* _) { return _->Times(this); }
 Node* Error::back_Times(Array* _) { return _->Times(this); }
 Node* Error::back_Times(Object* _) { return _->Times(this); }
 Node* Error::back_Times(Function* _) { return _->Times(this); }
-Node* Nothing::Times(Node* _) { return _->back_Times(this); }
-Node* Nothing::back_Times(Error* _) { return _->Times(this); }
-Node* Nothing::back_Times(Nothing* _) { return _->Times(this); }
-Node* Nothing::back_Times(Member* _) { return _->Times(this); }
-Node* Nothing::back_Times(Boolean* _) { return _->Times(this); }
-Node* Nothing::back_Times(Integer* _) { return _->Times(this); }
-Node* Nothing::back_Times(Double* _) { return _->Times(this); }
-Node* Nothing::back_Times(String* _) { return _->Times(this); }
-Node* Nothing::back_Times(Array* _) { return _->Times(this); }
-Node* Nothing::back_Times(Object* _) { return _->Times(this); }
-Node* Nothing::back_Times(Function* _) { return _->Times(this); }
 Node* Member::Times(Node* _) { return _->back_Times(this); }
 Node* Member::back_Times(Error* _) { return _->Times(this); }
-Node* Member::back_Times(Nothing* _) { return _->Times(this); }
 Node* Member::back_Times(Member* _) { return _->Times(this); }
 Node* Member::back_Times(Boolean* _) { return _->Times(this); }
 Node* Member::back_Times(Integer* _) { return _->Times(this); }
@@ -7954,7 +6530,6 @@ Node* Member::back_Times(Object* _) { return _->Times(this); }
 Node* Member::back_Times(Function* _) { return _->Times(this); }
 Node* Boolean::Times(Node* _) { return _->back_Times(this); }
 Node* Boolean::back_Times(Error* _) { return _->Times(this); }
-Node* Boolean::back_Times(Nothing* _) { return _->Times(this); }
 Node* Boolean::back_Times(Member* _) { return _->Times(this); }
 Node* Boolean::back_Times(Boolean* _) { return _->Times(this); }
 Node* Boolean::back_Times(Integer* _) { return _->Times(this); }
@@ -7965,7 +6540,6 @@ Node* Boolean::back_Times(Object* _) { return _->Times(this); }
 Node* Boolean::back_Times(Function* _) { return _->Times(this); }
 Node* Integer::Times(Node* _) { return _->back_Times(this); }
 Node* Integer::back_Times(Error* _) { return _->Times(this); }
-Node* Integer::back_Times(Nothing* _) { return _->Times(this); }
 Node* Integer::back_Times(Member* _) { return _->Times(this); }
 Node* Integer::back_Times(Boolean* _) { return _->Times(this); }
 Node* Integer::back_Times(Integer* _) { return _->Times(this); }
@@ -7976,7 +6550,6 @@ Node* Integer::back_Times(Object* _) { return _->Times(this); }
 Node* Integer::back_Times(Function* _) { return _->Times(this); }
 Node* Double::Times(Node* _) { return _->back_Times(this); }
 Node* Double::back_Times(Error* _) { return _->Times(this); }
-Node* Double::back_Times(Nothing* _) { return _->Times(this); }
 Node* Double::back_Times(Member* _) { return _->Times(this); }
 Node* Double::back_Times(Boolean* _) { return _->Times(this); }
 Node* Double::back_Times(Integer* _) { return _->Times(this); }
@@ -7987,7 +6560,6 @@ Node* Double::back_Times(Object* _) { return _->Times(this); }
 Node* Double::back_Times(Function* _) { return _->Times(this); }
 Node* String::Times(Node* _) { return _->back_Times(this); }
 Node* String::back_Times(Error* _) { return _->Times(this); }
-Node* String::back_Times(Nothing* _) { return _->Times(this); }
 Node* String::back_Times(Member* _) { return _->Times(this); }
 Node* String::back_Times(Boolean* _) { return _->Times(this); }
 Node* String::back_Times(Integer* _) { return _->Times(this); }
@@ -7998,7 +6570,6 @@ Node* String::back_Times(Object* _) { return _->Times(this); }
 Node* String::back_Times(Function* _) { return _->Times(this); }
 Node* Array::Times(Node* _) { return _->back_Times(this); }
 Node* Array::back_Times(Error* _) { return _->Times(this); }
-Node* Array::back_Times(Nothing* _) { return _->Times(this); }
 Node* Array::back_Times(Member* _) { return _->Times(this); }
 Node* Array::back_Times(Boolean* _) { return _->Times(this); }
 Node* Array::back_Times(Integer* _) { return _->Times(this); }
@@ -8009,7 +6580,6 @@ Node* Array::back_Times(Object* _) { return _->Times(this); }
 Node* Array::back_Times(Function* _) { return _->Times(this); }
 Node* Object::Times(Node* _) { return _->back_Times(this); }
 Node* Object::back_Times(Error* _) { return _->Times(this); }
-Node* Object::back_Times(Nothing* _) { return _->Times(this); }
 Node* Object::back_Times(Member* _) { return _->Times(this); }
 Node* Object::back_Times(Boolean* _) { return _->Times(this); }
 Node* Object::back_Times(Integer* _) { return _->Times(this); }
@@ -8020,7 +6590,6 @@ Node* Object::back_Times(Object* _) { return _->Times(this); }
 Node* Object::back_Times(Function* _) { return _->Times(this); }
 Node* Function::Times(Node* _) { return _->back_Times(this); }
 Node* Function::back_Times(Error* _) { return _->Times(this); }
-Node* Function::back_Times(Nothing* _) { return _->Times(this); }
 Node* Function::back_Times(Member* _) { return _->Times(this); }
 Node* Function::back_Times(Boolean* _) { return _->Times(this); }
 Node* Function::back_Times(Integer* _) { return _->Times(this); }
@@ -8031,7 +6600,6 @@ Node* Function::back_Times(Object* _) { return _->Times(this); }
 Node* Function::back_Times(Function* _) { return _->Times(this); }
 Node* Error::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Error::back_DividedBy(Error* _) { return _->DividedBy(this); }
-Node* Error::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
 Node* Error::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Error::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Error::back_DividedBy(Integer* _) { return _->DividedBy(this); }
@@ -8040,20 +6608,8 @@ Node* Error::back_DividedBy(String* _) { return _->DividedBy(this); }
 Node* Error::back_DividedBy(Array* _) { return _->DividedBy(this); }
 Node* Error::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Error::back_DividedBy(Function* _) { return _->DividedBy(this); }
-Node* Nothing::DividedBy(Node* _) { return _->back_DividedBy(this); }
-Node* Nothing::back_DividedBy(Error* _) { return _->DividedBy(this); }
-Node* Nothing::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
-Node* Nothing::back_DividedBy(Member* _) { return _->DividedBy(this); }
-Node* Nothing::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
-Node* Nothing::back_DividedBy(Integer* _) { return _->DividedBy(this); }
-Node* Nothing::back_DividedBy(Double* _) { return _->DividedBy(this); }
-Node* Nothing::back_DividedBy(String* _) { return _->DividedBy(this); }
-Node* Nothing::back_DividedBy(Array* _) { return _->DividedBy(this); }
-Node* Nothing::back_DividedBy(Object* _) { return _->DividedBy(this); }
-Node* Nothing::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Member::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Member::back_DividedBy(Error* _) { return _->DividedBy(this); }
-Node* Member::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
 Node* Member::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Member::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Member::back_DividedBy(Integer* _) { return _->DividedBy(this); }
@@ -8064,7 +6620,6 @@ Node* Member::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Member::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Boolean::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Boolean::back_DividedBy(Error* _) { return _->DividedBy(this); }
-Node* Boolean::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
 Node* Boolean::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Boolean::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Boolean::back_DividedBy(Integer* _) { return _->DividedBy(this); }
@@ -8075,7 +6630,6 @@ Node* Boolean::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Boolean::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Integer::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Integer::back_DividedBy(Error* _) { return _->DividedBy(this); }
-Node* Integer::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
 Node* Integer::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Integer::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Integer::back_DividedBy(Integer* _) { return _->DividedBy(this); }
@@ -8086,7 +6640,6 @@ Node* Integer::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Integer::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Double::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Double::back_DividedBy(Error* _) { return _->DividedBy(this); }
-Node* Double::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
 Node* Double::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Double::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Double::back_DividedBy(Integer* _) { return _->DividedBy(this); }
@@ -8097,7 +6650,6 @@ Node* Double::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Double::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* String::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* String::back_DividedBy(Error* _) { return _->DividedBy(this); }
-Node* String::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
 Node* String::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* String::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* String::back_DividedBy(Integer* _) { return _->DividedBy(this); }
@@ -8108,7 +6660,6 @@ Node* String::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* String::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Array::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Array::back_DividedBy(Error* _) { return _->DividedBy(this); }
-Node* Array::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
 Node* Array::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Array::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Array::back_DividedBy(Integer* _) { return _->DividedBy(this); }
@@ -8119,7 +6670,6 @@ Node* Array::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Array::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Object::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Object::back_DividedBy(Error* _) { return _->DividedBy(this); }
-Node* Object::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
 Node* Object::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Object::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Object::back_DividedBy(Integer* _) { return _->DividedBy(this); }
@@ -8130,7 +6680,6 @@ Node* Object::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Object::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Function::DividedBy(Node* _) { return _->back_DividedBy(this); }
 Node* Function::back_DividedBy(Error* _) { return _->DividedBy(this); }
-Node* Function::back_DividedBy(Nothing* _) { return _->DividedBy(this); }
 Node* Function::back_DividedBy(Member* _) { return _->DividedBy(this); }
 Node* Function::back_DividedBy(Boolean* _) { return _->DividedBy(this); }
 Node* Function::back_DividedBy(Integer* _) { return _->DividedBy(this); }
@@ -8141,7 +6690,6 @@ Node* Function::back_DividedBy(Object* _) { return _->DividedBy(this); }
 Node* Function::back_DividedBy(Function* _) { return _->DividedBy(this); }
 Node* Error::Mod(Node* _) { return _->back_Mod(this); }
 Node* Error::back_Mod(Error* _) { return _->Mod(this); }
-Node* Error::back_Mod(Nothing* _) { return _->Mod(this); }
 Node* Error::back_Mod(Member* _) { return _->Mod(this); }
 Node* Error::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Error::back_Mod(Integer* _) { return _->Mod(this); }
@@ -8150,20 +6698,8 @@ Node* Error::back_Mod(String* _) { return _->Mod(this); }
 Node* Error::back_Mod(Array* _) { return _->Mod(this); }
 Node* Error::back_Mod(Object* _) { return _->Mod(this); }
 Node* Error::back_Mod(Function* _) { return _->Mod(this); }
-Node* Nothing::Mod(Node* _) { return _->back_Mod(this); }
-Node* Nothing::back_Mod(Error* _) { return _->Mod(this); }
-Node* Nothing::back_Mod(Nothing* _) { return _->Mod(this); }
-Node* Nothing::back_Mod(Member* _) { return _->Mod(this); }
-Node* Nothing::back_Mod(Boolean* _) { return _->Mod(this); }
-Node* Nothing::back_Mod(Integer* _) { return _->Mod(this); }
-Node* Nothing::back_Mod(Double* _) { return _->Mod(this); }
-Node* Nothing::back_Mod(String* _) { return _->Mod(this); }
-Node* Nothing::back_Mod(Array* _) { return _->Mod(this); }
-Node* Nothing::back_Mod(Object* _) { return _->Mod(this); }
-Node* Nothing::back_Mod(Function* _) { return _->Mod(this); }
 Node* Member::Mod(Node* _) { return _->back_Mod(this); }
 Node* Member::back_Mod(Error* _) { return _->Mod(this); }
-Node* Member::back_Mod(Nothing* _) { return _->Mod(this); }
 Node* Member::back_Mod(Member* _) { return _->Mod(this); }
 Node* Member::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Member::back_Mod(Integer* _) { return _->Mod(this); }
@@ -8174,7 +6710,6 @@ Node* Member::back_Mod(Object* _) { return _->Mod(this); }
 Node* Member::back_Mod(Function* _) { return _->Mod(this); }
 Node* Boolean::Mod(Node* _) { return _->back_Mod(this); }
 Node* Boolean::back_Mod(Error* _) { return _->Mod(this); }
-Node* Boolean::back_Mod(Nothing* _) { return _->Mod(this); }
 Node* Boolean::back_Mod(Member* _) { return _->Mod(this); }
 Node* Boolean::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Boolean::back_Mod(Integer* _) { return _->Mod(this); }
@@ -8185,7 +6720,6 @@ Node* Boolean::back_Mod(Object* _) { return _->Mod(this); }
 Node* Boolean::back_Mod(Function* _) { return _->Mod(this); }
 Node* Integer::Mod(Node* _) { return _->back_Mod(this); }
 Node* Integer::back_Mod(Error* _) { return _->Mod(this); }
-Node* Integer::back_Mod(Nothing* _) { return _->Mod(this); }
 Node* Integer::back_Mod(Member* _) { return _->Mod(this); }
 Node* Integer::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Integer::back_Mod(Integer* _) { return _->Mod(this); }
@@ -8196,7 +6730,6 @@ Node* Integer::back_Mod(Object* _) { return _->Mod(this); }
 Node* Integer::back_Mod(Function* _) { return _->Mod(this); }
 Node* Double::Mod(Node* _) { return _->back_Mod(this); }
 Node* Double::back_Mod(Error* _) { return _->Mod(this); }
-Node* Double::back_Mod(Nothing* _) { return _->Mod(this); }
 Node* Double::back_Mod(Member* _) { return _->Mod(this); }
 Node* Double::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Double::back_Mod(Integer* _) { return _->Mod(this); }
@@ -8207,7 +6740,6 @@ Node* Double::back_Mod(Object* _) { return _->Mod(this); }
 Node* Double::back_Mod(Function* _) { return _->Mod(this); }
 Node* String::Mod(Node* _) { return _->back_Mod(this); }
 Node* String::back_Mod(Error* _) { return _->Mod(this); }
-Node* String::back_Mod(Nothing* _) { return _->Mod(this); }
 Node* String::back_Mod(Member* _) { return _->Mod(this); }
 Node* String::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* String::back_Mod(Integer* _) { return _->Mod(this); }
@@ -8218,7 +6750,6 @@ Node* String::back_Mod(Object* _) { return _->Mod(this); }
 Node* String::back_Mod(Function* _) { return _->Mod(this); }
 Node* Array::Mod(Node* _) { return _->back_Mod(this); }
 Node* Array::back_Mod(Error* _) { return _->Mod(this); }
-Node* Array::back_Mod(Nothing* _) { return _->Mod(this); }
 Node* Array::back_Mod(Member* _) { return _->Mod(this); }
 Node* Array::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Array::back_Mod(Integer* _) { return _->Mod(this); }
@@ -8229,7 +6760,6 @@ Node* Array::back_Mod(Object* _) { return _->Mod(this); }
 Node* Array::back_Mod(Function* _) { return _->Mod(this); }
 Node* Object::Mod(Node* _) { return _->back_Mod(this); }
 Node* Object::back_Mod(Error* _) { return _->Mod(this); }
-Node* Object::back_Mod(Nothing* _) { return _->Mod(this); }
 Node* Object::back_Mod(Member* _) { return _->Mod(this); }
 Node* Object::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Object::back_Mod(Integer* _) { return _->Mod(this); }
@@ -8240,7 +6770,6 @@ Node* Object::back_Mod(Object* _) { return _->Mod(this); }
 Node* Object::back_Mod(Function* _) { return _->Mod(this); }
 Node* Function::Mod(Node* _) { return _->back_Mod(this); }
 Node* Function::back_Mod(Error* _) { return _->Mod(this); }
-Node* Function::back_Mod(Nothing* _) { return _->Mod(this); }
 Node* Function::back_Mod(Member* _) { return _->Mod(this); }
 Node* Function::back_Mod(Boolean* _) { return _->Mod(this); }
 Node* Function::back_Mod(Integer* _) { return _->Mod(this); }
@@ -8251,7 +6780,6 @@ Node* Function::back_Mod(Object* _) { return _->Mod(this); }
 Node* Function::back_Mod(Function* _) { return _->Mod(this); }
 Node* Error::Call(Node* _) { return _->back_Call(this); }
 Node* Error::back_Call(Error* _) { return _->Call(this); }
-Node* Error::back_Call(Nothing* _) { return _->Call(this); }
 Node* Error::back_Call(Member* _) { return _->Call(this); }
 Node* Error::back_Call(Boolean* _) { return _->Call(this); }
 Node* Error::back_Call(Integer* _) { return _->Call(this); }
@@ -8260,20 +6788,8 @@ Node* Error::back_Call(String* _) { return _->Call(this); }
 Node* Error::back_Call(Array* _) { return _->Call(this); }
 Node* Error::back_Call(Object* _) { return _->Call(this); }
 Node* Error::back_Call(Function* _) { return _->Call(this); }
-Node* Nothing::Call(Node* _) { return _->back_Call(this); }
-Node* Nothing::back_Call(Error* _) { return _->Call(this); }
-Node* Nothing::back_Call(Nothing* _) { return _->Call(this); }
-Node* Nothing::back_Call(Member* _) { return _->Call(this); }
-Node* Nothing::back_Call(Boolean* _) { return _->Call(this); }
-Node* Nothing::back_Call(Integer* _) { return _->Call(this); }
-Node* Nothing::back_Call(Double* _) { return _->Call(this); }
-Node* Nothing::back_Call(String* _) { return _->Call(this); }
-Node* Nothing::back_Call(Array* _) { return _->Call(this); }
-Node* Nothing::back_Call(Object* _) { return _->Call(this); }
-Node* Nothing::back_Call(Function* _) { return _->Call(this); }
 Node* Member::Call(Node* _) { return _->back_Call(this); }
 Node* Member::back_Call(Error* _) { return _->Call(this); }
-Node* Member::back_Call(Nothing* _) { return _->Call(this); }
 Node* Member::back_Call(Member* _) { return _->Call(this); }
 Node* Member::back_Call(Boolean* _) { return _->Call(this); }
 Node* Member::back_Call(Integer* _) { return _->Call(this); }
@@ -8284,7 +6800,6 @@ Node* Member::back_Call(Object* _) { return _->Call(this); }
 Node* Member::back_Call(Function* _) { return _->Call(this); }
 Node* Boolean::Call(Node* _) { return _->back_Call(this); }
 Node* Boolean::back_Call(Error* _) { return _->Call(this); }
-Node* Boolean::back_Call(Nothing* _) { return _->Call(this); }
 Node* Boolean::back_Call(Member* _) { return _->Call(this); }
 Node* Boolean::back_Call(Boolean* _) { return _->Call(this); }
 Node* Boolean::back_Call(Integer* _) { return _->Call(this); }
@@ -8295,7 +6810,6 @@ Node* Boolean::back_Call(Object* _) { return _->Call(this); }
 Node* Boolean::back_Call(Function* _) { return _->Call(this); }
 Node* Integer::Call(Node* _) { return _->back_Call(this); }
 Node* Integer::back_Call(Error* _) { return _->Call(this); }
-Node* Integer::back_Call(Nothing* _) { return _->Call(this); }
 Node* Integer::back_Call(Member* _) { return _->Call(this); }
 Node* Integer::back_Call(Boolean* _) { return _->Call(this); }
 Node* Integer::back_Call(Integer* _) { return _->Call(this); }
@@ -8306,7 +6820,6 @@ Node* Integer::back_Call(Object* _) { return _->Call(this); }
 Node* Integer::back_Call(Function* _) { return _->Call(this); }
 Node* Double::Call(Node* _) { return _->back_Call(this); }
 Node* Double::back_Call(Error* _) { return _->Call(this); }
-Node* Double::back_Call(Nothing* _) { return _->Call(this); }
 Node* Double::back_Call(Member* _) { return _->Call(this); }
 Node* Double::back_Call(Boolean* _) { return _->Call(this); }
 Node* Double::back_Call(Integer* _) { return _->Call(this); }
@@ -8317,7 +6830,6 @@ Node* Double::back_Call(Object* _) { return _->Call(this); }
 Node* Double::back_Call(Function* _) { return _->Call(this); }
 Node* String::Call(Node* _) { return _->back_Call(this); }
 Node* String::back_Call(Error* _) { return _->Call(this); }
-Node* String::back_Call(Nothing* _) { return _->Call(this); }
 Node* String::back_Call(Member* _) { return _->Call(this); }
 Node* String::back_Call(Boolean* _) { return _->Call(this); }
 Node* String::back_Call(Integer* _) { return _->Call(this); }
@@ -8328,7 +6840,6 @@ Node* String::back_Call(Object* _) { return _->Call(this); }
 Node* String::back_Call(Function* _) { return _->Call(this); }
 Node* Array::Call(Node* _) { return _->back_Call(this); }
 Node* Array::back_Call(Error* _) { return _->Call(this); }
-Node* Array::back_Call(Nothing* _) { return _->Call(this); }
 Node* Array::back_Call(Member* _) { return _->Call(this); }
 Node* Array::back_Call(Boolean* _) { return _->Call(this); }
 Node* Array::back_Call(Integer* _) { return _->Call(this); }
@@ -8339,7 +6850,6 @@ Node* Array::back_Call(Object* _) { return _->Call(this); }
 Node* Array::back_Call(Function* _) { return _->Call(this); }
 Node* Object::Call(Node* _) { return _->back_Call(this); }
 Node* Object::back_Call(Error* _) { return _->Call(this); }
-Node* Object::back_Call(Nothing* _) { return _->Call(this); }
 Node* Object::back_Call(Member* _) { return _->Call(this); }
 Node* Object::back_Call(Boolean* _) { return _->Call(this); }
 Node* Object::back_Call(Integer* _) { return _->Call(this); }
@@ -8350,7 +6860,6 @@ Node* Object::back_Call(Object* _) { return _->Call(this); }
 Node* Object::back_Call(Function* _) { return _->Call(this); }
 Node* Function::Call(Node* _) { return _->back_Call(this); }
 Node* Function::back_Call(Error* _) { return _->Call(this); }
-Node* Function::back_Call(Nothing* _) { return _->Call(this); }
 Node* Function::back_Call(Member* _) { return _->Call(this); }
 Node* Function::back_Call(Boolean* _) { return _->Call(this); }
 Node* Function::back_Call(Integer* _) { return _->Call(this); }
@@ -8361,7 +6870,6 @@ Node* Function::back_Call(Object* _) { return _->Call(this); }
 Node* Function::back_Call(Function* _) { return _->Call(this); }
 Node* Error::Equals(Node* _) { return _->back_Equals(this); }
 Node* Error::back_Equals(Error* _) { return _->Equals(this); }
-Node* Error::back_Equals(Nothing* _) { return _->Equals(this); }
 Node* Error::back_Equals(Member* _) { return _->Equals(this); }
 Node* Error::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Error::back_Equals(Integer* _) { return _->Equals(this); }
@@ -8370,20 +6878,8 @@ Node* Error::back_Equals(String* _) { return _->Equals(this); }
 Node* Error::back_Equals(Array* _) { return _->Equals(this); }
 Node* Error::back_Equals(Object* _) { return _->Equals(this); }
 Node* Error::back_Equals(Function* _) { return _->Equals(this); }
-Node* Nothing::Equals(Node* _) { return _->back_Equals(this); }
-Node* Nothing::back_Equals(Error* _) { return _->Equals(this); }
-Node* Nothing::back_Equals(Nothing* _) { return _->Equals(this); }
-Node* Nothing::back_Equals(Member* _) { return _->Equals(this); }
-Node* Nothing::back_Equals(Boolean* _) { return _->Equals(this); }
-Node* Nothing::back_Equals(Integer* _) { return _->Equals(this); }
-Node* Nothing::back_Equals(Double* _) { return _->Equals(this); }
-Node* Nothing::back_Equals(String* _) { return _->Equals(this); }
-Node* Nothing::back_Equals(Array* _) { return _->Equals(this); }
-Node* Nothing::back_Equals(Object* _) { return _->Equals(this); }
-Node* Nothing::back_Equals(Function* _) { return _->Equals(this); }
 Node* Member::Equals(Node* _) { return _->back_Equals(this); }
 Node* Member::back_Equals(Error* _) { return _->Equals(this); }
-Node* Member::back_Equals(Nothing* _) { return _->Equals(this); }
 Node* Member::back_Equals(Member* _) { return _->Equals(this); }
 Node* Member::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Member::back_Equals(Integer* _) { return _->Equals(this); }
@@ -8394,7 +6890,6 @@ Node* Member::back_Equals(Object* _) { return _->Equals(this); }
 Node* Member::back_Equals(Function* _) { return _->Equals(this); }
 Node* Boolean::Equals(Node* _) { return _->back_Equals(this); }
 Node* Boolean::back_Equals(Error* _) { return _->Equals(this); }
-Node* Boolean::back_Equals(Nothing* _) { return _->Equals(this); }
 Node* Boolean::back_Equals(Member* _) { return _->Equals(this); }
 Node* Boolean::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Boolean::back_Equals(Integer* _) { return _->Equals(this); }
@@ -8405,7 +6900,6 @@ Node* Boolean::back_Equals(Object* _) { return _->Equals(this); }
 Node* Boolean::back_Equals(Function* _) { return _->Equals(this); }
 Node* Integer::Equals(Node* _) { return _->back_Equals(this); }
 Node* Integer::back_Equals(Error* _) { return _->Equals(this); }
-Node* Integer::back_Equals(Nothing* _) { return _->Equals(this); }
 Node* Integer::back_Equals(Member* _) { return _->Equals(this); }
 Node* Integer::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Integer::back_Equals(Integer* _) { return _->Equals(this); }
@@ -8416,7 +6910,6 @@ Node* Integer::back_Equals(Object* _) { return _->Equals(this); }
 Node* Integer::back_Equals(Function* _) { return _->Equals(this); }
 Node* Double::Equals(Node* _) { return _->back_Equals(this); }
 Node* Double::back_Equals(Error* _) { return _->Equals(this); }
-Node* Double::back_Equals(Nothing* _) { return _->Equals(this); }
 Node* Double::back_Equals(Member* _) { return _->Equals(this); }
 Node* Double::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Double::back_Equals(Integer* _) { return _->Equals(this); }
@@ -8427,7 +6920,6 @@ Node* Double::back_Equals(Object* _) { return _->Equals(this); }
 Node* Double::back_Equals(Function* _) { return _->Equals(this); }
 Node* String::Equals(Node* _) { return _->back_Equals(this); }
 Node* String::back_Equals(Error* _) { return _->Equals(this); }
-Node* String::back_Equals(Nothing* _) { return _->Equals(this); }
 Node* String::back_Equals(Member* _) { return _->Equals(this); }
 Node* String::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* String::back_Equals(Integer* _) { return _->Equals(this); }
@@ -8438,7 +6930,6 @@ Node* String::back_Equals(Object* _) { return _->Equals(this); }
 Node* String::back_Equals(Function* _) { return _->Equals(this); }
 Node* Array::Equals(Node* _) { return _->back_Equals(this); }
 Node* Array::back_Equals(Error* _) { return _->Equals(this); }
-Node* Array::back_Equals(Nothing* _) { return _->Equals(this); }
 Node* Array::back_Equals(Member* _) { return _->Equals(this); }
 Node* Array::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Array::back_Equals(Integer* _) { return _->Equals(this); }
@@ -8449,7 +6940,6 @@ Node* Array::back_Equals(Object* _) { return _->Equals(this); }
 Node* Array::back_Equals(Function* _) { return _->Equals(this); }
 Node* Object::Equals(Node* _) { return _->back_Equals(this); }
 Node* Object::back_Equals(Error* _) { return _->Equals(this); }
-Node* Object::back_Equals(Nothing* _) { return _->Equals(this); }
 Node* Object::back_Equals(Member* _) { return _->Equals(this); }
 Node* Object::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Object::back_Equals(Integer* _) { return _->Equals(this); }
@@ -8460,7 +6950,6 @@ Node* Object::back_Equals(Object* _) { return _->Equals(this); }
 Node* Object::back_Equals(Function* _) { return _->Equals(this); }
 Node* Function::Equals(Node* _) { return _->back_Equals(this); }
 Node* Function::back_Equals(Error* _) { return _->Equals(this); }
-Node* Function::back_Equals(Nothing* _) { return _->Equals(this); }
 Node* Function::back_Equals(Member* _) { return _->Equals(this); }
 Node* Function::back_Equals(Boolean* _) { return _->Equals(this); }
 Node* Function::back_Equals(Integer* _) { return _->Equals(this); }
@@ -8471,7 +6960,6 @@ Node* Function::back_Equals(Object* _) { return _->Equals(this); }
 Node* Function::back_Equals(Function* _) { return _->Equals(this); }
 Node* Error::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Error::back_NotEquals(Error* _) { return _->NotEquals(this); }
-Node* Error::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
 Node* Error::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Error::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Error::back_NotEquals(Integer* _) { return _->NotEquals(this); }
@@ -8480,20 +6968,8 @@ Node* Error::back_NotEquals(String* _) { return _->NotEquals(this); }
 Node* Error::back_NotEquals(Array* _) { return _->NotEquals(this); }
 Node* Error::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Error::back_NotEquals(Function* _) { return _->NotEquals(this); }
-Node* Nothing::NotEquals(Node* _) { return _->back_NotEquals(this); }
-Node* Nothing::back_NotEquals(Error* _) { return _->NotEquals(this); }
-Node* Nothing::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
-Node* Nothing::back_NotEquals(Member* _) { return _->NotEquals(this); }
-Node* Nothing::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
-Node* Nothing::back_NotEquals(Integer* _) { return _->NotEquals(this); }
-Node* Nothing::back_NotEquals(Double* _) { return _->NotEquals(this); }
-Node* Nothing::back_NotEquals(String* _) { return _->NotEquals(this); }
-Node* Nothing::back_NotEquals(Array* _) { return _->NotEquals(this); }
-Node* Nothing::back_NotEquals(Object* _) { return _->NotEquals(this); }
-Node* Nothing::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Member::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Member::back_NotEquals(Error* _) { return _->NotEquals(this); }
-Node* Member::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
 Node* Member::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Member::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Member::back_NotEquals(Integer* _) { return _->NotEquals(this); }
@@ -8504,7 +6980,6 @@ Node* Member::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Member::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Boolean::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Boolean::back_NotEquals(Error* _) { return _->NotEquals(this); }
-Node* Boolean::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
 Node* Boolean::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Boolean::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Boolean::back_NotEquals(Integer* _) { return _->NotEquals(this); }
@@ -8515,7 +6990,6 @@ Node* Boolean::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Boolean::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Integer::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Integer::back_NotEquals(Error* _) { return _->NotEquals(this); }
-Node* Integer::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
 Node* Integer::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Integer::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Integer::back_NotEquals(Integer* _) { return _->NotEquals(this); }
@@ -8526,7 +7000,6 @@ Node* Integer::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Integer::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Double::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Double::back_NotEquals(Error* _) { return _->NotEquals(this); }
-Node* Double::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
 Node* Double::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Double::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Double::back_NotEquals(Integer* _) { return _->NotEquals(this); }
@@ -8537,7 +7010,6 @@ Node* Double::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Double::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* String::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* String::back_NotEquals(Error* _) { return _->NotEquals(this); }
-Node* String::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
 Node* String::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* String::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* String::back_NotEquals(Integer* _) { return _->NotEquals(this); }
@@ -8548,7 +7020,6 @@ Node* String::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* String::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Array::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Array::back_NotEquals(Error* _) { return _->NotEquals(this); }
-Node* Array::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
 Node* Array::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Array::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Array::back_NotEquals(Integer* _) { return _->NotEquals(this); }
@@ -8559,7 +7030,6 @@ Node* Array::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Array::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Object::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Object::back_NotEquals(Error* _) { return _->NotEquals(this); }
-Node* Object::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
 Node* Object::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Object::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Object::back_NotEquals(Integer* _) { return _->NotEquals(this); }
@@ -8570,7 +7040,6 @@ Node* Object::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Object::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Function::NotEquals(Node* _) { return _->back_NotEquals(this); }
 Node* Function::back_NotEquals(Error* _) { return _->NotEquals(this); }
-Node* Function::back_NotEquals(Nothing* _) { return _->NotEquals(this); }
 Node* Function::back_NotEquals(Member* _) { return _->NotEquals(this); }
 Node* Function::back_NotEquals(Boolean* _) { return _->NotEquals(this); }
 Node* Function::back_NotEquals(Integer* _) { return _->NotEquals(this); }
@@ -8581,7 +7050,6 @@ Node* Function::back_NotEquals(Object* _) { return _->NotEquals(this); }
 Node* Function::back_NotEquals(Function* _) { return _->NotEquals(this); }
 Node* Error::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Error::back_LessThan(Error* _) { return _->LessThan(this); }
-Node* Error::back_LessThan(Nothing* _) { return _->LessThan(this); }
 Node* Error::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Error::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Error::back_LessThan(Integer* _) { return _->LessThan(this); }
@@ -8590,20 +7058,8 @@ Node* Error::back_LessThan(String* _) { return _->LessThan(this); }
 Node* Error::back_LessThan(Array* _) { return _->LessThan(this); }
 Node* Error::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Error::back_LessThan(Function* _) { return _->LessThan(this); }
-Node* Nothing::LessThan(Node* _) { return _->back_LessThan(this); }
-Node* Nothing::back_LessThan(Error* _) { return _->LessThan(this); }
-Node* Nothing::back_LessThan(Nothing* _) { return _->LessThan(this); }
-Node* Nothing::back_LessThan(Member* _) { return _->LessThan(this); }
-Node* Nothing::back_LessThan(Boolean* _) { return _->LessThan(this); }
-Node* Nothing::back_LessThan(Integer* _) { return _->LessThan(this); }
-Node* Nothing::back_LessThan(Double* _) { return _->LessThan(this); }
-Node* Nothing::back_LessThan(String* _) { return _->LessThan(this); }
-Node* Nothing::back_LessThan(Array* _) { return _->LessThan(this); }
-Node* Nothing::back_LessThan(Object* _) { return _->LessThan(this); }
-Node* Nothing::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Member::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Member::back_LessThan(Error* _) { return _->LessThan(this); }
-Node* Member::back_LessThan(Nothing* _) { return _->LessThan(this); }
 Node* Member::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Member::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Member::back_LessThan(Integer* _) { return _->LessThan(this); }
@@ -8614,7 +7070,6 @@ Node* Member::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Member::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Boolean::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Boolean::back_LessThan(Error* _) { return _->LessThan(this); }
-Node* Boolean::back_LessThan(Nothing* _) { return _->LessThan(this); }
 Node* Boolean::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Boolean::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Boolean::back_LessThan(Integer* _) { return _->LessThan(this); }
@@ -8625,7 +7080,6 @@ Node* Boolean::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Boolean::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Integer::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Integer::back_LessThan(Error* _) { return _->LessThan(this); }
-Node* Integer::back_LessThan(Nothing* _) { return _->LessThan(this); }
 Node* Integer::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Integer::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Integer::back_LessThan(Integer* _) { return _->LessThan(this); }
@@ -8636,7 +7090,6 @@ Node* Integer::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Integer::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Double::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Double::back_LessThan(Error* _) { return _->LessThan(this); }
-Node* Double::back_LessThan(Nothing* _) { return _->LessThan(this); }
 Node* Double::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Double::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Double::back_LessThan(Integer* _) { return _->LessThan(this); }
@@ -8647,7 +7100,6 @@ Node* Double::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Double::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* String::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* String::back_LessThan(Error* _) { return _->LessThan(this); }
-Node* String::back_LessThan(Nothing* _) { return _->LessThan(this); }
 Node* String::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* String::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* String::back_LessThan(Integer* _) { return _->LessThan(this); }
@@ -8658,7 +7110,6 @@ Node* String::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* String::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Array::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Array::back_LessThan(Error* _) { return _->LessThan(this); }
-Node* Array::back_LessThan(Nothing* _) { return _->LessThan(this); }
 Node* Array::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Array::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Array::back_LessThan(Integer* _) { return _->LessThan(this); }
@@ -8669,7 +7120,6 @@ Node* Array::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Array::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Object::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Object::back_LessThan(Error* _) { return _->LessThan(this); }
-Node* Object::back_LessThan(Nothing* _) { return _->LessThan(this); }
 Node* Object::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Object::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Object::back_LessThan(Integer* _) { return _->LessThan(this); }
@@ -8680,7 +7130,6 @@ Node* Object::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Object::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Function::LessThan(Node* _) { return _->back_LessThan(this); }
 Node* Function::back_LessThan(Error* _) { return _->LessThan(this); }
-Node* Function::back_LessThan(Nothing* _) { return _->LessThan(this); }
 Node* Function::back_LessThan(Member* _) { return _->LessThan(this); }
 Node* Function::back_LessThan(Boolean* _) { return _->LessThan(this); }
 Node* Function::back_LessThan(Integer* _) { return _->LessThan(this); }
@@ -8691,7 +7140,6 @@ Node* Function::back_LessThan(Object* _) { return _->LessThan(this); }
 Node* Function::back_LessThan(Function* _) { return _->LessThan(this); }
 Node* Error::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Error::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
-Node* Error::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
 Node* Error::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Error::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Error::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
@@ -8700,20 +7148,8 @@ Node* Error::back_GreaterThan(String* _) { return _->GreaterThan(this); }
 Node* Error::back_GreaterThan(Array* _) { return _->GreaterThan(this); }
 Node* Error::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Error::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
-Node* Nothing::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
-Node* Nothing::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
-Node* Nothing::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
-Node* Nothing::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
-Node* Nothing::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
-Node* Nothing::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
-Node* Nothing::back_GreaterThan(Double* _) { return _->GreaterThan(this); }
-Node* Nothing::back_GreaterThan(String* _) { return _->GreaterThan(this); }
-Node* Nothing::back_GreaterThan(Array* _) { return _->GreaterThan(this); }
-Node* Nothing::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
-Node* Nothing::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Member::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Member::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
-Node* Member::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
 Node* Member::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Member::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Member::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
@@ -8724,7 +7160,6 @@ Node* Member::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Member::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Boolean::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Boolean::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
-Node* Boolean::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
 Node* Boolean::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Boolean::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Boolean::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
@@ -8735,7 +7170,6 @@ Node* Boolean::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Boolean::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Integer::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Integer::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
-Node* Integer::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
 Node* Integer::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Integer::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Integer::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
@@ -8746,7 +7180,6 @@ Node* Integer::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Integer::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Double::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Double::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
-Node* Double::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
 Node* Double::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Double::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Double::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
@@ -8757,7 +7190,6 @@ Node* Double::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Double::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* String::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* String::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
-Node* String::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
 Node* String::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* String::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* String::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
@@ -8768,7 +7200,6 @@ Node* String::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* String::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Array::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Array::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
-Node* Array::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
 Node* Array::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Array::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Array::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
@@ -8779,7 +7210,6 @@ Node* Array::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Array::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Object::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Object::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
-Node* Object::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
 Node* Object::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Object::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Object::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
@@ -8790,7 +7220,6 @@ Node* Object::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Object::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Function::GreaterThan(Node* _) { return _->back_GreaterThan(this); }
 Node* Function::back_GreaterThan(Error* _) { return _->GreaterThan(this); }
-Node* Function::back_GreaterThan(Nothing* _) { return _->GreaterThan(this); }
 Node* Function::back_GreaterThan(Member* _) { return _->GreaterThan(this); }
 Node* Function::back_GreaterThan(Boolean* _) { return _->GreaterThan(this); }
 Node* Function::back_GreaterThan(Integer* _) { return _->GreaterThan(this); }
@@ -8801,7 +7230,6 @@ Node* Function::back_GreaterThan(Object* _) { return _->GreaterThan(this); }
 Node* Function::back_GreaterThan(Function* _) { return _->GreaterThan(this); }
 Node* Error::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Error::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
-Node* Error::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
 Node* Error::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Error::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Error::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
@@ -8810,20 +7238,8 @@ Node* Error::back_LessThanOrEqualTo(String* _) { return _->LessThanOrEqualTo(thi
 Node* Error::back_LessThanOrEqualTo(Array* _) { return _->LessThanOrEqualTo(this); }
 Node* Error::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(this); }
 Node* Error::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
-Node* Nothing::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
-Node* Nothing::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
-Node* Nothing::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
-Node* Nothing::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
-Node* Nothing::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
-Node* Nothing::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
-Node* Nothing::back_LessThanOrEqualTo(Double* _) { return _->LessThanOrEqualTo(this); }
-Node* Nothing::back_LessThanOrEqualTo(String* _) { return _->LessThanOrEqualTo(this); }
-Node* Nothing::back_LessThanOrEqualTo(Array* _) { return _->LessThanOrEqualTo(this); }
-Node* Nothing::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(this); }
-Node* Nothing::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Member::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Member::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
-Node* Member::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
 Node* Member::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Member::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Member::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
@@ -8834,7 +7250,6 @@ Node* Member::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(th
 Node* Member::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Boolean::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Boolean::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
-Node* Boolean::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
 Node* Boolean::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Boolean::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Boolean::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
@@ -8845,7 +7260,6 @@ Node* Boolean::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(t
 Node* Boolean::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Integer::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Integer::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
-Node* Integer::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
 Node* Integer::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Integer::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Integer::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
@@ -8856,7 +7270,6 @@ Node* Integer::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(t
 Node* Integer::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Double::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Double::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
-Node* Double::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
 Node* Double::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Double::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Double::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
@@ -8867,7 +7280,6 @@ Node* Double::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(th
 Node* Double::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* String::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* String::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
-Node* String::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
 Node* String::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* String::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* String::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
@@ -8878,7 +7290,6 @@ Node* String::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(th
 Node* String::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Array::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Array::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
-Node* Array::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
 Node* Array::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Array::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Array::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
@@ -8889,7 +7300,6 @@ Node* Array::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(thi
 Node* Array::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Object::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Object::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
-Node* Object::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
 Node* Object::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Object::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Object::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
@@ -8900,7 +7310,6 @@ Node* Object::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(th
 Node* Object::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Function::LessThanOrEqualTo(Node* _) { return _->back_LessThanOrEqualTo(this); }
 Node* Function::back_LessThanOrEqualTo(Error* _) { return _->LessThanOrEqualTo(this); }
-Node* Function::back_LessThanOrEqualTo(Nothing* _) { return _->LessThanOrEqualTo(this); }
 Node* Function::back_LessThanOrEqualTo(Member* _) { return _->LessThanOrEqualTo(this); }
 Node* Function::back_LessThanOrEqualTo(Boolean* _) { return _->LessThanOrEqualTo(this); }
 Node* Function::back_LessThanOrEqualTo(Integer* _) { return _->LessThanOrEqualTo(this); }
@@ -8911,7 +7320,6 @@ Node* Function::back_LessThanOrEqualTo(Object* _) { return _->LessThanOrEqualTo(
 Node* Function::back_LessThanOrEqualTo(Function* _) { return _->LessThanOrEqualTo(this); }
 Node* Error::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Error::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Error::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Error::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Error::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Error::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
@@ -8920,20 +7328,8 @@ Node* Error::back_GreaterThanOrEqualTo(String* _) { return _->GreaterThanOrEqual
 Node* Error::back_GreaterThanOrEqualTo(Array* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Error::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Error::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Nothing::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
-Node* Nothing::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Nothing::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Nothing::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Nothing::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Nothing::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Nothing::back_GreaterThanOrEqualTo(Double* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Nothing::back_GreaterThanOrEqualTo(String* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Nothing::back_GreaterThanOrEqualTo(Array* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Nothing::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Nothing::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Member::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Member::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Member::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Member::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Member::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Member::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
@@ -8944,7 +7340,6 @@ Node* Member::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqua
 Node* Member::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Boolean::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Boolean::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Boolean::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Boolean::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Boolean::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Boolean::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
@@ -8955,7 +7350,6 @@ Node* Boolean::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqu
 Node* Boolean::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Integer::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Integer::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Integer::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Integer::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Integer::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Integer::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
@@ -8966,7 +7360,6 @@ Node* Integer::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqu
 Node* Integer::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Double::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Double::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Double::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Double::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Double::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Double::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
@@ -8977,7 +7370,6 @@ Node* Double::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqua
 Node* Double::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* String::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* String::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
-Node* String::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
 Node* String::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* String::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* String::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
@@ -8988,7 +7380,6 @@ Node* String::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqua
 Node* String::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Array::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Array::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Array::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Array::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Array::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Array::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
@@ -8999,7 +7390,6 @@ Node* Array::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqual
 Node* Array::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Object::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Object::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Object::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Object::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Object::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Object::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
@@ -9010,7 +7400,6 @@ Node* Object::back_GreaterThanOrEqualTo(Object* _) { return _->GreaterThanOrEqua
 Node* Object::back_GreaterThanOrEqualTo(Function* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Function::GreaterThanOrEqualTo(Node* _) { return _->back_GreaterThanOrEqualTo(this); }
 Node* Function::back_GreaterThanOrEqualTo(Error* _) { return _->GreaterThanOrEqualTo(this); }
-Node* Function::back_GreaterThanOrEqualTo(Nothing* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Function::back_GreaterThanOrEqualTo(Member* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Function::back_GreaterThanOrEqualTo(Boolean* _) { return _->GreaterThanOrEqualTo(this); }
 Node* Function::back_GreaterThanOrEqualTo(Integer* _) { return _->GreaterThanOrEqualTo(this); }
