@@ -534,17 +534,6 @@ public:
 DEFINITIONS
 };
 
-class Array : public Node
-{
-    std::vector<Node*> value;
-public:
-    const std::vector<Node*>& getValue();
-    void append(Node*);
-
-    virtual std::string toString() const override;
-DEFINITIONS
-};
-
 class Key
 {
 public:
@@ -557,9 +546,20 @@ public:
     std::string toString() const;
 };
 
+class Array : public Node
+{
+    std::vector<Key> value;
+public:
+    const std::vector<Key>& getValue();
+    void append(Node*);
+
+    virtual std::string toString() const override;
+DEFINITIONS
+};
+
 class Object : public Node
 {
-    std::map<Key, Node*> mappings;
+    std::map<Key, Key> mappings;
     Node* underscore;
 
 public:

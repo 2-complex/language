@@ -489,7 +489,7 @@ Node* String::And(Function* _)
     return new Error("Logical 'and' with string and function");
 }
 
-const std::vector<Node*>& Array::getValue()
+const std::vector<Key>& Array::getValue()
 {
     return value;
 }
@@ -497,9 +497,9 @@ const std::vector<Node*>& Array::getValue()
 std::string Array::toString() const
 {
     std::string result = "[";
-    for( Node* node : value )
+    for( const Key& k : value )
     {
-        result += node->toString() + ",";
+        result += k.node->toString() + ",";
     }
     result += "]";
     return result;
@@ -1581,11 +1581,11 @@ Node* Array::Plus(Array* _)
 {
     Array* array = new Array;
 
-    for (Node* node : value)
-        array->append(node);
+    for( Key& k : value )
+        array->append(k.node);
 
-    for (Node* node : _->value)
-        array->append(node);
+    for( Key& k : _->value )
+        array->append(k.node);
 
     return array;
 }
@@ -3688,7 +3688,7 @@ Node* Array::Call(Integer* _)
     if( _->getValue() < 0 || _->getValue() > value.size() )
         return new Error("Array index out of bounds");
 
-    return value[_->getValue().toSizeT()];
+    return value[_->getValue().toSizeT()].node;
 }
 
 Node* Array::Call(Double* _)
