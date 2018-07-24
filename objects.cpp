@@ -566,6 +566,11 @@ Node* Array::And(Function* _)
     return new Error("Logical 'and' with array and function");
 }
 
+Key::Key()
+    :node(NULL)
+{
+}
+
 Key::Key(Node* node)
     : node(node)
 {
@@ -610,11 +615,11 @@ Object::~Object()
 
     for( auto itr = mappings.begin(); itr != mappings.end(); itr++ )
     {
-        itr->second->release();
+        itr->second.node->release();
     }
 }
 
-std::map<Key, Node*> Object::getValue()
+std::map<Key, Key> Object::getValue()
 {
     return mappings;
 }
@@ -640,7 +645,7 @@ object::Node* Object::setMapping(Node* index, Node* value)
     }
     else
     {
-        itr->second->release();
+        itr->second.node->release();
         itr->second = value;
     }
 
@@ -656,8 +661,8 @@ Node* Object::getMapping(Node* index)
         return NULL;
     }
 
-    itr->second->retain();
-    return itr->second;
+    itr->second.node->retain();
+    return itr->second.node;
 }
 
 Node* Object::getUnderscore()
@@ -671,7 +676,7 @@ std::string Object::toString() const
 
     for( auto itr = mappings.begin(); itr != mappings.end(); itr++ )
     {
-        result += itr->first.node->mappingToString(itr->second);
+        result += itr->first.node->mappingToString(itr->second.node);
         result += ",";
     }
 

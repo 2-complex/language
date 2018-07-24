@@ -538,6 +538,7 @@ class Key
 {
 public:
     Node* node;
+    Key();
     Key(Node* node);
 
     bool operator == (const class Key& other) const;
@@ -567,7 +568,7 @@ public:
     Object(Node* underscore);
     virtual ~Object();
 
-    std::map<Key, Node*> getValue();
+    std::map<Key, Key> getValue();
     object::Node* getUnderscore();
 
     virtual object::Node* setMapping(object::Node* key, object::Node* value);
