@@ -5,7 +5,6 @@
 
 #include <stdlib.h>
 
-
 namespace code
 {
 
