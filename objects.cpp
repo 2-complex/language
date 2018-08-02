@@ -3447,42 +3447,42 @@ Node* Member::Call(Error* _)
 
 Node* Member::Call(Member* _)
 {
-    return new Error("Attmept to call member with member as argument");
+    return new Error("Attempt to call member with member as argument");
 }
 
 Node* Member::Call(Boolean* _)
 {
-    return new Error("Attmept to call member with boolean as argument");
+    return new Error("Attempt to call member with boolean as argument");
 }
 
 Node* Member::Call(Integer* _)
 {
-    return new Error("Attmept to call member with integer as argument");
+    return new Error("Attempt to call member with integer as argument");
 }
 
 Node* Member::Call(Double* _)
 {
-    return new Error("Attmept to call member with double as argument");
+    return new Error("Attempt to call member with double as argument");
 }
 
 Node* Member::Call(String* _)
 {
-    return new Error("Attmept to call member with string as argument");
+    return new Error("Attempt to call member with string as argument");
 }
 
 Node* Member::Call(Array* _)
 {
-    return new Error("Attmept to call member with array as argument");
+    return new Error("Attempt to call member with array as argument");
 }
 
 Node* Member::Call(Object* _)
 {
-    return new Error("Attmept to call member with object as argument");
+    return new Error("Attempt to call member with object as argument");
 }
 
 Node* Member::Call(Function* _)
 {
-    return new Error("Attmept to call member with function as argument");
+    return new Error("Attempt to call member with function as argument");
 }
 
 Node* Boolean::Call(Error* _)
@@ -3493,42 +3493,42 @@ Node* Boolean::Call(Error* _)
 
 Node* Boolean::Call(Member* _)
 {
-    return new Error("Attmept to call boolean with member as argument");
+    return new Error("Attempt to call boolean with member as argument");
 }
 
 Node* Boolean::Call(Boolean* _)
 {
-    return new Error("Attmept to call boolean with boolean as argument");
+    return new Error("Attempt to call boolean with boolean as argument");
 }
 
 Node* Boolean::Call(Integer* _)
 {
-    return new Error("Attmept to call boolean with integer as argument");
+    return new Error("Attempt to call boolean with integer as argument");
 }
 
 Node* Boolean::Call(Double* _)
 {
-    return new Error("Attmept to call boolean with double as argument");
+    return new Error("Attempt to call boolean with double as argument");
 }
 
 Node* Boolean::Call(String* _)
 {
-    return new Error("Attmept to call boolean with string as argument");
+    return new Error("Attempt to call boolean with string as argument");
 }
 
 Node* Boolean::Call(Array* _)
 {
-    return new Error("Attmept to call boolean with array as argument");
+    return new Error("Attempt to call boolean with array as argument");
 }
 
 Node* Boolean::Call(Object* _)
 {
-    return new Error("Attmept to call boolean with object as argument");
+    return new Error("Attempt to call boolean with object as argument");
 }
 
 Node* Boolean::Call(Function* _)
 {
-    return new Error("Attmept to call boolean with function as argument");
+    return new Error("Attempt to call boolean with function as argument");
 }
 
 Node* Integer::Call(Error* _)
@@ -3539,42 +3539,42 @@ Node* Integer::Call(Error* _)
 
 Node* Integer::Call(Member* _)
 {
-    return new Error("Attmept to call integer with member as argument");
+    return new Error("Attempt to call integer with member as argument");
 }
 
 Node* Integer::Call(Boolean* _)
 {
-    return new Error("Attmept to call integer with boolean as argument");
+    return new Error("Attempt to call integer with boolean as argument");
 }
 
 Node* Integer::Call(Integer* _)
 {
-    return new Error("Attmept to call integer with integer as argument");
+    return new Error("Attempt to call integer with integer as argument");
 }
 
 Node* Integer::Call(Double* _)
 {
-    return new Error("Attmept to call integer with double as argument");
+    return new Error("Attempt to call integer with double as argument");
 }
 
 Node* Integer::Call(String* _)
 {
-    return new Error("Attmept to call integer with string as argument");
+    return new Error("Attempt to call integer with string as argument");
 }
 
 Node* Integer::Call(Array* _)
 {
-    return new Error("Attmept to call integer with array as argument");
+    return new Error("Attempt to call integer with array as argument");
 }
 
 Node* Integer::Call(Object* _)
 {
-    return new Error("Attmept to call integer with object as argument");
+    return new Error("Attempt to call integer with object as argument");
 }
 
 Node* Integer::Call(Function* _)
 {
-    return new Error("Attmept to call integer with function as argument");
+    return new Error("Attempt to call integer with function as argument");
 }
 
 Node* Double::Call(Error* _)
@@ -3585,42 +3585,42 @@ Node* Double::Call(Error* _)
 
 Node* Double::Call(Member* _)
 {
-    return new Error("Attmept to call double with member as argument");
+    return new Error("Attempt to call double with member as argument");
 }
 
 Node* Double::Call(Boolean* _)
 {
-    return new Error("Attmept to call double with boolean as argument");
+    return new Error("Attempt to call double with boolean as argument");
 }
 
 Node* Double::Call(Integer* _)
 {
-    return new Error("Attmept to call double with integer as argument");
+    return new Error("Attempt to call double with integer as argument");
 }
 
 Node* Double::Call(Double* _)
 {
-    return new Error("Attmept to call double with double as argument");
+    return new Error("Attempt to call double with double as argument");
 }
 
 Node* Double::Call(String* _)
 {
-    return new Error("Attmept to call double with string as argument");
+    return new Error("Attempt to call double with string as argument");
 }
 
 Node* Double::Call(Array* _)
 {
-    return new Error("Attmept to call double with array as argument");
+    return new Error("Attempt to call double with array as argument");
 }
 
 Node* Double::Call(Object* _)
 {
-    return new Error("Attmept to call double with object as argument");
+    return new Error("Attempt to call double with object as argument");
 }
 
 Node* Double::Call(Function* _)
 {
-    return new Error("Attmept to call double with function as argument");
+    return new Error("Attempt to call double with function as argument");
 }
 
 Node* String::Call(Error* _)
@@ -3631,12 +3631,12 @@ Node* String::Call(Error* _)
 
 Node* String::Call(Member* _)
 {
-    return new Error("Attmept to call string with member as argument");
+    return new Error("Attempt to call string with member as argument");
 }
 
 Node* String::Call(Boolean* _)
 {
-    return new Error("Attmept to call string with boolean as argument");
+    return new Error("Attempt to call string with boolean as argument");
 }
 
 Node* String::Call(Integer* _)
@@ -3649,27 +3649,27 @@ Node* String::Call(Integer* _)
 
 Node* String::Call(Double* _)
 {
-    return new Error("Attmept to call string with double as argument");
+    return new Error("Attempt to call string with double as argument");
 }
 
 Node* String::Call(String* _)
 {
-    return new Error("Attmept to call string with string as argument");
+    return new Error("Attempt to call string with string as argument");
 }
 
 Node* String::Call(Array* _)
 {
-    return new Error("Attmept to call string with array as argument");
+    return new Error("Attempt to call string with array as argument");
 }
 
 Node* String::Call(Object* _)
 {
-    return new Error("Attmept to call string with object as argument");
+    return new Error("Attempt to call string with object as argument");
 }
 
 Node* String::Call(Function* _)
 {
-    return new Error("Attmept to call string with function as argument");
+    return new Error("Attempt to call string with function as argument");
 }
 
 Node* Array::Call(Error* _)
@@ -3680,17 +3680,17 @@ Node* Array::Call(Error* _)
 
 Node* Array::Call(Member* _)
 {
-    return new Error("Attmept to call array with member as argument");
+    return new Error("Attempt to call array with member as argument");
 }
 
 Node* Array::Call(Boolean* _)
 {
-    return new Error("Attmept to call array with boolean as argument");
+    return new Error("Attempt to call array with boolean as argument");
 }
 
 Node* Array::Call(Integer* _)
 {
-    if( _->getValue() < 0 || _->getValue() > value.size() )
+    if( _->getValue() < 0 || _->getValue() >= value.size() )
         return new Error("Array index out of bounds");
 
     return value[_->getValue().toSizeT()].node;
@@ -3698,27 +3698,32 @@ Node* Array::Call(Integer* _)
 
 Node* Array::Call(Double* _)
 {
-    return new Error("Attmept to call array with double as argument");
+    return new Error("Attempt to call array with double as argument");
 }
 
 Node* Array::Call(String* _)
 {
-    return new Error("Attmept to call array with string as argument");
+    return new Error("Attempt to call array with string as argument");
 }
 
 Node* Array::Call(Array* _)
 {
-    return new Error("Attmept to call array with array as argument");
+    return new Error("Attempt to call array with array as argument");
 }
 
 Node* Array::Call(Object* _)
 {
-    return new Error("Attmept to call array with object as argument");
+    return new Error("Attempt to call array with object as argument");
 }
 
 Node* Array::Call(Function* _)
 {
-    return new Error("Attmept to call array with function as argument");
+    Array* array = new Array;
+
+    for( Key& k : value )
+        array->append(_->Call(k.node));
+
+    return array;
 }
 
 Node* Object::Call(Error* _)
