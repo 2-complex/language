@@ -37,6 +37,9 @@ run: calam
 Environment.o: Environment.h Environment.cpp
 	$(CPP) -c Environment.cpp
 
+linenoise.o: linenoise/linenoise.cpp
+	$(CPP) -c linenoise/linenoise.cpp
+
 BigInteger.o: BigInteger.h BigInteger.cpp
 	$(CPP) -c BigInteger.cpp
 
@@ -108,7 +111,9 @@ CalamityParser.h: Calamity.g4
 CPP = c++ -std=gnu++11 -g3
 
 INCLUDES = \
-	-Iantlr4-cpp-runtime-4.7.1-macos/antlr4-runtime
+	-Iantlr4-cpp-runtime-4.7.1-macos/antlr4-runtime \
+	-Ilinenoise
+
 
 ANTLR_LIBRARY = \
 	antlr4-cpp-runtime-4.7.1-macos/lib/libantlr4-runtime.a
@@ -152,8 +157,8 @@ calam: main.cpp $(CALAMITY_OBJETS)
 	$(CPP) $(INCLUDES) \
 	main.cpp -o calam \
 	$(CALAMITY_OBJETS) \
+	linenoise.o \
 	$(ANTLR_LIBRARY)
-
 
 try: printtree.py $(TRIER_GENERATED_CODE)
 	python printtree.py

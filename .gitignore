@@ -22,6 +22,7 @@ calam
 codetest
 
 temp_*
+history.txt
 
 *.dSYM
 

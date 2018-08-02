@@ -242,6 +242,10 @@ void displayTreeShape(tree::ParseTree *tree)
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "linenoise.h"
 
 int main(int argc, const char* argv[])
 {
@@ -271,13 +275,10 @@ int main(int argc, const char* argv[])
         object::Object* obj = new object::Object;
         Environment environment(obj);
 
-        for(;;)
+        linenoiseHistoryLoad("history.txt");
+        while(char* line = linenoise("> "))
         {
-            printf("> ");
-            std::string mystr;
-            getline(std::cin, mystr);
-
-            std::stringstream ss(mystr);
+            std::stringstream ss(line);
 
             try
             {
@@ -295,6 +296,9 @@ int main(int argc, const char* argv[])
 
                 printf( "%s\n\n", answer->toString().c_str() );
                 answer->release();
+
+                linenoiseHistoryAdd(line);
+                linenoiseHistorySave("history.txt");
             }
             catch(std::exception)
             {
@@ -302,6 +306,7 @@ int main(int argc, const char* argv[])
                 continue;
             }
 
+            free(line);
         }
     }
 }
