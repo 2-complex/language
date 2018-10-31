@@ -7,7 +7,6 @@
 #include <string>
 #include <map>
 #include <vector>
-#include <unordered_map>
 
 #include <stdlib.h>
 
@@ -561,15 +560,12 @@ DEFINITIONS
 class Object : public Node
 {
     std::map<Key, Key> mappings;
-    Node* underscore;
 
 public:
     Object();
-    Object(Node* underscore);
     virtual ~Object();
 
     std::map<Key, Key> getValue();
-    object::Node* getUnderscore();
 
     virtual object::Node* setMapping(object::Node* key, object::Node* value);
     virtual object::Node* getMapping(object::Node* key);
