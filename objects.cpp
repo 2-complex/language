@@ -567,7 +567,7 @@ Node* Array::And(Function* _)
 }
 
 Key::Key()
-    :node(NULL)
+    : node(NULL)
 {
 }
 
@@ -3703,12 +3703,7 @@ Node* Array::Call(Object* _)
 
 Node* Array::Call(Function* _)
 {
-    Array* array = new Array;
-
-    for( Key& k : value )
-        array->append(_->Call(k.node));
-
-    return array;
+    return new Error("Attempt to call array with function as argument");
 }
 
 Node* Object::Call(Error* _)
