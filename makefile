@@ -38,7 +38,7 @@ Environment.o: Environment.h Environment.cpp
 	$(CPP) -c Environment.cpp
 
 linenoise.o: linenoise/linenoise.cpp
-	$(CPP) -c linenoise/linenoise.cpp
+	$(CPP) -c linenoise/linenoise.cpp -o linenoise.o
 
 BigInteger.o: BigInteger.h BigInteger.cpp
 	$(CPP) -c BigInteger.cpp
@@ -153,7 +153,7 @@ CALAMITY_OBJETS = \
 	TreeShapeListener.o
 
 
-calam: main.cpp $(CALAMITY_OBJETS)
+calam: main.cpp $(CALAMITY_OBJETS) linenoise.o
 	$(CPP) $(INCLUDES) \
 	main.cpp -o calam \
 	$(CALAMITY_OBJETS) \

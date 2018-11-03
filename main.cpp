@@ -255,18 +255,33 @@ int main(int argc, const char* argv[])
     {
         stream.open(argv[1]);
 
-        ANTLRInputStream input(stream);
-        CalamityLexer lexer(&input);
-        CommonTokenStream tokens(&lexer);
-        CalamityParser parser(&tokens);
+        object::Object* obj = new object::Object;
+        Environment environment(obj);
 
-        tree::ParseTree *tree = parser.program();
-        displayTreeShape(tree);
+        try
+        {
+            ANTLRInputStream input(stream);
+            CalamityLexer lexer(&input);
+            CommonTokenStream tokens(&lexer);
+            CalamityParser parser(&tokens);
 
-        MainVisitor vistor;
-        HType a = vistor.visit(tree);
+            tree::ParseTree* tree = parser.program();
 
-        printf( "%s\n", a.code->toString().c_str() );
+            if( parser.getNumberOfSyntaxErrors() == 0 )
+            {
+                MainVisitor vistor;
+                HType a = vistor.visit(tree);
+
+                object::Node* answer = a.code->evaluate(environment);
+
+                printf( "%s\n\n", answer->toString().c_str() );
+                answer->release();
+            }
+        }
+        catch(std::exception)
+        {
+            printf("PARSE ERROR\n\n");
+        }
 
         return 0;
     }
