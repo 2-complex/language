@@ -8,8 +8,13 @@
 
 #include "objects.h"
 
+
 namespace code
 {
+
+/*! When Calamity gets paresed into a tree of objects.
+    Code is the base class of those objects.
+*/
 class Code
 {
 public:
@@ -21,6 +26,13 @@ class Line : public Code
 {
 };
 
+/*! Expression represents any evaluable substring of code:
+    x+7
+    (z=2)
+
+    Not an assignment:
+    n = 3  <- not an Expression.
+*/
 class Expression : public Line
 {
 public:
@@ -28,6 +40,15 @@ public:
     virtual object::Node* evaluateLast(Environment& env) const;
 };
 
+/*! A Pair is an element of a Group (object literal) i.e.
+    (
+        x = "ex",
+        4: "four",
+        *: "",
+    )
+
+    x = "ex", 4: "four" and *: "" are Pairs
+*/
 class Pair : public Line
 {
 public:
@@ -40,6 +61,12 @@ public:
     virtual object::Node* evaluate(Environment& env) const;
 };
 
+/*! Assignment is a piece of code that assigns a value to a variable
+    such as:
+
+    n = 3
+    n += 1
+*/
 class Assignment : public Line
 {
 public:
@@ -57,6 +84,9 @@ public:
     virtual object::Node* evaluate(Environment& env) const override;
 };
 
+/*! A Program is a bunch of lines of code.  This can be the contents of a function,
+    or it can be the contents of a group (object literal) or it can be the contents
+    of a file.*/
 class Program : public Code
 {
 public:
