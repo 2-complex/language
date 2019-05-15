@@ -43,14 +43,17 @@ linenoise.o: linenoise/linenoise.cpp
 BigInteger.o: BigInteger.h BigInteger.cpp
 	$(CPP) -c BigInteger.cpp
 
+Instruction.o: Instruction.h Instruction.cpp
+	$(CPP) -c Instruction.cpp
+
 Code.o: Code.h Code.cpp
 	$(CPP) -c Code.cpp
 
 objects.o: objects.cpp objects.h
 	$(CPP) -c objects.cpp
 
-codetest: codetest.cpp objects.o Code.o Environment.o
-	$(CPP) codetest.cpp objects.o Code.o Environment.o -o codetest
+codetest: codetest.cpp objects.o Code.o Instruction.o Environment.o
+	$(CPP) codetest.cpp objects.o Code.o Instruction.o Environment.o -o codetest
 
 test: printtree.py $(GENERATED_CODE)
 	python printtree.py
@@ -142,6 +145,7 @@ TreeShapeListener.o: TreeShapeListener.h TreeShapeListener.cpp
 
 CALAMITY_OBJETS = \
 	Code.o \
+	Instruction.o \
 	objects.o \
 	BigInteger.o \
 	Environment.o \

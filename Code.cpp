@@ -24,6 +24,13 @@ object::Node* Pair::evaluate(Environment& env) const
     return result;
 }
 
+void Pair::makeInstructions(std::vector<instruction::Instruction*>& instructions) const
+{
+    left->makeInstructions(instructions);
+    right->makeInstructions(instructions);
+    instructions.push_back(new instruction::Operation(":"));
+}
+
 Assignment::Assignment()
 {
 }
@@ -81,6 +88,13 @@ object::Node* Assignment::evaluate(Environment& env) const
     return result;
 }
 
+void Assignment::makeInstructions(std::vector<instruction::Instruction*>& instructions) const
+{
+    reference->makeInstructionsButLast(instructions);
+    expression->makeInstructions(instructions);
+    instructions.push_back(new instruction::Operation(operation));
+}
+
 std::string Program::toString() const
 {
     std::string accum;
@@ -96,13 +110,24 @@ object::Node* Program::evaluate(Environment& env) const
     object::Node* result = env.getArgument();
     result->retain();
 
-    for( std::vector<Line*>::const_iterator itr = lines.begin(); itr != lines.end(); itr++)
+    for( std::vector<Line*>::const_iterator itr = lines.begin(); itr != lines.end(); ++itr )
     {
         result->release();
         result = (*itr)->evaluate(env);
     }
 
     return result;
+}
+
+void Program::makeInstructions(std::vector<instruction::Instruction*>& instructions) const
+{
+    instructions.push_back(new instruction::Underscore);
+
+    for( std::vector<Line*>::const_iterator itr = lines.begin(); itr != lines.end(); ++itr )
+    {
+        instructions.push_back(new instruction::Disregard);
+        (*itr)->makeInstructions(instructions);
+    }
 }
 
 std::string Call::toString() const
@@ -159,6 +184,31 @@ object::Node* Call::evaluateLast(Environment& env) const
     return (*(expressions.rbegin()))->evaluate(env);
 }
 
+void Call::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    instructions.push_back(new instruction::Underscore);
+    size_t n = expressions.size();
+    for( size_t i = 0; i < n; i++ )
+    {
+        expressions[i]->makeInstructions(instructions);
+        instructions.push_back(new instruction::Operation("call"));
+    }
+}
+
+void Call::makeInstructionsButLast(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    instructions.push_back(new instruction::Underscore);
+    size_t n = expressions.size()-1;
+    for( size_t i = 0; i < n; i++ )
+    {
+        expressions[i]->makeInstructions(instructions);
+        instructions.push_back(new instruction::Operation("call"));
+    }
+    expressions[n]->makeInstructions(instructions);
+}
+
 AddedList::AddedList(Addable* first)
 {
     operands.push_back(first);
@@ -197,6 +247,19 @@ object::Node* AddedList::evaluate(Environment& env) const
     return accum;
 }
 
+void AddedList::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    operands[0]->makeInstructions(instructions);
+
+    size_t n = ops.size();
+    for( size_t i = 0; i < n; ++i )
+    {
+        operands[i+1]->makeInstructions(instructions);
+        instructions.push_back(new instruction::Operation(ops[i]));
+    }
+}
+
 void AddedList::append(const std::string& op, Addable* operand)
 {
     ops.push_back(op);
@@ -233,6 +296,13 @@ std::string Negative::toString() const
 object::Node* Negative::evaluate(Environment& env) const
 {
     return operand->evaluate(env)->Negative();
+}
+
+void Negative::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    operand->makeInstructions(instructions);
+    instructions.push_back(new instruction::Negative);
 }
 
 Product::Product(Expression* first)
@@ -302,6 +372,19 @@ object::Node* Product::evaluate(Environment& env) const
     return accum;
 }
 
+void Product::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    operands[0]->makeInstructions(instructions);
+
+    size_t n = ops.size();
+    for( size_t i = 0; i < n; ++i )
+    {
+        operands[i+1]->makeInstructions(instructions);
+        instructions.push_back(new instruction::Operation(ops[i]));
+    }
+}
+
 Conjunction::Conjunction(Logicable* first)
 {
     operands.push_back(first);
@@ -359,6 +442,19 @@ object::Node* Conjunction::evaluate(Environment& env) const
     return accum;
 }
 
+void Conjunction::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    operands[0]->makeInstructions(instructions);
+
+    size_t n = ops.size();
+    for( size_t i = 0; i < n; ++i )
+    {
+        operands[i+1]->makeInstructions(instructions);
+        instructions.push_back(new instruction::Operation(ops[i]));
+    }
+}
+
 Negation::Negation(Logicable* operand)
     : operand(operand)
 {
@@ -374,13 +470,20 @@ object::Node* Negation::evaluate(Environment& env) const
     return operand->evaluate(env)->Negation();
 }
 
+void Negation::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    operand->makeInstructions(instructions);
+    instructions.push_back(new instruction::Negation);
+}
+
 Comparison::Comparison(
-        Comparable* left,
-        std::string op,
-        Comparable* right)
-        : left(left)
-        , op(op)
-        , right(right)
+    Comparable* left,
+    std::string op,
+    Comparable* right)
+    : left(left)
+    , op(op)
+    , right(right)
 {
 }
 
@@ -417,6 +520,14 @@ object::Node* Comparison::evaluate(Environment& env) const
     }
 }
 
+void Comparison::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    left->makeInstructions(instructions);
+    right->makeInstructions(instructions);
+    instructions.push_back(new instruction::Operation(op));
+}
+
 Function::Function(Program* program)
     : program(program)
 {
@@ -430,6 +541,12 @@ std::string Function::toString() const
 object::Node* Function::evaluate(Environment& env) const
 {
     return new object::Function(env, program);
+}
+
+void Function::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    //not sure what to do here yet
 }
 
 Group::Group(Program* program)
@@ -447,6 +564,12 @@ object::Node* Group::evaluate(Environment& env) const
     Environment extension(env, new object::Object);
     object::Node* result = program->evaluate(extension);
     return result;
+}
+
+void Group::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    program->makeInstructions(instructions);
 }
 
 Array::Array()
@@ -480,6 +603,19 @@ object::Node* Array::evaluate(Environment& env) const
     return array;
 }
 
+void Array::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    for(std::vector<Expression*>::const_iterator itr = elements.begin();
+        itr != elements.end();
+        itr++)
+    {
+        (*itr)->makeInstructions(instructions);
+    }
+
+    instructions.push_back(new instruction::ConstructArray(elements.size()));
+}
+
 Boolean::Boolean()
     : value(false)
 {
@@ -498,6 +634,12 @@ std::string Boolean::toString() const
 object::Node* Boolean::evaluate(Environment& env) const
 {
     return new object::Boolean(value);
+}
+
+void Boolean::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    instructions.push_back(new instruction::Push(new object::Boolean(value)));
 }
 
 Number::Number()
@@ -534,6 +676,27 @@ object::Node* Number::evaluate(Environment& env) const
     }
 }
 
+void Number::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    bool isFloat = false;
+    for( size_t i = 0; i < text.size(); ++i)
+    {
+        if( text[i] == '.' )
+            isFloat = true;
+    }
+
+    if( isFloat )
+    {
+        instructions.push_back(new instruction::Push(new object::Double(text)));
+    }
+    else
+    {
+        instructions.push_back(new instruction::Push(new object::Integer(text)));
+    }
+}
+
+
 String::String()
 {
 }
@@ -551,6 +714,12 @@ std::string String::toString() const
 object::Node* String::evaluate(Environment& env) const
 {
     return new object::String(value);
+}
+
+void String::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    instructions.push_back(new instruction::Push(new object::String(value)));
 }
 
 Word::Word()
@@ -583,6 +752,14 @@ object::Node* Word::evaluate(Environment& env) const
     return result;
 }
 
+void Word::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    instructions.push_back(new instruction::Underscore);
+    instructions.push_back(new instruction::Push(new object::Member(name)));
+    instructions.push_back(new instruction::Operation("call"));
+}
+
 object::Node* Word::evaluateLast(Environment& env) const
 {
     return new object::Member(name);
@@ -591,6 +768,10 @@ object::Node* Word::evaluateLast(Environment& env) const
 object::Node* Expression::evaluateButLast(Environment& env) const
 {
     return env.getArgument();
+}
+
+void Expression::makeInstructionsButLast(std::vector<instruction::Instruction*>& instructions) const
+{
 }
 
 object::Node* Expression::evaluateLast(Environment& env) const
@@ -611,6 +792,12 @@ std::string Member::toString() const
 object::Node* Member::evaluate(Environment& env) const
 {
     return new object::Member(name);
+}
+
+void Member::makeInstructions(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    instructions.push_back(new instruction::Push(new object::Member(name)));
 }
 
 }
