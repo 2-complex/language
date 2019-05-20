@@ -21,7 +21,7 @@ std::string Underscore::toString() const
 
 std::string Disregard::toString() const
 {
-    return "x";
+    return "disregard";
 }
 
 Push::Push(object::Node* n)

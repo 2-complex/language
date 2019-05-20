@@ -121,11 +121,8 @@ object::Node* Program::evaluate(Environment& env) const
 
 void Program::makeInstructions(std::vector<instruction::Instruction*>& instructions) const
 {
-    instructions.push_back(new instruction::Underscore);
-
     for( std::vector<Line*>::const_iterator itr = lines.begin(); itr != lines.end(); ++itr )
     {
-        instructions.push_back(new instruction::Disregard);
         (*itr)->makeInstructions(instructions);
     }
 }
@@ -187,9 +184,10 @@ object::Node* Call::evaluateLast(Environment& env) const
 void Call::makeInstructions(
     std::vector<instruction::Instruction*>& instructions) const
 {
-    instructions.push_back(new instruction::Underscore);
+    expressions[0]->makeInstructions(instructions);
+
     size_t n = expressions.size();
-    for( size_t i = 0; i < n; i++ )
+    for( size_t i = 1; i < n; i++ )
     {
         expressions[i]->makeInstructions(instructions);
         instructions.push_back(new instruction::Operation("call"));
@@ -199,9 +197,10 @@ void Call::makeInstructions(
 void Call::makeInstructionsButLast(
     std::vector<instruction::Instruction*>& instructions) const
 {
-    instructions.push_back(new instruction::Underscore);
+    expressions[0]->makeInstructions(instructions);
+
     size_t n = expressions.size()-1;
-    for( size_t i = 0; i < n; i++ )
+    for( size_t i = 1; i < n; i++ )
     {
         expressions[i]->makeInstructions(instructions);
         instructions.push_back(new instruction::Operation("call"));
@@ -758,6 +757,13 @@ void Word::makeInstructions(
     instructions.push_back(new instruction::Underscore);
     instructions.push_back(new instruction::Push(new object::Member(name)));
     instructions.push_back(new instruction::Operation("call"));
+}
+
+void Word::makeInstructionsButLast(
+    std::vector<instruction::Instruction*>& instructions) const
+{
+    instructions.push_back(new instruction::Underscore);
+    instructions.push_back(new instruction::Push(new object::Member(name)));
 }
 
 object::Node* Word::evaluateLast(Environment& env) const

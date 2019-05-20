@@ -302,6 +302,7 @@ public:
     virtual object::Node* evaluate(Environment& env) const override;
     virtual object::Node* evaluateLast(Environment& env) const;
     virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructionsButLast(std::vector<instruction::Instruction*>& instructions) const override;
 };
 
 class Member : public Expression
