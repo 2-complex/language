@@ -568,7 +568,9 @@ object::Node* Group::evaluate(Environment& env) const
 void Group::makeInstructions(
     std::vector<instruction::Instruction*>& instructions) const
 {
+    instructions.push_back(new instruction::Begin("("));
     program->makeInstructions(instructions);
+    instructions.push_back(new instruction::End(")"));
 }
 
 Array::Array()

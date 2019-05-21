@@ -42,7 +42,7 @@ class Push : public Instruction
     object::Node* n;
 
 public:
-    Push(object::Node* n);
+    explicit Push(object::Node* n);
 
     virtual std::string toString() const;
 };
@@ -52,7 +52,7 @@ class Operation : public Instruction
     std::string op;
 
 public:
-    Operation(std::string op);
+    explicit Operation(const std::string& op);
     virtual std::string toString() const;
 };
 
@@ -74,6 +74,24 @@ class ConstructArray : public Instruction
 
 public:
     explicit ConstructArray(int size);
+    virtual std::string toString() const;
+};
+
+class Begin : public Instruction
+{
+    std::string op;
+
+public:
+    explicit Begin(const std::string& op);
+    virtual std::string toString() const;
+};
+
+class End : public Instruction
+{
+    std::string op;
+
+public:
+    explicit End(const std::string& op);
     virtual std::string toString() const;
 };
 

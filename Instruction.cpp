@@ -34,7 +34,7 @@ std::string Push::toString() const
     return n->toString();
 }
 
-Operation::Operation(std::string op)
+Operation::Operation(const std::string& op)
     : op(op)
 {
 }
@@ -62,6 +62,26 @@ ConstructArray::ConstructArray(int size)
 std::string ConstructArray::toString() const
 {
     return "array : " + std::to_string(size);
+}
+
+Begin::Begin(const std::string& op)
+    : op(op)
+{
+}
+
+std::string Begin::toString() const
+{
+    return op;
+}
+
+End::End(const std::string& op)
+    : op(op)
+{
+}
+
+std::string End::toString() const
+{
+    return op;
 }
 
 Jump::Jump(code::Program* program)
