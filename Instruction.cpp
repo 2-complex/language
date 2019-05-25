@@ -14,6 +14,20 @@ Instruction::~Instruction()
 {
 }
 
+std::string Procedure::toString() const
+{
+    std::string result;
+
+    for( std::vector< instruction::Instruction* >::const_iterator itr = instructions.begin();
+        itr != instructions.end();
+        itr++ )
+    {
+        result += (*itr)->toString() + "\n";
+    }
+
+    return result;
+}
+
 std::string Underscore::toString() const
 {
     return "_";
@@ -84,14 +98,14 @@ std::string End::toString() const
     return op;
 }
 
-Jump::Jump(code::Program* program)
-    : program(program)
+ConstructFunction::ConstructFunction(std::shared_ptr<instruction::Procedure> procedure)
+    : procedure(procedure)
 {
 }
 
-std::string Jump::toString() const
+std::string ConstructFunction::toString() const
 {
-    return program->toString();
+    return "PROCEDURE\n" + procedure->toString() + "END\n";
 }
 
 }

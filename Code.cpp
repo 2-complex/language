@@ -24,11 +24,11 @@ object::Node* Pair::evaluate(Environment& env) const
     return result;
 }
 
-void Pair::makeInstructions(std::vector<instruction::Instruction*>& instructions) const
+void Pair::makeInstructions(instruction::Procedure& procedure) const
 {
-    left->makeInstructions(instructions);
-    right->makeInstructions(instructions);
-    instructions.push_back(new instruction::Operation(":"));
+    left->makeInstructions(procedure);
+    right->makeInstructions(procedure);
+    procedure.instructions.push_back(new instruction::Operation(":"));
 }
 
 Assignment::Assignment()
@@ -88,11 +88,11 @@ object::Node* Assignment::evaluate(Environment& env) const
     return result;
 }
 
-void Assignment::makeInstructions(std::vector<instruction::Instruction*>& instructions) const
+void Assignment::makeInstructions(instruction::Procedure& procedure) const
 {
-    reference->makeInstructionsButLast(instructions);
-    expression->makeInstructions(instructions);
-    instructions.push_back(new instruction::Operation(operation));
+    reference->makeInstructionsButLast(procedure);
+    expression->makeInstructions(procedure);
+    procedure.instructions.push_back(new instruction::Operation(operation));
 }
 
 std::string Program::toString() const
@@ -119,11 +119,11 @@ object::Node* Program::evaluate(Environment& env) const
     return result;
 }
 
-void Program::makeInstructions(std::vector<instruction::Instruction*>& instructions) const
+void Program::makeInstructions(instruction::Procedure& procedure) const
 {
     for( std::vector<Line*>::const_iterator itr = lines.begin(); itr != lines.end(); ++itr )
     {
-        (*itr)->makeInstructions(instructions);
+        (*itr)->makeInstructions(procedure);
     }
 }
 
@@ -182,30 +182,30 @@ object::Node* Call::evaluateLast(Environment& env) const
 }
 
 void Call::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    expressions[0]->makeInstructions(instructions);
+    expressions[0]->makeInstructions(procedure);
 
     size_t n = expressions.size();
     for( size_t i = 1; i < n; i++ )
     {
-        expressions[i]->makeInstructions(instructions);
-        instructions.push_back(new instruction::Operation("call"));
+        expressions[i]->makeInstructions(procedure);
+        procedure.instructions.push_back(new instruction::Operation("call"));
     }
 }
 
 void Call::makeInstructionsButLast(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    expressions[0]->makeInstructions(instructions);
+    expressions[0]->makeInstructions(procedure);
 
     size_t n = expressions.size()-1;
     for( size_t i = 1; i < n; i++ )
     {
-        expressions[i]->makeInstructions(instructions);
-        instructions.push_back(new instruction::Operation("call"));
+        expressions[i]->makeInstructions(procedure);
+        procedure.instructions.push_back(new instruction::Operation("call"));
     }
-    expressions[n]->makeInstructions(instructions);
+    expressions[n]->makeInstructions(procedure);
 }
 
 AddedList::AddedList(Addable* first)
@@ -247,15 +247,15 @@ object::Node* AddedList::evaluate(Environment& env) const
 }
 
 void AddedList::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    operands[0]->makeInstructions(instructions);
+    operands[0]->makeInstructions(procedure);
 
     size_t n = ops.size();
     for( size_t i = 0; i < n; ++i )
     {
-        operands[i+1]->makeInstructions(instructions);
-        instructions.push_back(new instruction::Operation(ops[i]));
+        operands[i+1]->makeInstructions(procedure);
+        procedure.instructions.push_back(new instruction::Operation(ops[i]));
     }
 }
 
@@ -298,10 +298,10 @@ object::Node* Negative::evaluate(Environment& env) const
 }
 
 void Negative::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    operand->makeInstructions(instructions);
-    instructions.push_back(new instruction::Negative);
+    operand->makeInstructions(procedure);
+    procedure.instructions.push_back(new instruction::Negative);
 }
 
 Product::Product(Expression* first)
@@ -372,15 +372,15 @@ object::Node* Product::evaluate(Environment& env) const
 }
 
 void Product::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    operands[0]->makeInstructions(instructions);
+    operands[0]->makeInstructions(procedure);
 
     size_t n = ops.size();
     for( size_t i = 0; i < n; ++i )
     {
-        operands[i+1]->makeInstructions(instructions);
-        instructions.push_back(new instruction::Operation(ops[i]));
+        operands[i+1]->makeInstructions(procedure);
+        procedure.instructions.push_back(new instruction::Operation(ops[i]));
     }
 }
 
@@ -442,15 +442,15 @@ object::Node* Conjunction::evaluate(Environment& env) const
 }
 
 void Conjunction::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    operands[0]->makeInstructions(instructions);
+    operands[0]->makeInstructions(procedure);
 
     size_t n = ops.size();
     for( size_t i = 0; i < n; ++i )
     {
-        operands[i+1]->makeInstructions(instructions);
-        instructions.push_back(new instruction::Operation(ops[i]));
+        operands[i+1]->makeInstructions(procedure);
+        procedure.instructions.push_back(new instruction::Operation(ops[i]));
     }
 }
 
@@ -470,10 +470,10 @@ object::Node* Negation::evaluate(Environment& env) const
 }
 
 void Negation::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    operand->makeInstructions(instructions);
-    instructions.push_back(new instruction::Negation);
+    operand->makeInstructions(procedure);
+    procedure.instructions.push_back(new instruction::Negation);
 }
 
 Comparison::Comparison(
@@ -520,11 +520,11 @@ object::Node* Comparison::evaluate(Environment& env) const
 }
 
 void Comparison::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    left->makeInstructions(instructions);
-    right->makeInstructions(instructions);
-    instructions.push_back(new instruction::Operation(op));
+    left->makeInstructions(procedure);
+    right->makeInstructions(procedure);
+    procedure.instructions.push_back(new instruction::Operation(op));
 }
 
 Function::Function(Program* program)
@@ -543,9 +543,17 @@ object::Node* Function::evaluate(Environment& env) const
 }
 
 void Function::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    //not sure what to do here yet
+    instruction::Procedure* newProcedure =
+        new instruction::Procedure;
+
+    program->makeInstructions(*newProcedure);
+
+    instruction::ConstructFunction* constructFunction =
+        new instruction::ConstructFunction(std::shared_ptr<instruction::Procedure>(newProcedure));
+
+    procedure.instructions.push_back(constructFunction);
 }
 
 Group::Group(Program* program)
@@ -566,11 +574,11 @@ object::Node* Group::evaluate(Environment& env) const
 }
 
 void Group::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    instructions.push_back(new instruction::Begin("("));
-    program->makeInstructions(instructions);
-    instructions.push_back(new instruction::End(")"));
+    procedure.instructions.push_back(new instruction::Begin("("));
+    program->makeInstructions(procedure);
+    procedure.instructions.push_back(new instruction::End(")"));
 }
 
 Array::Array()
@@ -605,16 +613,16 @@ object::Node* Array::evaluate(Environment& env) const
 }
 
 void Array::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
     for(std::vector<Expression*>::const_iterator itr = elements.begin();
         itr != elements.end();
         itr++)
     {
-        (*itr)->makeInstructions(instructions);
+        (*itr)->makeInstructions(procedure);
     }
 
-    instructions.push_back(new instruction::ConstructArray(elements.size()));
+    procedure.instructions.push_back(new instruction::ConstructArray(elements.size()));
 }
 
 Boolean::Boolean()
@@ -638,9 +646,9 @@ object::Node* Boolean::evaluate(Environment& env) const
 }
 
 void Boolean::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    instructions.push_back(new instruction::Push(new object::Boolean(value)));
+    procedure.instructions.push_back(new instruction::Push(new object::Boolean(value)));
 }
 
 Number::Number()
@@ -678,7 +686,7 @@ object::Node* Number::evaluate(Environment& env) const
 }
 
 void Number::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
     bool isFloat = false;
     for( size_t i = 0; i < text.size(); ++i)
@@ -689,11 +697,11 @@ void Number::makeInstructions(
 
     if( isFloat )
     {
-        instructions.push_back(new instruction::Push(new object::Double(text)));
+        procedure.instructions.push_back(new instruction::Push(new object::Double(text)));
     }
     else
     {
-        instructions.push_back(new instruction::Push(new object::Integer(text)));
+        procedure.instructions.push_back(new instruction::Push(new object::Integer(text)));
     }
 }
 
@@ -718,9 +726,9 @@ object::Node* String::evaluate(Environment& env) const
 }
 
 void String::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    instructions.push_back(new instruction::Push(new object::String(value)));
+    procedure.instructions.push_back(new instruction::Push(new object::String(value)));
 }
 
 Word::Word()
@@ -754,18 +762,18 @@ object::Node* Word::evaluate(Environment& env) const
 }
 
 void Word::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    instructions.push_back(new instruction::Underscore);
-    instructions.push_back(new instruction::Push(new object::Member(name)));
-    instructions.push_back(new instruction::Operation("call"));
+    procedure.instructions.push_back(new instruction::Underscore);
+    procedure.instructions.push_back(new instruction::Push(new object::Member(name)));
+    procedure.instructions.push_back(new instruction::Operation("call"));
 }
 
 void Word::makeInstructionsButLast(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    instructions.push_back(new instruction::Underscore);
-    instructions.push_back(new instruction::Push(new object::Member(name)));
+    procedure.instructions.push_back(new instruction::Underscore);
+    procedure.instructions.push_back(new instruction::Push(new object::Member(name)));
 }
 
 object::Node* Word::evaluateLast(Environment& env) const
@@ -778,7 +786,8 @@ object::Node* Expression::evaluateButLast(Environment& env) const
     return env.getArgument();
 }
 
-void Expression::makeInstructionsButLast(std::vector<instruction::Instruction*>& instructions) const
+void Expression::makeInstructionsButLast(
+    instruction::Procedure& procedure) const
 {
 }
 
@@ -803,9 +812,9 @@ object::Node* Member::evaluate(Environment& env) const
 }
 
 void Member::makeInstructions(
-    std::vector<instruction::Instruction*>& instructions) const
+    instruction::Procedure& procedure) const
 {
-    instructions.push_back(new instruction::Push(new object::Member(name)));
+    procedure.instructions.push_back(new instruction::Push(new object::Member(name)));
 }
 
 }

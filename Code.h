@@ -21,7 +21,7 @@ class Code
 public:
     virtual std::string toString() const = 0;
     virtual object::Node* evaluate(Environment& env) const = 0;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const = 0;
+    virtual void makeInstructions(instruction::Procedure& procedure) const = 0;
 };
 
 class Line : public Code
@@ -42,7 +42,7 @@ class Expression : public Line
 public:
     virtual object::Node* evaluateButLast(Environment& env) const;
     virtual object::Node* evaluateLast(Environment& env) const;
-    virtual void makeInstructionsButLast(std::vector<instruction::Instruction*>& instructions) const;
+    virtual void makeInstructionsButLast(instruction::Procedure& procedure) const;
 };
 
 /*! A Pair is an element of a Group (object literal) i.e.
@@ -64,7 +64,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 /*! Assignment is a piece of code that assigns a value to a variable
@@ -89,7 +89,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const  override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const  override;
 };
 
 /*! A Program is a list of lines of code.  This can be the contents of a function,
@@ -103,7 +103,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const  override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const  override;
 };
 
 class Comparable : public Code
@@ -132,8 +132,8 @@ public:
     virtual object::Node* evaluateButLast(Environment& env) const override;
     virtual object::Node* evaluateLast(Environment& env) const override;
 
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
-    virtual void makeInstructionsButLast(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
+    virtual void makeInstructionsButLast(instruction::Procedure& procedure) const override;
 };
 
 class AddedList : public Code
@@ -148,7 +148,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 class Negative : public Code
@@ -161,7 +161,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 class Product : public Code
@@ -176,7 +176,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 class Conjunction : public Code
@@ -191,7 +191,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 class Negation : public Code
@@ -203,7 +203,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 class Comparison : public Logicable
@@ -221,19 +221,20 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 class Function : public Expression
 {
 private:
     Program* program;
+    mutable std::vector<instruction::Instruction*> procedure;
 
 public:
     Function(Program* program);
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 class Group : public Expression
@@ -246,7 +247,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 class Array : public Addable
@@ -256,7 +257,7 @@ public:
     std::vector<Expression*> elements;
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 class Number
@@ -271,7 +272,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 class Boolean : public Logicable
@@ -285,7 +286,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 class Word
@@ -301,8 +302,8 @@ public:
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
     virtual object::Node* evaluateLast(Environment& env) const;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
-    virtual void makeInstructionsButLast(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
+    virtual void makeInstructionsButLast(instruction::Procedure& procedure) const override;
 };
 
 class Member : public Expression
@@ -314,7 +315,7 @@ public:
     Member(const std::string& text);
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 class String : public Addable
@@ -327,7 +328,7 @@ public:
     String(const std::string& text);
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual void makeInstructions(std::vector<instruction::Instruction*>& instructions) const override;
+    virtual void makeInstructions(instruction::Procedure& procedure) const override;
 };
 
 }

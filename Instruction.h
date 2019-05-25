@@ -1,6 +1,8 @@
 #ifndef _Instruction_
 #define _Instruction_
 
+#include <memory>
+#include <vector>
 #include <string>
 
 namespace object
@@ -23,6 +25,14 @@ public:
     virtual ~Instruction();
 
     virtual std::string toString() const = 0;
+};
+
+class Procedure
+{
+public:
+    std::vector<Instruction*> instructions;
+
+    virtual std::string toString() const;
 };
 
 class Underscore : public Instruction
@@ -95,12 +105,12 @@ public:
     virtual std::string toString() const;
 };
 
-class Jump : public Instruction
+class ConstructFunction : public Instruction
 {
-    code::Program* program;
+    std::shared_ptr<Procedure> procedure;
 
 public:
-    Jump(code::Program* program);
+    ConstructFunction(std::shared_ptr<Procedure> procedure);
     virtual std::string toString() const;
 };
 

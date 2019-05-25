@@ -309,17 +309,9 @@ int main(int argc, const char* argv[])
                     MainVisitor vistor;
                     HType a = vistor.visit(tree);
 
-                    std::vector< instruction::Instruction* > instructions;
-
-                    a.code->makeInstructions(instructions);
-
-                    for( std::vector< instruction::Instruction* >::iterator itr = instructions.begin();
-                        itr != instructions.end();
-                        itr++ )
-                    {
-                        printf( "%s\n", (*itr)->toString().c_str() );
-                    }
-                    printf("\n");
+                    instruction::Procedure procedure;
+                    a.code->makeInstructions(procedure);
+                    printf( "%s\n", procedure.toString().c_str());
 
                     linenoiseHistoryAdd(line);
                     linenoiseHistorySave("history.txt");
