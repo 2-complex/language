@@ -33,9 +33,8 @@ std::string Underscore::toString() const
     return "_";
 }
 
-std::string Disregard::toString() const
+void Underscore::execute(Machine& machine) const
 {
-    return "disregard";
 }
 
 Push::Push(object::Node* n)
@@ -48,14 +47,45 @@ std::string Push::toString() const
     return n->toString();
 }
 
-Operation::Operation(const std::string& op)
-    : op(op)
+void Push::execute(Machine& machine) const
+{
+}
+
+Operation::Operation(const std::string& name)
+    : name(name)
 {
 }
 
 std::string Operation::toString() const
 {
-    return std::string(op);
+    return name;
+}
+
+void Operation::execute(Machine& machine) const
+{
+}
+
+OperationAndAssign::OperationAndAssign(const std::string& name)
+    : name(name)
+{
+}
+
+std::string OperationAndAssign::toString() const
+{
+    return name;
+}
+
+void OperationAndAssign::execute(Machine& machine) const
+{
+}
+
+std::string Assign::toString() const
+{
+    return "=";
+}
+
+void Assign::execute(Machine& machine) const
+{
 }
 
 std::string Negative::toString() const
@@ -63,10 +93,19 @@ std::string Negative::toString() const
     return "neg";
 }
 
+void Negative::execute(Machine& machine) const
+{
+}
+
 std::string Negation::toString() const
 {
     return "not";
 }
+
+void Negation::execute(Machine& machine) const
+{
+}
+
 
 ConstructArray::ConstructArray(int size)
     : size(size)
@@ -78,24 +117,26 @@ std::string ConstructArray::toString() const
     return "array : " + std::to_string(size);
 }
 
-Begin::Begin(const std::string& op)
-    : op(op)
+void ConstructArray::execute(Machine& machine) const
 {
 }
 
 std::string Begin::toString() const
 {
-    return op;
+    return "(";
 }
 
-End::End(const std::string& op)
-    : op(op)
+void Begin::execute(Machine& machine) const
 {
 }
 
 std::string End::toString() const
 {
-    return op;
+    return ")";
+}
+
+void End::execute(Machine& machine) const
+{
 }
 
 ConstructFunction::ConstructFunction(std::shared_ptr<instruction::Procedure> procedure)
@@ -106,6 +147,41 @@ ConstructFunction::ConstructFunction(std::shared_ptr<instruction::Procedure> pro
 std::string ConstructFunction::toString() const
 {
     return "PROCEDURE\n" + procedure->toString() + "END\n";
+}
+
+void ConstructFunction::execute(Machine& machine) const
+{
+}
+
+Location::Location(std::shared_ptr<Procedure>& procedure, size_t index)
+    : procedure(procedure)
+    , index(index)
+{
+}
+
+Machine::Machine(const Location& startingLocation)
+    : location(startingLocation)
+{
+}
+
+Universe::Universe(Machine& machine)
+    : machine(machine)
+{
+}
+
+object::Node* Universe::setMapping(object::Node* key, object::Node* value)
+{
+    return nullptr;
+}
+
+object::Node* Universe::getMapping(object::Node* key)
+{
+    return nullptr;
+}
+
+std::string Universe::toString() const
+{
+    return "UNIVERSE";
 }
 
 }

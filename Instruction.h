@@ -1,14 +1,13 @@
 #ifndef _Instruction_
 #define _Instruction_
 
+#include "objects.h"
+
 #include <memory>
 #include <vector>
 #include <string>
-
-namespace object
-{
-    class Node;
-};
+#include <stack>
+#include <functional>
 
 namespace code
 {
@@ -18,6 +17,8 @@ namespace code
 namespace instruction
 {
 
+class Machine;
+
 class Instruction
 {
 public:
@@ -25,6 +26,7 @@ public:
     virtual ~Instruction();
 
     virtual std::string toString() const = 0;
+    virtual void execute(Machine& machine) const = 0;
 };
 
 class Procedure
@@ -35,16 +37,43 @@ public:
     virtual std::string toString() const;
 };
 
+class Location
+{
+    Location(
+        std::shared_ptr<Procedure>& procedure,
+        size_t index);
+
+public:
+    std::shared_ptr<Procedure> procedure;
+    size_t index;
+};
+
+class MemoryFrame
+{
+public:
+    std::shared_ptr<object::Object> obj;
+    std::shared_ptr<class MemoryFrame> next;
+};
+
+class Machine
+{
+public:
+    explicit Machine(const Location& startingLocation);
+
+    Location location;
+
+    std::stack<std::shared_ptr<object::Node>> temp;
+    std::stack<Location> call;
+    std::shared_ptr<MemoryFrame> memory;
+
+    bool step();
+};
+
 class Underscore : public Instruction
 {
 public:
     virtual std::string toString() const;
-};
-
-class Disregard : public Instruction
-{
-public:
-    virtual std::string toString() const;
+    virtual void execute(Machine& machine) const;
 };
 
 class Push : public Instruction
@@ -55,27 +84,54 @@ public:
     explicit Push(object::Node* n);
 
     virtual std::string toString() const;
+    virtual void execute(Machine& machine) const;
 };
+
+typedef
+    std::function<object::Node*(const object::Node* a, const object::Node* b)>
+    OperationFunction;
 
 class Operation : public Instruction
 {
-    std::string op;
+    OperationFunction op;
+    std::string name;
 
 public:
-    explicit Operation(const std::string& op);
+    explicit Operation(const std::string& opName);
     virtual std::string toString() const;
+    virtual void execute(Machine& machine) const;
+};
+
+class OperationAndAssign : public Instruction
+{
+    OperationFunction op;
+    std::string name;
+
+public:
+    explicit OperationAndAssign(const std::string& opName);
+    virtual std::string toString() const;
+    virtual void execute(Machine& machine) const;
+};
+
+class Assign : public Instruction
+{
+public:
+    virtual std::string toString() const;
+    virtual void execute(Machine& machine) const;
 };
 
 class Negative : public Instruction
 {
 public:
     virtual std::string toString() const;
+    virtual void execute(Machine& machine) const;
 };
 
 class Negation : public Instruction
 {
 public:
     virtual std::string toString() const;
+    virtual void execute(Machine& machine) const;
 };
 
 class ConstructArray : public Instruction
@@ -85,24 +141,21 @@ class ConstructArray : public Instruction
 public:
     explicit ConstructArray(int size);
     virtual std::string toString() const;
+    virtual void execute(Machine& machine) const;
 };
 
 class Begin : public Instruction
 {
-    std::string op;
-
 public:
-    explicit Begin(const std::string& op);
     virtual std::string toString() const;
+    virtual void execute(Machine& machine) const;
 };
 
 class End : public Instruction
 {
-    std::string op;
-
 public:
-    explicit End(const std::string& op);
     virtual std::string toString() const;
+    virtual void execute(Machine& machine) const;
 };
 
 class ConstructFunction : public Instruction
@@ -112,6 +165,20 @@ class ConstructFunction : public Instruction
 public:
     ConstructFunction(std::shared_ptr<Procedure> procedure);
     virtual std::string toString() const;
+    virtual void execute(Machine& machine) const;
+};
+
+class Universe : public object::Object
+{
+    Machine& machine;
+
+public:
+    explicit Universe(Machine& machine);
+
+    virtual object::Node* setMapping(object::Node* key, object::Node* value);
+    virtual object::Node* getMapping(object::Node* key);
+
+    virtual std::string toString() const override;
 };
 
 }

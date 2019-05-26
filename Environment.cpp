@@ -8,29 +8,21 @@
 Environment::Environment(object::Object* argument)
 {
     chain.push_back(argument);
-    argument->retain();
 }
 
 Environment::Environment(Environment& parent, object::Object* argument)
     : chain(parent.chain)
 {
     chain.push_back(argument);
-
-    for( object::Node* c : chain )
-        c->retain();
 }
 
 Environment::Environment(const Environment& env)
     : chain(env.chain)
 {
-    for( object::Node* c : chain )
-        c->retain();
 }
 
 Environment::~Environment()
 {
-    for( object::Node* c : chain )
-        c->release();
 }
 
 std::string Environment::toString() const

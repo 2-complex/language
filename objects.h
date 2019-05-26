@@ -305,11 +305,6 @@ public:
     Node();
     virtual ~Node();
 
-    mutable int refCount;
-
-    void retain();
-    void release();
-
     virtual std::string toString() const = 0;
     virtual std::string mappingToString(Node* node) const;
 
@@ -463,6 +458,21 @@ public:
     virtual Node* back_GreaterThanOrEqualTo(Function*) = 0;
 };
 
+Node* fAnd(Node* a, Node* b);
+Node* fOr(Node* a, Node* b);
+Node* fPlus(Node* a, Node* b);
+Node* fMinus(Node* a, Node* b);
+Node* fTimes(Node* a, Node* b);
+Node* fDividedBy(Node* a, Node* b);
+Node* fMod(Node* a, Node* b);
+Node* fCall(Node* a, Node* b);
+Node* fEquals(Node* a, Node* b);
+Node* fNotEquals(Node* a, Node* b);
+Node* fLessThan(Node* a, Node* b);
+Node* fGreaterThan(Node* a, Node* b);
+Node* fLessThanOrEqualTo(Node* a, Node* b);
+Node* fGreaterThanOrEqualTo(Node* a, Node* b);
+
 class Error : public Node
 {
     std::string message;
@@ -576,11 +586,7 @@ DEFINITIONS
 
 class Function : public Node
 {
-    code::Program* program;
-    Environment environment;
-
 public:
-    Function(Environment& environment, code::Program* program);
     std::string getValue();
 
     virtual std::string toString() const override;

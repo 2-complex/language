@@ -272,10 +272,7 @@ int main(int argc, const char* argv[])
                 MainVisitor vistor;
                 HType a = vistor.visit(tree);
 
-                object::Node* answer = a.code->evaluate(environment);
-
-                printf( "%s\n\n", answer->toString().c_str() );
-                answer->release();
+                /*a.code*/
             }
         }
         catch(std::exception)
