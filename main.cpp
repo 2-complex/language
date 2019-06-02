@@ -303,8 +303,9 @@ int main(int argc, const char* argv[])
                     std::shared_ptr<instruction::Procedure> procedure(new instruction::Procedure);
                     a.code->makeInstructions(*procedure);
 
-                    instruction::Machine m(instruction::Location(procedure, 0));
+                    printf( "procedure:\n%s", procedure->toString().c_str() );
 
+                    instruction::Machine m(instruction::Location(procedure, 0));
 
                     while(m.step());
 
@@ -317,9 +318,9 @@ int main(int argc, const char* argv[])
                     linenoiseHistorySave("history.txt");
                 }
             }
-            catch(std::exception)
+            catch(std::exception& e)
             {
-                printf("PARSE ERROR\n\n");
+                printf("EXCEPTION CAUGHT AT TOP LEVEL %s\n\n", e.what());
                 continue;
             }
 

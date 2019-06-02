@@ -90,7 +90,8 @@ public:
     std::string toString() const;
 
     bool step();
-    const object::Node* top();
+    void popTemp();
+    object::Node* top() const;
 };
 
 class Underscore : public Instruction
@@ -197,19 +198,6 @@ public:
     ConstructFunction(std::shared_ptr<Procedure> procedure);
     virtual std::string toString() const;
     virtual void execute(Machine& machine);
-};
-
-class Universe : public object::Object
-{
-    Machine& machine;
-
-public:
-    explicit Universe(Machine& machine);
-
-    virtual object::Node* setMapping(object::Node* key, object::Node* value);
-    virtual object::Node* getMapping(object::Node* key);
-
-    virtual std::string toString() const override;
 };
 
 }

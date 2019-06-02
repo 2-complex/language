@@ -309,8 +309,9 @@ public:
 
     virtual bool isTrue();
     virtual bool isError() const;
-    virtual object::Node* setMapping(object::Node* key, object::Node* value);
-    virtual object::Node* getMapping(object::Node* key);
+
+    virtual void setMapping(std::shared_ptr<object::Node> key, std::shared_ptr<object::Node> value);
+    virtual std::shared_ptr<object::Node> getMapping(std::shared_ptr<object::Node> key);
 
     virtual Node* Negation() = 0;
     virtual Node* Negative() = 0;
@@ -545,9 +546,9 @@ DEFINITIONS
 class Key
 {
 public:
-    Node* node;
+    std::shared_ptr<Node> node;
     Key();
-    Key(Node* node);
+    Key(std::shared_ptr<Node> node);
 
     bool operator == (const class Key& other) const;
     bool operator < (const class Key& other) const;
@@ -560,7 +561,7 @@ class Array : public Node
     std::vector<Key> value;
 public:
     const std::vector<Key>& getValue();
-    void append(Node*);
+    void append(std::shared_ptr<Node> node);
 
     virtual std::string toString() const override;
 DEFINITIONS
@@ -576,8 +577,8 @@ public:
 
     std::map<Key, Key> getValue();
 
-    virtual object::Node* setMapping(object::Node* key, object::Node* value);
-    virtual object::Node* getMapping(object::Node* key);
+    virtual void setMapping(std::shared_ptr<object::Node> key, std::shared_ptr<object::Node> value);
+    virtual std::shared_ptr<object::Node> getMapping(std::shared_ptr<object::Node> key);
 
     virtual std::string toString() const override;
 DEFINITIONS

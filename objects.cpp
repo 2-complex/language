@@ -42,15 +42,20 @@ std::string Node::mappingToString(Node* node) const
     return toString() + ":" + node->toString();
 }
 
-object::Node* Node::setMapping(object::Node* key, object::Node* value)
+void Node::setMapping(
+    std::shared_ptr<Node> key,
+    std::shared_ptr<Node> value)
 {
-    return new Error("Attempt to set member "
+    /*
+    error("Attempt to set member "
         + key->toString()
         + " on non-object: "
         + toString());
+        */
 }
 
-object::Node* Node::getMapping(object::Node* key)
+std::shared_ptr<object::Node> Node::getMapping(
+    std::shared_ptr<Node> key)
 {
     return NULL;
 }
@@ -481,7 +486,7 @@ std::string Array::toString() const
     return result;
 }
 
-void Array::append(Node* node)
+void Array::append(std::shared_ptr<Node> node)
 {
     value.push_back(node);
 }
@@ -542,26 +547,29 @@ Node* Array::And(Function* _)
 }
 
 Key::Key()
-    : node(NULL)
 {
 }
 
-Key::Key(Node* node)
+Key::Key(std::shared_ptr<Node> node)
     : node(node)
 {
 }
 
 bool Key::operator == (const class Key& other) const
 {
-    Node* temp = node->Equals(other.node);
+    Node* temp = node->Equals(other.node.get());
     bool result = temp->isTrue();
+    delete temp;
+
     return result;
 }
 
 bool Key::operator < (const class Key& other) const
 {
-    Node* temp = node->LessThan(other.node);
+    Node* temp = node->LessThan(other.node.get());
     bool result = temp->isTrue();
+    delete temp;
+
     return result;
 }
 
@@ -583,19 +591,11 @@ std::map<Key, Key> Object::getValue()
     return mappings;
 }
 
-object::Node* Object::setMapping(Node* index, Node* value)
+void Object::setMapping(
+    std::shared_ptr<Node> index,
+    std::shared_ptr<Node> value)
 {
     Key key(index);
-
-    if( index->isError() )
-    {
-        return index;
-    }
-
-    if( value->isError() )
-    {
-        return value;
-    }
 
     auto itr = mappings.find(key);
     if (itr == mappings.end())
@@ -606,11 +606,10 @@ object::Node* Object::setMapping(Node* index, Node* value)
     {
         itr->second = value;
     }
-
-    return this;
 }
 
-Node* Object::getMapping(Node* index)
+std::shared_ptr<object::Node> Object::getMapping(
+    std::shared_ptr<Node> index)
 {
     Key key(index);
     auto itr = mappings.find(key);
@@ -628,7 +627,7 @@ std::string Object::toString() const
 
     for( auto itr = mappings.begin(); itr != mappings.end(); itr++ )
     {
-        result += itr->first.node->mappingToString(itr->second.node);
+        result += itr->first.node->mappingToString(itr->second.node.get());
         result += ",";
     }
 
@@ -3518,7 +3517,7 @@ Node* Array::Call(Integer* _)
     if( _->getValue() < 0 || _->getValue() >= value.size() )
         return new Error("Array index out of bounds");
 
-    return value[_->getValue().toSizeT()].node;
+    return value[_->getValue().toSizeT()].node.get();
 }
 
 Node* Array::Call(Double* _)
@@ -3553,82 +3552,50 @@ Node* Object::Call(Error* _)
 
 Node* Object::Call(Member* _)
 {
-    Node* result = getMapping(_);
-    if( ! result )
-    {
-        return new Error("Attempt to access non-existant member " + _->getValue());
-    }
-    return result;
+    // We don't use this anymore
+    return nullptr;
 }
 
 Node* Object::Call(Boolean* _)
 {
-    Node* result = getMapping(_);
-    if( ! result )
-    {
-        return new Object;
-    }
-    return result;
+    // We don't use this anymore
+    return nullptr;
 }
 
 Node* Object::Call(Integer* _)
 {
-    Node* result = getMapping(_);
-    if( ! result )
-    {
-        return new Object;
-    }
-    return result;
+    // We don't use this anymore
+    return nullptr;
 }
 
 Node* Object::Call(Double* _)
 {
-    Node* result = getMapping(_);
-    if( ! result )
-    {
-        return new Object;
-    }
-    return result;
+    // We don't use this anymore
+    return nullptr;
 }
 
 Node* Object::Call(String* _)
 {
-    Node* result = getMapping(_);
-    if( ! result )
-    {
-        return new Object;
-    }
-    return result;
+    // We don't use this anymore
+    return nullptr;
 }
 
 Node* Object::Call(Array* _)
 {
-    Node* result = getMapping(_);
-    if( ! result )
-    {
-        return new Object;
-    }
-    return result;
+    // We don't use this anymore
+    return nullptr;
 }
 
 Node* Object::Call(Object* _)
 {
-    Node* result = getMapping(_);
-    if( ! result )
-    {
-        return new Object;
-    }
-    return result;
+    // We don't use this anymore
+    return nullptr;
 }
 
 Node* Object::Call(Function* _)
 {
-    Node* result = getMapping(_);
-    if( ! result )
-    {
-        return new Object;
-    }
-    return result;
+    // We don't use this anymore
+    return nullptr;
 }
 
 Node* Function::Call(Error* _)

@@ -110,7 +110,7 @@ void Call::makeInstructionsButLast(
     for( size_t i = 1; i < n; i++ )
     {
         expressions[i]->makeInstructions(procedure);
-        procedure.instructions.push_back(new instruction::Operation("call"));
+        procedure.instructions.push_back(new instruction::Call);
     }
     expressions[n]->makeInstructions(procedure);
 }
@@ -456,7 +456,7 @@ void Word::makeInstructions(
 {
     procedure.instructions.push_back(new instruction::Underscore);
     procedure.instructions.push_back(new instruction::Push(std::shared_ptr<object::Node>(new object::Member(name))));
-    procedure.instructions.push_back(new instruction::Operation("call"));
+    procedure.instructions.push_back(new instruction::Call);
 }
 
 void Word::makeInstructionsButLast(

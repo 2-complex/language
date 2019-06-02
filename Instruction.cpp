@@ -71,6 +71,7 @@ std::string Underscore::toString() const
 
 void Underscore::execute(Machine& machine)
 {
+    machine.temp = new TempFrame(machine.mem->obj, machine.temp);
     ++machine.location.index;
 }
 
@@ -129,10 +130,7 @@ void Operation::execute(Machine& machine)
         machine.temp->node.get()
     );
 
-    TempFrame* b = machine.temp;
-    machine.temp = machine.temp->next;
-    delete b;
-
+    machine.popTemp();
     machine.temp->node.reset(newNode);
 
     ++machine.location.index;
@@ -150,7 +148,6 @@ std::string OperationAndAssign::toString() const
 
 void OperationAndAssign::execute(Machine& machine)
 {
-
     ++machine.location.index;
 }
 
@@ -161,6 +158,11 @@ std::string Assign::toString() const
 
 void Assign::execute(Machine& machine)
 {
+    machine.temp->next->next->node->setMapping(
+        machine.temp->next->node, machine.temp->node);
+
+    machine.popTemp();
+    machine.popTemp();
 
     ++machine.location.index;
 }
@@ -172,6 +174,11 @@ std::string Call::toString() const
 
 void Call::execute(Machine& machine)
 {
+    std::shared_ptr<object::Node> source = machine.temp->next->node;
+    std::shared_ptr<object::Node> index = machine.temp->node;
+    machine.popTemp();
+    machine.temp->node = source->getMapping(index);
+    ++machine.location.index;
 }
 
 std::string Negative::toString() const
@@ -220,6 +227,11 @@ std::string Begin::toString() const
 
 void Begin::execute(Machine& machine)
 {
+    std::shared_ptr<object::Object> newObjectPtr = std::shared_ptr<object::Object>(
+        new object::Object);
+
+    machine.mem = std::shared_ptr<MemoryFrame>(
+        new MemoryFrame(newObjectPtr, machine.mem));
 
     ++machine.location.index;
 }
@@ -231,6 +243,7 @@ std::string End::toString() const
 
 void End::execute(Machine& machine)
 {
+    machine.mem = machine.mem->next;
 
     ++machine.location.index;
 }
@@ -262,19 +275,36 @@ Machine::Machine(const Location& startingLocation)
     , temp(nullptr)
     , ret(nullptr)
 {
+    mem.reset(new MemoryFrame(
+        std::shared_ptr<object::Object>(
+            new object::Object),
+            nullptr));
 }
 
 bool Machine::step()
 {
+    printf( "exectue: %s\n", location.procedure->instructions[location.index]->toString().c_str() );
     location.procedure->instructions[location.index]->execute(*this);
-    //printf( "%s", toString().c_str() );
+    printf( "%s", toString().c_str() );
 
     return location.index < location.procedure->instructions.size();
 }
 
-const object::Node* Machine::top()
+void Machine::popTemp()
 {
-    return temp->node.get();
+    TempFrame* b = temp;
+    temp = temp->next;
+    delete b;
+}
+
+object::Node* Machine::top() const
+{
+    if( temp )
+    {
+        return temp->node.get();
+    }
+
+    return nullptr;
 }
 
 std::string Machine::toString() const
@@ -287,26 +317,6 @@ std::string Machine::toString() const
     }
 
     return result;
-}
-
-Universe::Universe(Machine& machine)
-    : machine(machine)
-{
-}
-
-object::Node* Universe::setMapping(object::Node* key, object::Node* value)
-{
-    return nullptr;
-}
-
-object::Node* Universe::getMapping(object::Node* key)
-{
-    return nullptr;
-}
-
-std::string Universe::toString() const
-{
-    return "UNIVERSE";
 }
 
 }
