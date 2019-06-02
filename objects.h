@@ -1,7 +1,6 @@
 #ifndef _objects_
 #define _objects_
 
-#include "Environment.h"
 #include "BigInteger.h"
 
 #include <string>

@@ -255,9 +255,6 @@ int main(int argc, const char* argv[])
     {
         stream.open(argv[1]);
 
-        object::Object* obj = new object::Object;
-        Environment environment(obj);
-
         try
         {
             ANTLRInputStream input(stream);
@@ -284,9 +281,6 @@ int main(int argc, const char* argv[])
     }
     else if(argc == 1)
     {
-        object::Object* obj = new object::Object;
-        Environment environment(obj);
-
         linenoiseHistoryLoad("history.txt");
         while(char* line = linenoise("> "))
         {
@@ -306,9 +300,18 @@ int main(int argc, const char* argv[])
                     MainVisitor vistor;
                     HType a = vistor.visit(tree);
 
-                    instruction::Procedure procedure;
-                    a.code->makeInstructions(procedure);
-                    printf( "%s\n", procedure.toString().c_str());
+                    std::shared_ptr<instruction::Procedure> procedure(new instruction::Procedure);
+                    a.code->makeInstructions(*procedure);
+
+                    instruction::Machine m(instruction::Location(procedure, 0));
+
+
+                    while(m.step());
+
+                    if( m.top() )
+                    {
+                        printf( "%s\n", m.top()->toString().c_str());
+                    }
 
                     linenoiseHistoryAdd(line);
                     linenoiseHistorySave("history.txt");

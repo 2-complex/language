@@ -1,7 +1,6 @@
 #include "Code.h"
 
 #include "objects.h"
-#include "Environment.h"
 
 #include <stdlib.h>
 
@@ -98,7 +97,7 @@ void Call::makeInstructions(
     for( size_t i = 1; i < n; i++ )
     {
         expressions[i]->makeInstructions(procedure);
-        procedure.instructions.push_back(new instruction::Operation("call"));
+        procedure.instructions.push_back(new instruction::Call);
     }
 }
 
@@ -378,7 +377,8 @@ std::string Boolean::toString() const
 void Boolean::makeInstructions(
     instruction::Procedure& procedure) const
 {
-    procedure.instructions.push_back(new instruction::Push(new object::Boolean(value)));
+    procedure.instructions.push_back(new instruction::Push(
+        std::shared_ptr<object::Node>(new object::Boolean(value))));
 }
 
 Number::Number()
@@ -408,11 +408,11 @@ void Number::makeInstructions(
 
     if( isFloat )
     {
-        procedure.instructions.push_back(new instruction::Push(new object::Double(text)));
+        procedure.instructions.push_back(new instruction::Push(std::shared_ptr<object::Node>(new object::Double(text))));
     }
     else
     {
-        procedure.instructions.push_back(new instruction::Push(new object::Integer(text)));
+        procedure.instructions.push_back(new instruction::Push(std::shared_ptr<object::Node>(new object::Integer(text))));
     }
 }
 
@@ -434,7 +434,7 @@ std::string String::toString() const
 void String::makeInstructions(
     instruction::Procedure& procedure) const
 {
-    procedure.instructions.push_back(new instruction::Push(new object::String(value)));
+    procedure.instructions.push_back(new instruction::Push(std::shared_ptr<object::Node>(new object::String(value))));
 }
 
 Word::Word()
@@ -455,7 +455,7 @@ void Word::makeInstructions(
     instruction::Procedure& procedure) const
 {
     procedure.instructions.push_back(new instruction::Underscore);
-    procedure.instructions.push_back(new instruction::Push(new object::Member(name)));
+    procedure.instructions.push_back(new instruction::Push(std::shared_ptr<object::Node>(new object::Member(name))));
     procedure.instructions.push_back(new instruction::Operation("call"));
 }
 
@@ -463,7 +463,7 @@ void Word::makeInstructionsButLast(
     instruction::Procedure& procedure) const
 {
     procedure.instructions.push_back(new instruction::Underscore);
-    procedure.instructions.push_back(new instruction::Push(new object::Member(name)));
+    procedure.instructions.push_back(new instruction::Push(std::shared_ptr<object::Node>(new object::Member(name))));
 }
 
 void Expression::makeInstructionsButLast(
@@ -484,7 +484,7 @@ std::string Member::toString() const
 void Member::makeInstructions(
     instruction::Procedure& procedure) const
 {
-    procedure.instructions.push_back(new instruction::Push(new object::Member(name)));
+    procedure.instructions.push_back(new instruction::Push(std::shared_ptr<object::Node>(new object::Member(name))));
 }
 
 }

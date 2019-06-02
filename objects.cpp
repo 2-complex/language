@@ -12,7 +12,6 @@ Node* fMinus(Node* a, Node* b) { return a->Minus(b); }
 Node* fTimes(Node* a, Node* b) { return a->Times(b); }
 Node* fDividedBy(Node* a, Node* b) { return a->DividedBy(b); }
 Node* fMod(Node* a, Node* b) { return a->Mod(b); }
-Node* fCall(Node* a, Node* b) { return a->Call(b); }
 Node* fEquals(Node* a, Node* b) { return a->Equals(b); }
 Node* fNotEquals(Node* a, Node* b) { return a->NotEquals(b); }
 Node* fLessThan(Node* a, Node* b) { return a->LessThan(b); }

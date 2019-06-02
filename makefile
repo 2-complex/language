@@ -34,9 +34,6 @@ run: calam
 	./calam programs/boolean-logic.cal
 
 
-Environment.o: Environment.h Environment.cpp
-	$(CPP) -c Environment.cpp
-
 linenoise.o: linenoise/linenoise.cpp
 	$(CPP) -c linenoise/linenoise.cpp -o linenoise.o
 
@@ -52,8 +49,8 @@ Code.o: Code.h Code.cpp
 objects.o: objects.cpp objects.h
 	$(CPP) -c objects.cpp
 
-codetest: codetest.cpp objects.o Code.o Instruction.o Environment.o
-	$(CPP) codetest.cpp objects.o Code.o Instruction.o Environment.o -o codetest
+codetest: codetest.cpp objects.o Code.o Instruction.o
+	$(CPP) codetest.cpp objects.o Code.o Instruction.o -o codetest
 
 test: printtree.py $(GENERATED_CODE)
 	python printtree.py
@@ -148,7 +145,6 @@ CALAMITY_OBJETS = \
 	Instruction.o \
 	objects.o \
 	BigInteger.o \
-	Environment.o \
 	CalamityBaseListener.o \
 	CalamityLexer.o \
 	CalamityListener.o \
