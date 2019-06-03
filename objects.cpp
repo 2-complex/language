@@ -470,6 +470,11 @@ Node* String::And(Function* _)
     return new Error("Logical 'and' with string and function");
 }
 
+Array::Array(const std::vector<Key>& value)
+    : value(value)
+{
+}
+
 const std::vector<Key>& Array::getValue()
 {
     return value;
@@ -1493,10 +1498,7 @@ Node* Array::Plus(String* _)
 
 Node* Array::Plus(Array* _)
 {
-    Array* array = new Array;
-
-    for( Key& k : value )
-        array->append(k.node);
+    Array* array = new Array(value);
 
     for( Key& k : _->value )
         array->append(k.node);

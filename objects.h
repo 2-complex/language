@@ -560,6 +560,7 @@ class Array : public Node
 {
     std::vector<Key> value;
 public:
+    Array(const std::vector<Key>& value);
     const std::vector<Key>& getValue();
     void append(std::shared_ptr<Node> node);
 

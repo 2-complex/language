@@ -188,7 +188,7 @@ std::string Negative::toString() const
 
 void Negative::execute(Machine& machine)
 {
-
+    machine.temp->node = std::shared_ptr<object::Node>(machine.temp->node->Negative());
     ++machine.location.index;
 }
 
@@ -199,7 +199,7 @@ std::string Negation::toString() const
 
 void Negation::execute(Machine& machine)
 {
-
+    machine.temp->node = std::shared_ptr<object::Node>(machine.temp->node->Negation());
     ++machine.location.index;
 }
 
@@ -216,6 +216,16 @@ std::string ConstructArray::toString() const
 
 void ConstructArray::execute(Machine& machine)
 {
+    std::vector<object::Key> value(size);
+
+    for( size_t i = 0; i < size; ++i )
+    {
+        value[size-i-1] = machine.temp->node;
+        machine.popTemp();
+    }
+
+    machine.temp = new TempFrame(std::shared_ptr<object::Node>(
+        new object::Array(value)), machine.temp);
 
     ++machine.location.index;
 }
