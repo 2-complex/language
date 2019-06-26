@@ -35,27 +35,31 @@ public:
     virtual ~Procedure();
     std::vector<Instruction*> instructions;
 
-    virtual std::string toString() const;
+    std::string toString() const;
 };
 
 class Location
 {
 public:
     Location(
-        std::shared_ptr<Procedure>& procedure,
+        std::shared_ptr<Procedure> procedure,
         size_t index);
 
     std::shared_ptr<Procedure> procedure;
     size_t index;
+
+    std::string toString() const;
 };
 
 class MemoryFrame
 {
 public:
-    MemoryFrame(std::shared_ptr<object::Object> obj, std::shared_ptr<class MemoryFrame> next);
+    MemoryFrame(std::shared_ptr<object::Node> node, std::shared_ptr<class MemoryFrame> next);
 
-    std::shared_ptr<object::Object> obj;
+    std::shared_ptr<object::Node> node;
     std::shared_ptr<class MemoryFrame> next;
+
+    std::string toString() const;
 };
 
 class ReturnFrame
@@ -65,6 +69,8 @@ public:
 
     Location location;
     class ReturnFrame* next;
+
+    std::string toString() const;
 };
 
 class TempFrame
@@ -74,12 +80,14 @@ public:
 
     std::shared_ptr<object::Node> node;
     class TempFrame* next;
+
+    std::string toString() const;
 };
 
 class Machine
 {
 public:
-    explicit Machine(const Location& startingLocation);
+    Machine();
 
     Location location;
 
@@ -108,6 +116,13 @@ class Push : public Instruction
 public:
     explicit Push(std::shared_ptr<object::Node> n);
 
+    virtual std::string toString() const;
+    virtual void execute(Machine& machine);
+};
+
+class Pop : public Instruction
+{
+public:
     virtual std::string toString() const;
     virtual void execute(Machine& machine);
 };
@@ -198,6 +213,21 @@ public:
     ConstructFunction(std::shared_ptr<Procedure> procedure);
     virtual std::string toString() const;
     virtual void execute(Machine& machine);
+};
+
+class StackFunction : public object::Function
+{
+public:
+    StackFunction(
+        Machine& machine,
+        std::shared_ptr<Procedure> procedure,
+        std::shared_ptr<MemoryFrame> memoryFrame);
+
+    Machine& machine;
+    std::shared_ptr<Procedure> procedure;
+    std::shared_ptr<MemoryFrame> memoryFrame;
+
+    virtual std::shared_ptr<object::Node> getMapping(std::shared_ptr<object::Node> key);
 };
 
 }

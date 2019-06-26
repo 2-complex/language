@@ -703,7 +703,7 @@ std::string Function::getValue()
 
 std::string Function::toString() const
 {
-    return std::string("{FUNCTION}");
+    return std::string("{...}");
 }
 
 Node* Function::Negation()

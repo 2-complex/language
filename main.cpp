@@ -282,6 +282,9 @@ int main(int argc, const char* argv[])
     else if(argc == 1)
     {
         linenoiseHistoryLoad("history.txt");
+
+        instruction::Machine machine;
+
         while(char* line = linenoise("> "))
         {
             std::stringstream ss(line);
@@ -301,17 +304,23 @@ int main(int argc, const char* argv[])
                     HType a = vistor.visit(tree);
 
                     std::shared_ptr<instruction::Procedure> procedure(new instruction::Procedure);
+
                     a.code->makeInstructions(*procedure);
 
-                    printf( "procedure:\n%s", procedure->toString().c_str() );
-
-                    instruction::Machine m(instruction::Location(procedure, 0));
-
-                    while(m.step());
-
-                    if( m.top() )
+                    if(!procedure->instructions.empty())
                     {
-                        printf( "%s\n", m.top()->toString().c_str());
+                        machine.location = instruction::Location(procedure, 0);
+
+                        printf( "procedure:\n%s\n", procedure->toString().c_str() );
+
+                        while(machine.step());
+
+                        if( machine.top() )
+                        {
+                            printf( "%s\n", machine.top()->toString().c_str());
+                        }
+
+                        machine.popTemp();
                     }
 
                     linenoiseHistoryAdd(line);

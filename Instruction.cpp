@@ -34,18 +34,23 @@ std::string Procedure::toString() const
         itr != instructions.end();
         ++itr )
     {
-        result += (*itr)->toString() + "\n";
+        result += (*itr)->toString();
     }
 
     return result;
 }
 
 MemoryFrame::MemoryFrame(
-    std::shared_ptr<object::Object> obj,
+    std::shared_ptr<object::Node> node,
     std::shared_ptr<class MemoryFrame> next)
-    : obj(obj)
+    : node(node)
     , next(next)
 {
+}
+
+std::string MemoryFrame::toString() const
+{
+    return node->toString();
 }
 
 ReturnFrame::ReturnFrame(
@@ -56,12 +61,22 @@ ReturnFrame::ReturnFrame(
 {
 }
 
+std::string ReturnFrame::toString() const
+{
+    return location.toString();
+}
+
 TempFrame::TempFrame(
     std::shared_ptr<object::Node> node,
     class TempFrame* next)
     : node(node)
     , next(next)
 {
+}
+
+std::string TempFrame::toString() const
+{
+    return node->toString();
 }
 
 std::string Underscore::toString() const
@@ -71,7 +86,7 @@ std::string Underscore::toString() const
 
 void Underscore::execute(Machine& machine)
 {
-    machine.temp = new TempFrame(machine.mem->obj, machine.temp);
+    machine.temp = new TempFrame(machine.mem->node, machine.temp);
     ++machine.location.index;
 }
 
@@ -88,6 +103,17 @@ std::string Push::toString() const
 void Push::execute(Machine& machine)
 {
     machine.temp = new TempFrame(node, machine.temp);
+    ++machine.location.index;
+}
+
+std::string Pop::toString() const
+{
+    return ",";
+}
+
+void Pop::execute(Machine& machine)
+{
+    machine.popTemp();
     ++machine.location.index;
 }
 
@@ -177,7 +203,18 @@ void Call::execute(Machine& machine)
     std::shared_ptr<object::Node> source = machine.temp->next->node;
     std::shared_ptr<object::Node> index = machine.temp->node;
     machine.popTemp();
-    machine.temp->node = source->getMapping(index);
+
+    std::shared_ptr<object::Node> newNode = source->getMapping(index);
+
+    // Sorry : (
+    if( newNode )
+    {
+        machine.temp->node = newNode;
+    }
+    else
+    {
+        machine.popTemp();
+    }
     ++machine.location.index;
 }
 
@@ -265,23 +302,34 @@ ConstructFunction::ConstructFunction(std::shared_ptr<instruction::Procedure> pro
 
 std::string ConstructFunction::toString() const
 {
-    return "PROCEDURE\n" + procedure->toString() + "END\n";
+    return "{" + procedure->toString() + "}";
 }
 
 void ConstructFunction::execute(Machine& machine)
 {
+    machine.temp = new TempFrame(
+        std::shared_ptr<object::Node>(
+            new StackFunction(
+                machine,
+                procedure,
+                machine.mem)), machine.temp);
 
     ++machine.location.index;
 }
 
-Location::Location(std::shared_ptr<Procedure>& procedure, size_t index)
+Location::Location(std::shared_ptr<Procedure> procedure, size_t index)
     : procedure(procedure)
     , index(index)
 {
 }
 
-Machine::Machine(const Location& startingLocation)
-    : location(startingLocation)
+std::string Location::toString() const
+{
+    return procedure->toString() + "(" + std::to_string(index) + ")";
+}
+
+Machine::Machine()
+    : location(std::shared_ptr<Procedure>(new Procedure), -1)
     , temp(nullptr)
     , ret(nullptr)
 {
@@ -293,11 +341,33 @@ Machine::Machine(const Location& startingLocation)
 
 bool Machine::step()
 {
-    printf( "exectue: %s\n", location.procedure->instructions[location.index]->toString().c_str() );
-    location.procedure->instructions[location.index]->execute(*this);
-    printf( "%s", toString().c_str() );
+    if( location.index < location.procedure->instructions.size() )
+    {
+        printf( "exectue:\n" );
+        printf( "%s\n", location.procedure->instructions[location.index]->toString().c_str() );
+        location.procedure->instructions[location.index]->execute(*this);
+        printf( "%s", toString().c_str() );
+    }
 
-    return location.index < location.procedure->instructions.size();
+    if( location.index < location.procedure->instructions.size() )
+    {
+        return true;
+    }
+    else
+    {
+        if( ret )
+        {
+            location = ret->location;
+            ++location.index;
+            ReturnFrame* b = ret;
+            ret = ret->next;
+            mem = mem->next;
+            delete b;
+            return true;
+        }
+    }
+
+    return false;
 }
 
 void Machine::popTemp()
@@ -319,14 +389,49 @@ object::Node* Machine::top() const
 
 std::string Machine::toString() const
 {
-    std::string result = "m:\n";
+    std::string result = "";
+
+    result += "machine:\n";
 
     for( TempFrame* f = temp; f; f=f->next )
     {
-        result += std::string("    ") + f->node->toString() + "\n";
+        result += std::string("    ") + f->toString() + "\n";
+    }
+
+    result += "memory-stack:\n";
+
+    for( std::shared_ptr<MemoryFrame> f = mem; f; f=f->next )
+    {
+        result += std::string("    ") + f->toString() + "\n";
+    }
+
+    result += "return-stack:\n";
+
+    for( ReturnFrame* f = ret; f; f=f->next )
+    {
+        result += std::string("    ") + f->toString() + "\n";
     }
 
     return result;
+}
+
+StackFunction::StackFunction(
+    Machine& machine,
+    std::shared_ptr<Procedure> procedure,
+    std::shared_ptr<MemoryFrame> memoryFrame)
+    : machine(machine)
+    , procedure(procedure)
+    , memoryFrame(memoryFrame)
+{
+}
+
+std::shared_ptr<object::Node> StackFunction::getMapping(
+    std::shared_ptr<object::Node> argument)
+{
+    machine.ret = new ReturnFrame(machine.location, machine.ret);
+    machine.location = instruction::Location(procedure, -1);
+    machine.mem = std::shared_ptr<MemoryFrame>(new MemoryFrame(argument, machine.mem));
+    return nullptr;
 }
 
 }

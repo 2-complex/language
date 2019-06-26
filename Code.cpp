@@ -71,9 +71,16 @@ std::string Program::toString() const
 
 void Program::makeInstructions(instruction::Procedure& procedure) const
 {
-    for( std::vector<Line*>::const_iterator itr = lines.begin(); itr != lines.end(); ++itr )
+    size_t n = lines.size();
+    for( size_t i = 0; i+1 < n; ++i )
     {
-        (*itr)->makeInstructions(procedure);
+        lines[i]->makeInstructions(procedure);
+        procedure.instructions.push_back(new instruction::Pop());
+    }
+
+    if( n >= 1 )
+    {
+        lines[n-1]->makeInstructions(procedure);
     }
 }
 
