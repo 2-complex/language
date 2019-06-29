@@ -204,9 +204,14 @@ void Call::execute(Machine& machine)
     std::shared_ptr<object::Node> index = machine.temp->node;
     machine.popTemp();
 
-    std::shared_ptr<object::Node> newNode = source->getMapping(index);
+    std::shared_ptr<object::Node> newNode;
+    for( std::shared_ptr<MemoryFrame> f = machine.mem; !newNode && f; f = f->next )
+    {
+        newNode = f->node->getMapping(index);
+    }
 
-    // Sorry : (
+    // Before I wrote this, and expressed contrition in a comment,
+    // Now I can't remember why I did it.
     if( newNode )
     {
         machine.temp->node = newNode;
@@ -215,6 +220,7 @@ void Call::execute(Machine& machine)
     {
         machine.popTemp();
     }
+
     ++machine.location.index;
 }
 

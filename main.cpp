@@ -239,13 +239,14 @@ void displayTreeShape(tree::ParseTree *tree)
 }
 
 
+#include "linenoise.h"
+
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "linenoise.h"
 
 int main(int argc, const char* argv[])
 {
