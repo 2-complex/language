@@ -30,6 +30,10 @@ CPP_GENERATED_CODE = \
 	CalamityParser.h
 
 
+current: machinetest
+	./machinetest
+
+
 run: calam
 	./calam programs/boolean-logic.cal
 
@@ -43,6 +47,9 @@ BigInteger.o: BigInteger.h BigInteger.cpp
 Instruction.o: Instruction.h Instruction.cpp
 	$(CPP) -c Instruction.cpp
 
+Machine.o: INode.h Machine.h Machine.cpp
+	$(CPP) -c Machine.cpp
+
 Code.o: Code.h Code.cpp
 	$(CPP) -c Code.cpp
 
@@ -51,6 +58,10 @@ objects.o: objects.cpp objects.h
 
 codetest: codetest.cpp objects.o Code.o Instruction.o
 	$(CPP) codetest.cpp objects.o Code.o Instruction.o -o codetest
+
+machinetest: machinetest.cpp Machine.o
+	$(CPP) machinetest.cpp Machine.o -o machinetest
+
 
 test: printtree.py $(GENERATED_CODE)
 	python printtree.py

@@ -1,7 +1,5 @@
 #include "Code.h"
-
 #include "objects.h"
-
 #include <stdlib.h>
 
 namespace code
@@ -18,10 +16,10 @@ std::string Pair::toString() const
 
 void Pair::makeInstructions(instruction::Procedure& procedure) const
 {
-    procedure.instructions.push_back(new instruction::Underscore);
+    procedure.underscore();
     left->makeInstructions(procedure);
     right->makeInstructions(procedure);
-    procedure.instructions.push_back(new instruction::Assign);
+    procedure.assign();
 }
 
 Assignment::Assignment()
@@ -49,13 +47,13 @@ void Assignment::makeInstructions(instruction::Procedure& procedure) const
     {
         reference->makeInstructionsButLast(procedure);
         expression->makeInstructions(procedure);
-        procedure.instructions.push_back(new instruction::Assign);
+        procedure.assign();
     }
     else
     {
         reference->makeInstructionsButLast(procedure);
         expression->makeInstructions(procedure);
-        procedure.instructions.push_back(new instruction::OperationAndAssign(operation));
+        procedure.operationAndAssign(operation);
     }
 }
 
@@ -75,7 +73,7 @@ void Program::makeInstructions(instruction::Procedure& procedure) const
     for( size_t i = 0; i+1 < n; ++i )
     {
         lines[i]->makeInstructions(procedure);
-        procedure.instructions.push_back(new instruction::Pop());
+        procedure.pop();
     }
 
     if( n >= 1 )
@@ -104,7 +102,7 @@ void Call::makeInstructions(
     for( size_t i = 1; i < n; i++ )
     {
         expressions[i]->makeInstructions(procedure);
-        procedure.instructions.push_back(new instruction::Call);
+        procedure.call();
     }
 }
 
@@ -117,7 +115,7 @@ void Call::makeInstructionsButLast(
     for( size_t i = 1; i < n; i++ )
     {
         expressions[i]->makeInstructions(procedure);
-        procedure.instructions.push_back(new instruction::Call);
+        procedure.call();
     }
     expressions[n]->makeInstructions(procedure);
 }
@@ -136,7 +134,7 @@ void AddedList::makeInstructions(
     for( size_t i = 0; i < n; ++i )
     {
         operands[i+1]->makeInstructions(procedure);
-        procedure.instructions.push_back(new instruction::Operation(ops[i]));
+        procedure.operation(ops[i]);
     }
 }
 
@@ -177,7 +175,7 @@ void Negative::makeInstructions(
     instruction::Procedure& procedure) const
 {
     operand->makeInstructions(procedure);
-    procedure.instructions.push_back(new instruction::Negative);
+    procedure.negative();
 }
 
 Product::Product(Expression* first)
@@ -213,7 +211,7 @@ void Product::makeInstructions(
     for( size_t i = 0; i < n; ++i )
     {
         operands[i+1]->makeInstructions(procedure);
-        procedure.instructions.push_back(new instruction::Operation(ops[i]));
+        procedure.operation(ops[i]);
     }
 }
 
@@ -250,7 +248,7 @@ void Conjunction::makeInstructions(
     for( size_t i = 0; i < n; ++i )
     {
         operands[i+1]->makeInstructions(procedure);
-        procedure.instructions.push_back(new instruction::Operation(ops[i]));
+        procedure.operation(ops[i]);
     }
 }
 
@@ -268,7 +266,7 @@ void Negation::makeInstructions(
     instruction::Procedure& procedure) const
 {
     operand->makeInstructions(procedure);
-    procedure.instructions.push_back(new instruction::Negation);
+    procedure.negation();
 }
 
 Comparison::Comparison(
@@ -291,7 +289,7 @@ void Comparison::makeInstructions(
 {
     left->makeInstructions(procedure);
     right->makeInstructions(procedure);
-    procedure.instructions.push_back(new instruction::Operation(op));
+    procedure.operation(op);
 }
 
 Function::Function(Program* program)
@@ -307,15 +305,9 @@ std::string Function::toString() const
 void Function::makeInstructions(
     instruction::Procedure& procedure) const
 {
-    instruction::Procedure* newProcedure =
-        new instruction::Procedure;
-
+    instruction::Procedure* newProcedure = new instruction::Procedure;
     program->makeInstructions(*newProcedure);
-
-    instruction::ConstructFunction* constructFunction =
-        new instruction::ConstructFunction(std::shared_ptr<instruction::Procedure>(newProcedure));
-
-    procedure.instructions.push_back(constructFunction);
+    procedure.function(std::shared_ptr<instruction::Procedure>(newProcedure));
 }
 
 Group::Group(Program* program)
@@ -331,9 +323,9 @@ std::string Group::toString() const
 void Group::makeInstructions(
     instruction::Procedure& procedure) const
 {
-    procedure.instructions.push_back(new instruction::Begin);
+    procedure.begin();
     program->makeInstructions(procedure);
-    procedure.instructions.push_back(new instruction::End);
+    procedure.end();
 }
 
 Array::Array()
@@ -356,14 +348,16 @@ std::string Array::toString() const
 void Array::makeInstructions(
     instruction::Procedure& procedure) const
 {
+    int i = 0;
+    procedure.pushArray();
     for(std::vector<Expression*>::const_iterator itr = elements.begin();
         itr != elements.end();
         itr++)
     {
         (*itr)->makeInstructions(procedure);
+        procedure.pushInteger(i);
+        procedure.assign();
     }
-
-    procedure.instructions.push_back(new instruction::ConstructArray(elements.size()));
 }
 
 Boolean::Boolean()
@@ -384,8 +378,7 @@ std::string Boolean::toString() const
 void Boolean::makeInstructions(
     instruction::Procedure& procedure) const
 {
-    procedure.instructions.push_back(new instruction::Push(
-        std::shared_ptr<object::Node>(new object::Boolean(value))));
+    procedure.pushBoolean(value);
 }
 
 Number::Number()
@@ -415,11 +408,11 @@ void Number::makeInstructions(
 
     if( isFloat )
     {
-        procedure.instructions.push_back(new instruction::Push(std::shared_ptr<object::Node>(new object::Double(text))));
+        procedure.pushDouble(text);
     }
     else
     {
-        procedure.instructions.push_back(new instruction::Push(std::shared_ptr<object::Node>(new object::Integer(text))));
+        procedure.pushInteger(text);
     }
 }
 
@@ -441,7 +434,7 @@ std::string String::toString() const
 void String::makeInstructions(
     instruction::Procedure& procedure) const
 {
-    procedure.instructions.push_back(new instruction::Push(std::shared_ptr<object::Node>(new object::String(value))));
+    procedure.pushString(value);
 }
 
 Word::Word()
@@ -461,16 +454,16 @@ std::string Word::toString() const
 void Word::makeInstructions(
     instruction::Procedure& procedure) const
 {
-    procedure.instructions.push_back(new instruction::Underscore);
-    procedure.instructions.push_back(new instruction::Push(std::shared_ptr<object::Node>(new object::Member(name))));
-    procedure.instructions.push_back(new instruction::Call);
+    procedure.underscore();
+    procedure.pushMember(name);
+    procedure.call();
 }
 
 void Word::makeInstructionsButLast(
     instruction::Procedure& procedure) const
 {
-    procedure.instructions.push_back(new instruction::Underscore);
-    procedure.instructions.push_back(new instruction::Push(std::shared_ptr<object::Node>(new object::Member(name))));
+    procedure.underscore();
+    procedure.pushMember(name);
 }
 
 void Expression::makeInstructionsButLast(
@@ -491,7 +484,7 @@ std::string Member::toString() const
 void Member::makeInstructions(
     instruction::Procedure& procedure) const
 {
-    procedure.instructions.push_back(new instruction::Push(std::shared_ptr<object::Node>(new object::Member(name))));
+    procedure.pushMember(name);
 }
 
 }

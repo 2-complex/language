@@ -596,6 +596,29 @@ std::map<Key, Key> Object::getValue()
     return mappings;
 }
 
+#include <unordered_map>
+
+struct OperationNameToFunc : public std::unordered_map<std::string, OperationFunction>
+{
+    OperationNameToFunc()
+    {
+        (*this)["and"] = object::fAnd;
+        (*this)["or"] = object::fOr;
+        (*this)["+"] = object::fPlus;
+        (*this)["-"] = object::fMinus;
+        (*this)["*"] = object::fTimes;
+        (*this)["/"] = object::fDividedBy;
+        (*this)["%"] = object::fMod;
+        (*this)["=="] = object::fEquals;
+        (*this)["!="] = object::fNotEquals;
+        (*this)["<"] = object::fLessThan;
+        (*this)[">"] = object::fGreaterThan;
+        (*this)["<="] = object::fLessThanOrEqualTo;
+        (*this)[">="] = object::fGreaterThanOrEqualTo;
+    }
+} operationNameToFunc;
+
+
 void Object::setMapping(
     std::shared_ptr<Node> index,
     std::shared_ptr<Node> value)
