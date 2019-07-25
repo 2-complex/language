@@ -86,6 +86,13 @@ void Machine::start(const Location& startingLocation)
     location = startingLocation;
 }
 
+void Machine::jump(std::shared_ptr<Procedure> procedure, std::shared_ptr<INode> node)
+{
+    ret = new ReturnFrame(location, ret);
+    location = Location(procedure, -1);
+    mem = std::shared_ptr<MemoryFrame>(new MemoryFrame(node, mem));
+}
+
 std::string Machine::toString() const
 {
     std::string result = "";

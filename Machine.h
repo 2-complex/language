@@ -82,6 +82,7 @@ public:
     Machine();
 
     void start(const Location& staringLocation);
+    void jump(std::shared_ptr<Procedure> procedure, std::shared_ptr<INode> node);
 
     bool step();
     void popTemp(size_t n);

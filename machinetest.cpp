@@ -47,6 +47,28 @@ public:
     }
 };
 
+class MyJumpInstruction : public Instruction
+{
+public:
+    explicit MyJumpInstruction(std::shared_ptr<Procedure> procedure)
+        : procedure(procedure)
+    {
+    }
+
+    virtual std::string toString() const
+    {
+        return "Jump to: " + procedure->toString();
+    }
+
+    virtual void execute(Machine& machine)
+    {
+        machine.jump(procedure, std::shared_ptr<MyStringNode>(new MyStringNode("()")));
+    }
+
+private:
+    std::shared_ptr<Procedure> procedure;
+};
+
 class MyPushInstruction : public Instruction
 {
 public:
@@ -79,8 +101,8 @@ void test1()
     procedure->add(new MyAddInstruction);
 
     Location l(procedure, 0);
-
     m.start(l);
+
     m.step();
     printf("%s\n", m.toString().c_str());
     m.step();
@@ -89,9 +111,34 @@ void test1()
     printf("%s\n", m.toString().c_str());
 }
 
+void test2()
+{
+    Machine m;
+
+    std::shared_ptr<Procedure> pushProcedure(new Procedure);
+    pushProcedure->add(new MyPushInstruction("A"));
+    pushProcedure->add(new MyPushInstruction("B"));
+
+    std::shared_ptr<Procedure> addProcedure(new Procedure);
+    addProcedure->add(new MyAddInstruction);
+
+    pushProcedure->add(new MyJumpInstruction(addProcedure));
+    pushProcedure->add(new MyPushInstruction("C"));
+
+    Location l(pushProcedure, 0);
+    m.start(l);
+
+    while(m.step())
+    {
+        printf("%s\n", m.toString().c_str());
+    }
+    printf("%s\n", m.toString().c_str());
+}
+
+
 int main(int argc, char** args)
 {
-    test1();
+    test2();
 
     return 0;
 }
