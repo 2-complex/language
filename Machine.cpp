@@ -97,25 +97,53 @@ std::string Machine::toString() const
 {
     std::string result = "";
 
-    result += "temp-stack:\n";
+    result += "temp:\n";
 
     for( TempFrame* f = temp; f; f=f->next )
     {
         result += std::string("    ") + f->toString() + "\n";
     }
 
-    result += "memory-stack:\n";
+    result += "memory:\n";
 
     for( std::shared_ptr<MemoryFrame> f = mem; f; f=f->next )
     {
         result += std::string("    ") + f->toString() + "\n";
     }
 
-    result += "return-stack:\n";
+    result += "return:\n";
 
     for( ReturnFrame* f = ret; f; f=f->next )
     {
         result += std::string("    ") + f->toString() + "\n";
+    }
+
+    return result;
+}
+
+std::string Machine::toStringCompact() const
+{
+    std::string result = "";
+
+    result += "t:";
+
+    for( TempFrame* f = temp; f; f=f->next )
+    {
+        result += f->toString() + ",";
+    }
+
+    result += "m:";
+
+    for( std::shared_ptr<MemoryFrame> f = mem; f; f=f->next )
+    {
+        result += f->toString() + ",";
+    }
+
+    result += "r:";
+
+    for( ReturnFrame* f = ret; f; f=f->next )
+    {
+        result += f->toString() + ",";
     }
 
     return result;

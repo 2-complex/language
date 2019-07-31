@@ -90,6 +90,7 @@ public:
     void pushTemp(std::shared_ptr<INode> node);
 
     std::string toString() const;
+    std::string toStringCompact() const;
 
 private:
     Location location;

@@ -1,5 +1,6 @@
 
 #include "Instruction.h"
+#include "assert.h"
 
 using namespace instruction;
 
@@ -135,10 +136,43 @@ void test2()
     printf("%s\n", m.toString().c_str());
 }
 
+void test3()
+{
+    Machine m;
+
+    std::shared_ptr<Procedure> emptyProcedure(new Procedure);
+
+    std::shared_ptr<Procedure> pushProcedure(new Procedure);
+    pushProcedure->add(new MyPushInstruction("A"));
+    pushProcedure->add(new MyJumpInstruction(emptyProcedure));
+    pushProcedure->add(new MyPushInstruction("B"));
+    pushProcedure->add(new MyJumpInstruction(emptyProcedure));
+    pushProcedure->add(new MyJumpInstruction(emptyProcedure));
+    pushProcedure->add(new MyJumpInstruction(emptyProcedure));
+    pushProcedure->add(new MyJumpInstruction(emptyProcedure));
+    pushProcedure->add(new MyJumpInstruction(emptyProcedure));
+    pushProcedure->add(new MyJumpInstruction(emptyProcedure));
+    pushProcedure->add(new MyJumpInstruction(emptyProcedure));
+    pushProcedure->add(new MyJumpInstruction(emptyProcedure));
+    pushProcedure->add(new MyPushInstruction("C"));
+    pushProcedure->add(new MyJumpInstruction(emptyProcedure));
+
+    Location l(pushProcedure, 0);
+    m.start(l);
+
+    while(m.step())
+    {
+        printf("%s\n", m.toString().c_str());
+    }
+    printf("%s\n", m.toString().c_str());
+
+    assert(m.toStringCompact() == "t:C,B,A,m:r:");
+}
+
 
 int main(int argc, char** args)
 {
-    test2();
+    test3();
 
     return 0;
 }
