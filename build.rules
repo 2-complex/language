@@ -1,0 +1,77 @@
+linenoise.o
+:
+linenoise/linenoise.cpp
+:
+c++ -std=gnu++11 -g3 -c
+linenoise/linenoise.cpp
+:
+
+Environment.o
+:
+Environment.h
+Environment.cpp
+:
+c++ -std=gnu++11 -g3 -c
+Environment.cpp
+:
+
+BigInteger.o
+:
+BigInteger.h
+BigInteger.cpp
+:
+c++ -std=gnu++11 -g3 -c
+BigInteger.cpp
+:
+
+Code.o
+:
+Code.h
+Code.cpp
+:
+c++ -std=gnu++11 -g3 -c
+Code.cpp
+:
+
+objects.o
+:
+objects.h
+objects.cpp
+:
+c++ -std=gnu++11 -g3 -c
+-Wno-inconsistent-missing-override
+objects.cpp
+:
+
+calam
+:
+main.cpp
+Code.o
+objects.o
+BigInteger.o
+Environment.o
+CalamityBaseListener.o
+CalamityLexer.o
+CalamityListener.o
+CalamityVisitor.o
+CalamityParser.o
+TreeShapeListener.o
+:
+c++ -std=gnu++11 -g3
+-Iantlr4-cpp-runtime-4.8-macos/antlr4-runtime
+-Ilinenoise
+main.cpp
+Code.o
+objects.o
+BigInteger.o
+Environment.o
+CalamityBaseListener.o
+CalamityLexer.o
+CalamityListener.o
+CalamityVisitor.o
+CalamityParser.o
+TreeShapeListener.o
+linenoise.o
+antlr4-cpp-runtime-4.8-macos/lib/libantlr4-runtime.a
+-o calam
+:

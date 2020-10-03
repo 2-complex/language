@@ -1,5 +1,5 @@
 
-ANTLR = java -jar /usr/local/lib/antlr-4.7.1-complete.jar
+ANTLR = java -jar antlr-4.8-complete.jar
 
 GENERATED_CODE = \
 	CalamityLexer.py \
@@ -111,12 +111,11 @@ CalamityParser.h: Calamity.g4
 CPP = c++ -std=gnu++11 -g3
 
 INCLUDES = \
-	-Iantlr4-cpp-runtime-4.7.1-macos/antlr4-runtime \
+	-Iantlr4-cpp-runtime-4.8-macos/antlr4-runtime \
 	-Ilinenoise
 
-
 ANTLR_LIBRARY = \
-	antlr4-cpp-runtime-4.7.1-macos/lib/libantlr4-runtime.a
+	antlr4-cpp-runtime-4.8-macos/lib/libantlr4-runtime.a
 
 CalamityBaseListener.o: CalamityBaseListener.h CalamityBaseListener.cpp
 	$(CPP) -c $(INCLUDES) CalamityBaseListener.cpp

@@ -10,6 +10,8 @@
 *trierListener*
 *trierBaseListener*
 
+.ruler
+
 *.tokens
 *.interp
 *.o

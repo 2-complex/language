@@ -469,7 +469,7 @@ class Error : public Node
     std::string message;
 public:
     Error(const std::string& message);
-    virtual bool isError() const;
+    virtual bool isError() const override;
 
     virtual std::string toString() const override;
 DEFINITIONS
