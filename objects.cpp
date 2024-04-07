@@ -754,6 +754,11 @@ std::string Function::getValue()
     return toString();
 }
 
+code::Program* Function::getProgram() const
+{
+    return program;
+}
+
 std::string Function::toString() const
 {
     return std::string("{") + program->toString() + std::string("}");
@@ -1265,6 +1270,429 @@ Node* Function::Or(Object* _)
 Node* Function::Or(Function* _)
 {
     return new Error("Logical 'or' with function and function");
+}
+
+Node* Error::Impart(Error* _)
+{
+    retain();
+    return this;
+}
+
+Node* Error::Impart(Member* _)
+{
+    retain();
+    return this;
+}
+
+Node* Error::Impart(Boolean* _)
+{
+    retain();
+    return this;
+}
+
+Node* Error::Impart(Integer* _)
+{
+    retain();
+    return this;
+}
+
+Node* Error::Impart(Double* _)
+{
+    retain();
+    return this;
+}
+
+Node* Error::Impart(String* _)
+{
+    retain();
+    return this;
+}
+
+Node* Error::Impart(Array* _)
+{
+    retain();
+    return this;
+}
+
+Node* Error::Impart(Object* _)
+{
+    retain();
+    return this;
+}
+
+Node* Error::Impart(Function* _)
+{
+    retain();
+    return this;
+}
+
+Node* Member::Impart(Error* _)
+{
+    _->retain();
+    return _;
+}
+
+Node* Member::Impart(Member* _)
+{
+    return new Error("Attempt to impart member and member");
+}
+
+Node* Member::Impart(Boolean* _)
+{
+    return new Error("Attempt to impart member and boolean");
+}
+
+Node* Member::Impart(Integer* _)
+{
+    return new Error("Attempt to impart member and integer");
+}
+
+Node* Member::Impart(Double* _)
+{
+    return new Error("Attempt to impart member and double");
+}
+
+Node* Member::Impart(String* _)
+{
+    return new Error("Attempt to impart member and string");
+}
+
+Node* Member::Impart(Array* _)
+{
+    return new Error("Attempt to impart member and array");
+}
+
+Node* Member::Impart(Object* _)
+{
+    return new Error("Attempt to impart member and object");
+}
+
+Node* Member::Impart(Function* _)
+{
+    return new Error("Attempt to impart member and function");
+}
+
+Node* Boolean::Impart(Error* _)
+{
+    _->retain();
+    return _;
+}
+
+Node* Boolean::Impart(Member* _)
+{
+    return new Error("Attempt to impart boolean and member");
+}
+
+Node* Boolean::Impart(Boolean* _)
+{
+    return new Error("Attempt to impart boolean and boolean");
+}
+
+Node* Boolean::Impart(Integer* _)
+{
+    return new Error("Attempt to impart boolean and integer");
+}
+
+Node* Boolean::Impart(Double* _)
+{
+    return new Error("Attempt to impart boolean and double");
+}
+
+Node* Boolean::Impart(String* _)
+{
+    return new Error("Attempt to impart boolean and string");
+}
+
+Node* Boolean::Impart(Array* _)
+{
+    return new Error("Attempt to impart boolean and array");
+}
+
+Node* Boolean::Impart(Object* _)
+{
+    return new Error("Attempt to impart boolean and object");
+}
+
+Node* Boolean::Impart(Function* _)
+{
+    return new Error("Attempt to impart boolean and function");
+}
+
+Node* Integer::Impart(Error* _)
+{
+    _->retain();
+    return _;
+}
+
+Node* Integer::Impart(Member* _)
+{
+    return new Error("Attempt to impart integer and member");
+}
+
+Node* Integer::Impart(Boolean* _)
+{
+    return new Error("Attempt to impart integer and boolean");
+}
+
+Node* Integer::Impart(Integer* _)
+{
+    return new Error("Attempt to impart integer and integer");
+}
+
+Node* Integer::Impart(Double* _)
+{
+    return new Error("Attempt to impart integer and double");
+}
+
+Node* Integer::Impart(String* _)
+{
+    return new Error("Attempt to impart integer and string");
+}
+
+Node* Integer::Impart(Array* _)
+{
+    return new Error("Attempt to impart integer and array");
+}
+
+Node* Integer::Impart(Object* _)
+{
+    return new Error("Attempt to impart integer and object");
+}
+
+Node* Integer::Impart(Function* _)
+{
+    return new Error("Attempt to impart integer and function");
+}
+
+Node* Double::Impart(Error* _)
+{
+    _->retain();
+    return _;
+}
+
+Node* Double::Impart(Member* _)
+{
+    return new Error("Attempt to impart double and member");
+}
+
+Node* Double::Impart(Boolean* _)
+{
+    return new Error("Attempt to impart double and boolean");
+}
+
+Node* Double::Impart(Integer* _)
+{
+    return new Error("Attempt to impart double and integer");
+}
+
+Node* Double::Impart(Double* _)
+{
+    return new Error("Attempt to impart double and double");
+}
+
+Node* Double::Impart(String* _)
+{
+    return new Error("Attempt to impart double and string");
+}
+
+Node* Double::Impart(Array* _)
+{
+    return new Error("Attempt to impart double and array");
+}
+
+Node* Double::Impart(Object* _)
+{
+    return new Error("Attempt to impart double and object");
+}
+
+Node* Double::Impart(Function* _)
+{
+    return new Error("Attempt to impart double and function");
+}
+
+Node* String::Impart(Error* _)
+{
+    _->retain();
+    return _;
+}
+
+Node* String::Impart(Member* _)
+{
+    return new Error("Attempt to impart string and member");
+}
+
+Node* String::Impart(Boolean* _)
+{
+    return new Error("Attempt to impart string and boolean");
+}
+
+Node* String::Impart(Integer* _)
+{
+    return new Error("Attempt to impart string and integer");
+}
+
+Node* String::Impart(Double* _)
+{
+    return new Error("Attempt to impart string and double");
+}
+
+Node* String::Impart(String* _)
+{
+    return new Error("Attempt to impart string and string");
+}
+
+Node* String::Impart(Array* _)
+{
+    return new Error("Attempt to impart string and array");
+}
+
+Node* String::Impart(Object* _)
+{
+    return new Error("Attempt to impart string and object");
+}
+
+Node* String::Impart(Function* _)
+{
+    return new Error("Attempt to impart string and function");
+}
+
+Node* Array::Impart(Error* _)
+{
+    _->retain();
+    return _;
+}
+
+Node* Array::Impart(Member* _)
+{
+    return new Error("Attempt to impart array and member");
+}
+
+Node* Array::Impart(Boolean* _)
+{
+    return new Error("Attempt to impart array and boolean");
+}
+
+Node* Array::Impart(Integer* _)
+{
+    return new Error("Attempt to impart array and integer");
+}
+
+Node* Array::Impart(Double* _)
+{
+    return new Error("Attempt to impart array and double");
+}
+
+Node* Array::Impart(String* _)
+{
+    return new Error("Attempt to impart string and string");
+}
+
+Node* Array::Impart(Array* _)
+{
+    return new Error("Attempt to impart string and array");
+}
+
+Node* Array::Impart(Object* _)
+{
+    return new Error("Attempt to impart array and object");
+}
+
+Node* Array::Impart(Function* _)
+{
+    return new Error("Attempt to impart array and function");
+}
+
+Node* Object::Impart(Error* _)
+{
+    _->retain();
+    return _;
+}
+
+Node* Object::Impart(Member* _)
+{
+    return new Error("Attempt to impart object and member");
+}
+
+Node* Object::Impart(Boolean* _)
+{
+    return new Error("Attempt to impart object and boolean");
+}
+
+Node* Object::Impart(Integer* _)
+{
+    return new Error("Attempt to impart object and integer");
+}
+
+Node* Object::Impart(Double* _)
+{
+    return new Error("Attempt to impart object and double");
+}
+
+Node* Object::Impart(String* _)
+{
+    return new Error("Attempt to impart object and string");
+}
+
+Node* Object::Impart(Array* _)
+{
+    return new Error("Attempt to impart object and array");
+}
+
+Node* Object::Impart(Object* _)
+{
+    return new Error("Attempt to impart object and object");
+}
+
+Node* Object::Impart(Function* function)
+{
+    Environment env(this);
+    return new Function(env, function->getProgram());
+}
+
+Node* Function::Impart(Error* _)
+{
+    _->retain();
+    return _;
+}
+
+Node* Function::Impart(Member* _)
+{
+    return new Error("Attempt to impart function and member");
+}
+
+Node* Function::Impart(Boolean* _)
+{
+    return new Error("Attempt to impart function and boolean");
+}
+
+Node* Function::Impart(Integer* _)
+{
+    return new Error("Attempt to impart function and integer");
+}
+
+Node* Function::Impart(Double* _)
+{
+    return new Error("Attempt to impart function and double");
+}
+
+Node* Function::Impart(String* _)
+{
+    return new Error("Attempt to impart string and string");
+}
+
+Node* Function::Impart(Array* _)
+{
+    return new Error("Attempt to impart function and array");
+}
+
+Node* Function::Impart(Object* _)
+{
+    return new Error("Attempt to impart function and object");
+}
+
+Node* Function::Impart(Function* _)
+{
+    return new Error("Attempt to impart function and function");
 }
 
 Node* Error::Plus(Error* _)
@@ -6579,6 +7007,96 @@ Node* Function::back_Or(String* _) { return _->Or(this); }
 Node* Function::back_Or(Array* _) { return _->Or(this); }
 Node* Function::back_Or(Object* _) { return _->Or(this); }
 Node* Function::back_Or(Function* _) { return _->Or(this); }
+Node* Error::Impart(Node* _) { return _->back_Impart(this); }
+Node* Error::back_Impart(Error* _) { return _->Impart(this); }
+Node* Error::back_Impart(Member* _) { return _->Impart(this); }
+Node* Error::back_Impart(Boolean* _) { return _->Impart(this); }
+Node* Error::back_Impart(Integer* _) { return _->Impart(this); }
+Node* Error::back_Impart(Double* _) { return _->Impart(this); }
+Node* Error::back_Impart(String* _) { return _->Impart(this); }
+Node* Error::back_Impart(Array* _) { return _->Impart(this); }
+Node* Error::back_Impart(Object* _) { return _->Impart(this); }
+Node* Error::back_Impart(Function* _) { return _->Impart(this); }
+Node* Member::Impart(Node* _) { return _->back_Impart(this); }
+Node* Member::back_Impart(Error* _) { return _->Impart(this); }
+Node* Member::back_Impart(Member* _) { return _->Impart(this); }
+Node* Member::back_Impart(Boolean* _) { return _->Impart(this); }
+Node* Member::back_Impart(Integer* _) { return _->Impart(this); }
+Node* Member::back_Impart(Double* _) { return _->Impart(this); }
+Node* Member::back_Impart(String* _) { return _->Impart(this); }
+Node* Member::back_Impart(Array* _) { return _->Impart(this); }
+Node* Member::back_Impart(Object* _) { return _->Impart(this); }
+Node* Member::back_Impart(Function* _) { return _->Impart(this); }
+Node* Boolean::Impart(Node* _) { return _->back_Impart(this); }
+Node* Boolean::back_Impart(Error* _) { return _->Impart(this); }
+Node* Boolean::back_Impart(Member* _) { return _->Impart(this); }
+Node* Boolean::back_Impart(Boolean* _) { return _->Impart(this); }
+Node* Boolean::back_Impart(Integer* _) { return _->Impart(this); }
+Node* Boolean::back_Impart(Double* _) { return _->Impart(this); }
+Node* Boolean::back_Impart(String* _) { return _->Impart(this); }
+Node* Boolean::back_Impart(Array* _) { return _->Impart(this); }
+Node* Boolean::back_Impart(Object* _) { return _->Impart(this); }
+Node* Boolean::back_Impart(Function* _) { return _->Impart(this); }
+Node* Integer::Impart(Node* _) { return _->back_Impart(this); }
+Node* Integer::back_Impart(Error* _) { return _->Impart(this); }
+Node* Integer::back_Impart(Member* _) { return _->Impart(this); }
+Node* Integer::back_Impart(Boolean* _) { return _->Impart(this); }
+Node* Integer::back_Impart(Integer* _) { return _->Impart(this); }
+Node* Integer::back_Impart(Double* _) { return _->Impart(this); }
+Node* Integer::back_Impart(String* _) { return _->Impart(this); }
+Node* Integer::back_Impart(Array* _) { return _->Impart(this); }
+Node* Integer::back_Impart(Object* _) { return _->Impart(this); }
+Node* Integer::back_Impart(Function* _) { return _->Impart(this); }
+Node* Double::Impart(Node* _) { return _->back_Impart(this); }
+Node* Double::back_Impart(Error* _) { return _->Impart(this); }
+Node* Double::back_Impart(Member* _) { return _->Impart(this); }
+Node* Double::back_Impart(Boolean* _) { return _->Impart(this); }
+Node* Double::back_Impart(Integer* _) { return _->Impart(this); }
+Node* Double::back_Impart(Double* _) { return _->Impart(this); }
+Node* Double::back_Impart(String* _) { return _->Impart(this); }
+Node* Double::back_Impart(Array* _) { return _->Impart(this); }
+Node* Double::back_Impart(Object* _) { return _->Impart(this); }
+Node* Double::back_Impart(Function* _) { return _->Impart(this); }
+Node* String::Impart(Node* _) { return _->back_Impart(this); }
+Node* String::back_Impart(Error* _) { return _->Impart(this); }
+Node* String::back_Impart(Member* _) { return _->Impart(this); }
+Node* String::back_Impart(Boolean* _) { return _->Impart(this); }
+Node* String::back_Impart(Integer* _) { return _->Impart(this); }
+Node* String::back_Impart(Double* _) { return _->Impart(this); }
+Node* String::back_Impart(String* _) { return _->Impart(this); }
+Node* String::back_Impart(Array* _) { return _->Impart(this); }
+Node* String::back_Impart(Object* _) { return _->Impart(this); }
+Node* String::back_Impart(Function* _) { return _->Impart(this); }
+Node* Array::Impart(Node* _) { return _->back_Impart(this); }
+Node* Array::back_Impart(Error* _) { return _->Impart(this); }
+Node* Array::back_Impart(Member* _) { return _->Impart(this); }
+Node* Array::back_Impart(Boolean* _) { return _->Impart(this); }
+Node* Array::back_Impart(Integer* _) { return _->Impart(this); }
+Node* Array::back_Impart(Double* _) { return _->Impart(this); }
+Node* Array::back_Impart(String* _) { return _->Impart(this); }
+Node* Array::back_Impart(Array* _) { return _->Impart(this); }
+Node* Array::back_Impart(Object* _) { return _->Impart(this); }
+Node* Array::back_Impart(Function* _) { return _->Impart(this); }
+Node* Object::Impart(Node* _) { return _->back_Impart(this); }
+Node* Object::back_Impart(Error* _) { return _->Impart(this); }
+Node* Object::back_Impart(Member* _) { return _->Impart(this); }
+Node* Object::back_Impart(Boolean* _) { return _->Impart(this); }
+Node* Object::back_Impart(Integer* _) { return _->Impart(this); }
+Node* Object::back_Impart(Double* _) { return _->Impart(this); }
+Node* Object::back_Impart(String* _) { return _->Impart(this); }
+Node* Object::back_Impart(Array* _) { return _->Impart(this); }
+Node* Object::back_Impart(Object* _) { return _->Impart(this); }
+Node* Object::back_Impart(Function* _) { return _->Impart(this); }
+Node* Function::Impart(Node* _) { return _->back_Impart(this); }
+Node* Function::back_Impart(Error* _) { return _->Impart(this); }
+Node* Function::back_Impart(Member* _) { return _->Impart(this); }
+Node* Function::back_Impart(Boolean* _) { return _->Impart(this); }
+Node* Function::back_Impart(Integer* _) { return _->Impart(this); }
+Node* Function::back_Impart(Double* _) { return _->Impart(this); }
+Node* Function::back_Impart(String* _) { return _->Impart(this); }
+Node* Function::back_Impart(Array* _) { return _->Impart(this); }
+Node* Function::back_Impart(Object* _) { return _->Impart(this); }
+Node* Function::back_Impart(Function* _) { return _->Impart(this); }
 Node* Error::Plus(Node* _) { return _->back_Plus(this); }
 Node* Error::back_Plus(Error* _) { return _->Plus(this); }
 Node* Error::back_Plus(Member* _) { return _->Plus(this); }

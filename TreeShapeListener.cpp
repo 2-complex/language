@@ -192,6 +192,17 @@ void TreeShapeListener::exitExpression(CalamityParser::ExpressionContext* ctx)
     indentAmt--;
 }
 
+void TreeShapeListener::enterImpart(CalamityParser::ImpartContext* ctx)
+{
+    printf( "%s%s      %s\n", getIndentString().c_str(), "Impart", ctx->getText().c_str() );
+    indentAmt++;
+}
+
+void TreeShapeListener::exitImpart(CalamityParser::ImpartContext* ctx)
+{
+    indentAmt--;
+}
+
 void TreeShapeListener::enterCall(CalamityParser::CallContext* ctx)
 {
     printf( "%s%s      %s\n", getIndentString().c_str(), "Call", ctx->getText().c_str() );

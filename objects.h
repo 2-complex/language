@@ -70,6 +70,25 @@ class Function;
     virtual Node* Or(Array*);\
     virtual Node* Or(Object*);\
     virtual Node* Or(Function*);\
+    virtual Node* Impart(Node*);\
+    virtual Node* back_Impart(Error*);\
+    virtual Node* back_Impart(Member*);\
+    virtual Node* back_Impart(Boolean*);\
+    virtual Node* back_Impart(Integer*);\
+    virtual Node* back_Impart(Double*);\
+    virtual Node* back_Impart(String*);\
+    virtual Node* back_Impart(Array*);\
+    virtual Node* back_Impart(Object*);\
+    virtual Node* back_Impart(Function*);\
+    virtual Node* Impart(Error*);\
+    virtual Node* Impart(Member*);\
+    virtual Node* Impart(Boolean*);\
+    virtual Node* Impart(Integer*);\
+    virtual Node* Impart(Double*);\
+    virtual Node* Impart(String*);\
+    virtual Node* Impart(Array*);\
+    virtual Node* Impart(Object*);\
+    virtual Node* Impart(Function*);\
     virtual Node* Plus(Node*);\
     virtual Node* back_Plus(Error*);\
     virtual Node* back_Plus(Member*);\
@@ -342,6 +361,16 @@ public:
     virtual Node* back_Or(Array*) = 0;
     virtual Node* back_Or(Object*) = 0;
     virtual Node* back_Or(Function*) = 0;
+    virtual Node* Impart(Node*) = 0;
+    virtual Node* back_Impart(Error*) = 0;
+    virtual Node* back_Impart(Member*) = 0;
+    virtual Node* back_Impart(Boolean*) = 0;
+    virtual Node* back_Impart(Integer*) = 0;
+    virtual Node* back_Impart(Double*) = 0;
+    virtual Node* back_Impart(String*) = 0;
+    virtual Node* back_Impart(Array*) = 0;
+    virtual Node* back_Impart(Object*) = 0;
+    virtual Node* back_Impart(Function*) = 0;
     virtual Node* Plus(Node*) = 0;
     virtual Node* back_Plus(Error*) = 0;
     virtual Node* back_Plus(Member*) = 0;
@@ -586,6 +615,8 @@ class Function : public Node
 public:
     Function(Environment& environment, code::Program* program);
     std::string getValue();
+
+    code::Program* getProgram() const;
 
     virtual std::string toString() const override;
 DEFINITIONS

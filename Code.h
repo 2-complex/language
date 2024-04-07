@@ -37,7 +37,7 @@ public:
     Expression* right;
 
     virtual std::string toString() const override;
-    virtual object::Node* evaluate(Environment& env) const;
+    virtual object::Node* evaluate(Environment& env) const override;
 };
 
 class Assignment : public Line
@@ -198,6 +198,18 @@ public:
     virtual object::Node* evaluate(Environment& env) const override;
 };
 
+class Impart : public Expression
+{
+public:
+    Impart(Group* group, Expression* expression);
+
+    Group* group;
+    Expression* expression;
+
+    virtual std::string toString() const override;
+    virtual object::Node* evaluate(Environment& env) const override;
+};
+
 class Array : public Addable
 {
 public:
@@ -246,7 +258,7 @@ public:
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;
-    virtual object::Node* evaluateLast(Environment& env) const;
+    virtual object::Node* evaluateLast(Environment& env) const override;
 };
 
 class Member : public Expression

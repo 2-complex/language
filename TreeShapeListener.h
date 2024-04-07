@@ -44,6 +44,8 @@ public:
     virtual void exitEvaluable(CalamityParser::EvaluableContext * /*ctx*/) override;
     virtual void enterExpression(CalamityParser::ExpressionContext * /*ctx*/) override;
     virtual void exitExpression(CalamityParser::ExpressionContext * /*ctx*/) override;
+    virtual void enterImpart(CalamityParser::ImpartContext * /*ctx*/) override;
+    virtual void exitImpart(CalamityParser::ImpartContext * /*ctx*/) override;
     virtual void enterCall(CalamityParser::CallContext * /*ctx*/) override;
     virtual void exitCall(CalamityParser::CallContext * /*ctx*/) override;
     virtual void enterPair(CalamityParser::PairContext * /*ctx*/) override;

@@ -31,7 +31,7 @@ CPP_GENERATED_CODE = \
 
 
 run: calam
-	./calam programs/boolean-logic.cal
+	./calam programs/impart.cal
 
 
 Environment.o: Environment.h Environment.cpp
@@ -152,7 +152,7 @@ CALAMITY_OBJETS = \
 	TreeShapeListener.o
 
 
-calam: main.cpp $(CALAMITY_OBJETS)
+calam: linenoise.o main.cpp $(CALAMITY_OBJETS)
 	$(CPP) $(INCLUDES) \
 	main.cpp -o calam \
 	$(CALAMITY_OBJETS) \
@@ -176,6 +176,7 @@ trier.tokens: trier.g4
 
 
 clean:
+	rm -f calam.dSYM
 	rm -f $(GENERATED_CODE)
 	rm -f $(TRIER_GENERATED_CODE)
 	rm -f $(CPP_GENERATED_CODE)

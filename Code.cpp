@@ -135,6 +135,24 @@ object::Node* Call::evaluate(Environment& env) const
     return accum;
 }
 
+Impart::Impart(Group* group, Expression* expression)
+    : group(group)
+    , expression(expression)
+{
+}
+
+std::string Impart::toString() const
+{
+    return group->toString() + "::" + expression->toString();
+}
+
+object::Node* Impart::evaluate(Environment& env) const
+{
+    object::Node* groupValue = group->evaluate(env);
+    object::Node* expressionValue = expression->evaluate(env);
+    return groupValue->Impart(expressionValue);
+}
+
 object::Node* Call::evaluateButLast(Environment& env) const
 {
     object::Node* accum = expressions[0]->evaluate(env);

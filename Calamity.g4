@@ -80,6 +80,7 @@ expression
    | conjunction
    | negation
    | call
+   | impart
    ;
 
 function
@@ -112,6 +113,10 @@ addedList
 
 call
    : evaluable expression+
+   ;
+
+impart
+   : group '::' expression
    ;
 
 product

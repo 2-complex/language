@@ -180,6 +180,16 @@ class MainVisitor : public CalamityBaseVisitor
         return HType(call);
     }
 
+    virtual Any visitImpart(CalamityParser::ImpartContext* ctx) override
+    {
+        HType firstH = visit(ctx->children[0]);
+        HType secondH = visit(ctx->children[2]);
+        Impart* impart = new Impart(
+            static_cast<Group*>(firstH.code),
+            static_cast<Expression*>(secondH.code));
+        return HType(impart);
+    }
+
     virtual Any visitNegative(CalamityParser::NegativeContext* ctx) override
     {
         Negative* negative = new Negative;
