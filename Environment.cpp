@@ -53,6 +53,16 @@ object::Object* Environment::getArgument() const
     return *(chain.rbegin());
 }
 
+object::Object* Environment::flatten() const
+{
+    object::Object* result = new object::Object;
+    for( std::vector<object::Object*>::const_iterator itr = chain.begin(); itr != chain.end(); ++itr )
+    {
+        result->merge(*itr);
+    }
+    return result;
+}
+
 object::Node* Environment::getMapping(object::Node* index)
 {
     for( std::vector<object::Object*>::reverse_iterator itr = chain.rbegin(); itr != chain.rend(); ++itr )

@@ -705,6 +705,14 @@ Node* Object::getMapping(Node* index)
     return itr->second.node;
 }
 
+void Object::merge(const Object* object)
+{
+    for( const auto& it : object->mappings )
+    {
+        mappings[it.first] = it.second;
+    }
+}
+
 Node* Object::clone() const
 {
     return new Object(mappings);
@@ -782,9 +790,9 @@ Node* Object::And(Function* _)
 }
 
 Function::Function(
-    Environment& environment,
+    Object* object,
     code::Program* program)
-    : environment(environment)
+    : object(object)
     , program(program)
 {
 }
@@ -801,13 +809,12 @@ code::Program* Function::getProgram() const
 
 Node* Function::clone() const
 {
-    Environment envClone(environment);
-    return new Function(envClone, program);
+    return new Function(static_cast<Object*>(object->clone()), program);
 }
 
 std::string Function::toString() const
 {
-    return std::string("{") + program->toString() + std::string("}");
+    return object->toString() + std::string("::{") + program->toString() + std::string("}");
 }
 
 Node* Function::Negation()
@@ -1696,8 +1703,8 @@ Node* Object::Impart(Object* _)
 
 Node* Object::Impart(Function* _)
 {
-    Environment env(this);
-    return new Function(env, _->getProgram());
+    retain();
+    return new Function(this, _->getProgram());
 }
 
 Node* Function::Impart(Error* _)
@@ -4324,24 +4331,26 @@ Node* Function::Call(String* _)
 
 Node* Function::Call(Array* _)
 {
-    Node* result = environment.getArgument();
+    Object* arg = static_cast<Object*>(object->clone());
     for( const Key& k : _->getValue() )
     {
-        Object* arg = new Object();
+        Object* base = new Object;
         Member* underscore = new Member("_");
-        arg->setMapping(underscore, k.node);
-        Environment extension(environment, arg);
-        result = program->evaluate(extension);
-        //underscore->release();
-        //arg->release();
+        base->setMapping(underscore, k.node);
+
+        Environment baseEnv(base);
+        Environment extension(baseEnv, arg);
+
+        arg = static_cast<Object*>(program->evaluate(extension));
     }
-    return result;
+    return arg;
 }
 
 Node* Function::Call(Object* _)
 {
-    Environment extension(environment, _);
-    return program->evaluate(extension);
+    Environment baseEnv(static_cast<Object*>(object->clone()));
+    Environment env(baseEnv, _);
+    return program->evaluate(env);
 }
 
 Node* Function::Call(Function* _)

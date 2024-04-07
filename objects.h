@@ -615,6 +615,7 @@ public:
     virtual object::Node* setMapping(object::Node* key, object::Node* value);
     virtual object::Node* getMapping(object::Node* key);
 
+    void merge(const Object* object);
     virtual Node* clone() const override;
     virtual std::string toString() const override;
 DEFINITIONS
@@ -623,10 +624,10 @@ DEFINITIONS
 class Function : public Node
 {
     code::Program* program;
-    Environment environment;
+    Object* object;
 
 public:
-    Function(Environment& environment, code::Program* program);
+    Function(Object* object, code::Program* program);
     std::string getValue();
 
     code::Program* getProgram() const;

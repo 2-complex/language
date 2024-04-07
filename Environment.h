@@ -22,6 +22,7 @@ public:
     virtual ~Environment();
 
     object::Object* getArgument() const;
+    object::Object* flatten() const;
 
     object::Node* setMapping(object::Node* index, object::Node* value);
     object::Node* getMapping(object::Node* index);
