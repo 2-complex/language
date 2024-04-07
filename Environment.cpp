@@ -53,11 +53,6 @@ object::Object* Environment::getArgument() const
     return *(chain.rbegin());
 }
 
-object::Node* Environment::getUnderscore() const
-{
-    return (*(chain.rbegin()))->getUnderscore();
-}
-
 object::Node* Environment::getMapping(object::Node* index)
 {
     for( std::vector<object::Object*>::reverse_iterator itr = chain.rbegin(); itr != chain.rend(); ++itr )

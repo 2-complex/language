@@ -587,17 +587,8 @@ std::string Word::toString() const
 
 object::Node* Word::evaluate(Environment& env) const
 {
-    object::Node* result = NULL;
-
-    if( name == "_" )
-    {
-        result = env.getUnderscore();
-    }
-    else
-    {
-        object::Member member(name);
-        result = env.getMapping(&member);
-    }
+    object::Member member(name);
+    object::Node* result = env.getMapping(&member);
 
     if( ! result )
     {

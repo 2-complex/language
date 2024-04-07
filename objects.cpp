@@ -599,20 +599,10 @@ std::string Key::toString() const
 
 Object::Object()
 {
-    underscore = this;
-}
-
-Object::Object(Node* underscore)
-    : underscore(underscore)
-{
-    underscore->retain();
 }
 
 Object::~Object()
 {
-    if( underscore != this )
-        underscore->release();
-
     for( auto itr = mappings.begin(); itr != mappings.end(); itr++ )
     {
         itr->second.node->release();
@@ -663,11 +653,6 @@ Node* Object::getMapping(Node* index)
 
     itr->second.node->retain();
     return itr->second.node;
-}
-
-Node* Object::getUnderscore()
-{
-    return underscore;
 }
 
 std::string Object::toString() const
@@ -4248,38 +4233,32 @@ Node* Function::Call(Error* _)
 
 Node* Function::Call(Member* _)
 {
-    Environment extension(environment, new Object(_));
-    return program->evaluate(extension);
+    return new Error("Attempt to call function with non-object argument");
 }
 
 Node* Function::Call(Boolean* _)
 {
-    Environment extension(environment, new Object(_));
-    return program->evaluate(extension);
+    return new Error("Attempt to call function with non-object argument");
 }
 
 Node* Function::Call(Integer* _)
 {
-    Environment extension(environment, new Object(_));
-    return program->evaluate(extension);
+    return new Error("Attempt to call function with non-object argument");
 }
 
 Node* Function::Call(Double* _)
 {
-    Environment extension(environment, new Object(_));
-    return program->evaluate(extension);
+    return new Error("Attempt to call function with non-object argument");
 }
 
 Node* Function::Call(String* _)
 {
-    Environment extension(environment, new Object(_));
-    return program->evaluate(extension);
+    return new Error("Attempt to call function with non-object argument");
 }
 
 Node* Function::Call(Array* _)
 {
-    Environment extension(environment, new Object(_));
-    return program->evaluate(extension);
+    return new Error("Attempt to call function with non-object argument");
 }
 
 Node* Function::Call(Object* _)
@@ -4290,8 +4269,7 @@ Node* Function::Call(Object* _)
 
 Node* Function::Call(Function* _)
 {
-    Environment extension(environment, new Object(_));
-    return program->evaluate(extension);
+    return new Error("Attempt to call function with non-object argument");
 }
 
 Node* Error::Equals(Error* _)
