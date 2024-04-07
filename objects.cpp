@@ -2784,7 +2784,14 @@ Node* Integer::Times(String* _)
 
 Node* Integer::Times(Array* _)
 {
-    return new Error("Attempt to multiply integer by array with '*'");
+    std::vector<Key> productValue;
+    const std::vector<Key>& arrayValue = _->getValue();
+    for( BigInteger i; i < value; i++ )
+    {
+        productValue.insert(
+            productValue.end(), arrayValue.begin(), arrayValue.end());
+    }
+    return new Array(productValue);
 }
 
 Node* Integer::Times(Object* _)

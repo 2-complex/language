@@ -55,6 +55,7 @@ mutliplyable
    | call
    | number
    | word
+   | array
    ;
 
 evaluable

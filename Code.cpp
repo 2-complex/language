@@ -447,7 +447,7 @@ std::string Function::toString() const
 
 object::Node* Function::evaluate(Environment& env) const
 {
-    return new object::Function(env.flatten(), program);
+    return new object::Function(new object::Object, program);
 }
 
 Group::Group(Program* program)
