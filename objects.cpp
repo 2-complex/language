@@ -63,6 +63,11 @@ object::Node* Node::getMapping(object::Node* key)
     return NULL;
 }
 
+Node* Error::clone() const
+{
+    return new Error(message);
+}
+
 std::string Error::toString() const
 {
     return "ERROR: " + message;
@@ -200,6 +205,11 @@ bool Boolean::getValue()
     return value;
 }
 
+Node* Boolean::clone() const
+{
+    return new Boolean(value);
+}
+
 std::string Boolean::toString() const
 {
     return std::string(value ? "true" : "false");
@@ -271,6 +281,11 @@ Integer::Integer(int value)
 {
 }
 
+Integer::Integer(const BigInteger& value)
+    : value(value)
+{
+}
+
 Integer::Integer(const std::string& text)
 {
     value = text;
@@ -279,6 +294,11 @@ Integer::Integer(const std::string& text)
 BigInteger Integer::getValue()
 {
     return value;
+}
+
+Node* Integer::clone() const
+{
+    return new Integer(value);
 }
 
 std::string Integer::toString() const
@@ -357,6 +377,11 @@ double Double::getValue() const
     return value;
 }
 
+Node* Double::clone() const
+{
+    return new Double(value);
+}
+
 std::string Double::toString() const
 {
     return std::to_string(value);
@@ -421,6 +446,11 @@ Node* Double::And(Function* _)
 String::String(const std::string& value)
     : value(value)
 {
+}
+
+Node* String::clone() const
+{
+    return new String(value);
 }
 
 std::string String::toString() const
@@ -489,9 +519,19 @@ Node* String::And(Function* _)
     return new Error("Logical 'and' with string and function");
 }
 
+Array::Array(const std::vector<Key>& value)
+    : value(value)
+{
+}
+
 const std::vector<Key>& Array::getValue()
 {
     return value;
+}
+
+Node* Array::clone() const
+{
+    return new Array(value);
 }
 
 std::string Array::toString() const
@@ -576,6 +616,11 @@ Key::Key(Node* node)
 {
 }
 
+Key::Key(const Key& key)
+{
+    node = key.node->clone();
+}
+
 bool Key::operator == (const class Key& other) const
 {
     Node* temp = node->Equals(other.node);
@@ -607,6 +652,11 @@ Object::~Object()
     {
         itr->second.node->release();
     }
+}
+
+Object::Object(const std::map<Key, Key>& mappings)
+    : mappings(mappings)
+{
 }
 
 std::map<Key, Key> Object::getValue()
@@ -653,6 +703,11 @@ Node* Object::getMapping(Node* index)
 
     itr->second.node->retain();
     return itr->second.node;
+}
+
+Node* Object::clone() const
+{
+    return new Object(mappings);
 }
 
 std::string Object::toString() const
@@ -742,6 +797,12 @@ std::string Function::getValue()
 code::Program* Function::getProgram() const
 {
     return program;
+}
+
+Node* Function::clone() const
+{
+    Environment envClone(environment);
+    return new Function(envClone, program);
 }
 
 std::string Function::toString() const
@@ -862,6 +923,11 @@ Node* Error::Or(Function* _)
 Member::Member(const std::string& value)
     : value(value)
 {
+}
+
+Node* Member::clone() const
+{
+    return new Member(value);
 }
 
 std::string Member::toString() const
@@ -1628,10 +1694,10 @@ Node* Object::Impart(Object* _)
     return new Error("Attempt to impart object and object");
 }
 
-Node* Object::Impart(Function* function)
+Node* Object::Impart(Function* _)
 {
     Environment env(this);
-    return new Function(env, function->getProgram());
+    return new Function(env, _->getProgram());
 }
 
 Node* Function::Impart(Error* _)
@@ -4258,7 +4324,18 @@ Node* Function::Call(String* _)
 
 Node* Function::Call(Array* _)
 {
-    return new Error("Attempt to call function with non-object argument");
+    Node* result = environment.getArgument();
+    for( const Key& k : _->getValue() )
+    {
+        Object* arg = new Object();
+        Member* underscore = new Member("_");
+        arg->setMapping(underscore, k.node);
+        Environment extension(environment, arg);
+        result = program->evaluate(extension);
+        //underscore->release();
+        //arg->release();
+    }
+    return result;
 }
 
 Node* Function::Call(Object* _)

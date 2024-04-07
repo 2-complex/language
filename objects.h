@@ -330,6 +330,7 @@ public:
     void retain();
     void release();
 
+    virtual Node* clone() const = 0;
     virtual std::string toString() const = 0;
     virtual std::string mappingToString(Node* node) const;
 
@@ -500,6 +501,7 @@ public:
     Error(const std::string& message);
     virtual bool isError() const override;
 
+    virtual Node* clone() const override;
     virtual std::string toString() const override;
 DEFINITIONS
 };
@@ -511,6 +513,7 @@ public:
     Member(const std::string& name);
     std::string getValue();
 
+    virtual Node* clone() const override;
     virtual std::string toString() const override;
     virtual std::string mappingToString(Node* node) const override;
 DEFINITIONS
@@ -524,6 +527,7 @@ public:
     bool getValue();
     bool isTrue();
 
+    virtual Node* clone() const override;
     virtual std::string toString() const override;
 DEFINITIONS
 };
@@ -533,9 +537,11 @@ class Integer : public Node
     BigInteger value;
 public:
     Integer(int value);
+    Integer(const BigInteger& value);
     Integer(const std::string& text);
     BigInteger getValue();
 
+    virtual Node* clone() const override;
     virtual std::string toString() const override;
 DEFINITIONS
 };
@@ -548,6 +554,7 @@ public:
     Double(const std::string& text);
     double getValue() const;
 
+    virtual Node* clone() const override;
     virtual std::string toString() const override;
 DEFINITIONS
 };
@@ -557,6 +564,8 @@ class String : public Node
     std::string value;
 public:
     String(const std::string& value);
+
+    virtual Node* clone() const override;
     virtual std::string toString() const override;
     const std::string& getValue() const;
 
@@ -569,6 +578,7 @@ public:
     Node* node;
     Key();
     Key(Node* node);
+    Key(const Key& key);
 
     bool operator == (const class Key& other) const;
     bool operator < (const class Key& other) const;
@@ -580,9 +590,13 @@ class Array : public Node
 {
     std::vector<Key> value;
 public:
+    Array() = default;
+    explicit Array(const std::vector<Key>& value);
+
     const std::vector<Key>& getValue();
     void append(Node*);
 
+    virtual Node* clone() const override;
     virtual std::string toString() const override;
 DEFINITIONS
 };
@@ -593,6 +607,7 @@ class Object : public Node
 
 public:
     Object();
+    Object(const std::map<Key, Key>& mappings);
     virtual ~Object();
 
     std::map<Key, Key> getValue();
@@ -600,6 +615,7 @@ public:
     virtual object::Node* setMapping(object::Node* key, object::Node* value);
     virtual object::Node* getMapping(object::Node* key);
 
+    virtual Node* clone() const override;
     virtual std::string toString() const override;
 DEFINITIONS
 };
@@ -615,6 +631,7 @@ public:
 
     code::Program* getProgram() const;
 
+    virtual Node* clone() const override;
     virtual std::string toString() const override;
 DEFINITIONS
 };
