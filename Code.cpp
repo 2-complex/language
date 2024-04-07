@@ -135,21 +135,21 @@ object::Node* Call::evaluate(Environment& env) const
     return accum;
 }
 
-Impart::Impart(Group* group, Expression* expression)
-    : group(group)
-    , expression(expression)
+Impart::Impart(ImpartLeft* left, ImpartRight* right)
+    : left(left)
+    , right(right)
 {
 }
 
 std::string Impart::toString() const
 {
-    return group->toString() + "::" + expression->toString();
+    return left->toString() + "::" + right->toString();
 }
 
 object::Node* Impart::evaluate(Environment& env) const
 {
-    object::Node* groupValue = group->evaluate(env);
-    object::Node* expressionValue = expression->evaluate(env);
+    object::Node* groupValue = left->evaluate(env);
+    object::Node* expressionValue = right->evaluate(env);
     return groupValue->Impart(expressionValue);
 }
 

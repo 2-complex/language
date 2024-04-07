@@ -22,6 +22,7 @@ comparable
    | product
    | addedList
    | function
+   | impart
    ;
 
 logicable
@@ -62,6 +63,7 @@ evaluable
    | array
    | group
    | function
+   | impart
    ;
 
 expression
@@ -72,6 +74,7 @@ expression
    | number
    | array
    | function
+   | impart
    | product
    | negative
    | addedList
@@ -80,7 +83,6 @@ expression
    | conjunction
    | negation
    | call
-   | impart
    ;
 
 function
@@ -115,8 +117,19 @@ call
    : evaluable expression+
    ;
 
+impartLeft
+   : group
+   | word
+   ;
+
+impartRight
+   : group
+   | function
+   | word
+   ;
+
 impart
-   : group '::' expression
+   : impartLeft '::' impartRight
    ;
 
 product

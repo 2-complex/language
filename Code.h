@@ -198,13 +198,21 @@ public:
     virtual object::Node* evaluate(Environment& env) const override;
 };
 
+class ImpartLeft : public Code
+{
+};
+
+class ImpartRight : public Code
+{
+};
+
 class Impart : public Expression
 {
 public:
-    Impart(Group* group, Expression* expression);
+    Impart(ImpartLeft* group, ImpartRight* expression);
 
-    Group* group;
-    Expression* expression;
+    ImpartLeft* left;
+    ImpartRight* right;
 
     virtual std::string toString() const override;
     virtual object::Node* evaluate(Environment& env) const override;

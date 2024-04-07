@@ -159,6 +159,28 @@ void TreeShapeListener::exitAddable(CalamityParser::AddableContext* ctx)
     indentAmt--;
 }
 
+void TreeShapeListener::enterImpartLeft(CalamityParser::ImpartLeftContext* ctx)
+{
+    printf( "%s%s      %s\n", getIndentString().c_str(), "ImpartLeft", ctx->getText().c_str() );
+    indentAmt++;
+}
+
+void TreeShapeListener::exitImpartLeft(CalamityParser::ImpartLeftContext* ctx)
+{
+    indentAmt--;
+}
+
+void TreeShapeListener::enterImpartRight(CalamityParser::ImpartRightContext* ctx)
+{
+    printf( "%s%s      %s\n", getIndentString().c_str(), "ImpartRight", ctx->getText().c_str() );
+    indentAmt++;
+}
+
+void TreeShapeListener::exitImpartRight(CalamityParser::ImpartRightContext* ctx)
+{
+    indentAmt--;
+}
+
 void TreeShapeListener::enterMutliplyable(CalamityParser::MutliplyableContext* ctx)
 {
     printf( "%s%s      %s\n", getIndentString().c_str(), "Mutliplyable", ctx->getText().c_str() );

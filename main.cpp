@@ -185,8 +185,8 @@ class MainVisitor : public CalamityBaseVisitor
         HType firstH = visit(ctx->children[0]);
         HType secondH = visit(ctx->children[2]);
         Impart* impart = new Impart(
-            static_cast<Group*>(firstH.code),
-            static_cast<Expression*>(secondH.code));
+            static_cast<ImpartLeft*>(firstH.code),
+            static_cast<ImpartRight*>(secondH.code));
         return HType(impart);
     }
 
