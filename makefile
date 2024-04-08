@@ -31,7 +31,7 @@ CPP_GENERATED_CODE = \
 
 
 run: calam
-	./calam programs/impart.cal
+	./calam programs/mn.cal
 
 
 Environment.o: Environment.h Environment.cpp

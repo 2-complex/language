@@ -41,13 +41,12 @@ boolean
 
 addable
    : group
-   | call
+   | negative
    | number
    | array
    | word
    | product
    | string
-   | negative
    ;
 
 mutliplyable
