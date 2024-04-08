@@ -261,7 +261,7 @@ int main(int argc, const char* argv[])
 {
     std::ifstream stream;
 
-    if(argc == 2)
+    if(argc == 3 && strcmp(argv[1], "--parse")==0)
     {
         stream.open(argv[1]);
 
@@ -277,6 +277,29 @@ int main(int argc, const char* argv[])
         HType a = vistor.visit(tree);
 
         printf( "%s\n", a.code->toString().c_str() );
+
+        return 0;
+    }
+    else if(argc == 2)
+    {
+        object::Object* obj = new object::Object;
+        Environment environment(obj);
+
+        stream.open(argv[1]);
+
+        ANTLRInputStream input(stream);
+        CalamityLexer lexer(&input);
+        CommonTokenStream tokens(&lexer);
+        CalamityParser parser(&tokens);
+
+        tree::ParseTree *tree = parser.program();
+
+        MainVisitor vistor;
+        HType a = vistor.visit(tree);
+        object::Node* answer = a.code->evaluate(environment);
+
+        printf( "%s\n", answer->toString().c_str() );
+        answer->release();
 
         return 0;
     }
